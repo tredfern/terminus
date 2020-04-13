@@ -1,0 +1,10 @@
+return {
+  _all = {
+    lpath = "./?/init.lua;./ext/?.lua;./ext/?/init.lua",
+    ROOT = {"game"}
+  },
+  travis = {
+    verbose = true,
+    coverage = true
+  }
+}

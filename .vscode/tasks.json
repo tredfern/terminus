@@ -1,0 +1,42 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Love",
+            "type": "shell",
+            "command": "/mnt/c/Program Files/LOVE/love.exe",
+            "args": [
+                "."
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Tests",
+            "type": "shell",
+            "command": "busted",
+            "args": [
+                "--verbose"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "luacheck",
+            "args": [
+                "."
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

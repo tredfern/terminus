@@ -1,0 +1,3 @@
+[submodule "ext/moonpie"]
+	path = ext/moonpie
+	url = https://github.com/tredfern/moonpie.git
