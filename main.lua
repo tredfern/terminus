@@ -1,5 +1,17 @@
+-- Copyright (c) 2020 Trevor Redfern
+--
+-- This software is released under the MIT License.
+-- https://opensource.org/licenses/MIT
+
 love.filesystem.setRequirePath("?.lua;?/init.lua;ext/?.lua;ext/?/init.lua;ext/moonpie/?.lua;ext/moonpie/?/init.lua;")
 moonpie = require "moonpie"
+require "assets.stylesheet"
+
+
+function love.load()
+  local app = require "game.app"
+  app.load()
+end
 
 
 function love.update()

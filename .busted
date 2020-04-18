@@ -1,7 +1,8 @@
 return {
   _all = {
-    lpath = "./?/init.lua;./ext/?.lua;./ext/?/init.lua",
-    ROOT = {"game"}
+    lpath = "./?/init.lua;./ext/?.lua;./ext/?/init.lua;./ext/moonpie/?.lua;./ext/moonpie/?/init.lua;",
+    ROOT = {"game"},
+    helper = "test_helper.lua"
   },
   travis = {
     verbose = true,
