@@ -16,7 +16,7 @@ local function create_text_grid(rows, cols)
     for j = 1,cols do
       out[i][j] = moonpie.ui.components.terminal_character{
         id = get_id(i, j),
-        text = ".",
+        text = "",
         width = width,
       }
     end

@@ -3,12 +3,12 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screen.ship_combat", function()
+describe("game.ui.screen.main_layout", function()
   require "game.ui"
 
   it("configures a renderable component", function()
-    assert.not_nil(moonpie.ui.components.screens_ship_combat)
-    moonpie.ui.components.screens_ship_combat()
+    assert.not_nil(moonpie.ui.components.main_layout)
+    moonpie.ui.components.main_layout()
   end)
 
 

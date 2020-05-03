@@ -4,10 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 local app = {}
+app.assets = require "assets"
 require "game.ui"
 
 function app.load()
-  app.render(moonpie.ui.components.screens_ship_combat())
+  app.render(moonpie.ui.components.main_layout())
 end
 
 function app.render(scene)

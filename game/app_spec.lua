@@ -11,4 +11,8 @@ describe("game.app", function()
     assert.not_nil(moonpie.ui.current.find_by_id("foo"))
   end)
 
+  it("loads some global assets", function()
+    assert.not_nil(app.assets)
+  end)
+
 end)

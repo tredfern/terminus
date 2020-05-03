@@ -3,8 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-moonpie.ui.components("screens_ship_combat", function()
+moonpie.ui.components("main_layout", function()
   return {
-    moonpie.ui.components.terminal{ id = "terminal", cols = 70, rows = 30 }
   }
 end)
