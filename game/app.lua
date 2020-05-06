@@ -8,7 +8,13 @@ app.assets = require "assets"
 require "game.ui"
 
 function app.load()
-  app.render(moonpie.ui.components.main_layout())
+  local spaceport = require "game.entities.spaceport"
+  local sp = spaceport:new{ name = "Spaceport Alpha" }
+
+  sp:set_price("item a", 28)
+  sp:set_price("item b", 35)
+  sp:set_price("item c", 43)
+  app.render(moonpie.ui.components.main_layout{ spaceport = sp })
 end
 
 function app.render(scene)

@@ -5,10 +5,11 @@
 
 describe("game.ui.screen.main_layout", function()
   require "game.ui"
+  local spaceport = require "game.entities.spaceport"
 
   it("configures a renderable component", function()
     assert.not_nil(moonpie.ui.components.main_layout)
-    moonpie.ui.components.main_layout()
+    moonpie.ui.components.main_layout{ spaceport = spaceport:new{ name = "Earth" }}
   end)
 
 

@@ -3,4 +3,6 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-require 
+return {
+  weapons = require "assets.starships.weapon_stats"
+}

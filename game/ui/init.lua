@@ -5,6 +5,7 @@
 
 
 -- Widgets
+require "game.ui.widgets.market"
 require "game.ui.widgets.terminal"
 
 
