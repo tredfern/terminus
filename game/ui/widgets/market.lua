@@ -6,8 +6,8 @@
 moonpie.ui.components("trade_good_detail", function(props)
   local tg = props.trade_good
   return {
-    moonpie.ui.components.text { id = "{{name}}_name", text = tg.name, name = tg.name },
-    moonpie.ui.components.text { id = "{{name}}_price", name = tg.name, text = tg.price }
+    moonpie.ui.components.text { style = "market-good-name", id = "{{name}}_name", text = tg.name, name = tg.name },
+    moonpie.ui.components.text { style = "market-good-price", id = "{{name}}_price", name = tg.name, text = tg.price }
   }
 end)
 

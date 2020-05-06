@@ -3,22 +3,18 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-moonpie.graphics.font:register("assets/fonts/square.ttf", "terminal")
+require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
-styles.terminal = {
-  background_color = "black",
-  width = "100%",
-  height = "100%"
+styles["market-good-name"] = {
+  padding = 10,
+  font_name = "default",
+  font_size = 20
 }
 
-styles.terminal_grid = {
-  align = "center"
-}
-
-styles.terminal_character = {
-  font_name = "terminal",
-  font_size = 14,
-  color = "white"
+styles["market-good-price"] = {
+  padding = 10,
+  font_name = "default",
+  font_size = 20
 }
