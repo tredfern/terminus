@@ -11,9 +11,10 @@ function app.load()
   local spaceport = require "game.entities.spaceport"
   local sp = spaceport:new{ name = "Spaceport Alpha" }
 
-  sp:set_price("item a", 28)
-  sp:set_price("item b", 35)
-  sp:set_price("item c", 43)
+  print(#app.assets.trade_goods)
+  for _, v in ipairs(app.assets.trade_goods) do
+    sp:set_price(v.name, v.baseprice)
+  end
   app.render(moonpie.ui.components.main_layout{ spaceport = sp })
 end
 
