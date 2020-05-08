@@ -26,4 +26,9 @@ describe("game.entities.starship.cargo_hold", function()
     assert.equals(15, cg:get_cargo_quantity(food))
   end)
 
+  it("returns zero if it the cargo hasn't been referenced before", function()
+    local cg = cargo_hold:new { size = 15 }
+    assert.equals(0, cg:get_cargo_quantity(food))
+  end)
+
 end)

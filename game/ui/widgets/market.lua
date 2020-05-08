@@ -6,6 +6,13 @@
 local function buy_click(tg, cargo)
   return function()
     cargo:add_cargo(tg, 1)
+    local id = tg .. "_player_quantity"
+    local quantity = moonpie.ui.current.find_by_id(id)
+    if quantity then
+      quantity:update { text = cargo:get_cargo_quantity(tg) }
+    else
+      moonpie.logger.debug("quantity component not found: %s", id)
+    end
   end
 end
 
@@ -16,7 +23,7 @@ moonpie.ui.components("trade_good_detail", function(props)
     moonpie.ui.components.text {
       style = "market-good-price",
       id = "{{name}}_player_quantity",
-      text = "0", name = tg.name },
+      text = "{{quantity}}", name = tg.name, quantity = cargo:get_cargo_quantity(tg) },
     moonpie.ui.components.button {
       id = "{{name}}_buy",
       name = tg.name,

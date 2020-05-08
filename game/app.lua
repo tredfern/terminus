@@ -5,6 +5,7 @@
 
 local app = {}
 app.assets = require "assets"
+app.rules = require "game.rules"
 require "game.ui"
 
 local function new_game()
@@ -18,9 +19,7 @@ local function new_game()
   }
 
   -- set up markets
-
-  local starship = require "game.entities.starship"
-  app.player = starship:new()
+  app.rules.starting_player_ship(app)
 end
 
 local function arrive_in_port(sp)

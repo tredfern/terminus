@@ -18,7 +18,7 @@ function cargo_hold:add_cargo(good, quantity)
 end
 
 function cargo_hold:get_cargo_quantity(good)
-  return self.cargo[good]
+  return self.cargo[good] or 0
 end
 
 return cargo_hold
