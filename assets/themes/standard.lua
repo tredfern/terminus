@@ -14,8 +14,6 @@ font:register("assets/fonts/LibreBaskerville-Regular.ttf", "headline")
 font:register("assets/fonts/LibreBaskerville-Bold.ttf", "headline-bold")
 
 -- Colors
-
-
 local colors = moonpie.graphics.colors
 colors.light_shade = colors.convert_hex("#FAFAFA")
 colors.light_accent = colors.convert_hex("#7AB257")

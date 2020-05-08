@@ -5,13 +5,9 @@
 
 local starship = moonpie.class({})
 
-function starship:attach_weapon()
+function starship:constructor(props)
+  props = props or {}
+  self.cargo_hold = props.cargo_hold
 end
 
-
-return {
-  new = function()
-    return starship:new()
-  end,
-  weapons = require "game.entities.starship.weapons"
-}
+return starship
