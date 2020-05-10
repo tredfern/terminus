@@ -22,7 +22,7 @@ end
 function spaceport:get_available_goods()
   return moonpie.utility.tables.map(self.trade_goods, function(price, good)
     return {
-      name = good,
+      trade_good = good,
       price = price
     }
   end)

@@ -24,7 +24,7 @@ end
 
 local function arrive_in_port(sp)
   for _, v in ipairs(app.assets.trade_goods) do
-    sp:set_price(v.name, v.baseprice)
+    sp:set_price(v, v.baseprice)
   end
 end
 

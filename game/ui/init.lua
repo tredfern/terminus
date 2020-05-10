@@ -5,6 +5,7 @@
 
 
 -- Widgets
+require "game.ui.widgets.cargo_hold"
 require "game.ui.widgets.market"
 
 

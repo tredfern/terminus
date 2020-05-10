@@ -21,4 +21,13 @@ function cargo_hold:get_cargo_quantity(good)
   return self.cargo[good] or 0
 end
 
+function cargo_hold:used_space()
+  local tb = moonpie.utility.tables.to_array(self.cargo)
+  return moonpie.utility.tables.sum(tb)
+end
+
+function cargo_hold:free_space()
+  return self.size - self:used_space()
+end
+
 return cargo_hold
