@@ -31,4 +31,24 @@ describe("game.ui.widgets.market", function()
     buy:click()
     assert.equals(1, player_hold:get_cargo_quantity(organics))
   end)
+
+  it("shows the quantity of items that the player has", function()
+    local quantity = market:find_by_id("organics_player_quantity")
+    assert.equals("0", quantity.text)
+
+    local buy = market:find_by_id("organics_buy")
+    buy:click()
+
+    assert.equals(1, quantity.text)
+  end)
+
+  it("has a sell button that transfers cargo back to the market", function()
+    player_hold:add_cargo(organics, 10)
+
+    local sell = market:find_by_id("organics_sell")
+    sell:click()
+
+    local quantity = market:find_by_id("organics_player_quantity")
+    assert.equals(9, quantity.text)
+  end)
 end)

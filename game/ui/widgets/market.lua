@@ -3,24 +3,34 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local function buy_click(tg, cargo)
-  return function()
-    cargo:add_cargo(tg, 1)
-    local cargo_hold = moonpie.ui.current.find_by_id("cargo_hold")
-    if cargo_hold then
-      cargo_hold:update()
-    end
-  end
-end
-
 moonpie.ui.components("trade_good_detail", function(props)
   local cargo = props.cargo_hold
+  local quantity_control = moonpie.ui.components.text {
+    id = "{{name}}_player_quantity",
+    name = props.trade_good.name,
+    text = cargo:get_cargo_quantity(props.trade_good),
+    style = "market-good-price",
+  }
   return {
+    quantity_control,
     moonpie.ui.components.button {
       id = "{{name}}_buy",
       name = props.trade_good.name,
       caption = "<< Buy",
-      click = buy_click(props.trade_good, cargo) },
+      click = function()
+        cargo:add_cargo(props.trade_good, 1)
+        quantity_control:update { text = cargo:get_cargo_quantity(props.trade_good) }
+      end
+    },
+    moonpie.ui.components.button {
+      id = "{{name}}_sell",
+      name = props.trade_good.name,
+      caption = "Sell >>",
+      click = function()
+        cargo:remove_cargo(props.trade_good, 1)
+        quantity_control:update { text = cargo:get_cargo_quantity(props.trade_good) }
+      end
+    },
     moonpie.ui.components.text {
       style = "market-good-name",
       id = "{{name}}_name",

@@ -40,4 +40,12 @@ describe("game.entities.starship.cargo_hold", function()
     cg:add_cargo(dirt, 7)
     assert.equals(1, cg:free_space())
   end)
+
+  it("can remove cargo from the hold", function()
+    local cg = cargo_hold:new { size = 15 }
+    cg:add_cargo(food, 5)
+    assert.equals(5, cg:get_cargo_quantity(food))
+    cg:remove_cargo(food, 2)
+    assert.equals(3, cg:get_cargo_quantity(food))
+  end)
 end)

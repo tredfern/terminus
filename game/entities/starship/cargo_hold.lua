@@ -17,6 +17,13 @@ function cargo_hold:add_cargo(good, quantity)
   self.cargo[good] = self.cargo[good] + quantity
 end
 
+function cargo_hold:remove_cargo(good, quantity)
+  if not self.cargo[good] then
+    self.cargo[good] = 0
+  end
+  self.cargo[good] = self.cargo[good] - quantity
+end
+
 function cargo_hold:get_cargo_quantity(good)
   return self.cargo[good] or 0
 end
