@@ -4,5 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  starting_player_ship = require "game.rules.starting_player_ship"
+  arrive_in_port = require "game.rules.arrive_in_port",
+  new_game = require "game.rules.new_game",
+  space_travel_to = require "game.rules.space_travel_to",
 }

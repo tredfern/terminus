@@ -6,21 +6,8 @@
 local app = {}
 app.assets = require "assets"
 app.rules = require "game.rules"
+app.state = require "game.state"
 require "game.ui"
-
-local function new_game()
-  local spaceport = require "game.entities.spaceport"
-  app.spaceports = {
-    spaceport:new{ name = "Alpha Station" },
-    spaceport:new{ name = "Beta Station" },
-    spaceport:new{ name = "Charlie Station" },
-    spaceport:new{ name = "Delta Station" },
-    spaceport:new{ name = "Echo Station" },
-  }
-
-  -- set up markets
-  app.rules.starting_player_ship(app)
-end
 
 local function arrive_in_port(sp)
   for _, v in ipairs(app.assets.trade_goods) do
@@ -29,8 +16,11 @@ local function arrive_in_port(sp)
 end
 
 function app.load()
-  arrive_in_port(app.spaceports[1])
-  app.render(moonpie.ui.components.main_layout{ spaceport = app.spaceports[1], player = app.player })
+  arrive_in_port(app.state.spaceports[1])
+  app.render(moonpie.ui.components.main_layout{ spaceport = app.state.spaceports[1],
+    player = app.state.player,
+    destinations = app.state.spaceports
+  })
 end
 
 function app.render(scene)
@@ -40,6 +30,6 @@ function app.render(scene)
   )
 end
 
-new_game()
+app.rules.new_game(app.state)
 
 return app

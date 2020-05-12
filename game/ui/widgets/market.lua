@@ -3,6 +3,22 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+moonpie.ui.components("market", function(props)
+  local market = props.market
+  local goods = market:get_available_goods()
+
+  return {
+    moonpie.ui.components.h2 { text = "Market" },
+    moonpie.utility.tables.map(goods, function(tg)
+      return moonpie.ui.components.trade_good_detail{
+        trade_good = tg.trade_good,
+        price = tg.price,
+        cargo_hold = props.cargo_hold
+      }
+    end)
+  }
+end)
+
 moonpie.ui.components("trade_good_detail", function(props)
   local cargo = props.cargo_hold
   local quantity_control = moonpie.ui.components.text {
@@ -41,20 +57,5 @@ moonpie.ui.components("trade_good_detail", function(props)
       id = "{{name}}_price",
       name = props.trade_good.name,
       text = props.price },
-  }
-end)
-
-moonpie.ui.components("market", function(props)
-  local market = props.market
-  local goods = market:get_available_goods()
-
-  return {
-    moonpie.utility.tables.map(goods, function(tg)
-      return moonpie.ui.components.trade_good_detail{
-        trade_good = tg.trade_good,
-        price = tg.price,
-        cargo_hold = props.cargo_hold
-      }
-    end)
   }
 end)

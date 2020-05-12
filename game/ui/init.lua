@@ -7,6 +7,7 @@
 -- Widgets
 require "game.ui.widgets.cargo_hold"
 require "game.ui.widgets.market"
+require "game.ui.widgets.space_travel_menu"
 
 
 -- Screens
