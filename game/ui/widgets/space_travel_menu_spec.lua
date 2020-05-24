@@ -6,15 +6,19 @@
 describe("game.ui.widgets.space_travel_menu", function()
   require "game.ui"
   local spaceport = require "game.entities.spaceport"
-  local destinations = {
+  local spaceports = {
     spaceport:new { name = "Alpha" },
     spaceport:new { name = "Bravo" },
     spaceport:new { name = "Charlie" },
   }
-  local travel_menu
+  local travel_menu, store
+  local mock_store = require "mock_store"
+  local action_types = require "game.rules.actions.types"
 
   before_each(function()
-    travel_menu = moonpie.ui.components.space_travel_menu { destinations = destinations }
+    local menu = require "game.ui.widgets.space_travel_menu"
+    store = mock_store({ spaceports = spaceports })
+    travel_menu = moonpie.test_render(menu())
   end)
 
 
@@ -24,12 +28,14 @@ describe("game.ui.widgets.space_travel_menu", function()
     assert.not_nil(travel_menu:find_by_id("goto_Charlie_button"))
   end)
 
-  it("triggers travelling to another station when clicked", function()
-    pending()
+  it("updates location to another station when clicked", function()
     local btn = travel_menu:find_by_id("goto_Bravo_button")
-    local rules = require "game.rules"
-    spy.on(rules, "space_travel_to")
     btn:click()
-    assert.spy(rules.space_travel_to).was.called_with(destinations[2])
+    assert.is_true(
+      moonpie.tables.any(
+        store.get_state().actions,
+        function(a) return a.type == action_types.location_update end
+      )
+    )
   end)
 end)

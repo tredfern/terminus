@@ -3,21 +3,27 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local connect = require "moonpie.redux.connect"
+local location_update = require "game.rules.actions.location_update"
 
-moonpie.ui.components("space_travel_menu", function(props)
+local menu = moonpie.ui.components("space_travel_menu", function(props)
   return {
     id = "space_travel_menu",
-    moonpie.ui.components.h2 { text = "Destination" },
-    moonpie.utility.tables.map(props.destinations, function(d)
-      return moonpie.ui.components.button {
-        id = "goto_{{name}}_button",
-        caption = d.name,
-        name = d.name,
-        style = "destination_button",
-        click = function()
-          --rules.space_travel_to(d)
-        end
-      }
-    end)
+    destinations = props.destinations,
+    render = function(self)
+      return moonpie.utility.tables.map(self.destinations, function(d)
+          return moonpie.ui.components.button {
+            id = "goto_{{name}}_button",
+            caption = d.name,
+            name = d.name,
+            style = "destination_button",
+            click = function()
+              self.dispatch(location_update(d))
+            end
+          }
+      end)
+    end
   }
 end)
+
+return connect(menu, function(state) return { destinations = state.spaceports } end)

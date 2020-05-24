@@ -13,8 +13,9 @@ local function initial_state()
 end
 
 return function(state, action)
-  if not state then
-    return initial_state()
+  state = state or initial_state()
+  if not action then
+    return state
   end
 
   if action.type == types.spaceport_add then
