@@ -25,6 +25,7 @@ describe("game.ui.widgets.space_travel_menu", function()
   end)
 
   it("triggers travelling to another station when clicked", function()
+    pending()
     local btn = travel_menu:find_by_id("goto_Bravo_button")
     local rules = require "game.rules"
     spy.on(rules, "space_travel_to")

@@ -3,24 +3,16 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local store = require "moonpie.redux.store"
+store.create_store(require "game.rules.reducers")
+
 local app = {}
 app.assets = require "assets"
-app.rules = require "game.rules"
-app.state = require "game.state"
+app.actions = require "game.rules.actions"
 require "game.ui"
 
-local function arrive_in_port(sp)
-  for _, v in ipairs(app.assets.trade_goods) do
-    sp:set_price(v, v.baseprice)
-  end
-end
-
 function app.load()
-  arrive_in_port(app.state.spaceports[1])
-  app.render(moonpie.ui.components.main_layout{ spaceport = app.state.spaceports[1],
-    player = app.state.player,
-    destinations = app.state.spaceports
-  })
+  app.render(moonpie.ui.components.main_layout())
 end
 
 function app.render(scene)
@@ -30,6 +22,6 @@ function app.render(scene)
   )
 end
 
-app.rules.new_game(app.state)
+store.dispatch(app.actions.new_game())
 
 return app

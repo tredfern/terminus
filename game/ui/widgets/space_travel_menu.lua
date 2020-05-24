@@ -3,7 +3,6 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local rules = require "game.rules"
 
 moonpie.ui.components("space_travel_menu", function(props)
   return {
@@ -16,7 +15,7 @@ moonpie.ui.components("space_travel_menu", function(props)
         name = d.name,
         style = "destination_button",
         click = function()
-          rules.space_travel_to(d)
+          --rules.space_travel_to(d)
         end
       }
     end)

@@ -3,6 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local connect = require "moonpie.redux.connect"
 local components = moonpie.ui.components
 components("cargo_hold_item", function(props)
   return {
@@ -21,15 +22,16 @@ components("cargo_hold_item", function(props)
   }
 end)
 
-components("cargo_hold", function(props)
+local cargo_hold = components("cargo_hold", function(props)
   return {
     id = "cargo_hold",
-    player = props.player,
+    cargo_hold = props.cargo_hold,
     render = function(self)
-      self.logger.debug("rendering cargo hold")
-      return moonpie.utility.tables.map(self.player.cargo_hold.cargo, function(v, k)
+      return moonpie.utility.tables.map(self.cargo_hold.cargo, function(v, k)
         return components.cargo_hold_item{ cargo_type = k, quantity = v }
       end)
     end
   }
 end)
+
+return connect(cargo_hold)

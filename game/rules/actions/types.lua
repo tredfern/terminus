@@ -3,5 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-
-return { }
+return {
+  spaceport_add = "SPACEPORT_ADD",
+  location_update = "LOCATION_UPDATE"
+}
