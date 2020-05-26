@@ -13,16 +13,19 @@ moonpie.ui.components("main_layout", function()
     title(),
     moonpie.ui.components.hr(),
     {
+      style = "market_panel",
       moonpie.ui.components.h3 { text = "Market" },
       market()
     },
     {
+      style = "destination_panel",
+      moonpie.ui.components.h3 { text = "Destinations" },
+      travel_menu()
+    },
+    {
+      style = "player_panel",
       moonpie.ui.components.h3 { text = "Cargo Hold" },
       cargo_hold()
     },
-    {
-      moonpie.ui.components.h3 { text = "Destinations" },
-      travel_menu()
-    }
   }
 end)

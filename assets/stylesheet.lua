@@ -7,12 +7,19 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
-styles["market"] = {
+styles["market_panel"] = {
   width = "45%"
 }
 
-styles["space_travel_menu"] = {
-  width = "40%",
+styles["destination_panel"] = {
+  width = "45%"
+}
+
+styles["player_panel"] = {
+  vertical_align = "bottom"
+}
+
+styles["market"] = {
 }
 
 styles["destination_button"] = {
