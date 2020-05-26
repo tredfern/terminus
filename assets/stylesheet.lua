@@ -31,3 +31,21 @@ styles["market-good-price"] = {
   font_name = "default",
   font_size = 20
 }
+
+styles["label-value-group"] = {
+  border = 1,
+  border_color = "light_accent",
+  padding = 10
+}
+
+styles["label"] = {
+  padding = 2,
+  font_name = "default-bold",
+  font_size = 15
+}
+
+styles["value"] = {
+  padding = 2,
+  font_name = "default",
+  font_size = 15
+}

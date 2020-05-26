@@ -42,4 +42,64 @@ describe("game.rules.reducers", function()
       assert.equals("Turtle", new_state.location.name)
     end)
   end)
+
+  describe("market reducers", function()
+    it("sets the price of goods in the current market", function()
+      local new_state = root(initial_state,
+        {
+          type = action_types.market_add_item,
+          payload = { name = "Foo", price = 20}
+        }
+      )
+      assert.equals("Foo", new_state.market_items[1].name)
+      assert.equals(20, new_state.market_items[1].price)
+
+      new_state = root(new_state, {
+          type = action_types.market_add_item,
+          payload = { name = "Foobar", price = 22 }
+
+      })
+      assert.equals("Foobar", new_state.market_items[2].name)
+      assert.equals(22, new_state.market_items[2].price)
+    end)
+  end)
+
+  describe("cargo reducers", function()
+    it("adds cargo the player cargo to the specified value", function()
+      local new_state = root( initial_state, {
+          type = action_types.cargo_update,
+          payload = { name = "Cargo", quantity = 12
+        }
+      })
+      new_state = root( new_state, {
+          type = action_types.cargo_update,
+          payload = { name = "Cargo 2", quantity = 22
+        }
+      })
+      assert.is_true(moonpie.tables.any(new_state.player_cargo,
+        function(v) return v.name == "Cargo" and v.quantity == 12 end))
+      assert.is_true(moonpie.tables.any(new_state.player_cargo,
+        function(v) return v.name == "Cargo 2" and v.quantity == 22 end))
+    end)
+
+    it("updates cargo with new quantity", function()
+      root( initial_state, {
+          type = action_types.cargo_update,
+          payload = { name = "Cargo", quantity = 12
+        }
+      })
+      root( initial_state, {
+          type = action_types.cargo_update,
+          payload = { name = "Cargo", quantity = 22
+        }
+      })
+      local new_state = root( initial_state, {
+          type = action_types.cargo_update,
+          payload = { name = "Cargo", quantity = 3
+        }
+      })
+      assert.is_true(moonpie.tables.any(new_state.player_cargo,
+        function(v) return v.name == "Cargo" and v.quantity == 3 end))
+    end)
+  end)
 end)

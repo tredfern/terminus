@@ -3,59 +3,52 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-moonpie.ui.components("market", function(props)
-  local market = props.market
-  local goods = market:get_available_goods()
+local connect = require "moonpie.redux.connect"
+local market_buy = require "game.rules.actions.market_buy"
+local market_sell = require "game.rules.actions.market_sell"
 
+local trade_good_item = moonpie.ui.components("trade_good_detail", function(props)
   return {
-    moonpie.ui.components.h2 { text = "Market" },
-    moonpie.utility.tables.map(goods, function(tg)
-      return moonpie.ui.components.trade_good_detail{
-        trade_good = tg.trade_good,
-        price = tg.price,
-        cargo_hold = props.cargo_hold
-      }
-    end)
-  }
-end)
-
-moonpie.ui.components("trade_good_detail", function(props)
-  local cargo = props.cargo_hold
-  local quantity_control = moonpie.ui.components.text {
-    id = "{{name}}_player_quantity",
-    name = props.trade_good.name,
-    text = cargo:get_cargo_quantity(props.trade_good),
-    style = "market-good-price",
-  }
-  return {
-    quantity_control,
     moonpie.ui.components.button {
       id = "{{name}}_buy",
-      name = props.trade_good.name,
+      name = props.item_name,
       caption = "<< Buy",
-      click = function()
-        cargo:add_cargo(props.trade_good, 1)
-        quantity_control:update { text = cargo:get_cargo_quantity(props.trade_good) }
-      end
+      click = props.buy
     },
     moonpie.ui.components.button {
       id = "{{name}}_sell",
-      name = props.trade_good.name,
+      name = props.item_name,
       caption = "Sell >>",
-      click = function()
-        cargo:remove_cargo(props.trade_good, 1)
-        quantity_control:update { text = cargo:get_cargo_quantity(props.trade_good) }
-      end
+      click = props.sell
     },
     moonpie.ui.components.text {
       style = "market-good-name",
       id = "{{name}}_name",
-      text = props.trade_good.name,
-      name = props.trade_good.name },
+      text = props.item_name,
+      name = props.item_name },
     moonpie.ui.components.text {
       style = "market-good-price",
       id = "{{name}}_price",
-      name = props.trade_good.name,
+      name = props.item_name,
       text = props.price },
   }
 end)
+
+local market = moonpie.ui.components("market", function(props)
+  return {
+    market_items = props.market_items,
+    render = function(self)
+      return moonpie.utility.tables.map(self.market_items, function(tg)
+        return trade_good_item{
+          item_name = tg.name,
+          price = tg.price,
+          buy = function() self.dispatch(market_buy(tg.name, tg.price)) end,
+          sell = function() self.dispatch(market_sell(tg.name, tg.price)) end
+        }
+      end)
+    end
+  }
+end)
+
+
+return connect(market, function(state) return { market_items = state.market_items } end)
