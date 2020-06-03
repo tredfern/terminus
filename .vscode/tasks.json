@@ -6,7 +6,7 @@
         {
             "label": "Run Love",
             "type": "shell",
-            "command": "/mnt/c/Program Files/LOVE/love.exe",
+            "command": "/Applications/love.app/Contents/MacOS/love",
             "args": [
                 "."
             ],
