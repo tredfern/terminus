@@ -32,7 +32,7 @@ describe("game.ui.widgets.market", function()
     buy:click()
     assert.is_true(moonpie.tables.any(
       store.get_state().actions,
-      function(a) return a.type == action_types.market_buy end)
+      function(a) return a.type == action_types.cargo_adjust end)
     )
   end)
 

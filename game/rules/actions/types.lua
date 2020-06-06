@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return {
+  cargo_adjust = "CARGO_ADJUST",
   cargo_update = "CARGO_UPDATE",
   location_update = "LOCATION_UPDATE",
   market_add_item = "MARKET_ADD_ITEM",
