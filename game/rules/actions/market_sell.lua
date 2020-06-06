@@ -3,14 +3,15 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.actions.types"
+local cargo_adjust = require "game.rules.actions.cargo_adjust"
+local player_has_cargo = require "game.rules.validators.player_has_cargo"
 
-return function(name, price)
-  return {
-    type = types.market_sell,
-    payload = {
-      name = name,
-      price = price
-    }
-  }
+return function(name, _)
+  return function(dispatch, get_state)
+    local state = get_state()
+
+    if player_has_cargo(state, name) then
+      dispatch(cargo_adjust(name, -1))
+    end
+  end
 end

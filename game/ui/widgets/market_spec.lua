@@ -15,6 +15,9 @@ describe("game.ui.widgets.market", function()
         { name = "Organics", price = 15, quantity = 12 },
         { name = "Technology", price = 16, quantity = 11 },
         { name = "Contraband", price = 17, quantity = 10 }
+      },
+      player_cargo = {
+        ["Organics"] = { quantity = 8 }
       }
     })
     rendered = moonpie.test_render(market())
@@ -42,7 +45,7 @@ describe("game.ui.widgets.market", function()
 
     assert.is_true(moonpie.tables.any(
       store.get_state().actions,
-      function(a) return a.type == action_types.market_sell end)
+      function(a) return a.type == action_types.cargo_adjust end)
     )
   end)
 end)

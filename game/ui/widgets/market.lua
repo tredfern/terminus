@@ -6,6 +6,7 @@
 local connect = require "moonpie.redux.connect"
 local market_buy = require "game.rules.actions.market_buy"
 local market_sell = require "game.rules.actions.market_sell"
+local tables = require "moonpie.tables"
 
 local trade_good_item = moonpie.ui.components("trade_good_detail", function(props)
   return {
@@ -38,12 +39,13 @@ local market = moonpie.ui.components("market", function(props)
   return {
     market_items = props.market_items,
     render = function(self)
-      return moonpie.utility.tables.map(self.market_items, function(tg)
+      local sorted_items = tables.sort_by(self.market_items, function(_, v) return v.name end)
+      return tables.map(sorted_items, function(tg)
         return trade_good_item{
-          item_name = tg.name,
-          price = tg.price,
-          buy = function() self.dispatch(market_buy(tg.name, tg.price)) end,
-          sell = function() self.dispatch(market_sell(tg.name, tg.price)) end
+          item_name = tg.value.name,
+          price = tg.value.price,
+          buy = function() self.dispatch(market_buy(tg.value.name, tg.value.price)) end,
+          sell = function() self.dispatch(market_sell(tg.value.name, tg.value.price)) end
         }
       end)
     end
