@@ -10,6 +10,7 @@ return function()
   local location_update = require "game.rules.actions.location_update"
   local market_add_item = require "game.rules.actions.market_add_item"
   local spaceport_add = require "game.rules.actions.spaceport_add"
+  local money_update = require "game.rules.actions.money_update"
 
   return function(dispatch, get_state)
     dispatch(spaceport_add{ name = "Alpha Station" })
@@ -23,7 +24,7 @@ return function()
       dispatch(cargo_update(v.name, 0))
     end
 
-
+    dispatch(money_update(500))
 
     dispatch(
       location_update(

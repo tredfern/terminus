@@ -32,4 +32,8 @@ describe("game.rules.actions.new_game", function()
     assert.greater_than(1, #action_groups[action_types.market_add_item])
   end)
 
+  it("sets the starting funds", function()
+    assert.equals(1, #action_groups[action_types.money_update])
+  end)
+
 end)

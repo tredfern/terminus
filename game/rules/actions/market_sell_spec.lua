@@ -26,6 +26,13 @@ describe("game.rules.actions.market_sell", function()
     assert.equals(-1, action_groups[types.cargo_adjust][1].payload.amount)
   end)
 
+  it("dispatches to adjust the money in a positive direction", function()
+    store.dispatch(market_sell("squid", 29))
+    local action_groups = store.get_action_groups()
+    assert.equals(1, #action_groups[types.money_adjust])
+    assert.equals(29, action_groups[types.money_adjust][1].payload.amount)
+  end)
+
   it("ignores selling if there is no cargo for the player", function()
     store.dispatch(market_sell("herring", 18))
     local state = store.get_state()

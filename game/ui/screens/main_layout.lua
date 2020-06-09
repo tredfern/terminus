@@ -8,6 +8,7 @@ moonpie.ui.components("main_layout", function()
   local travel_menu = require "game.ui.widgets.space_travel_menu"
   local cargo_hold = require "game.ui.widgets.cargo_hold"
   local market = require "game.ui.widgets.market"
+  local player_stats = require "game.ui.widgets.player_stats"
 
   return {
     title(),
@@ -24,8 +25,8 @@ moonpie.ui.components("main_layout", function()
     },
     {
       style = "player_panel",
-      moonpie.ui.components.h3 { text = "Cargo Hold" },
-      cargo_hold()
+      player_stats(),
+      cargo_hold(),
     },
   }
 end)

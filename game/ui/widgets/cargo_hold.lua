@@ -30,6 +30,7 @@ local cargo_hold = components("cargo_hold", function(props)
   return {
     id = "cargo_hold",
     cargo = props.cargo,
+    style = "player-panel-box",
     render = function(self)
       local sorted_list = tables.sort_by(self.cargo, function(k) return k end)
       return {

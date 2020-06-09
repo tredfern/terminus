@@ -18,7 +18,8 @@ describe("game.ui.widgets.market", function()
       },
       player_cargo = {
         ["Organics"] = { quantity = 8 }
-      }
+      },
+      player = { money = 399 }
     })
     rendered = moonpie.test_render(market())
   end)

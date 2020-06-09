@@ -16,7 +16,9 @@ styles["destination_panel"] = {
 }
 
 styles["player_panel"] = {
-  vertical_align = "bottom"
+  vertical_align = "bottom",
+  border = 1,
+  border_color = "light_accent"
 }
 
 styles["market"] = {
@@ -40,8 +42,6 @@ styles["market-good-price"] = {
 }
 
 styles["label-value-group"] = {
-  border = 1,
-  border_color = "light_accent",
   padding = 10
 }
 
@@ -55,4 +55,9 @@ styles["value"] = {
   padding = 2,
   font_name = "default",
   font_size = 15
+}
+
+styles["player-panel-box"] = {
+  padding = 3,
+  width = "24%"
 }
