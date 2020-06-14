@@ -5,14 +5,12 @@
 
 local types = require "game.rules.actions.types"
 local tables = require "moonpie.tables"
+local cargo_entity = require "game.entities.cargo"
 
 local function clone_cargo(name, state)
   local cargo = state[name] or {}
   local quantity = cargo.quantity or 0
-  return {
-    name = name,
-    quantity = quantity
-  }
+  return cargo_entity(name, quantity)
 end
 
 return function(state, action)

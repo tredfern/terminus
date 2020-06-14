@@ -5,13 +5,11 @@
 
 local cargo_adjust = require "game.rules.actions.cargo_adjust"
 local money_adjust = require "game.rules.actions.money_adjust"
+local player_has_funds = require "game.rules.validators.player_has_funds"
 
 return function(name, price)
   return function(dispatch, get_state)
-    local state = get_state()
-    assert(state.player.money, "State must have a player with money to buy something")
-
-    if state.player.money >= price then
+    if player_has_funds(get_state(), price) then
       dispatch(cargo_adjust(name, 1))
       dispatch(money_adjust(-price))
     end

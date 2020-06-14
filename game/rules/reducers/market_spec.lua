@@ -20,16 +20,16 @@ describe("game.rules.reducers.market", function()
           payload = { name = "Foo", price = 20}
         }
       )
-      assert.equals("Foo", new_state[1].name)
-      assert.equals(20, new_state[1].price)
+      assert.equals("Foo", new_state["Foo"].name)
+      assert.equals(20, new_state["Foo"].price)
 
       new_state = market_reducer(new_state, {
           type = action_types.market_add_item,
           payload = { name = "Foobar", price = 22 }
 
       })
-      assert.equals("Foobar", new_state[2].name)
-      assert.equals(22, new_state[2].price)
+      assert.equals("Foobar", new_state["Foobar"].name)
+      assert.equals(22, new_state["Foobar"].price)
     end)
   end)
 end)
