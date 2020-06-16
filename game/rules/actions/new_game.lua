@@ -6,13 +6,15 @@
 local trade_goods = require "assets.trade_goods"
 
 return function()
+  local message_add = require "game.rules.actions.message_add"
   local cargo_update = require "game.rules.actions.cargo_update"
-  local location_update = require "game.rules.actions.location_update"
   local market_add_item = require "game.rules.actions.market_add_item"
   local spaceport_add = require "game.rules.actions.spaceport_add"
+  local travel_to = require "game.rules.actions.travel_to"
   local money_update = require "game.rules.actions.money_update"
 
   return function(dispatch, get_state)
+    dispatch(message_add("New Game!"))
     dispatch(spaceport_add{ name = "Alpha Station" })
     dispatch(spaceport_add{ name = "Bravo Station" })
     dispatch(spaceport_add{ name = "Charlie Station" })
@@ -27,9 +29,11 @@ return function()
     dispatch(money_update(500))
 
     dispatch(
-      location_update(
+      travel_to(
         moonpie.tables.pick_random(get_state().spaceports)
       )
     )
+    dispatch(message_add("Arriving at spaceport xyz"))
+    dispatch(message_add("Going to market"))
   end
 end

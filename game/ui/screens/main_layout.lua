@@ -9,24 +9,46 @@ moonpie.ui.components("main_layout", function()
   local cargo_hold = require "game.ui.widgets.cargo_hold"
   local market = require "game.ui.widgets.market"
   local player_stats = require "game.ui.widgets.player_stats"
+  local message_log = require "game.ui.widgets.message_log"
 
   return {
     title(),
     moonpie.ui.components.hr(),
     {
-      style = "market_panel",
-      moonpie.ui.components.h3 { text = "Market" },
-      market()
-    },
-    {
-      style = "destination_panel",
-      moonpie.ui.components.h3 { text = "Destinations" },
-      travel_menu()
+      style = "game_panel",
+      {
+        moonpie.ui.components.h3 { text = "Market" },
+        moonpie.ui.components.hr(),
+        {
+          style = "panel",
+          market()
+        }
+      },
+      {
+        moonpie.ui.components.h3 { text = "Destinations" },
+        moonpie.ui.components.hr(),
+        {
+          style = "panel",
+          travel_menu(),
+        }
+      },
+      {
+        moonpie.ui.components.h3 { text = "Message Log" },
+        moonpie.ui.components.hr(),
+        {
+          style = "panel",
+          message_log()
+        }
+      }
     },
     {
       style = "player_panel",
-      player_stats(),
-      cargo_hold(),
+      moonpie.ui.components.h3 { text = "Player" },
+      {
+        style = "panel",
+        player_stats(),
+        cargo_hold(),
+      }
     },
   }
 end)

@@ -7,16 +7,14 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
-styles["market_panel"] = {
-  width = "45%"
-}
-
-styles["destination_panel"] = {
-  width = "45%"
+styles["game_panel"] = {
+  width = "75%"
 }
 
 styles["player_panel"] = {
-  vertical_align = "bottom",
+  align = "right",
+  width = "25%",
+  height = "100%",
   border = 1,
   border_color = "light_accent"
 }
@@ -42,7 +40,6 @@ styles["market-good-price"] = {
 }
 
 styles["label-value-group"] = {
-  padding = 10
 }
 
 styles["label"] = {
@@ -57,7 +54,6 @@ styles["value"] = {
   font_size = 15
 }
 
-styles["player-panel-box"] = {
-  padding = 3,
-  width = "24%"
+styles["panel"] = {
+  padding = 6
 }

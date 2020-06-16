@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local connect = require "moonpie.redux.connect"
-local location_update = require "game.rules.actions.location_update"
+local travel_to = require "game.rules.actions.travel_to"
 
 local menu = moonpie.ui.components("space_travel_menu", function(props)
   return {
@@ -18,7 +18,7 @@ local menu = moonpie.ui.components("space_travel_menu", function(props)
             name = d.name,
             style = "destination_button",
             click = function()
-              self.dispatch(location_update(d))
+              self.dispatch(travel_to(d))
             end
           }
       end)
