@@ -8,6 +8,7 @@ return {
   cargo_update = "CARGO_UPDATE",
   location_update = "LOCATION_UPDATE",
   market_add_item = "MARKET_ADD_ITEM",
+  market_setup_shop = "MARKET_SETUP_SHOP",
   market_buy = "MARKET_BUY",
   market_sell = "MARKET_SELL",
   message_add = "MESSAGE_ADD",

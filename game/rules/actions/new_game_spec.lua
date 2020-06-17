@@ -24,10 +24,6 @@ describe("game.rules.actions.new_game", function()
     assert.equals(1, #action_groups[action_types.location_update])
   end)
 
-  it("sets initial cargo for player", function()
-    assert.greater_than(1, #action_groups[action_types.cargo_update])
-  end)
-
   it("sets some initial prices for goods", function()
     assert.greater_than(1, #action_groups[action_types.market_add_item])
   end)

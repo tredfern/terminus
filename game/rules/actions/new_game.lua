@@ -7,7 +7,6 @@ local trade_goods = require "assets.trade_goods"
 
 return function()
   local message_add = require "game.rules.actions.message_add"
-  local cargo_update = require "game.rules.actions.cargo_update"
   local market_add_item = require "game.rules.actions.market_add_item"
   local spaceport_add = require "game.rules.actions.spaceport_add"
   local travel_to = require "game.rules.actions.travel_to"
@@ -23,7 +22,6 @@ return function()
 
     for _, v in ipairs(trade_goods) do
       dispatch(market_add_item(v.name, v.baseprice))
-      dispatch(cargo_update(v.name, 0))
     end
 
     dispatch(money_update(500))
@@ -33,7 +31,6 @@ return function()
         moonpie.tables.pick_random(get_state().spaceports)
       )
     )
-    dispatch(message_add("Arriving at spaceport xyz"))
     dispatch(message_add("Going to market"))
   end
 end

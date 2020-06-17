@@ -25,4 +25,10 @@ describe("game.rules.actions.travel_to", function()
     store.dispatch(travel_to(new_location))
     assert.greater_than(0, #store.get_action_groups()[types.message_add])
   end)
+
+  it("sets up the shop at the new destination", function()
+    local new_location = { name = "someplace" }
+    store.dispatch(travel_to(new_location))
+    assert.greater_than(0, #store.get_action_groups()[types.market_add_item])
+  end)
 end)
