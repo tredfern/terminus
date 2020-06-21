@@ -9,10 +9,11 @@ store.create_store(require "game.rules.reducers")
 local app = {}
 app.assets = require "assets"
 app.actions = require "game.rules.actions"
-require "game.ui"
+
+local market_screen = require "game.ui.screens.market"
 
 function app.load()
-  app.render(moonpie.ui.components.main_layout())
+  app.render(market_screen())
 end
 
 function app.render(scene)

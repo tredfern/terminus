@@ -4,7 +4,6 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.ui.widgets.space_travel_menu", function()
-  require "game.ui"
   local spaceport = require "game.entities.spaceport"
   local spaceports = {
     spaceport:new { name = "Alpha" },

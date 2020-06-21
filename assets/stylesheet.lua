@@ -54,6 +54,6 @@ styles["value"] = {
   font_size = 15
 }
 
-styles["panel"] = {
+styles["panel_contents"] = {
   padding = 6
 }
