@@ -8,13 +8,15 @@ require "assets.themes.standard"
 local styles = moonpie.ui.styles
 
 styles["game_panel"] = {
-  width = "75%"
+  width = "80%",
+  height = "90%",
+  border = 1,
+  border_color = "light_accent"
 }
 
 styles["player_panel"] = {
-  align = "right",
-  width = "25%",
-  height = "100%",
+  width = "20%",
+  height = "90%",
   border = 1,
   border_color = "light_accent"
 }

@@ -11,6 +11,7 @@ return function()
   local spaceport_add = require "game.rules.actions.spaceport_add"
   local travel_to = require "game.rules.actions.travel_to"
   local money_update = require "game.rules.actions.money_update"
+  local show_market = require "game.rules.actions.views.show_market"
 
   return function(dispatch, get_state)
     dispatch(message_add("New Game!"))
@@ -32,5 +33,7 @@ return function()
       )
     )
     dispatch(message_add("Going to market"))
+
+    dispatch(show_market())
   end
 end

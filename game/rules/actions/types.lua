@@ -6,6 +6,7 @@
 return {
   cargo_adjust = "CARGO_ADJUST",
   cargo_update = "CARGO_UPDATE",
+  game_view_set = "GAME_VIEW_SET",
   location_update = "LOCATION_UPDATE",
   market_add_item = "MARKET_ADD_ITEM",
   market_setup_shop = "MARKET_SETUP_SHOP",

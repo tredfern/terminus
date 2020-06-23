@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.market", function()
-  local market = require "game.ui.screens.market"
+describe("game.ui.screens.main_layout", function()
+  local market = require "game.ui.screens.main_layout"
   local mock_store = require "mock_store"
 
   before_each(function()

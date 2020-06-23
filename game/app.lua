@@ -10,10 +10,10 @@ local app = {}
 app.assets = require "assets"
 app.actions = require "game.rules.actions"
 
-local market_screen = require "game.ui.screens.market"
+local main_layout = require "game.ui.screens.main_layout"
 
 function app.load()
-  app.render(market_screen())
+  app.render(main_layout())
 end
 
 function app.render(scene)
