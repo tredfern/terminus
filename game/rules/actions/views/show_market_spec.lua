@@ -8,6 +8,6 @@ describe("game.rules.actions.views.show_market", function()
 
   it("uses the market widget as the payload for the action", function()
     local act = action()
-    assert.equals("market", act.payload.name)
+    assert.equals("market_view", act.payload.name)
   end)
 end)

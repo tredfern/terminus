@@ -10,6 +10,7 @@ local tables = require "moonpie.tables"
 
 local trade_good_item = moonpie.ui.components("trade_good_detail", function(props)
   return {
+    display = "inline-block",
     moonpie.ui.components.button {
       id = "{{name}}_buy",
       name = props.item_name,

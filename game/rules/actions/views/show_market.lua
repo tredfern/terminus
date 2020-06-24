@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local action = require "game.rules.actions.game_view_set"
-local market = require "game.ui.widgets.market"
+local market = require "game.ui.views.market_view"
 
 return function()
   return action(market())

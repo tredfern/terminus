@@ -7,6 +7,10 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
+styles["game_view"] = {
+  height = "75%"
+}
+
 styles["game_panel"] = {
   width = "80%",
   height = "90%",
