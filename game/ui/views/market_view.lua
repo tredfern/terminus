@@ -11,10 +11,7 @@ return components("market_view", function()
     components.h3 { text = "Market" },
     components.hr(),
     {
-      components.text{ text = "You enter the warehouse market and talk to the merchant..." },
-    },
-    {
       market()
-    }
+    },
   }
 end)
