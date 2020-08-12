@@ -13,5 +13,10 @@ return function(state, action)
   if action.type == types.game_view_set then
     return tables.assign(state, { current = action.payload })
   end
+
+  if action.type == types.game_view_action_add then
+    local actions = tables.concat_array(state.actions, { action.payload })
+    return tables.assign(state, { actions = actions })
+  end
   return state
 end

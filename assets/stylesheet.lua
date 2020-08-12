@@ -7,13 +7,9 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
-styles["action_menu"] = {
-  vertical_align = "bottom"
-}
+styles["action_menu"] = { }
 
-styles["action_menu_item"] = {
-
-}
+styles["action_menu_item"] = { }
 
 styles["destination_button"] = {
   margin = 5,

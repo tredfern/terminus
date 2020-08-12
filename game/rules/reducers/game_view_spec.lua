@@ -19,5 +19,11 @@ describe("game.rules.reducers.game_view", function()
     assert.equals(view, state.current)
   end)
 
+  it("can add actions that are used on the view", function()
+    local action = { text = "Shoot Raygun", action = function() end }
+    local state = game_view({}, { type = types.game_view_action_add, payload = action })
+    assert.equals(action, state.actions[1])
+  end)
+
 
 end)

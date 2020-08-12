@@ -7,13 +7,13 @@ local components = require "moonpie.ui.components"
 local tables = require "moonpie.tables"
 local connect = require "moonpie.redux.connect"
 
-local action_item = components("action_menu_item", function(props)
+local action_item = function(props)
   return components.button {
     id = "action_menu_item_" .. props.index,
     caption = props.text,
     click = props.action
   }
-end)
+end
 
 local action_menu = components("action_menu", function(props)
   return {

@@ -3,9 +3,13 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local action = require "game.rules.actions.game_view_set"
+local game_view = require "game.rules.actions.game_view_set"
+local add_action = require "game.rules.actions.game_view_action_add"
 local market = require "game.ui.views.market_view"
 
 return function()
-  return action(market())
+  return function(dispatch, get_state)
+    dispatch(game_view(market()))
+    dispatch(add_action("Leave Store", function() end))
+  end
 end

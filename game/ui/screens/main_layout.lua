@@ -18,6 +18,7 @@ return moonpie.ui.components("main_layout", function()
     {
       style = "game_panel",
       game_view(),
+      moonpie.ui.components.h3 { text = "Action Menu" },
       action_menu(),
       panel {
         title = "Message Log",
