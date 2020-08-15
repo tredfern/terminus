@@ -5,8 +5,18 @@
  https://opensource.org/licenses/MIT
 -->
 
+Version 1.0
+===========
+ * Create a character
+ * Get a contract
+ * Fight and kill some thugs
+ * Get Reward
+ * Repeat same contract
+
 Features
 --------
+*Character Creation*
+ - 
 *Arriving at Starbase*
  - Description of landing
  - Generate random market prices
@@ -16,6 +26,12 @@ Features
    - Go to Market
    - Leave Spaceport
    - ...
+
+
+*Tactical Combat*
+
+*Space Combat*
+
 
 Bugs
 ----

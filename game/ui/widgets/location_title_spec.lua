@@ -11,7 +11,7 @@ describe("game.ui.widgets.location_title", function()
     mock_store({ location = { name = "Foo" } })
     local t = title()
     local render = moonpie.test_render(t)
-    assert.equals("Foo", render:find_by_id("location_title_label").text)
+    assert.equals("Foo", render:find_by_id("section_title").text)
   end)
 
 end)

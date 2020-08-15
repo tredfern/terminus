@@ -10,19 +10,25 @@ moonpie.graphics.font:register("assets/fonts/square.ttf", "terminal")
 
 font:register("assets/fonts/BalsamiqSans-Regular.ttf", "default")
 font:register("assets/fonts/BalsamiqSans-Bold.ttf", "default-bold")
-font:register("assets/fonts/LibreBaskerville-Regular.ttf", "headline")
-font:register("assets/fonts/LibreBaskerville-Bold.ttf", "headline-bold")
+font:register("assets/fonts/nulshock.ttf", "headline")
+font:register("assets/fonts/nulshock.ttf", "headline-bold")
 
 -- Colors
 local colors = moonpie.graphics.colors
-colors.light_shade = colors.convert_hex("#FAFAFA")
-colors.light_accent = colors.convert_hex("#7AB257")
-colors.main = colors.convert_hex("#EF6000")
-colors.dark_accent = colors.convert_hex("#AF594C")
-colors.dark_shade = colors.convert_hex("#1B1B29")
+colors.base_blue = colors.convert_hex("#3179bd")
+colors.base_red = colors.convert_hex("#a91a1a")
+colors.base_purple = colors.convert_hex("#9575a8")
+colors.base_yellow = colors.convert_hex("#fec562")
+colors.accent_yellow = colors.convert_hex("#f59d08")
 
-colors.button_default = colors.gray_medium
-colors.button_default_hover = colors.light_gray
+colors.light_shade = "base_yellow"
+colors.light_accent = "accent_yellow"
+colors.main = "base_blue"
+colors.dark_accent = "base_red"
+colors.dark_shade = colors.convert_hex("#040503")
+
+colors.button_default = "main"
+colors.button_default_hover = colors.lighten(colors:get_color("main"), 0.2)
 colors.button_text = colors.white
 colors.primary = colors.main
 colors.info = colors.steel_gray

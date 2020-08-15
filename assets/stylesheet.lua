@@ -61,3 +61,15 @@ styles["value"] = {
   font_name = "default",
   font_size = 15
 }
+
+styles.section_title = {
+  margin = 3
+}
+
+styles["section_title_text"] = {
+  background_color = "background",
+  margin = { left = 20 },
+  padding = { left = 6, right = 6, top = 2, bottom = 2 },
+  font_name = "headline",
+  font_size = 16
+}

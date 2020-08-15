@@ -23,13 +23,13 @@ after_success:
 - luacov-coveralls --exclude $TRAVIS_BUILD_DIR/lua_install/share --exclude ./ext
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
-- zip -r -x.git/* -xlua_install/* $TRAVIS_BUILD_DIR/../darkspace-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love ./
+- zip -r -x.git/* -xlua_install/* $TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love ./
 deploy:
   provider: releases
   api_key:
     secure: YMz/LOppWUmwEvAC1YchuIV58f1FxqHj0vAibv5tt/lSmaohEjS26LHB4SKgDamHeP63079nsatn+gfp/dhorHRxfL+FZJeiROuRXar41O6njI9Qk9JMurwCzC4FHJ3Qic+/NJi1zPTHNUPTe/g+FhaNrmxVpqkzg+JcqSoWudOVHZz3CsLBU2rP3flAehruub9e2tQTDHstu/XfYerf8vH0V9N4tJpAusjalhsrAmB/7QE9t1cIUBadEKR8YH65ZCYDUMBfcX6kgRazKb7bbBEW+8qbWDQzRkFLEIiuDMpVEnhtY3areki5E6nuoPFwEqBp1j0jRqxgD8xKqij8Vh15R8zJDiNaNVA4sgoAEe3ieIbRZzu30sRJsPHIO+LqyzxmXPc1ZH8lLtvGyDgB7NrVckRZIdph0IJP8DiRPiY0deR6X0jPBJlBryZ/YpINg4+DyCJqpKMl/ue006wZJnlPIbbpjuUwyS8b7xI6OJtUHVvZt11f25FbatDm3w0VWG4G+O+lhLcVlotkhEM/JFL2d/t/6h3cXWrrynhB76YLJrEq8zQlJws2JPQ1trFwag7d7+Ji4Tc7jYCXEhyPzrBY7KuY12e4Bqwui+fD+vPcd3YfYHuTfi/BOTAyh3NACxbzHgzVUfzcThaAA16vSrgvXniXplHW/vhX1PC1pgA=
-  file: $TRAVIS_BUILD_DIR/../darkspace-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love
+  file: $TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love
   on:
-    repo: tredfern/darkspace
+    repo: tredfern/terminus
     tags: true
     condition: $LUA =~ ^luajit=2.1$

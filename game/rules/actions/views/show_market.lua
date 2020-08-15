@@ -8,7 +8,7 @@ local add_action = require "game.rules.actions.game_view_action_add"
 local market = require "game.ui.views.market_view"
 
 return function()
-  return function(dispatch, get_state)
+  return function(dispatch)
     dispatch(game_view(market()))
     dispatch(add_action("Leave Store", function() end))
   end
