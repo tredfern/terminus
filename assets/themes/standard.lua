@@ -8,7 +8,7 @@
 local font = moonpie.graphics.font
 moonpie.graphics.font:register("assets/fonts/square.ttf", "terminal")
 
-font:register("assets/fonts/BalsamiqSans-Regular.ttf", "default")
+font:register("assets/fonts/coolvetica-rg.ttf", "default")
 font:register("assets/fonts/BalsamiqSans-Bold.ttf", "default-bold")
 font:register("assets/fonts/nulshock.ttf", "headline")
 font:register("assets/fonts/nulshock.ttf", "headline-bold")
@@ -37,7 +37,7 @@ colors.warning = colors.convert_hex("#f88706")
 colors.danger = colors.pomegranate
 
 colors.background = "dark_shade"
-colors.text = "light_shade"
+colors.text = "ghost_white"
 colors.accent = "dark_accent"
 colors.invert_background = "light_shade"
 colors.invert_text = "dark_shade"

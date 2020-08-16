@@ -14,13 +14,13 @@ local trade_good_item = moonpie.ui.components("trade_good_detail", function(prop
     moonpie.ui.components.button {
       id = "{{name}}_buy",
       name = props.item_name,
-      caption = "<< Buy",
+      caption = "Buy",
       click = props.buy
     },
     moonpie.ui.components.button {
       id = "{{name}}_sell",
       name = props.item_name,
-      caption = "Sell >>",
+      caption = "Sell",
       click = props.sell
     },
     moonpie.ui.components.text {

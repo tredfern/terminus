@@ -7,6 +7,17 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
+--layouts
+styles.sidebar = {
+  width = "20%",
+  height = "90%"
+}
+
+styles.primary = {
+  width = "80%",
+  height = "90%"
+}
+
 styles["action_menu"] = { }
 
 styles["action_menu_item"] = { }
@@ -19,8 +30,6 @@ styles["destination_button"] = {
 styles["game_panel"] = {
   width = "80%",
   height = "90%",
-  border = 1,
-  border_color = "light_accent",
 }
 
 styles["game_view"] = {
@@ -45,16 +54,39 @@ styles["market-good-price"] = {
   font_size = 20
 }
 
-styles["panel_contents"] = {
-  padding = 6
+styles.stretch_height = {
+  height = "100%"
 }
 
-styles["player_panel"] = {
-  width = "20%",
-  height = "90%",
-  border = 1,
-  border_color = "light_accent"
+styles.panel = {
+  color = "main",
+  border_color = "main",
+  margin = 2
 }
+
+styles.panel_yellow = {
+  color = "base_yellow",
+  border_color = "base_yellow"
+}
+
+styles.panel_title = {
+  background_color = "background",
+  font_name = "headline",
+  font_size = 16,
+  margin = { left = 25 },
+  padding = { left = 6, right = 6, top = 2, bottom = 2 }
+}
+
+styles["panel_contents"] = {
+  color = "text",
+  margin = { left = 8, right = 8, bottom = 8 },
+  padding = 8,
+  corner_radius_x = 16,
+  corner_radius_y = 16,
+  background_color = "background"
+}
+
+styles["player_panel"] = { }
 
 styles["value"] = {
   padding = 2,
@@ -73,3 +105,14 @@ styles["section_title_text"] = {
   font_name = "headline",
   font_size = 16
 }
+
+styles.button = moonpie.tables.merge(
+  {
+    corner_radius_x = 15,
+    corner_radius_y = 15,
+    font_name = "headline",
+    padding = { left = 15, right = 15, top = 8, bottom = 8 },
+    vertical_align = "middle"
+  },
+  styles.button
+)

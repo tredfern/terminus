@@ -4,11 +4,17 @@
 -- https://opensource.org/licenses/MIT
 
 local components = require "moonpie.ui.components"
+local colors = require "moonpie.graphics.colors"
 
 return components("panel", function(props)
   return {
-    components.h3 { id = "panel_title", text = props.title },
-    moonpie.ui.components.hr(),
+    draw_component = function(self)
+      local w, h = self.box:background_size()
+      local curve = 16
+      love.graphics.setColor(colors(self.border_color))
+      love.graphics.rectangle("fill", 0, 0, w, h, curve, curve)
+    end,
+    components.text { id = "panel_title", text = props.title, style = "panel_title" },
     {
       id = "panel_contents",
       style = "panel_contents",
