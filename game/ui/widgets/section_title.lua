@@ -5,7 +5,16 @@
 
 local components = require "moonpie.ui.components"
 local colors = require "moonpie.graphics.colors"
+local unpack = require "moonpie.utility.unpack"
 
+local function get_actions(actions)
+  if not actions then return nil end
+
+  return {
+    style = "section_title_actions",
+    unpack(actions)
+  }
+end
 
 return components("section_title", function(props)
   return {
@@ -19,7 +28,8 @@ return components("section_title", function(props)
       text = props.title,
       id = "section_title",
       style = "section_title_text"
-    }
+    },
+    get_actions(props.actions)
   }
 
 end)

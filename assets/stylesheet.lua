@@ -7,25 +7,29 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
---layouts
-styles.sidebar = {
-  width = "20%",
-  height = "90%"
-}
-
-styles.primary = {
-  width = "80%",
-  height = "90%"
-}
-
 styles["action_menu"] = { }
 
 styles["action_menu_item"] = { }
+
+styles.button = moonpie.tables.merge(
+  {
+    corner_radius_x = 15,
+    corner_radius_y = 15,
+    font_name = "headline",
+    padding = { left = 15, right = 15, top = 8, bottom = 8 },
+    vertical_align = "middle"
+  },
+  styles.button
+)
 
 styles["destination_button"] = {
   margin = 5,
   width = "20%"
 }
+
+--layouts
+
+
 
 styles["game_panel"] = {
   width = "80%",
@@ -58,10 +62,25 @@ styles.stretch_height = {
   height = "100%"
 }
 
+styles.main_menu = {
+  width = 250
+}
+
+styles.main_menu_button = {
+  display = "block"
+}
+
+styles.message_log = { }
+
 styles.panel = {
   color = "main",
   border_color = "main",
   margin = 2
+}
+
+styles.panel_red = {
+  color = "base_red",
+  border_color = "base_red"
 }
 
 styles.panel_yellow = {
@@ -77,25 +96,41 @@ styles.panel_title = {
   padding = { left = 6, right = 6, top = 2, bottom = 2 }
 }
 
-styles["panel_contents"] = {
+styles.panel_contents = {
   color = "text",
   margin = { left = 8, right = 8, bottom = 8 },
   padding = 8,
   corner_radius_x = 16,
   corner_radius_y = 16,
-  background_color = "background"
+  background_color = "background",
 }
 
 styles["player_panel"] = { }
 
-styles["value"] = {
-  padding = 2,
-  font_name = "default",
-  font_size = 15
+styles.primary = {
+  width = "80%",
+  height = "90%"
 }
 
+
 styles.section_title = {
+  color = "main",
   margin = 3
+}
+
+styles.section_title_actions = {
+  background_color = "background",
+  display = "inline",
+  align = "right",
+  margin = { right = 25 }
+}
+
+styles.section_title_button = {
+  corner_radius_x = 0, corner_radius_y = 0,
+  margin = { left = 3, right = 3 },
+  padding = { left = 6, right = 6, top = 2, bottom = 2 },
+  font_size = 16
+
 }
 
 styles["section_title_text"] = {
@@ -106,13 +141,13 @@ styles["section_title_text"] = {
   font_size = 16
 }
 
-styles.button = moonpie.tables.merge(
-  {
-    corner_radius_x = 15,
-    corner_radius_y = 15,
-    font_name = "headline",
-    padding = { left = 15, right = 15, top = 8, bottom = 8 },
-    vertical_align = "middle"
-  },
-  styles.button
-)
+styles.sidebar = {
+  width = "20%",
+  height = "90%"
+}
+
+styles["value"] = {
+  padding = 2,
+  font_name = "default",
+  font_size = 15
+}

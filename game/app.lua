@@ -4,16 +4,18 @@
 -- https://opensource.org/licenses/MIT
 
 local store = require "moonpie.redux.store"
-store.create_store(require "game.rules.reducers")
+store.create_store(require "game.rules.reducers", {
+  player = {
+    name = "Cmdr. Oskar"
+  }
+})
 
 local app = {}
 app.assets = require "assets"
 app.actions = require "game.rules.actions"
 
-local main_layout = require "game.ui.screens.main_layout"
-
 function app.load()
-  app.render(main_layout())
+  app.title()
 end
 
 function app.render(scene)
@@ -23,6 +25,20 @@ function app.render(scene)
   )
 end
 
-store.dispatch(app.actions.new_game())
+function app.create_character()
+  local c = require("game.ui.screens.character_creation")
+  app.render(c())
+end
+
+function app.game()
+  store.dispatch(app.actions.new_game())
+  local g = require("game.ui.screens.main_layout")
+  app.render(g())
+end
+
+function app.title()
+  local t = require("game.ui.screens.title")
+  app.render(t())
+end
 
 return app

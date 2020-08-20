@@ -9,7 +9,7 @@ local font = moonpie.graphics.font
 moonpie.graphics.font:register("assets/fonts/square.ttf", "terminal")
 
 font:register("assets/fonts/coolvetica-rg.ttf", "default")
-font:register("assets/fonts/BalsamiqSans-Bold.ttf", "default-bold")
+font:register("assets/fonts/coolvetica-rg.ttf", "default-bold")
 font:register("assets/fonts/nulshock.ttf", "headline")
 font:register("assets/fonts/nulshock.ttf", "headline-bold")
 
