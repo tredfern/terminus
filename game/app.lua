@@ -3,10 +3,19 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local attribute = require "game.entities.character.attribute"
 local store = require "moonpie.redux.store"
 store.create_store(require "game.rules.reducers", {
   player = {
-    name = "Cmdr. Oskar"
+    name = "Cmdr. Oskar",
+    attributes = {
+      strength = attribute(10),
+      dexterity = attribute(10),
+      endurance = attribute(10),
+      intelligence = attribute(10),
+      knowledge = attribute(10),
+      personality = attribute(10)
+    }
   }
 })
 
