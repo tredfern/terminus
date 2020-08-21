@@ -50,4 +50,14 @@ function app.title()
   app.render(t())
 end
 
+function app.quit()
+  love.event.quit()
+end
+
+function app.game_menu()
+  local t = require("game.ui.widgets.game_menu")
+  moonpie.render("modal", t())
+end
+
+moonpie.keyboard.hot_keys["escape"] = app.game_menu
 return app

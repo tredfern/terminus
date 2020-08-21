@@ -7,7 +7,7 @@ local components = require "moonpie.ui.components"
 local panel = require "game.ui.widgets.panel"
 local app = require "game.app"
 
-local game_menu = components("game_menu", function()
+local main_menu = components("main_menu", function()
   return panel {
     style = "main_menu panel_red align-center align-middle",
     title = "terminus",
@@ -15,15 +15,13 @@ local game_menu = components("game_menu", function()
       components.button {
         style = "main_menu_button",
         caption = "New Campaign",
-        click = function()
-          app.create_character()
-        end
+        click = app.create_character
       },
       components.button { style = "main_menu_button", caption = "Options" },
       components.button {
         style = "main_menu_button",
         caption = "Exit",
-        click = function() love.event.quit() end
+        click = app.quit
       },
     }
   }
@@ -31,6 +29,6 @@ end)
 
 return components("title_screen", function()
   return {
-    game_menu()
+    main_menu()
   }
 end)
