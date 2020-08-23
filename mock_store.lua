@@ -17,6 +17,10 @@ function store.get_action_groups()
   return moonpie.utility.tables.group_by(actions, function(a) return a.type end)
 end
 
+function store.get_actions(type)
+  local groups = store.get_action_groups()
+  return groups[type]
+end
 
 return function(stub_state)
   store.create_store(mock_reducer, stub_state)

@@ -9,6 +9,7 @@ return {
   character = {
     name_update = "CHARACTER_NAME_UPDATE"
   },
+  game_state_change = "GAME_STATE_CHANGE",
   game_view_action_add = "GAME_VIEW_ACTION_ADD",
   game_view_set = "GAME_VIEW_SET",
   location_update = "LOCATION_UPDATE",
