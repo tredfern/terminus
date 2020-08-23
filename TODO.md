@@ -32,6 +32,14 @@ Features
 
 *Space Combat*
 
+Stories
+-------
+
+ * Stories should allow for choices with different possible outcomes
+ * Skills of character(s) should impact the choices/success rate
+ * Failure can lead to different paths
+ * Stories should be able to trigger new events in the future
+
 
 Bugs
 ----

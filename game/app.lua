@@ -43,6 +43,7 @@ function app.game()
   store.dispatch(app.actions.new_game())
   local g = require("game.ui.screens.main_layout")
   app.render(g())
+  app.show_story(app.assets.stories[1])
 end
 
 function app.title()
@@ -57,6 +58,11 @@ end
 function app.game_menu()
   local t = require("game.ui.widgets.game_menu")
   moonpie.render("modal", t())
+end
+
+function app.show_story(story)
+  local story_screen = require("game.ui.screens.story")
+  app.render(story_screen { story = story })
 end
 
 moonpie.keyboard.hot_keys["escape"] = app.game_menu

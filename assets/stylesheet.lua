@@ -103,6 +103,8 @@ styles.panel_contents = {
   corner_radius_x = 16,
   corner_radius_y = 16,
   background_color = "background",
+  font_name = "default",
+  font_size = 14,
 }
 
 styles["player_panel"] = { }
@@ -144,6 +146,12 @@ styles["section_title_text"] = {
 styles.sidebar = {
   width = "20%",
   height = "90%"
+}
+
+styles.story_popup = {
+  width = "60%",
+  align = "center",
+  vertical_align = "middle"
 }
 
 styles["value"] = {
