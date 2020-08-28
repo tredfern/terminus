@@ -18,7 +18,7 @@ return components("story_popup", function(props)
         {
           tables.map(props.story.choices, function(c, i)
             return components.button { id = "choice_" .. tostring(i), caption = c.title, click = function()
-                c:handler(props.story)
+                c:event(props.story)
               end
             }
           end)

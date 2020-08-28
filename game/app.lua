@@ -9,7 +9,6 @@ local store = require "moonpie.redux.store"
 local app = {}
 app.assets = require "assets"
 app.actions = require "game.rules.actions"
-app.statemachine = require "game.statemachine"
 
 function app.load()
   store.create_store(require "game.rules.reducers", {
@@ -25,8 +24,6 @@ function app.load()
       }
     }
   })
-  app.statemachine.start()
-
   app.title()
 end
 

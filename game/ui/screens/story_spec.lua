@@ -10,8 +10,8 @@ describe("game.ui.screens.story", function()
     title = "Adventure",
     description = "Blah blah",
     choices = {
-      { title = "Done", handler = spy.new(function() end) },
-      { title = "Run away", handler = spy.new(function() end) },
+      { title = "Done", event = spy.new(function() end) },
+      { title = "Run away", event = spy.new(function() end) },
     }
   }
 
@@ -33,11 +33,11 @@ describe("game.ui.screens.story", function()
     local s = story_screen{ story = sample }
     local c1 = s:find_by_id("choice_1")
     c1:click()
-    assert.spy(sample.choices[1].handler).was.called_with(sample.choices[1], sample)
+    assert.spy(sample.choices[1].event).was.called_with(sample.choices[1], sample)
 
     local c2 = s:find_by_id("choice_2")
     c2:click()
-    assert.spy(sample.choices[2].handler).was.called_with(sample.choices[2], sample)
+    assert.spy(sample.choices[2].event).was.called_with(sample.choices[2], sample)
 
   end)
 end)
