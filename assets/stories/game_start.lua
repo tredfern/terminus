@@ -4,11 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 local story = require "game.entities.story"
+local events = require "moonpie.event_system"
 
 local function combat_event()
-  local store = require "moonpie.redux.store"
-  local begin_combat = require "game.rules.actions.game_state.combat"
-  store.dispatch(begin_combat())
+  local begin_combat = require "game.rules.events.combat_start"
+  events.dispatch(begin_combat())
 end
 
 return story:new {

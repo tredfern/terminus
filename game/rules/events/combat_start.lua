@@ -3,11 +3,11 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.actions.types"
+local types = require "game.rules.events.types"
 
-return function()
+return function(situation)
   return {
-    type = types.game_state_change,
-    payload = "start"
+    type = types.combat_start,
+    payload = situation
   }
 end

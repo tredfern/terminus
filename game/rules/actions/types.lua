@@ -9,9 +9,8 @@ return {
   character = {
     name_update = "CHARACTER_NAME_UPDATE"
   },
-  game_state_change = "GAME_STATE_CHANGE",
   game_view_action_add = "GAME_VIEW_ACTION_ADD",
-  game_view_set = "GAME_VIEW_SET",
+  game_view_set = "GAME_VIEW_SET", --TODO: These should not be actions, but handled by events
   location_update = "LOCATION_UPDATE",
   market_add_item = "MARKET_ADD_ITEM",
   market_setup_shop = "MARKET_SETUP_SHOP",

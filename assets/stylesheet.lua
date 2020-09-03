@@ -43,7 +43,8 @@ styles["game_view"] = {
 styles["label"] = {
   padding = 2,
   font_name = "default-bold",
-  font_size = 15
+  font_size = 15,
+  width = "50%"
 }
 
 styles["market-good-name"] = {

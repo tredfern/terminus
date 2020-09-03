@@ -4,16 +4,18 @@
 -- https://opensource.org/licenses/MIT
 
 describe("assets.stories.game_start", function()
-  local action_types = require "game.rules.actions.types"
+  local event_types = require "game.rules.events.types"
+  local events = require "moonpie.event_system"
   local game_start = require "assets.stories.game_start"
-  local mock_store = require "mock_store"
-  local store = require "moonpie.redux.store"
+
+  before_each(function()
+    events.clear()
+  end)
 
   it("has one action that initiates the combat event", function()
-    mock_store({})
+    local cb = spy.new(function() end)
+    events.subscribe(event_types.combat_start, spy_to_func(cb))
     game_start.choices[1].event()
-    assert.greater_than(0, #store.get_actions(action_types.game_state_change))
-    assert.equals("combat", store.get_actions(action_types.game_state_change)[1].payload)
-
+    assert.spy(cb).was.called()
   end)
 end)
