@@ -3,14 +3,16 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local attribute = require "game.entities.character.attribute"
 local store = require "moonpie.redux.store"
-
 local app = {}
-app.assets = require "assets"
-app.actions = require "game.rules.actions"
 
 function app.load()
+  -- Load state machine
+  local gsm = require "game.game_state_machine"
+  gsm.initialize()
+
+  -- Configure state store
+  local attribute = require "game.entities.character.attribute"
   store.create_store(require "game.rules.reducers", {
     player = {
       name = "Cmdr. Oskar",
@@ -40,10 +42,13 @@ function app.create_character()
 end
 
 function app.game()
-  store.dispatch(app.actions.new_game())
+  local assets = require "assets"
+  local actions = require "game.rules.actions"
+
+  store.dispatch(actions.new_game())
   local g = require("game.ui.screens.main_layout")
   app.render(g())
-  app.show_story(app.assets.stories[1])
+  app.show_story(assets.stories[1])
 end
 
 function app.title()
@@ -63,6 +68,12 @@ end
 function app.show_story(story)
   local story_screen = require("game.ui.screens.story")
   app.render(story_screen { story = story })
+end
+
+function app.show_combat()
+  local combat_screen = require("game.ui.screens.combat")
+  app.render(combat_screen())
+
 end
 
 moonpie.keyboard.hot_keys["escape"] = app.game_menu

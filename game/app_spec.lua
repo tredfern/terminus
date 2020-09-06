@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.app", function()
+  -- App is the central glue module that loads up the modules and links things together
   local app = require "game.app"
 
   it("can render scenes", function()
@@ -11,11 +12,4 @@ describe("game.app", function()
     assert.not_nil(moonpie.ui.current.find_by_id("foo"))
   end)
 
-  it("loads some global assets", function()
-    assert.not_nil(app.assets)
-  end)
-
-  it("state is not directly accessible", function()
-    assert.is_nil(app.state)
-  end)
 end)
