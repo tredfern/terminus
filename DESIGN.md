@@ -9,7 +9,7 @@
 
 ## Overview
 
-You are a character in a future space-faring universe. 
+You are a character (or group) in a future space-faring universe. 
 A sci-fi roguelike adventure game. Quests are story based and should be designed to integrate together. Where characters
 in the universe have motivations and endgame events are unfolding.
 
@@ -32,13 +32,21 @@ plays out.
 
 
 ## High Level Mechanics
+### Characters
+Attributes
+: Strength, Dexterity, Endurance, Intelligence, Knowledge, Personality
+
+
+
+Characters have attributes defining key traits and foundations for skills, skills that represent ability to perform tasks
 Skill based character development as opposed to class+xp. 
+### Adventure Mode
 
 
 ## Technical
 ```mermaid
 stateDiagram-v2
-  title : Title Screen
+  title : Title
   ng : New Game
   cc : Create Character
   st : Story Mode
@@ -56,6 +64,28 @@ stateDiagram-v2
   cb --> ad
   cb --> st
 ```
+
+### Folder Structure
+Assets
+: Contains game specific code, fonts, and data
+
+Entities
+: Contains the building blocks or pieces for the game. Entities should in general define what they are (properties, 
+etc.) and not the behaviors between them.
+
+Rules
+: Contains actions, events, reducers and validators that define the behaviors of the game.
+
+
+### Events / Actions
+Events and actions are the main areas that define how the game advances and changes. 
+
+Actions are for changing state. When state changes an event is raised from the store. 
+
+Events represent an occurrence in the system but does not impact state. An event might represent an occurrence in the
+game such as transitioning from adventure mode to combat.
+
+
 
 ### Store / State / Actions / Events
 
@@ -78,6 +108,8 @@ store --> subscribers
 subscribers --> game_state_manager
 game_state_manager --> SetupNewState
 ```
+
+Actions and events are organized under the **rules** folder. Rules represent those pieces that define
 
 ## Stories
 In most rogue/rpg based games, quests and missions are minimally connected. Frequently they feel like a chore
@@ -102,3 +134,20 @@ Stories should help build the tension of the experience. Leading towards
 
 ### Personal Combat
 + Maps that show the area the battle is happening
+
+
+## Inspiration
+
+
+## Interactions
+ * Get Contracts
+ * Fight something
+ * Fulfill contracts to earn rewards
+ * Get new contract
+
+## Inspiration
+ * Trade Wars
+ * Harpoon
+ * Traveller
+ * Gurps
+ * 

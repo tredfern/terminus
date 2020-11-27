@@ -63,7 +63,8 @@ styles.stretch_height = {
 }
 
 styles.main_menu = {
-  width = 250
+  width = 250,
+  height = "40%"
 }
 
 styles.main_menu_button = {
@@ -104,7 +105,7 @@ styles.panel_contents = {
   corner_radius_y = 16,
   background_color = "background",
   font_name = "default",
-  font_size = 14,
+  font_size = 14
 }
 
 styles["player_panel"] = { }
@@ -152,6 +153,10 @@ styles.story_popup = {
   width = "60%",
   align = "center",
   vertical_align = "middle"
+}
+
+styles.tactical_display = {
+  height = "100%"
 }
 
 styles["value"] = {
