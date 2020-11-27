@@ -5,12 +5,4 @@
 local combine_reducers = require "moonpie.redux.combine_reducers"
 
 return combine_reducers{
-  game_state = require "game.rules.reducers.game_state",
-  game_view = require "game.rules.reducers.game_view",
-  location = require "game.rules.reducers.location",
-  market_items = require "game.rules.reducers.market",
-  message_log = require "game.rules.reducers.message_log",
-  player = require "game.rules.reducers.player",
-  player_cargo = require "game.rules.reducers.cargo",
-  spaceports = require "game.rules.reducers.spaceports",
 }

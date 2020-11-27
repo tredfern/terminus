@@ -6,14 +6,9 @@
 describe("game.rules.reducers", function()
   local root = require "game.rules.reducers"
 
-  describe("initial state", function()
-    local state = root()
-    assert.not_nil(state)
-    assert.not_nil(state.spaceports)
+  it("has a combined reducer", function()
+    assert.not_nil(root)
+    assert.is_function(root)
   end)
 
-  it("has state for the player", function()
-    local state = root()
-    assert.not_nil(state.player)
-  end)
 end)

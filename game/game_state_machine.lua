@@ -12,12 +12,6 @@ function gsm.game_start()
   gsm.current = "start"
 end
 
-function gsm.combat_start()
-  local app = require "game.app"
-  gsm.current = "combat"
-  app.show_combat()
-end
-
 function gsm.initialize()
   events.subscribe(event_types.combat_start, gsm.combat_start)
   events.subscribe(event_types.game_start, gsm.game_start)
