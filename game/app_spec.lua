@@ -12,4 +12,8 @@ describe("game.app", function()
     assert.not_nil(moonpie.ui.current.find_by_id("foo"))
   end)
 
+  it("can start a new game", function()
+    assert.has_no_errors(function() app.new_game() end)
+  end)
+
 end)

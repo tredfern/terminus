@@ -15,4 +15,14 @@ describe("game.ui.screens.title", function()
   it("instantiates a component", function()
     assert.not_nil(title())
   end)
+
+  it("triggers new game on the app if new game is clicked", function()
+    local app = require "game.app"
+    spy.on(app, "new_game")
+
+    -- instantiate the title component to test it
+    local component = title()
+    component:find_by_id("new_game_button"):click()
+    assert.spy(app.new_game).was.called()
+  end)
 end)

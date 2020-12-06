@@ -37,5 +37,8 @@ function app.game_menu()
   moonpie.render("modal", t())
 end
 
+function app.new_game()
+end
+
 moonpie.keyboard.hot_keys["escape"] = app.game_menu
 return app
