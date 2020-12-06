@@ -38,6 +38,8 @@ function app.game_menu()
 end
 
 function app.new_game()
+  local combat = require "game.ui.screens.combat"
+  app.render(combat())
 end
 
 moonpie.keyboard.hot_keys["escape"] = app.game_menu
