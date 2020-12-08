@@ -9,4 +9,8 @@ describe("game.ui.screens.combat", function()
   it("creates a component", function()
     assert.is_table(combat_screen())
   end)
+
+  it("renders a map", function()
+    assert.contains_component("combat_map", combat_screen())
+  end)
 end)
