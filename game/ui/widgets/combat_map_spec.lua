@@ -5,9 +5,17 @@
 
 describe("game.ui.widgets.combat_map", function()
   local combat_map = require "game.ui.widgets.combat_map"
+  local mock_store = require "mock_store"
 
   it("renders a component", function()
     assert.is_table(combat_map())
+  end)
+
+  it("connects to the characters state of the store", function()
+    local c = {}
+    mock_store({ characters = { c }})
+    local map = combat_map()
+    assert.same({ c }, map.characters)
   end)
 
 end)

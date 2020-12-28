@@ -5,4 +5,5 @@
 local combine_reducers = require "moonpie.redux.combine_reducers"
 
 return combine_reducers{
+  characters = require "game.rules.reducers.characters"
 }
