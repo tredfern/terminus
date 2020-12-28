@@ -18,8 +18,12 @@ local function draw_tile(x, y)
   love.graphics.rectangle("line", x * tile_width, y*tile_height, tile_width, tile_height)
 end
 
-local function draw_character(x, y)
-  love.graphics.setColor(colors.green)
+local function draw_character(x, y, is_enemy)
+  if is_enemy then
+    love.graphics.setColor(colors.red)
+  else
+    love.graphics.setColor(colors.green)
+  end
   love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
 end
 
@@ -38,6 +42,11 @@ keyboard:hotkey("left", function()
 end)
 
 
+local enemies = {}
+for i=1,4 do
+  enemies[#enemies + 1] = character:new { is_enemy = true, x = math.random(10), y = math.random(10) }
+end
+
 
 return components("combat_map", function()
   return {
@@ -49,6 +58,10 @@ return components("combat_map", function()
       end
 
       draw_character(c.x, c.y)
+
+      for i = 1, #enemies do
+        draw_character(enemies[i].x, enemies[i].y, true)
+      end
     end
   }
 end)
