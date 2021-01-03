@@ -21,9 +21,6 @@ function app.load()
   -- Load state machine
   local gsm = require "game.game_state_machine"
   gsm.initialize()
-
-  -- Configure state store
-  store.create_store(require "game.rules.reducers", { })
   app.title()
 end
 

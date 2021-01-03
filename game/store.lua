@@ -8,8 +8,9 @@ local combine_reducers = require "moonpie.redux.combine_reducers"
 
 store.create_store(
   combine_reducers {
-    character = require "game.rules.character.reducer"
-  }
+    characters = require "game.rules.character.reducer"
+  },
+  {}
 )
 
 return store
