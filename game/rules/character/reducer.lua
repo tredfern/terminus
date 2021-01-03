@@ -16,5 +16,13 @@ return create_slice {
     c.x = action.payload.x
     c.y = action.payload.y
     return state
+  end,
+  [types.character_remove] = function(state, action)
+    return tables.select(state,
+    function(character)
+      if character ~= action.payload.character then
+        return character
+      end
+    end)
   end
 }

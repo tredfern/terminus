@@ -7,6 +7,11 @@ describe("game.rules.character.reducer", function()
   local characters_reducer = require "game.rules.character.reducer"
   local types = require "game.rules.character.actions.types"
 
+  it("returns the same state if the action is not handled", function()
+    local state = {}
+    assert.equals(state, characters_reducer(state, { type = "random_action" }))
+  end)
+
   it("adds new characters to the store through the character_add action", function()
     local new_char = {}
     local add = {
@@ -20,9 +25,15 @@ describe("game.rules.character.reducer", function()
     assert.array_includes(new_char, new_state)
   end)
 
-  it("returns the same state if the action is not handled", function()
-    local state = {}
-    assert.equals(state, characters_reducer(state, { type = "random_action" }))
+  it("removes the character specified from the array", function()
+    local character = {}
+    local keep_character = {}
+    local state = { character, keep_character }
+    local action = { type = types.character_remove, payload = { character = character } }
+
+    local new_state = characters_reducer(state, action)
+    assert.not_array_includes(character, new_state)
+    assert.array_includes(keep_character, new_state)
   end)
 
   it("moves the character to the specified position", function()
