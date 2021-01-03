@@ -4,7 +4,6 @@ env:
 - LUA="lua=5.1"
 - LUA="lua=5.2"
 - LUA="lua=5.3"
-#- LUA="luajit=2.0" -- Disabling because of some wierd memory issue on travis-ci...
 - LUA="luajit=2.1"
 before_install:
 - pip install hererocks
@@ -27,9 +26,9 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: YMz/LOppWUmwEvAC1YchuIV58f1FxqHj0vAibv5tt/lSmaohEjS26LHB4SKgDamHeP63079nsatn+gfp/dhorHRxfL+FZJeiROuRXar41O6njI9Qk9JMurwCzC4FHJ3Qic+/NJi1zPTHNUPTe/g+FhaNrmxVpqkzg+JcqSoWudOVHZz3CsLBU2rP3flAehruub9e2tQTDHstu/XfYerf8vH0V9N4tJpAusjalhsrAmB/7QE9t1cIUBadEKR8YH65ZCYDUMBfcX6kgRazKb7bbBEW+8qbWDQzRkFLEIiuDMpVEnhtY3areki5E6nuoPFwEqBp1j0jRqxgD8xKqij8Vh15R8zJDiNaNVA4sgoAEe3ieIbRZzu30sRJsPHIO+LqyzxmXPc1ZH8lLtvGyDgB7NrVckRZIdph0IJP8DiRPiY0deR6X0jPBJlBryZ/YpINg4+DyCJqpKMl/ue006wZJnlPIbbpjuUwyS8b7xI6OJtUHVvZt11f25FbatDm3w0VWG4G+O+lhLcVlotkhEM/JFL2d/t/6h3cXWrrynhB76YLJrEq8zQlJws2JPQ1trFwag7d7+Ji4Tc7jYCXEhyPzrBY7KuY12e4Bqwui+fD+vPcd3YfYHuTfi/BOTAyh3NACxbzHgzVUfzcThaAA16vSrgvXniXplHW/vhX1PC1pgA=
-  file: $TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love
+    secure: WvPYFfGL/XF0P+EmYlxTuvsNucgmZtmeiRYwlYrIIUMyVBS0x53lgKPQv23xn2MpteTN5M7hLQhpGWiA+kJ4odA2FuHT5iRdPJys1LagmMdn7Q50wefdOmzV3UbwShuAVE+jCk72VjmaWIZlTUivL9c92EKdiMxw7ED5Fet0rBl9FIvgZe+KL3sg3DTlGjgqR5hV8wKHEhfB2BL+fjnGMhp0FRKydyllhDL9l/2+ITlHZUMgfNnmC/bmoCNrKH5JpeaoHJRu92DjC54fB40Ty1+Svb0rifLT4bnpmEn1wsI8UuAFgb0CJq4M1rFDVzNC2LBqepIGcaWFMOyV+mGNMaMlrL36zzau8YsUF50oxqpJ0xDIUbCDrlhV6Irn7SZlQjiCHKG0EEgeql13RHElZ/j7fUVveIPt6I2jARebQl/hQTyQcAx8wDBWyKBeXfFl4yFuPabpJ1sfrrxigxzVkQ8b1ag4i9h80pKRXiv1a5ewjIP4Vd6bb8qH1cobSeowxLLugVEsLIsef3z3rHqBqpbXwd5x70m4lqSvH/5A72411xJr08Fhj9Y6DEa4v05tzKlTt72E3YxRCSCEMgCtiTkjOFGzb76WcArszSC3MOZkPQSgHyJiX9IYe7Y5dnlqRo1VciYQhYuuJiV+w3DGDPmSTLyDV8YjB/3kj7YnsEs=
+  file: "$TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love"
   on:
     repo: tredfern/terminus
     tags: true
-    condition: $LUA =~ ^luajit=2.1$
+    condition: "$LUA =~ ^luajit=2.1$"

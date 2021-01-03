@@ -25,6 +25,5 @@ describe("game.rules.character.reducer", function()
     assert.equals(state, characters_reducer(state, { type = "random_action" }))
   end)
 
-  it("updates the character p")
 
 end)
