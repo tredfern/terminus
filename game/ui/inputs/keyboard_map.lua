@@ -5,17 +5,14 @@
 
 local keyboard = require "moonpie.keyboard"
 local store = require "moonpie.redux.store"
-local filters = require "game.rules.filters"
-local actions = {
-  character_move = require "game.rules.actions.character_move"
-}
+local character = require "game.rules.character"
 
 local keysettings = {}
 
 keysettings.combat_map = {
   ["up"] = function()
-    local player_character = filters.find_player_character(store.get_state())
-    store.dispatch(actions.character_move(
+    local player_character = character.selectors.get_player_character(store.get_state())
+    store.dispatch(character.actions.move(
       player_character,
       player_character.x,
       player_character.y - 1

@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.entities.character", function()
-  local character = require "game.entities.character"
+describe("game.rules.character.character", function()
+  local character = require "game.rules.character.character"
 
   it("instantiates a character class", function()
     local c = character()

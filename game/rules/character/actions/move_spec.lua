@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.actions.character_move", function()
-  local character_move = require "game.rules.actions.character_move"
+describe("game.rules.character.actions.move", function()
+  local character_move = require "game.rules.character.actions.move"
 
   it("is set to the position that the character should move to", function()
     local c = {}

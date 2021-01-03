@@ -3,18 +3,17 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local store = require "moonpie.redux.store"
+local store = require "game.store"
 local app = {}
 
 local function set_up_the_game()
-  store.create_store(require "game.rules.reducers", { })
+  local character = require "game.rules.character"
 
-  local character_add = require "game.rules.actions.character_add"
-  local character = require "game.entities.character"
-
-  store.dispatch(character_add(character:new{ x = 2, y = 1, is_player_controlled = true }))
+  store.dispatch(character.actions.add(character.create { x = 2, y = 1, is_player_controlled = true }))
   for _=1,4 do
-    store.dispatch(character_add(character:new { is_enemy = true, x = math.random(10), y = math.random(10) }))
+    store.dispatch(
+      character.actions.add(
+        character.create { is_enemy = true, x = math.random(10), y = math.random(10) }))
   end
 end
 

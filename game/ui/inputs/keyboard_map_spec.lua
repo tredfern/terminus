@@ -4,11 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.ui.inputs.keyboard", function()
-  local action_types = require "game.rules.actions.types"
   local keyboard_map = require "game.ui.inputs.keyboard_map"
   local key_simulator = require "moonpie.keyboard"
   local mock_store = require "mock_store"
   local store
+  local character = require "game.rules.character"
 
   describe("combat_map settings", function()
     before_each(function()
@@ -19,7 +19,7 @@ describe("game.ui.inputs.keyboard", function()
     it("can disable keyboard mapping", function()
       keyboard_map.disable_combat_map()
       key_simulator:keypressed("up")
-      local msgs = store.get_actions(action_types.character_move)
+      local msgs = store.get_actions(character.actions.types.character_move)
       assert.is_nil(msgs)
     end)
 
@@ -42,7 +42,7 @@ describe("game.ui.inputs.keyboard", function()
 
       it("can move up", function()
         key_simulator:keypressed("up")
-        local msgs = store.get_actions(action_types.character_move)
+        local msgs = store.get_actions(character.actions.types.character_move)
         local move_up = msgs[1]
 
         assert.equals(player_character, move_up.payload.character)

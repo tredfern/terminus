@@ -3,9 +3,9 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.reducers.character", function()
-  local characters_reducer = require "game.rules.reducers.characters"
-  local types = require "game.rules.actions.types"
+describe("game.rules.character.reducer", function()
+  local characters_reducer = require "game.rules.character.reducer"
+  local types = require "game.rules.character.actions.types"
 
   it("adds new characters to the store through the character_add action", function()
     local new_char = {}
@@ -17,8 +17,7 @@ describe("game.rules.reducers.character", function()
     }
 
     local new_state = characters_reducer({}, add)
-    assert.same({ new_char }, new_state)
-    assert.equals(1, #new_state)
+    assert.array_includes(new_char, new_state)
   end)
 
   it("returns the same state if the action is not handled", function()
