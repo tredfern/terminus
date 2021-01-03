@@ -21,4 +21,11 @@ describe("game.rules.reducers.character", function()
     assert.equals(1, #new_state)
   end)
 
+  it("returns the same state if the action is not handled", function()
+    local state = {}
+    assert.equals(state, characters_reducer(state, { type = "random_action" }))
+  end)
+
+  it("updates the character p")
+
 end)

@@ -6,13 +6,13 @@
 local store = require "moonpie.redux.store"
 local app = {}
 
-function set_up_the_game()
+local function set_up_the_game()
   store.create_store(require "game.rules.reducers", { })
 
   local character_add = require "game.rules.actions.character_add"
   local character = require "game.entities.character"
 
-  store.dispatch(character_add(character:new{ x = 1, y = 1, is_player_controlled = true }))
+  store.dispatch(character_add(character:new{ x = 2, y = 1, is_player_controlled = true }))
   for _=1,4 do
     store.dispatch(character_add(character:new { is_enemy = true, x = math.random(10), y = math.random(10) }))
   end

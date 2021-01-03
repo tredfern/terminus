@@ -5,7 +5,6 @@
 
 local components = require "moonpie.ui.components"
 local colors = require "moonpie.graphics.colors"
-local character = require "game.entities.character"
 local connect = require "moonpie.redux.connect"
 
 local tile_width = 32
