@@ -10,5 +10,11 @@ local tables = require "moonpie.tables"
 return create_slice {
   [types.character_add] = function(state, action)
     return tables.concat_array(state, { action.payload.character })
+  end,
+  [types.character_move] = function(state, action)
+    local c = action.payload.character
+    c.x = action.payload.x
+    c.y = action.payload.y
+    return state
   end
 }

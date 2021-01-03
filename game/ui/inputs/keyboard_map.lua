@@ -10,6 +10,30 @@ local character = require "game.rules.character"
 local keysettings = {}
 
 keysettings.combat_map = {
+  ["down"] = function()
+    local player_character = character.selectors.get_player_character(store.get_state())
+    store.dispatch(character.actions.move(
+      player_character,
+      player_character.x,
+      player_character.y + 1
+    ))
+  end,
+  ["left"] = function()
+    local player_character = character.selectors.get_player_character(store.get_state())
+    store.dispatch(character.actions.move(
+      player_character,
+      player_character.x - 1,
+      player_character.y
+    ))
+  end,
+  ["right"]= function()
+    local player_character = character.selectors.get_player_character(store.get_state())
+    store.dispatch(character.actions.move(
+      player_character,
+      player_character.x + 1,
+      player_character.y
+    ))
+  end,
   ["up"] = function()
     local player_character = character.selectors.get_player_character(store.get_state())
     store.dispatch(character.actions.move(

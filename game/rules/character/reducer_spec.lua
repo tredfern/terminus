@@ -25,5 +25,21 @@ describe("game.rules.character.reducer", function()
     assert.equals(state, characters_reducer(state, { type = "random_action" }))
   end)
 
+  it("moves the character to the specified position", function()
+    local character = { x = 3, y = 8 }
+    local state = { character }
+    local action = { type = types.character_move,
+      payload = {
+        character = character,
+        x = 4,
+        y = 9
+      }
+    }
 
+    local new_state = characters_reducer(state, action)
+    local c = new_state[1]
+    assert.equals(character, c)
+    assert.equals(4, c.x)
+    assert.equals(9, c.y)
+  end)
 end)

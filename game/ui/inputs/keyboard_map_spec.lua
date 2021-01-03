@@ -49,6 +49,36 @@ describe("game.ui.inputs.keyboard", function()
         assert.equals(20, move_up.payload.x)
         assert.equals(31, move_up.payload.y)
       end)
+
+      it("can move down", function()
+        key_simulator:keypressed("down")
+        local msgs = store.get_actions(character.actions.types.character_move)
+        local move_down = msgs[1]
+
+        assert.equals(player_character, move_down.payload.character)
+        assert.equals(20, move_down.payload.x)
+        assert.equals(33, move_down.payload.y)
+      end)
+
+      it("can move right", function()
+        key_simulator:keypressed("right")
+        local msgs = store.get_actions(character.actions.types.character_move)
+        local move_down = msgs[1]
+
+        assert.equals(player_character, move_down.payload.character)
+        assert.equals(21, move_down.payload.x)
+        assert.equals(32, move_down.payload.y)
+      end)
+
+      it("can move right", function()
+        key_simulator:keypressed("left")
+        local msgs = store.get_actions(character.actions.types.character_move)
+        local move_down = msgs[1]
+
+        assert.equals(player_character, move_down.payload.character)
+        assert.equals(19, move_down.payload.x)
+        assert.equals(32, move_down.payload.y)
+      end)
     end)
   end)
 
