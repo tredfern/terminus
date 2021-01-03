@@ -15,6 +15,7 @@ return {
   create = function(props) return character:new(props) end,
   reducer = require "game.rules.character.reducer",
   selectors = {
-    get_player_character = require "game.rules.character.selectors.get_player_character"
+    get_all_characters = require "game.rules.character.selectors.get_all_characters",
+    get_player_character = require "game.rules.character.selectors.get_player_character",
   }
 }

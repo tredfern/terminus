@@ -6,6 +6,7 @@
 local components = require "moonpie.ui.components"
 local colors = require "moonpie.graphics.colors"
 local connect = require "moonpie.redux.connect"
+local character = require "game.rules.character"
 
 local tile_width = 32
 local tile_height = 32
@@ -44,4 +45,4 @@ local combat_map = components("combat_map", function(props)
   }
 end)
 
-return connect(combat_map, function(state) return { characters = state.characters } end)
+return connect(combat_map, function(state) return { characters = character.selectors.get_all_characters(state) } end)
