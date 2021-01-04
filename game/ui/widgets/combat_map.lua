@@ -45,4 +45,4 @@ local combat_map = components("combat_map", function(props)
   }
 end)
 
-return connect(combat_map, function(state) return { characters = character.selectors.get_all_characters(state) } end)
+return connect(combat_map, function(state) return { characters = character.selectors.get_all(state) } end)

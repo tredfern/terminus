@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.character.selectors.get_player_character", function()
-  local get_player_character = require "game.rules.character.selectors.get_player_character"
+describe("game.rules.character.selectors.get_player", function()
+  local get_player = require "game.rules.character.selectors.get_player"
 
   it("can search state and return the player character if it exists", function()
     local player = { is_player_controlled = true }
@@ -14,7 +14,7 @@ describe("game.rules.character.selectors.get_player_character", function()
       }
     }
 
-    assert.equals(player, get_player_character(state))
+    assert.equals(player, get_player(state))
   end)
 
 
