@@ -19,5 +19,6 @@ return {
   selectors = {
     get_all_characters = require "game.rules.character.selectors.get_all_characters",
     get_player_character = require "game.rules.character.selectors.get_player_character",
+    get_by_position = require "game.rules.character.selectors.get_by_position"
   }
 }
