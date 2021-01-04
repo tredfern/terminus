@@ -10,6 +10,8 @@ return {
   actions = {
     add = require "game.rules.character.actions.add",
     move = require "game.rules.character.actions.move",
+    remove = require "game.rules.character.actions.remove",
+    set_position = require "game.rules.character.actions.set_position",
     types = require "game.rules.character.actions.types"
   },
   create = function(props) return character:new(props) end,

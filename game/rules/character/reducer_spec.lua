@@ -36,10 +36,10 @@ describe("game.rules.character.reducer", function()
     assert.array_includes(keep_character, new_state)
   end)
 
-  it("moves the character to the specified position", function()
+  it("can set the character to the specified position", function()
     local character = { x = 3, y = 8 }
     local state = { character }
-    local action = { type = types.character_move,
+    local action = { type = types.character_set_position,
       payload = {
         character = character,
         x = 4,

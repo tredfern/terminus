@@ -7,20 +7,18 @@ describe("game.ui.inputs.keyboard", function()
   local keyboard_map = require "game.ui.inputs.keyboard_map"
   local key_simulator = require "moonpie.keyboard"
   local mock_store = require "mock_store"
-  local store
   local character = require "game.rules.character"
 
   describe("combat_map settings", function()
     before_each(function()
-      store = mock_store({ })
+      spy.on(character.actions, "move")
       keyboard_map.enable_combat_map()
     end)
 
     it("can disable keyboard mapping", function()
       keyboard_map.disable_combat_map()
       key_simulator:keypressed("up")
-      local msgs = store.get_actions(character.actions.types.character_move)
-      assert.is_nil(msgs)
+      assert.spy(character.actions.move).was_not.called()
     end)
 
     describe("character movement", function()
@@ -42,42 +40,22 @@ describe("game.ui.inputs.keyboard", function()
 
       it("can move up", function()
         key_simulator:keypressed("up")
-        local msgs = store.get_actions(character.actions.types.character_move)
-        local move_up = msgs[1]
-
-        assert.equals(player_character, move_up.payload.character)
-        assert.equals(20, move_up.payload.x)
-        assert.equals(31, move_up.payload.y)
+        assert.spy(character.actions.move).was.called_with(player_character, 20, 31)
       end)
 
       it("can move down", function()
         key_simulator:keypressed("down")
-        local msgs = store.get_actions(character.actions.types.character_move)
-        local move_down = msgs[1]
-
-        assert.equals(player_character, move_down.payload.character)
-        assert.equals(20, move_down.payload.x)
-        assert.equals(33, move_down.payload.y)
+        assert.spy(character.actions.move).was.called_with(player_character, 20, 33)
       end)
 
       it("can move right", function()
         key_simulator:keypressed("right")
-        local msgs = store.get_actions(character.actions.types.character_move)
-        local move_down = msgs[1]
-
-        assert.equals(player_character, move_down.payload.character)
-        assert.equals(21, move_down.payload.x)
-        assert.equals(32, move_down.payload.y)
+        assert.spy(character.actions.move).was.called_with(player_character, 21, 32)
       end)
 
       it("can move right", function()
         key_simulator:keypressed("left")
-        local msgs = store.get_actions(character.actions.types.character_move)
-        local move_down = msgs[1]
-
-        assert.equals(player_character, move_down.payload.character)
-        assert.equals(19, move_down.payload.x)
-        assert.equals(32, move_down.payload.y)
+        assert.spy(character.actions.move).was.called_with(player_character, 19, 32)
       end)
     end)
   end)

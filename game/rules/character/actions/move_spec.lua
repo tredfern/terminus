@@ -5,14 +5,16 @@
 
 describe("game.rules.character.actions.move", function()
   local character_move = require "game.rules.character.actions.move"
+  local types = require "game.rules.character.actions.types"
 
-  it("is set to the position that the character should move to", function()
+  it("dispatches a set_position message to move the character to the correct coordinates", function()
     local c = {}
-    local act = character_move(c, 19, 10)
+    local action = character_move(c, 19, 10)
+    local dispatched
+    local dispatch = spy.new(function(d) dispatched = d end)
+    local state = {}
 
-    assert.equals("CHARACTER_MOVE", act.type)
-    assert.equals(c, act.payload.character)
-    assert.equals(19, act.payload.x)
-    assert.equals(10, act.payload.y)
+    action(dispatch, state)
+    assert.equals(types.character_set_position, dispatched.type)
   end)
 end)

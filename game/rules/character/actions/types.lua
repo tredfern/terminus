@@ -6,5 +6,6 @@
 return {
   character_add = "CHARACTER_ADD",
   character_move = "CHARACTER_MOVE",
-  character_remove = "CHARACTER_REMOVE"
+  character_remove = "CHARACTER_REMOVE",
+  character_set_position = "CHARACTER_SET_POSITION",
 }
