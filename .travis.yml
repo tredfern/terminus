@@ -1,10 +1,13 @@
 language: python
 sudo: false
 env:
-- LUA="lua=5.1"
-- LUA="lua=5.2"
-- LUA="lua=5.3"
-- LUA="luajit=2.1"
+  matrix:
+  - LUA="lua=5.1"
+  - LUA="lua=5.2"
+  - LUA="lua=5.3"
+  - LUA="luajit=2.1"
+  global:
+    secure: TrffM6NywEivArMRSo7nHVkkNpYMWKKNmOqWnhAdwG2gmtsZJm4iNVUbfh9rHCNY/Lf2E1lhSDsdXjvnWazPkGsUBuBj17Yhif+b4DQ+DDeF4tZW5gkx0Ik4xcC+Gly6eCWeHYYzUixNEN9LN190ZFb2l4lasNRa6Tv9qeSEv8PN06qLQ1HX/1Xcqqf+/LmFUwMllD/tZvtSzARd/38LruhH5N6JebFgsnV+kmjru0kDPSm16LDjapykulipJfoAtP7XF7vowIRQrLuWbz7+8oylmfNFOhWIb5a3JI8V96uxbP1HP6QkmR2dse37MPXg4bO8d5Lunc6sq2b4QgRABw4kTdh8F6RUcStD/GYYvW9IFTGI0XGaz2ApNfgT9kK5MWZcbUSqHtD2kpQrwXFCLR8Ar7dqtm8M4t+uqLEASiCwvuP3Ax+DsZ8B1xdUWxF6vUuQuyluJmOsr4D48XoEmglUxrlFzx6mEOWzH2b+aVyHxj8qB8FIng0mo2mOtMshb9hC+buWShPIRm7mdlMCpH8fIHNSMMH/NdAhtuE4sQhBTX6tlZltzf7l1FWkCLYoi0zRNWXIpe5Ujvg0sDrKX0X1XL5HxbyJgRHEmBZT9Md0cL3pxVIw267GHqJdS1hj9Op0AnVf1kPLg41zQZ6pBxTxREyjsfppP+RMdeOODlE=
 before_install:
 - pip install hererocks
 - hererocks lua_install -r^ --$LUA
@@ -22,11 +25,12 @@ after_success:
 - luacov-coveralls --exclude $TRAVIS_BUILD_DIR/lua_install/share --exclude ./ext
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
-- zip -r -x.git/* -xlua_install/* $TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love ./
+- zip -r -x.git/* -xlua_install/* $TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love
+  ./
 deploy:
   provider: releases
   api_key:
-    secure: WvPYFfGL/XF0P+EmYlxTuvsNucgmZtmeiRYwlYrIIUMyVBS0x53lgKPQv23xn2MpteTN5M7hLQhpGWiA+kJ4odA2FuHT5iRdPJys1LagmMdn7Q50wefdOmzV3UbwShuAVE+jCk72VjmaWIZlTUivL9c92EKdiMxw7ED5Fet0rBl9FIvgZe+KL3sg3DTlGjgqR5hV8wKHEhfB2BL+fjnGMhp0FRKydyllhDL9l/2+ITlHZUMgfNnmC/bmoCNrKH5JpeaoHJRu92DjC54fB40Ty1+Svb0rifLT4bnpmEn1wsI8UuAFgb0CJq4M1rFDVzNC2LBqepIGcaWFMOyV+mGNMaMlrL36zzau8YsUF50oxqpJ0xDIUbCDrlhV6Irn7SZlQjiCHKG0EEgeql13RHElZ/j7fUVveIPt6I2jARebQl/hQTyQcAx8wDBWyKBeXfFl4yFuPabpJ1sfrrxigxzVkQ8b1ag4i9h80pKRXiv1a5ewjIP4Vd6bb8qH1cobSeowxLLugVEsLIsef3z3rHqBqpbXwd5x70m4lqSvH/5A72411xJr08Fhj9Y6DEa4v05tzKlTt72E3YxRCSCEMgCtiTkjOFGzb76WcArszSC3MOZkPQSgHyJiX9IYe7Y5dnlqRo1VciYQhYuuJiV+w3DGDPmSTLyDV8YjB/3kj7YnsEs=
+    secure: $GITHUB_TOKEN
   file: "$TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love"
   on:
     repo: tredfern/terminus
