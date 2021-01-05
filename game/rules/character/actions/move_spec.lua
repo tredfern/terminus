@@ -6,15 +6,32 @@
 describe("game.rules.character.actions.move", function()
   local character_move = require "game.rules.character.actions.move"
   local types = require "game.rules.character.actions.types"
+  local mock_dispatch = require "mock_dispatch"
+  local wrap_in_function = require "wrap_in_function"
 
   it("dispatches a set_position message to move the character to the correct coordinates", function()
     local c = {}
+    local state = {
+      characters = { c }
+    }
     local action = character_move(c, 19, 10)
-    local dispatched
-    local dispatch = spy.new(function(d) dispatched = d end)
-    local state = {}
 
-    action(dispatch, state)
-    assert.equals(types.character_set_position, dispatched.type)
+    action(mock_dispatch, wrap_in_function(state))
+    assert.is_true(mock_dispatch:received_action(types.character_set_position))
+  end)
+
+  it("dispatches an attack action if there is another character in the square attempting to move to", function()
+    local player = {}
+    local enemy = { x = 20, y = 11 }
+    local state = {
+      characters = {
+        player, enemy
+      }
+    }
+
+    local action = character_move(player, 20, 11)
+    action(mock_dispatch, wrap_in_function(state))
+
+    assert.is_true(mock_dispatch:received_action(types.character_attack))
   end)
 end)
