@@ -18,9 +18,6 @@ local function set_up_the_game()
 end
 
 function app.load()
-  -- Load state machine
-  local gsm = require "game.game_state_machine"
-  gsm.initialize()
   app.title()
 end
 
