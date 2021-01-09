@@ -6,13 +6,18 @@
 local keyboard = require "moonpie.keyboard"
 local store = require "moonpie.redux.store"
 local character = require "game.rules.character"
+local turn = require "game.rules.turn"
 
 local keysettings = {}
+
+local function process_turn(player_action)
+  store.dispatch(turn.actions.process(player_action))
+end
 
 keysettings.combat_map = {
   ["down"] = function()
     local player_character = character.selectors.get_player(store.get_state())
-    store.dispatch(character.actions.move(
+    process_turn(character.actions.move(
       player_character,
       player_character.x,
       player_character.y + 1
@@ -20,7 +25,7 @@ keysettings.combat_map = {
   end,
   ["left"] = function()
     local player_character = character.selectors.get_player(store.get_state())
-    store.dispatch(character.actions.move(
+    process_turn(character.actions.move(
       player_character,
       player_character.x - 1,
       player_character.y
@@ -28,7 +33,7 @@ keysettings.combat_map = {
   end,
   ["right"]= function()
     local player_character = character.selectors.get_player(store.get_state())
-    store.dispatch(character.actions.move(
+    process_turn(character.actions.move(
       player_character,
       player_character.x + 1,
       player_character.y
@@ -36,7 +41,7 @@ keysettings.combat_map = {
   end,
   ["up"] = function()
     local player_character = character.selectors.get_player(store.get_state())
-    store.dispatch(character.actions.move(
+    process_turn(character.actions.move(
       player_character,
       player_character.x,
       player_character.y - 1
