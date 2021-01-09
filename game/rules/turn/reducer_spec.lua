@@ -1,0 +1,26 @@
+-- Copyright (c) 2021 Trevor Redfern
+--
+-- This software is released under the MIT License.
+-- https://opensource.org/licenses/MIT
+
+describe("game.rules.turn.reducer", function()
+  local reducer = require "game.rules.turn.reducer"
+  local increment = require "game.rules.turn.actions.increment"
+
+  it("increments the turn counter when receiving the increment action", function()
+    local state = {
+      counter = 2
+    }
+
+    local new_state = reducer(state, increment())
+    assert.equals(3, new_state.counter)
+  end)
+
+  it("sets counter to 1 if counter is nil", function()
+    local state = {}
+
+    local new_state = reducer(state, increment())
+    assert.equals(1, new_state.counter)
+
+  end)
+end)

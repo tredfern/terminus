@@ -8,6 +8,8 @@ local tables = require "moonpie.tables"
 return setmetatable({
   dispatched = {},
   received_action = function(self, action)
+    if action == nil then return false end
+
     return tables.any(self.dispatched, function(d) return d.type == action end)
   end
 }, {

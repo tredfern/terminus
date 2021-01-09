@@ -9,7 +9,11 @@ describe("game.ui.screens.title", function()
   local mock_store = require "mock_store"
 
   before_each(function()
-    mock_store({})
+    mock_store({
+      turn = {
+        counter = 1
+      }
+    })
   end)
 
   it("instantiates a component", function()

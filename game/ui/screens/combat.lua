@@ -6,11 +6,13 @@
 local components = require 'moonpie.ui.components'
 local map_component = require "game.ui.widgets.combat_map"
 local keyboard_map = require 'game.ui.inputs.keyboard_map'
+local turn_counter = require "game.ui.widgets.turn_counter"
 
 local combat_screen = components("combat_screen", function()
   return {
     id = "combat_screen",
     components.h2 { text = "COMBAT!!!" },
+    turn_counter(),
     map_component(),
     mounted = function()
       keyboard_map.enable_combat_map()

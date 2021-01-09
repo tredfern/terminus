@@ -5,6 +5,7 @@
 
 describe("game.rules.turn.actions.process", function()
   local process = require "game.rules.turn.actions.process"
+  local turn_types = require "game.rules.turn.actions.types"
   local mock_dispatch = require "mock_dispatch"
 
   it("process the supplied character action", function()
@@ -14,5 +15,14 @@ describe("game.rules.turn.actions.process", function()
     action(mock_dispatch)
 
     assert.is_true(mock_dispatch:received_action("player_action"))
+  end)
+
+  it("increments the turn when processed", function()
+    local player_action = {}
+    local action = process(player_action)
+
+    action(mock_dispatch)
+
+    assert.is_true(mock_dispatch:received_action(turn_types.increment))
   end)
 end)
