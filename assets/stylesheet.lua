@@ -22,45 +22,7 @@ styles.button = moonpie.tables.merge(
   styles.button
 )
 
-styles["destination_button"] = {
-  margin = 5,
-  width = "20%"
-}
-
 --layouts
-
-
-
-styles["game_panel"] = {
-  width = "80%",
-  height = "90%",
-}
-
-styles["game_view"] = {
-  height = "75%"
-}
-
-styles["label"] = {
-  padding = 2,
-  font_name = "default-bold",
-  font_size = 15,
-}
-
-styles["market-good-name"] = {
-  padding = 10,
-  font_name = "default",
-  font_size = 20
-}
-
-styles["market-good-price"] = {
-  padding = 10,
-  font_name = "default",
-  font_size = 20
-}
-
-styles.stretch_height = {
-  height = "100%"
-}
 
 styles.main_menu = {
   width = 250,
@@ -70,8 +32,6 @@ styles.main_menu = {
 styles.main_menu_button = {
   display = "block"
 }
-
-styles.message_log = { }
 
 styles.panel = {
   color = "main",
@@ -108,59 +68,7 @@ styles.panel_contents = {
   font_size = 14
 }
 
-styles["player_panel"] = { }
-
 styles.primary = {
   width = "80%",
   height = "90%"
-}
-
-
-styles.section_title = {
-  color = "main",
-  margin = 3
-}
-
-styles.section_title_actions = {
-  background_color = "background",
-  display = "inline",
-  align = "right",
-  margin = { right = 25 }
-}
-
-styles.section_title_button = {
-  corner_radius_x = 0, corner_radius_y = 0,
-  margin = { left = 3, right = 3 },
-  padding = { left = 6, right = 6, top = 2, bottom = 2 },
-  font_size = 16
-
-}
-
-styles["section_title_text"] = {
-  background_color = "background",
-  margin = { left = 20 },
-  padding = { left = 6, right = 6, top = 2, bottom = 2 },
-  font_name = "headline",
-  font_size = 16
-}
-
-styles.sidebar = {
-  width = "20%",
-  height = "90%"
-}
-
-styles.story_popup = {
-  width = "60%",
-  align = "center",
-  vertical_align = "middle"
-}
-
-styles.tactical_display = {
-  height = "100%"
-}
-
-styles["value"] = {
-  padding = 2,
-  font_name = "default",
-  font_size = 15
 }
