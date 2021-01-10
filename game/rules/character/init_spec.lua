@@ -22,6 +22,7 @@ describe("game.rules.character", function()
     assert.not_nil(character.selectors.get_player)
     assert.not_nil(character.selectors.get_all)
     assert.not_nil(character.selectors.get_by_position)
+    assert.not_nil(character.selectors.get_enemies)
   end)
 
   it("has a reducer that can handle state changes", function()

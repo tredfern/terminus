@@ -14,6 +14,7 @@ return setmetatable({
   end
 }, {
   __call = function(self, action)
+    if type(action) == "function" then return end
     self.dispatched[#self.dispatched + 1] = action
   end
 })
