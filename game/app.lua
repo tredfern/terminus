@@ -44,6 +44,11 @@ end
 
 function app.new_game()
   set_up_the_game()
+  local create_character = require "game.ui.screens.create_character"
+  app.render(create_character())
+end
+
+function app.combat()
   local combat = require "game.ui.screens.combat"
   app.render(combat())
 end

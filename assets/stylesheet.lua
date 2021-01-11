@@ -7,10 +7,6 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 
-styles["action_menu"] = { }
-
-styles["action_menu_item"] = { }
-
 styles.button = moonpie.tables.merge(
   {
     corner_radius_x = 15,
@@ -22,8 +18,22 @@ styles.button = moonpie.tables.merge(
   styles.button
 )
 
---layouts
+styles["main_screen"] = {
+  width = "75%"
+}
 
+styles["stats"] = {
+  width = "25%",
+  height = "100%",
+  border = 2,
+  border_color = "light_accent"
+}
+
+styles["stats_content"] = {
+  padding = 8
+}
+
+--layouts
 styles.main_menu = {
   width = 250,
   height = "40%"
@@ -72,3 +82,11 @@ styles.primary = {
   width = "80%",
   height = "90%"
 }
+
+styles.textbox = moonpie.tables.merge({
+    width = 250,
+    height = 25,
+    font_size = 14,
+    font_name = "default"
+  },
+  styles.textbox)

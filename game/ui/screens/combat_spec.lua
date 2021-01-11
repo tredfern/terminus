@@ -8,6 +8,7 @@ describe("game.ui.screens.combat", function()
   local moonpie = require "moonpie"
   local mock_store = require "mock_store"
   mock_store({
+    characters = {},
     turn = {
       counter = 10
     }

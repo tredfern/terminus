@@ -36,6 +36,7 @@ describe("game.rules.character", function()
     assert.not_nil(character.actions.attack)
     assert.not_nil(character.actions.move)
     assert.not_nil(character.actions.remove)
+    assert.not_nil(character.actions.set_name)
     assert.not_nil(character.actions.set_position)
   end)
 

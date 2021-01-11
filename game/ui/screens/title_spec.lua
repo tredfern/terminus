@@ -10,6 +10,7 @@ describe("game.ui.screens.title", function()
 
   before_each(function()
     mock_store({
+      characters = { },
       turn = {
         counter = 1
       }

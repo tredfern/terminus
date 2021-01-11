@@ -53,4 +53,20 @@ describe("game.rules.character.reducer", function()
     assert.equals(4, c.x)
     assert.equals(9, c.y)
   end)
+
+  it("can set the character name", function()
+    local character = {}
+    local state = { character }
+    local action = {
+      type = types.character_set_name,
+      payload = {
+        character = character,
+        name = "Papageno"
+      }
+    }
+
+    local new_state = characters_reducer(state, action)
+    local c = new_state[1]
+    assert.equals("Papageno", c.name)
+  end)
 end)

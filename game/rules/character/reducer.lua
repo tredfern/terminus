@@ -11,12 +11,6 @@ return create_slice {
   [types.character_add] = function(state, action)
     return tables.concat_array(state, { action.payload.character })
   end,
-  [types.character_set_position] = function(state, action)
-    local c = action.payload.character
-    c.x = action.payload.x
-    c.y = action.payload.y
-    return state
-  end,
   [types.character_remove] = function(state, action)
     return tables.select(state,
     function(character)
@@ -24,5 +18,16 @@ return create_slice {
         return character
       end
     end)
-  end
+  end,
+  [types.character_set_name] = function(state, action)
+    local c = action.payload.character
+    c.name = action.payload.name
+    return state
+  end,
+  [types.character_set_position] = function(state, action)
+    local c = action.payload.character
+    c.x = action.payload.x
+    c.y = action.payload.y
+    return state
+  end,
 }
