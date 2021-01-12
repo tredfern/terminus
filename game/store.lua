@@ -10,10 +10,6 @@ store.create_store(
   combine_reducers {
     characters = require "game.rules.character.reducer",
     turn = require "game.rules.turn.reducer"
-  },
-  {
-    characters = {},
-    turn = { }
   }
 )
 

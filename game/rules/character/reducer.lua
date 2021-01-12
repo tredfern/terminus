@@ -8,6 +8,7 @@ local create_slice = require "moonpie.redux.create_slice"
 local tables = require "moonpie.tables"
 
 return create_slice {
+  initial_state = { },
   [types.character_add] = function(state, action)
     return tables.concat_array(state, { action.payload.character })
   end,

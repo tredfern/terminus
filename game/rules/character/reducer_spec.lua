@@ -69,4 +69,9 @@ describe("game.rules.character.reducer", function()
     local c = new_state[1]
     assert.equals("Papageno", c.name)
   end)
+
+  it("sets the initial state to empty table", function()
+    local state = characters_reducer(nil, {})
+    assert.same(0, #state)
+  end)
 end)
