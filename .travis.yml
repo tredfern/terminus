@@ -6,8 +6,6 @@ env:
   - LUA="lua=5.2"
   - LUA="lua=5.3"
   - LUA="luajit=2.1"
-  global:
-    secure: TrffM6NywEivArMRSo7nHVkkNpYMWKKNmOqWnhAdwG2gmtsZJm4iNVUbfh9rHCNY/Lf2E1lhSDsdXjvnWazPkGsUBuBj17Yhif+b4DQ+DDeF4tZW5gkx0Ik4xcC+Gly6eCWeHYYzUixNEN9LN190ZFb2l4lasNRa6Tv9qeSEv8PN06qLQ1HX/1Xcqqf+/LmFUwMllD/tZvtSzARd/38LruhH5N6JebFgsnV+kmjru0kDPSm16LDjapykulipJfoAtP7XF7vowIRQrLuWbz7+8oylmfNFOhWIb5a3JI8V96uxbP1HP6QkmR2dse37MPXg4bO8d5Lunc6sq2b4QgRABw4kTdh8F6RUcStD/GYYvW9IFTGI0XGaz2ApNfgT9kK5MWZcbUSqHtD2kpQrwXFCLR8Ar7dqtm8M4t+uqLEASiCwvuP3Ax+DsZ8B1xdUWxF6vUuQuyluJmOsr4D48XoEmglUxrlFzx6mEOWzH2b+aVyHxj8qB8FIng0mo2mOtMshb9hC+buWShPIRm7mdlMCpH8fIHNSMMH/NdAhtuE4sQhBTX6tlZltzf7l1FWkCLYoi0zRNWXIpe5Ujvg0sDrKX0X1XL5HxbyJgRHEmBZT9Md0cL3pxVIw267GHqJdS1hj9Op0AnVf1kPLg41zQZ6pBxTxREyjsfppP+RMdeOODlE=
 before_install:
 - pip install hererocks
 - hererocks lua_install -r^ --$LUA
@@ -30,7 +28,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: $GITHUB_TOKEN
+    secure: "MYz37jNqzTkmJFq2gavaRcWxZlTjsK8492/m0lC3kKlldsxzSVI02U+h68h7EFMlesyMEN9NmqGPC8avV4pwrnXfQt5l/xM8IN3AEX3T9neATomnKixY1xIIgVX9l284OAP/f0LUW24SmnL00ExNlgi3BnASGDQR1XafnSe8BSGBXYjlf+uBNHxfhNzz1WXO0sj7tVSiePssMF8vJoCEoiHt3oyOA8ZBCr7bdmAUFAiaTpklU3eI6Z4x7j4ekwLbx9j4l7jEpMS+qYqdosT+Nhp92FQ3QNvb54V3Ka113PyYvW5Ani/oHr8cz2+olSjsqAc0TcnEDetI15LeEebWy2prNpDgD7zdW85PTHRR4X6CzAFMGldVUnYbW27qMmTbZRM1X2wGviTFaf/BpeQAe2LMz3t4ZPsbKvbvAJu6piHWdOPdhRlBuVfPpBA69y3FcAxnXhzseorYGy4rclScW6mW7B4PrdvhlicxfXf9rDmCD++eyyokEhCYjo4fl0dglX+r6/UWw0MVxaRyzj24d/2sHonrt8hcT28M1aSlh9asKZBZhKlmSopPX6VFF+GlUwbgJZZ1VLNhbM9o75wHnoVhJl5Twwt3m2vhX0unqJ1cV8twvUxdUU/2+ENy9J3OVBhBmsUKXjCjrMyPHOwoW86XulXJ2jGmrZs3W8KA/AI="
   file: "$TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love"
   on:
     repo: tredfern/terminus
