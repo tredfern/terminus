@@ -15,6 +15,8 @@ return {
       width = w,
       height = h
     }
-  end
-
+  end,
+  selectors = {
+    get_dimensions = require "game.rules.map.selectors.get_dimensions"
+  }
 }

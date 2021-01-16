@@ -16,4 +16,29 @@ describe("game.rules.character.actions.set_position", function()
     assert.equals(89, sp.payload.x)
     assert.equals(38, sp.payload.y)
   end)
+
+  it("validates that the position is within the map boundaries", function()
+    local sp = set_position({}, 39, 20)
+    assert.is_true(sp:validate({
+      map = {
+        width = 100,
+        height = 100
+      }
+    }))
+
+    assert.is_false(sp:validate({
+      map = {
+        width = 10,
+        height = 10
+      }
+    }))
+  end)
+
+  it("validates x and y are >=1", function()
+    local sp = set_position({}, -1, -1)
+    assert.is_false(sp:validate({
+      map = { width = 100, height = 100 }
+    }))
+  end)
+
 end)
