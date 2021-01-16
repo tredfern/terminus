@@ -29,4 +29,14 @@ describe("game.ui.widgets.combat_map", function()
     assert.equals(map_state, cm.map)
   end)
 
+  it("connects the camera state to the component", function()
+    local camera = {}
+    mock_store({
+      camera = camera
+    })
+
+    local cm = combat_map()
+    assert.equals(camera, cm.camera)
+  end)
+
 end)

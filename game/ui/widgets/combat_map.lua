@@ -7,6 +7,7 @@ local components = require "moonpie.ui.components"
 local colors = require "moonpie.graphics.colors"
 local connect = require "moonpie.redux.connect"
 local character = require "game.rules.character"
+local camera = require "game.rules.camera"
 
 local tile_width = 32
 local tile_height = 32
@@ -30,17 +31,25 @@ end
 
 local combat_map = components("combat_map", function(props)
   return {
+    camera = props.camera,
     characters = props.characters,
     map = props.map,
+
     draw_component = function(self)
       for x = 1, self.map.width do
         for y = 1, self.map.height do
-          draw_tile(x, y, self.map:get_terrain(x, y).color)
+          draw_tile(
+            x - self.camera.x, 
+            y - self.camera.y, 
+            self.map:get_terrain(x, y).color)
         end
       end
 
       for _, v in ipairs(self.characters) do
-        draw_character(v.x, v.y, v.is_enemy)
+        draw_character(
+          v.x - self.camera.x, 
+          v.y - self.camera.y, 
+          v.is_enemy)
       end
     end
   }
@@ -49,6 +58,7 @@ end)
 return connect(combat_map,
   function(state)
     return {
+      camera = camera.selectors.get(state),
       characters = character.selectors.get_all(state),
       map = state.map
   }
