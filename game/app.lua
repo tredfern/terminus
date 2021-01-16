@@ -4,18 +4,8 @@
 -- https://opensource.org/licenses/MIT
 
 local store = require "game.store"
+local game_state = require "game.rules.game_state"
 local app = {}
-
-local function set_up_the_game()
-  local character = require "game.rules.character"
-
-  store.dispatch(character.actions.add(character.create { x = 2, y = 1, is_player_controlled = true }))
-  for _=1,4 do
-    store.dispatch(
-      character.actions.add(
-        character.create { is_enemy = true, x = math.random(10), y = math.random(10) }))
-  end
-end
 
 function app.load()
   app.title()
@@ -43,7 +33,7 @@ function app.game_menu()
 end
 
 function app.new_game()
-  set_up_the_game()
+  store.dispatch(game_state.actions.setup())
   local create_character = require "game.ui.screens.create_character"
   app.render(create_character())
 end
