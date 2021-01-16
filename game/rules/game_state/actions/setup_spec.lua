@@ -7,6 +7,7 @@ describe("game.rules.game_state.actions.setup", function()
   local setup = require "game.rules.game_state.actions.setup"
   local tables = require "moonpie.tables"
   local character = require "game.rules.character"
+  local map = require "game.rules.map"
 
   local captured_actions
   local dispatch_spy = spy.new(function(action)
@@ -15,12 +16,12 @@ describe("game.rules.game_state.actions.setup", function()
 
   before_each(function()
     captured_actions = {}
+
+    local s = setup()
+    s(dispatch_spy)
   end)
 
   it("dispatch create character action for player character", function()
-    local s = setup()
-    s(dispatch_spy)
-
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
@@ -31,14 +32,20 @@ describe("game.rules.game_state.actions.setup", function()
   end)
 
   it("adds some random enemies", function()
-    local s = setup()
-    s(dispatch_spy)
-
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
         c.type == character.actions.types.character_add and
         c.payload.character.is_enemy
+      end)
+    )
+  end)
+
+  it("creates a map", function()
+    assert.is_true(tables.any(
+      captured_actions,
+      function(c) return
+        c.type == map.actions.types.set
       end)
     )
   end)

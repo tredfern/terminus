@@ -4,9 +4,14 @@
 -- https://opensource.org/licenses/MIT
 
 local character = require "game.rules.character"
+local map = require "game.rules.map"
 
 return function()
   return function(dispatch)
+    dispatch(map.actions.set(
+      map.create(100, 100)
+    ))
+
     dispatch(character.actions.add(
       character.create {
         x = 2,
@@ -15,7 +20,7 @@ return function()
       }
     ))
 
-    for _=1,4 do
+    for _ = 1,4 do
       dispatch(character.actions.add(
         character.create {
           is_enemy = true,
