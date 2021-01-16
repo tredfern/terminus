@@ -31,9 +31,10 @@ end
 local combat_map = components("combat_map", function(props)
   return {
     characters = props.characters,
+    map = props.map,
     draw_component = function(self)
-      for x = 1,8 do
-        for y = 1, 8 do
+      for x = 1, self.map.width do
+        for y = 1, self.map.height do
           draw_tile(x, y)
         end
       end
@@ -45,4 +46,11 @@ local combat_map = components("combat_map", function(props)
   }
 end)
 
-return connect(combat_map, function(state) return { characters = character.selectors.get_all(state) } end)
+return connect(combat_map,
+  function(state)
+    return {
+      characters = character.selectors.get_all(state),
+      map = state.map
+  }
+  end
+)

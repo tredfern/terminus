@@ -18,4 +18,15 @@ describe("game.ui.widgets.combat_map", function()
     assert.same({ c }, map.characters)
   end)
 
+  it("connects to the map state of the store", function()
+    local map_state = {}
+    mock_store({
+      character = {},
+      map = map_state
+    })
+
+    local cm = combat_map()
+    assert.equals(map_state, cm.map)
+  end)
+
 end)
