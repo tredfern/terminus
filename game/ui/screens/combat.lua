@@ -8,6 +8,7 @@ local map_component = require "game.ui.widgets.combat_map"
 local keyboard_map = require 'game.ui.inputs.keyboard_map'
 local turn_counter = require "game.ui.widgets.turn_counter"
 local character_stats = require "game.ui.widgets.character_stats"
+local colors = require "moonpie.graphics.colors"
 
 local combat_screen = components("combat_screen", function()
   return {
@@ -17,6 +18,7 @@ local combat_screen = components("combat_screen", function()
       map_component(),
     }, {
       style = "stats",
+      background_color = colors.black,
       components.h3 { text = "Stats" },
       {
         style = "stats_content",
