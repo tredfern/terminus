@@ -6,7 +6,9 @@
 local remove = require "game.rules.character.actions.remove"
 local types = require "game.rules.character.actions.types"
 
-return function(_, target)
+return function(source, target)
+  if source == target then return {} end
+
   return setmetatable({
     type = types.character_attack,
   }, {

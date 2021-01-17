@@ -17,4 +17,11 @@ describe("game.rules.character.actions.attack", function()
     atk(mock_dispatch, state)
     assert.is_true(mock_dispatch:received_action(types.character_remove))
   end)
+
+  it("returns empty action if source and target", function()
+    local source = {}
+    local target = source
+
+    assert.same({}, attack(source, target))
+  end)
 end)
