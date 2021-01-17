@@ -18,6 +18,10 @@ styles.button = moonpie.tables.merge(
   styles.button
 )
 
+styles.combat_map = {
+  height = "100%"
+}
+
 styles["main_screen"] = {
   width = "75%"
 }

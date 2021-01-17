@@ -7,6 +7,7 @@ describe("game.rules.camera", function()
   local camera = require "game.rules.camera"
 
   it("has actions available", function()
+    assert.not_nil(camera.actions.set_dimensions)
     assert.not_nil(camera.actions.set_position)
   end)
 

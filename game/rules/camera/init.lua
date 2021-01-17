@@ -5,6 +5,7 @@
 
 return {
   actions = {
+    set_dimensions = require "game.rules.camera.actions.set_dimensions",
     set_position = require "game.rules.camera.actions.set_position"
   },
   selectors = {

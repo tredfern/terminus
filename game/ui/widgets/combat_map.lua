@@ -8,6 +8,7 @@ local colors = require "moonpie.graphics.colors"
 local connect = require "moonpie.redux.connect"
 local character = require "game.rules.character"
 local camera = require "game.rules.camera"
+local store = require "moonpie.redux.store"
 
 local tile_width = 32
 local tile_height = 32
@@ -36,6 +37,11 @@ local combat_map = components("combat_map", function(props)
     map = props.map,
 
     draw_component = function(self)
+      -- Set Camera Dimensions
+      local tileswide = self.box:width() / tile_width
+      local tileshigh = self.box:height() / tile_height
+      store.dispatch(camera.actions.set_dimensions(tileswide, tileshigh))
+
       for x = 1, self.map.width do
         for y = 1, self.map.height do
           draw_tile(

@@ -26,4 +26,17 @@ describe("game.rules.camera.reducer", function()
     assert.equals(75, s.x)
     assert.equals(118, s.y)
   end)
+
+  it("sets the dimensions of the camera", function()
+    local s = reducer({}, {
+      type = types.camera_set_dimensions,
+      payload = {
+        width = 28,
+        height = 68
+      }
+    })
+
+    assert.equals(28, s.width)
+    assert.equals(68, s.height)
+  end)
 end)

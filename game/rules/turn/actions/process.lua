@@ -20,12 +20,14 @@ return function(player_action)
       end
     end
 
-    -- Placeholder
-    local player = character.selectors.get_player(get_state())
-
-    dispatch(camera.actions.set_position(
-      player.x,
-      player.y
-    ))
+    -- Update camera position to follow character
+    local cam = camera.selectors.get(get_state())
+    if cam then
+      local player = character.selectors.get_player(get_state())
+      dispatch(camera.actions.set_position(
+        -(cam.width / 2) + player.x,
+        -(cam.height / 2) + player.y
+      ))
+    end
   end
 end

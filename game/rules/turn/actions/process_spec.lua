@@ -9,17 +9,19 @@ describe("game.rules.turn.actions.process", function()
   local mock_dispatch = require "mock_dispatch"
   local mock_store = require "mock_store"
 
-  local player = { is_player_controlled = true }
+  local player = { x = 5, y = 3, is_player_controlled = true }
   local enemy1 = { is_player_controlled = false }
   local enemy2 = { is_player_controlled = false }
   local enemy3 = { is_player_controlled = false }
+  local cam = { x = 0, y = 0, width = 20, height = 40 }
 
   local store = require "moonpie.redux.store"
   before_each(function()
     mock_store {
       characters = {
         enemy2, player, enemy1, enemy3
-      }
+      },
+      camera = cam
     }
   end)
 
@@ -49,5 +51,16 @@ describe("game.rules.turn.actions.process", function()
     action(mock_dispatch, store.get_state)
 
     assert.spy(enemy.actions.think).was.called(3)
+  end)
+
+  it("tracks the camera around the player with player center on screen", function()
+    local camera = require "game.rules.camera"
+    spy.on(camera.actions, "set_position")
+
+    local action = process({})
+    action(mock_dispatch, store.get_state)
+
+
+    assert.spy(camera.actions.set_position).was.called_with(-5, -17)
   end)
 end)
