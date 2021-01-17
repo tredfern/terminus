@@ -8,14 +8,14 @@ describe("game.rules.character.actions.attack", function()
   local types = require "game.rules.character.actions.types"
   local mock_dispatch = require "mock_dispatch"
 
-  it("removes the target character from the game", function()
-    local source, target = {}, {}
+  it("reduces health by 1 from target", function()
+    local source, target = {}, { health = 8 }
     local state = {
       characters = { source, target }
     }
     local atk = attack(source, target)
     atk(mock_dispatch, state)
-    assert.is_true(mock_dispatch:received_action(types.character_remove))
+    assert.is_true(mock_dispatch:received_action(types.character_set_health))
   end)
 
   it("returns empty action if source and target", function()

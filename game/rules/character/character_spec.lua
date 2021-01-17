@@ -34,4 +34,9 @@ describe("game.rules.character.character", function()
     assert.equals(142, c.x)
     assert.equals(192, c.y)
   end)
+
+  it("has a health of 10 to start", function()
+    local c = character {}
+    assert.equals(10, c.health)
+  end)
 end)

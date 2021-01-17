@@ -20,6 +20,14 @@ return function(player_action)
       end
     end
 
+    -- Check for dead characters
+    local dead = character.selectors.get_dead(get_state())
+    if dead then
+      for _, e in ipairs(dead) do
+        dispatch(character.actions.remove(e))
+      end
+    end
+
     -- Update camera position to follow character
     local cam = camera.selectors.get(get_state())
     if cam then

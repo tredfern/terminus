@@ -74,4 +74,18 @@ describe("game.rules.character.reducer", function()
     local state = characters_reducer(nil, {})
     assert.same(0, #state)
   end)
+
+  it("set the character health", function()
+    local character = { health = 84 }
+    local state = { characters = { character } }
+    local new_state = characters_reducer(state, {
+      type = types.character_set_health,
+      payload = {
+        character = character,
+        health = 54
+      }
+    })
+
+    assert.equals(54, new_state.characters[1].health)
+  end)
 end)

@@ -30,7 +30,8 @@ describe("game.ui.inputs.keyboard", function()
         player_character = {
           is_player_controlled = true,
           x = 20,
-          y = 32
+          y = 32,
+          health = 1
         }
 
         mock_store({

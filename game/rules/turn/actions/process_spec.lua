@@ -9,10 +9,10 @@ describe("game.rules.turn.actions.process", function()
   local mock_dispatch = require "mock_dispatch"
   local mock_store = require "mock_store"
 
-  local player = { x = 5, y = 3, is_player_controlled = true }
-  local enemy1 = { is_player_controlled = false }
-  local enemy2 = { is_player_controlled = false }
-  local enemy3 = { is_player_controlled = false }
+  local player = { x = 5, y = 3, is_player_controlled = true, health = 3 }
+  local enemy1 = { is_player_controlled = false, health = 2 }
+  local enemy2 = { is_player_controlled = false, health = 1 }
+  local enemy3 = { is_player_controlled = false, health = 0 }
   local cam = { x = 0, y = 0, width = 20, height = 40 }
 
   local store = require "moonpie.redux.store"
@@ -62,5 +62,15 @@ describe("game.rules.turn.actions.process", function()
 
 
     assert.spy(camera.actions.set_position).was.called_with(-5, -17)
+  end)
+
+  it("removes any dead characters", function()
+    local character = require "game.rules.character"
+    spy.on(character.actions, "remove")
+
+    local action = process({})
+    action(mock_dispatch, store.get_state)
+
+    assert.spy(character.actions.remove).was.called_with(enemy3)
   end)
 end)

@@ -11,14 +11,21 @@ local character_stats = components("character_stats", function(props)
   return {
     character = props.character,
     render = function(self)
-      local character_name
+      local character_name, character_health
       if self.character then
         character_name = self.character.name
+        character_health = self.character.health
       end
 
       return {
-        components.text { text = "Name: " },
-        components.text { id = "character_name", text = character_name }
+        {
+          components.text { text = "Name: " },
+          components.text { id = "character_name", text = character_name }
+        },
+        {
+          components.text { text = "Health:    " },
+          components.text { text = character_health }
+        }
       }
     end
   }

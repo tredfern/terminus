@@ -20,6 +20,11 @@ return create_slice {
       end
     end)
   end,
+  [types.character_set_health] = function(state, action)
+    local c = action.payload.character
+    c.health = action.payload.health
+    return state
+  end,
   [types.character_set_name] = function(state, action)
     local c = action.payload.character
     c.name = action.payload.name

@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local remove = require "game.rules.character.actions.remove"
+local set_health = require "game.rules.character.actions.set_health"
 local types = require "game.rules.character.actions.types"
 
 return function(source, target)
@@ -13,7 +13,7 @@ return function(source, target)
     type = types.character_attack,
   }, {
     __call = function(_, dispatch)
-      dispatch(remove(target))
+      dispatch(set_health(target, target.health - 1))
     end
   })
 end
