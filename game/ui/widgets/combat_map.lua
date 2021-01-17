@@ -39,16 +39,16 @@ local combat_map = components("combat_map", function(props)
       for x = 1, self.map.width do
         for y = 1, self.map.height do
           draw_tile(
-            x - self.camera.x, 
-            y - self.camera.y, 
+            x - self.camera.x,
+            y - self.camera.y,
             self.map:get_terrain(x, y).color)
         end
       end
 
       for _, v in ipairs(self.characters) do
         draw_character(
-          v.x - self.camera.x, 
-          v.y - self.camera.y, 
+          v.x - self.camera.x,
+          v.y - self.camera.y,
           v.is_enemy)
       end
     end

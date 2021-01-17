@@ -5,7 +5,6 @@
 
 describe("game.rules.camera.actions.set_position", function()
   local set_position = require "game.rules.camera.actions.set_position"
-  local types = require "game.rules.camera.actions.types"
 
   it("takes an x and y for the camera location", function()
     local sp = set_position(38, 94)
