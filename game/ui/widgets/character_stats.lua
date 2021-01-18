@@ -9,22 +9,17 @@ local character = require "game.rules.character"
 
 local character_stats = components("character_stats", function(props)
   return {
-    character = props.character,
+    character_name = props.character_name,
+    character_health = props.character_health,
     render = function(self)
-      local character_name, character_health
-      if self.character then
-        character_name = self.character.name
-        character_health = self.character.health
-      end
-
       return {
         {
           components.text { text = "Name: " },
-          components.text { id = "character_name", text = character_name }
+          components.text { id = "character_name", text = self.character_name }
         },
         {
           components.text { text = "Health:    " },
-          components.text { text = character_health }
+          components.text { id = "character_health", text = self.character_health }
         }
       }
     end
@@ -33,7 +28,10 @@ end)
 
 return connect(character_stats, function(state)
   local player = character.selectors.get_player(state)
-  return {
-    character = player
-  }
+  if player then
+    return {
+      character_name = player.name,
+      character_health = player.health
+    }
+  end
 end)
