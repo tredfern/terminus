@@ -7,12 +7,12 @@ local colors = require "moonpie.graphics.colors"
 
 return {
   dirt = {
-    color = colors.tan
+    color = colors.lighten(colors.beaver, 0.8)
   },
   grass = {
-    color = colors.green
+    color = colors.lighten(colors.pakistan_green, 1.2)
   },
   water = {
-    color = colors.blue
+    color = colors.lighten(colors.oxford_blue, 2.2)
   }
 }

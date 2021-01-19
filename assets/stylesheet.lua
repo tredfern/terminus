@@ -30,11 +30,16 @@ styles["stats"] = {
   width = "25%",
   height = "100%",
   border = 2,
-  border_color = "light_accent"
+  border_color = "light_accent",
+  background_color = "dark_accent"
 }
 
 styles["stats_content"] = {
   padding = 8
+}
+
+styles.textbox_text = {
+  font_size = 18,
 }
 
 --layouts
@@ -48,19 +53,19 @@ styles.main_menu_button = {
 }
 
 styles.panel = {
-  color = "main",
-  border_color = "main",
+  color = "light_shade",
+  border_color = "light_accent",
   margin = 2
 }
 
-styles.panel_red = {
-  color = "base_red",
-  border_color = "base_red"
+styles.panel_primary = {
+  color = "main",
+  border_color = "main",
 }
 
-styles.panel_yellow = {
-  color = "base_yellow",
-  border_color = "base_yellow"
+styles.panel_secondary = {
+  color = "dark_accent",
+  border_color = "dark_shade"
 }
 
 styles.panel_title = {

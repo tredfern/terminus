@@ -9,7 +9,7 @@ Terminus is at this point just a project code name to work under.
 * 100% Test Coverage
 * Easy to mod and extend
 * Repeatable game play
-* A feeling of story
+* A feeling of a story
 
 ## Development
 
@@ -31,4 +31,4 @@ I'm focusing my inspiration on games from the past. Certainly there will be idea
 
 **[Everything Epyx](https://en.wikipedia.org/wiki/Epyx)** - I grew up looking at everything Epyx released. I loved their motto even as a kid of combining strategy with action. Some of their games that are influencing my thinking on this project are, Temple of Apshai Trilogy, Dragonriders of Pern (I'm serious, I played that game a ton),
 
-Interesting tidbit I learned from research, is that Epyx did the port of Rogue to non-Unix platforms.
+An interesting tidbit I learned from research is that Epyx did the port of Rogue to non-Unix platforms.

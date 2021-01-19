@@ -9,7 +9,7 @@ local app = require "game.app"
 
 local main_menu = components("main_menu", function()
   return panel {
-    style = "main_menu panel_red align-center align-middle",
+    style = "main_menu panel_primary align-center align-middle",
     title = "terminus",
     contents = {
       components.button {

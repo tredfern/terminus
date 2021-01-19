@@ -13,7 +13,7 @@ return components("game_menu", function()
     target_layer = "modal",
     style = "align-center align-middle",
     panel {
-      style = "main_menu panel_red align-center align-middle",
+      style = "main_menu panel_primary align-center align-middle",
       title = "terminus",
       contents = {
         components.button {

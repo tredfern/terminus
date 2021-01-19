@@ -15,7 +15,8 @@ local create_character = components("create_character", function(props)
   local edit_character = props.character
   local character_name = components.textbox {
     id = "character_name",
-    click = function(self) self:set_focus() end
+    click = function(self) self:set_focus() end,
+    width = "100%",
   }
   character_name:set_text("Papageno")
 
@@ -26,20 +27,28 @@ local create_character = components("create_character", function(props)
       style = "align-middle align-center",
       title = "Create Character",
       contents = {
+        padding = 6,
         character_name,
-        components.button {
-          id = "button_done",
-          caption = "Done",
-          click = function()
-            store.dispatch(character.actions.set_name(
-              edit_character,
-              character_name:get_text()
-            ))
-            app.combat()
-          end
+        {
+          margin = 4,
+          components.button {
+            id = "button_done",
+            caption = "Done",
+            style = "align-right",
+            click = function()
+              store.dispatch(character.actions.set_name(
+                edit_character,
+                character_name:get_text()
+              ))
+              app.combat()
+            end
+          },
         },
       }
-    }
+    },
+    mounted = function()
+      character_name:set_focus()
+    end
   }
 end)
 

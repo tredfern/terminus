@@ -10,34 +10,37 @@ moonpie.graphics.font:register("assets/fonts/square.ttf", "terminal")
 
 font:register("assets/fonts/coolvetica-rg.ttf", "default")
 font:register("assets/fonts/coolvetica-rg.ttf", "default-bold")
-font:register("assets/fonts/nulshock.ttf", "headline")
-font:register("assets/fonts/nulshock.ttf", "headline-bold")
+font:register("assets/fonts/atmospheric.ttf", "headline")
+font:register("assets/fonts/atmospheric.ttf", "headline-bold")
 
 -- Colors
 local colors = moonpie.graphics.colors
-colors.base_blue = colors.convert_hex("#3179bd")
-colors.base_red = colors.convert_hex("#a91a1a")
-colors.base_purple = colors.convert_hex("#9575a8")
-colors.base_yellow = colors.convert_hex("#fec562")
-colors.accent_yellow = colors.convert_hex("#f59d08")
+colors.oxford_blue = colors.convert_hex("#0a2239")
+colors.outer_space_crayola = colors.convert_hex("#132e32")
+colors.cerulean_crayola = colors.convert_hex("#21a5d0")
+colors.beaver = colors.convert_hex("#ac9281")
+colors.baby_powder = colors.convert_hex("#fbfbf2")
+colors.goldenrod = colors.convert_hex("#e6af2e")
+colors.lava = colors.convert_hex("#c42021")
+colors.pakistan_green = colors.convert_hex("#2a7221")
 
-colors.light_shade = "base_yellow"
-colors.light_accent = "accent_yellow"
-colors.main = "base_blue"
-colors.dark_accent = "base_red"
-colors.dark_shade = colors.convert_hex("#040503")
+colors.light_shade = "baby_powder"
+colors.light_accent = "beaver"
+colors.main = "cerulean_crayola"
+colors.dark_accent = "outer_space_crayola"
+colors.dark_shade = "oxford_blue"
 
 colors.button_default = "main"
 colors.button_default_hover = colors.lighten(colors:get_color("main"), 0.2)
-colors.button_text = colors.white
+colors.button_text = colors.light_shade
 colors.primary = colors.main
-colors.info = colors.steel_gray
-colors.success = colors.convert_hex("#7b973e")
-colors.warning = colors.convert_hex("#f88706")
-colors.danger = colors.pomegranate
+colors.info = colors.beaver
+colors.success = colors.pakistan_green
+colors.warning = colors.goldenrod
+colors.danger = colors.lava
 
 colors.background = "dark_shade"
-colors.text = "ghost_white"
+colors.text = "light_shade"
 colors.accent = "dark_accent"
 colors.invert_background = "light_shade"
 colors.invert_text = "dark_shade"
