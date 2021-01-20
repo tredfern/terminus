@@ -5,6 +5,7 @@
 
 return {
   actions = {
+    center_on_player = require "game.rules.camera.actions.center_on_player",
     set_dimensions = require "game.rules.camera.actions.set_dimensions",
     set_position = require "game.rules.camera.actions.set_position"
   },

@@ -3,6 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+require "assets.stylesheet"
 local store = require "game.store"
 local game_state = require "game.rules.game_state"
 local app = {}

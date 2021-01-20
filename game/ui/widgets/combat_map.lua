@@ -36,11 +36,15 @@ local combat_map = components("combat_map", function(props)
     characters = props.characters,
     map = props.map,
 
-    draw_component = function(self)
+    after_layout = function(self)
       -- Set Camera Dimensions
       local tileswide = self.box:width() / tile_width
       local tileshigh = self.box:height() / tile_height
       store.dispatch(camera.actions.set_dimensions(tileswide, tileshigh))
+      store.dispatch(camera.actions.center_on_player(tileswide, tileshigh))
+    end,
+
+    draw_component = function(self)
 
       for x = 1, self.map.width do
         for y = 1, self.map.height do

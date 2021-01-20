@@ -8,7 +8,7 @@ describe("game.ui.screens.create_character", function()
   local character = require "game.rules.character"
   local mock_store = require "mock_store"
   local player = {
-    is_player_controlled = true
+    is_player_controlled = true, x = 19, y = 28
   }
   local store
 

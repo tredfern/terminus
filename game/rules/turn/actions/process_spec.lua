@@ -55,13 +55,12 @@ describe("game.rules.turn.actions.process", function()
 
   it("tracks the camera around the player with player center on screen", function()
     local camera = require "game.rules.camera"
-    spy.on(camera.actions, "set_position")
+    spy.on(camera.actions, "center_on_player")
 
     local action = process({})
     action(mock_dispatch, store.get_state)
 
-
-    assert.spy(camera.actions.set_position).was.called_with(-5, -17)
+    assert.spy(camera.actions.center_on_player).was.called_with(20, 40)
   end)
 
   it("removes any dead characters", function()

@@ -31,11 +31,7 @@ return function(player_action)
     -- Update camera position to follow character
     local cam = camera.selectors.get(get_state())
     if cam then
-      local player = character.selectors.get_player(get_state())
-      dispatch(camera.actions.set_position(
-        -(cam.width / 2) + player.x,
-        -(cam.height / 2) + player.y
-      ))
+      dispatch(camera.actions.center_on_player(cam.width, cam.height))
     end
   end
 end
