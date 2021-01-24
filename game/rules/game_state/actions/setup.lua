@@ -10,7 +10,7 @@ local tables = require "moonpie.tables"
 return function()
   return function(dispatch, get_state)
     dispatch(map.actions.set(
-      map.create(50, 50)
+      map.generators.dungeon.generate(50, 50)
     ))
     local rooms = map.selectors.get_rooms(get_state())
 

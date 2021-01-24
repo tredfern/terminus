@@ -22,4 +22,8 @@ describe("game.rules.map", function()
     assert.not_nil(map.selectors.get_rooms)
     assert.not_nil(map.selectors.get_terrain)
   end)
+
+  it("defines map generators", function()
+    assert.not_nil(map.generators.dungeon)
+  end)
 end)

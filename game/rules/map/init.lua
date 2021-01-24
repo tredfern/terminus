@@ -16,6 +16,9 @@ return {
       height = h
     }
   end,
+  generators = {
+    dungeon = require "game.rules.map.generators.dungeon"
+  },
   selectors = {
     get_dimensions = require "game.rules.map.selectors.get_dimensions",
     get_rooms = require "game.rules.map.selectors.get_rooms",

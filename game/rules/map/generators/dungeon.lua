@@ -81,14 +81,19 @@ function generator.create_rooms(node)
   }
 end
 
-function generator.generate(map)
-  local root = generator.create_node(1, 1, map.width, map.height)
+function generator.generate(width, height)
+  local map = require "game.rules.map.map"
+  local new_map = map:new { width = width, height = height }
+
+  local root = generator.create_node(1, 1, new_map.width, new_map.height)
   generator.divide(root, 1, DEPTH)
   generator.create_rooms(root)
 
   -- generator.add_border_walls(map, root)
-  generator.add_rooms(map, root)
-  generator.add_corridors(map, root)
+  generator.add_rooms(new_map, root)
+  generator.add_corridors(new_map, root)
+
+  return new_map
 end
 
 function generator.add_border_walls(map, node)

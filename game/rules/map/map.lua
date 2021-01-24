@@ -5,7 +5,6 @@
 
 local class = require "moonpie.class"
 local terrain = require "game.rules.map.terrain"
-local dungeon_generator = require "game.rules.map.generators.dungeon"
 local grid = require "moonpie.collections.grid"
 
 local map = {}
@@ -16,9 +15,6 @@ function map:constructor(props)
   self.height = props.height or 0
   self.data = grid:new(self.width, self.height)
   self.rooms = {}
-  if self.width > 0 and self.height > 0 then
-    dungeon_generator.generate(self)
-  end
 end
 
 function map:get_index(x, y)
