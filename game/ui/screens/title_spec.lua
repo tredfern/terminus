@@ -11,6 +11,11 @@ describe("game.ui.screens.title", function()
   before_each(function()
     mock_store({
       characters = { },
+      map = {
+        rooms = {
+          { x = 1, y = 1, height = 10, width = 10 }
+        }
+      },
       turn = {
         counter = 1
       }

@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.map.generators.dungeon", function()
+  local map = require "game.rules.map.map"
   local dungeon = require "game.rules.map.generators.dungeon"
 
   it("can create a node for the tree", function()
@@ -70,5 +71,10 @@ describe("game.rules.map.generators.dungeon", function()
 
     assert.is_true(node.room.x + node.room.width <= node.x + node.width)
     assert.is_true(node.room.y + node.room.height <= node.y + node.height)
+  end)
+
+  it("adds the rooms to the map after generation", function()
+    local m = map:new { width = 50, height = 50 }
+    assert.is_true(#m.rooms > 0)
   end)
 end)

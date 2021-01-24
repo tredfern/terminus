@@ -15,6 +15,7 @@ function map:constructor(props)
   self.width = props.width or 0
   self.height = props.height or 0
   self.data = grid:new(self.width, self.height)
+  self.rooms = {}
   if self.width > 0 and self.height > 0 then
     dungeon_generator.generate(self)
   end

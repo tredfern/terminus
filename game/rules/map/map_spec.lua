@@ -27,4 +27,9 @@ describe("game.rules.map.map", function()
     local t = m:get_terrain(4, 9)
     assert.not_nil(t)
   end)
+
+  it("has an empty room array to start", function()
+    local m = map:new { width = 200, height = 200 }
+    assert.not_nil(m.rooms)
+  end)
 end)

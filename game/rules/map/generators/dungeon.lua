@@ -116,6 +116,8 @@ function generator.add_rooms(map, node)
   end
 
 
+  map.rooms[#map.rooms + 1] = node.room
+
   for x = 0, node.room.width - 1 do
     for y = 0, node.room.height - 1 do
       map:set_terrain(node.room.x + x, node.room.y + y, terrain.room)

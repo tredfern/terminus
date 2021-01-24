@@ -14,11 +14,21 @@ describe("game.rules.game_state.actions.setup", function()
     captured_actions[#captured_actions + 1] = action
   end)
 
+  local get_state = function()
+    return {
+      map = {
+        rooms = {
+          { x = 1, y = 1, width = 10, height = 10 }
+        }
+      }
+    }
+  end
+
   before_each(function()
     captured_actions = {}
 
     local s = setup()
-    s(dispatch_spy)
+    s(dispatch_spy, get_state)
   end)
 
   it("dispatch create character action for player character", function()

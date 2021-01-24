@@ -19,5 +19,6 @@ describe("game.rules.map", function()
 
   it("defines the selectors available", function()
     assert.not_nil(map.selectors.get_dimensions)
+    assert.not_nil(map.selectors.get_rooms)
   end)
 end)
