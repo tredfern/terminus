@@ -6,21 +6,6 @@
 
 describe("game.ui.screens.title", function()
   local title = require "game.ui.screens.title"
-  local mock_store = require "mock_store"
-
-  before_each(function()
-    mock_store({
-      characters = { },
-      map = {
-        rooms = {
-          { x = 1, y = 1, height = 10, width = 10 }
-        }
-      },
-      turn = {
-        counter = 1
-      }
-    })
-  end)
 
   it("instantiates a component", function()
     assert.not_nil(title())
@@ -28,7 +13,7 @@ describe("game.ui.screens.title", function()
 
   it("triggers new game on the app if new game is clicked", function()
     local app = require "game.app"
-    spy.on(app, "new_game")
+    mock(app, "new_game")
 
     -- instantiate the title component to test it
     local component = title()
