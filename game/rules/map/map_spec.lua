@@ -23,7 +23,7 @@ describe("game.rules.map.map", function()
   end)
 
   it("returns the terrain for a specific tile", function()
-    local m = map:new { width = 32, height = 938 }
+    local m = map:new { width = 320, height = 938 }
     local t = m:get_terrain(4, 9)
     assert.not_nil(t)
   end)

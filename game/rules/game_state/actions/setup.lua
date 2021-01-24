@@ -9,7 +9,7 @@ local map = require "game.rules.map"
 return function()
   return function(dispatch)
     dispatch(map.actions.set(
-      map.create(100, 100)
+      map.create(50, 50)
     ))
 
     dispatch(character.actions.add(
