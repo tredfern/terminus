@@ -18,6 +18,7 @@ return {
   end,
   selectors = {
     get_dimensions = require "game.rules.map.selectors.get_dimensions",
-    get_rooms = require "game.rules.map.selectors.get_rooms"
+    get_rooms = require "game.rules.map.selectors.get_rooms",
+    get_terrain = require "game.rules.map.selectors.get_terrain"
   }
 }

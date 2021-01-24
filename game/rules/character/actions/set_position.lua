@@ -15,9 +15,8 @@ return function(character, x, y)
       y = y
     },
     validate = function(self, state)
-      local dims = map.selectors.get_dimensions(state)
-      return self.payload.x >= 1 and self.payload.x < dims.width and
-        self.payload.y >= 1 and self.payload.y < dims.height
+      local terrain = map.selectors.get_terrain(state, self.payload.x, self.payload.y)
+      return not terrain.blocks_movement
     end
   }
 end

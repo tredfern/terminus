@@ -7,7 +7,8 @@ local colors = require "moonpie.graphics.colors"
 
 return {
   blank = {
-    color = colors.oxford_blue
+    color = colors.oxford_blue,
+    blocks_movement = true
   },
   boundary = {
     color = colors.gray

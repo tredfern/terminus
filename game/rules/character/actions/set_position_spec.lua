@@ -17,28 +17,18 @@ describe("game.rules.character.actions.set_position", function()
     assert.equals(38, sp.payload.y)
   end)
 
-  it("validates that the position is within the map boundaries", function()
-    local sp = set_position({}, 39, 20)
-    assert.is_true(sp:validate({
-      map = {
-        width = 100,
-        height = 100
-      }
-    }))
-
-    assert.is_false(sp:validate({
-      map = {
-        width = 10,
-        height = 10
-      }
-    }))
+  it("is invalid if terrain blocks movement", function()
+    local sp = set_position({}, 5, 3)
+    local map = {
+      get_terrain = function() return { blocks_movement = true } end
+    }
+    assert.is_false(sp:validate({ map = map }))
   end)
 
-  it("validates x and y are >=1", function()
-    local sp = set_position({}, -1, -1)
-    assert.is_false(sp:validate({
-      map = { width = 100, height = 100 }
-    }))
+  it("is valid if terrain allows movement", function()
+    local sp = set_position({}, 5, 3)
+    local map = { get_terrain = function() return { } end }
+    assert.is_true(sp:validate({ map = map }))
   end)
 
 end)

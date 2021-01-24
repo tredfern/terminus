@@ -37,6 +37,9 @@ describe("game.ui.inputs.keyboard", function()
         mock_store({
           characters = {
             player_character
+          },
+          map = {
+            get_terrain = function() return {} end
           }
         })
       end)
