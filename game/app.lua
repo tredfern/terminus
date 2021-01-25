@@ -20,6 +20,7 @@ function app.render(scene)
 end
 
 function app.title()
+  store.reset()
   local t = require("game.ui.screens.title")
   app.render(t())
 end

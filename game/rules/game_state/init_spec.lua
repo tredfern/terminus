@@ -9,4 +9,8 @@ describe("game.rules.game_state", function()
   it("has an action to setup the game", function()
     assert.not_nil(game_state.actions.setup)
   end)
+
+  it("has an action to end the game", function()
+    assert.not_nil(game_state.actions.game_over)
+  end)
 end)

@@ -10,4 +10,9 @@ describe("game.store", function()
     assert.is_function(store.dispatch)
     assert.is_table(store.get_state())
   end)
+
+  it("can reset the store to the start state", function()
+    local store = require "game.store"
+    store.reset()
+  end)
 end)
