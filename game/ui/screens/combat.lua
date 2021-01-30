@@ -8,6 +8,7 @@ local map_component = require "game.ui.widgets.combat_map"
 local keyboard_map = require 'game.ui.inputs.keyboard_map'
 local turn_counter = require "game.ui.widgets.turn_counter"
 local character_stats = require "game.ui.widgets.character_stats"
+local message_log = require "game.ui.widgets.message_log"
 
 local combat_screen = components("combat_screen", function()
   return {
@@ -22,6 +23,10 @@ local combat_screen = components("combat_screen", function()
         style = "stats_content",
         turn_counter(),
         character_stats()
+      },
+      {
+        components.h3 { text = "Messages" },
+        message_log()
       }
     },
 

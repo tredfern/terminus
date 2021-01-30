@@ -52,6 +52,11 @@ styles.main_menu_button = {
   display = "block"
 }
 
+styles.message_log = {
+  padding = 10,
+  font_size = 15
+}
+
 styles.panel = {
   color = "light_shade",
   border_color = "light_accent",

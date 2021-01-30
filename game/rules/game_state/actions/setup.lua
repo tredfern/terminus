@@ -6,6 +6,7 @@
 local character = require "game.rules.character"
 local map = require "game.rules.map"
 local tables = require "moonpie.tables"
+local message_log = require "game.rules.message_log"
 
 return function()
   return function(dispatch, get_state)
@@ -34,5 +35,9 @@ return function()
         }
       ))
     end
+
+    dispatch(message_log.actions.add(
+      "Welcome to the jungle!"
+    ))
   end
 end
