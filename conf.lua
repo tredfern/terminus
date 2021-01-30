@@ -4,9 +4,9 @@
 -- https://opensource.org/licenses/MIT
 function love.conf(t)
   t.window.title = "Terminus"
-  t.window.height = 768
-  t.window.width = 1024
-  t.window.vsync = 1
+  t.window.height = 968
+  t.window.width = 1280
+  t.window.vsync = 0
   t.window.fullscreen = false
   t.console = true
 end

@@ -38,10 +38,12 @@ local combat_map = components("combat_map", function(props)
 
     after_layout = function(self)
       -- Set Camera Dimensions
-      local tileswide = self.box:width() / tile_width
-      local tileshigh = self.box:height() / tile_height
-      store.dispatch(camera.actions.set_dimensions(tileswide, tileshigh))
-      store.dispatch(camera.actions.center_on_player(tileswide, tileshigh))
+      local tileswide = self.box.width / tile_width
+      local tileshigh = self.box.height / tile_height
+
+      -- Disabling triggers prevents redundant events from triggering
+      store.dispatch(camera.actions.set_dimensions(tileswide, tileshigh), true)
+      store.dispatch(camera.actions.center_on_player(tileswide, tileshigh), true)
     end,
 
     draw_component = function(self)

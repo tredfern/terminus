@@ -9,7 +9,7 @@ local colors = require "moonpie.graphics.colors"
 return components("panel", function(props)
   return {
     draw_component = function(self)
-      local w, h = self.box:background_size()
+      local w, h = self.box.background_position.width, self.box.background_position.height
       local curve = 16
       love.graphics.setColor(colors(self.border_color))
       love.graphics.rectangle("fill", 0, 0, w, h, curve, curve)
