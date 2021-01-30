@@ -9,7 +9,6 @@ local character = require "game.rules.character.character"
 return {
   actions = {
     add = require "game.rules.character.actions.add",
-    attack = require "game.rules.character.actions.attack",
     move = require "game.rules.character.actions.move",
     remove = require "game.rules.character.actions.remove",
     set_name = require "game.rules.character.actions.set_name",

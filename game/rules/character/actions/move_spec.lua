@@ -32,6 +32,8 @@ describe("game.rules.character.actions.move", function()
     local action = character_move(player, 20, 11)
     action(mock_dispatch, wrap_in_function(state))
 
-    assert.is_true(mock_dispatch:received_action(types.character_attack))
+    local combat_action_types = require "game.rules.combat.actions.types"
+    assert.is_true(mock_dispatch:received_action(
+      combat_action_types.combat_attack))
   end)
 end)

@@ -4,14 +4,14 @@
 -- https://opensource.org/licenses/MIT
 
 local set_health = require "game.rules.character.actions.set_health"
-local types = require "game.rules.character.actions.types"
+local types = require "game.rules.combat.actions.types"
 local message_log = require "game.rules.message_log"
 
 return function(source, target)
   if source == target then return {} end
 
   return setmetatable({
-    type = types.character_attack,
+    type = types.combat_attack,
   }, {
     __call = function(_, dispatch)
       dispatch(set_health(target, target.health - 1))

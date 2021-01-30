@@ -39,4 +39,14 @@ describe("game.rules.character.character", function()
     local c = character {}
     assert.equals(10, c.health)
   end)
+
+  it("has a defense of 50", function()
+    local c = character {}
+    assert.equals(50, c.defense)
+  end)
+
+  it("has an attack of 50", function()
+    local c= character {}
+    assert.equals(50, c.attack)
+  end)
 end)

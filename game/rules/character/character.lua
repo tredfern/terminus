@@ -14,6 +14,8 @@ function character:constructor(props)
   self.is_player_controlled = props.is_player_controlled
   self.is_enemy = props.is_enemy
   self.health = 10
+  self.attack = 50
+  self.defense = 50
 end
 
 function character:set_position(x, y)
