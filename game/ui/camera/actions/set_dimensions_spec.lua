@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.camera.actions.set_dimensions", function()
-  local set_dimensions = require "game.rules.camera.actions.set_dimensions"
+describe("game.ui.camera.actions.set_dimensions", function()
+  local set_dimensions = require "game.ui.camera.actions.set_dimensions"
 
   it("takes a width and height for the camera to be", function()
     local action = set_dimensions(48, 293)

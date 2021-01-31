@@ -5,7 +5,7 @@
 
 local components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
-local message_log = require "game.rules.message_log"
+local MessageLog = require "game.rules.message_log"
 local tables = require "moonpie.tables"
 
 local message_log_widget = components("message_log", function(props)
@@ -24,6 +24,6 @@ end)
 
 return connect(message_log_widget, function(state)
   return {
-    messages = message_log.selectors.get_last(state, 5),
+    messages = MessageLog.selectors.getLast(state, 5),
   }
 end)

@@ -3,9 +3,9 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.camera.actions.center_on_player", function()
-  local centerOnPlayer = require "game.rules.camera.actions.center_on_player"
-  local types = require "game.rules.camera.actions.types"
+describe("game.ui.camera.actions.center_on_player", function()
+  local centerOnPlayer = require "game.ui.camera.actions.center_on_player"
+  local types = require "game.ui.camera.actions.types"
   local mock_store = require "mock_store"
 
   it("centers on the player location", function()

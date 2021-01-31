@@ -6,6 +6,7 @@
 require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
+local colors = require "moonpie.graphics.colors"
 
 styles.button = moonpie.tables.merge(
   {
@@ -30,8 +31,8 @@ styles["stats"] = {
   width = "25%",
   height = "100%",
   border = 2,
-  borderColor = "light_accent",
-  backgroundColor = "dark_accent"
+  borderColor = "dark_accent",
+  backgroundColor = colors.lighten(colors:getColor("dark_shade"), 1.5)
 }
 
 styles["stats_content"] = {

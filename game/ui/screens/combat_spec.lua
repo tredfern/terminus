@@ -24,14 +24,14 @@ describe("game.ui.screens.combat", function()
 
   describe("keyboard configuration", function()
     local keyboard_map = require "game.ui.inputs.keyboard_map"
-    spy.on(keyboard_map, "enable_combat_map")
-    spy.on(keyboard_map, "disable_combat_map")
+    spy.on(keyboard_map, "enableCombatMap")
+    spy.on(keyboard_map, "disableCombatMap")
 
     it("assigns and removes it's hotkeys on mounting and unmounting", function()
       moonpie.test_render(combat_screen())
-      assert.spy(keyboard_map.enable_combat_map).was.called()
+      assert.spy(keyboard_map.enableCombatMap).was.called()
       moonpie.test_render(nil)
-      assert.spy(keyboard_map.disable_combat_map).was.called()
+      assert.spy(keyboard_map.disableCombatMap).was.called()
     end)
 
   end)

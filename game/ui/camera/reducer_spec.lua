@@ -3,9 +3,9 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.camera.reducer", function()
-  local reducer = require "game.rules.camera.reducer"
-  local types = require "game.rules.camera.actions.types"
+describe("game.ui.camera.reducer", function()
+  local reducer = require "game.ui.camera.reducer"
+  local types = require "game.ui.camera.actions.types"
 
   it("initial state has a camera", function()
     local s = reducer(nil, {})

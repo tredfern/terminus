@@ -54,7 +54,7 @@ describe("game.rules.turn.actions.process", function()
   end)
 
   it("tracks the camera around the player with player center on screen", function()
-    local camera = require "game.rules.camera"
+    local camera = require "game.ui.camera"
     spy.on(camera.actions, "centerOnPlayer")
 
     local action = process({})

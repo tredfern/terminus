@@ -8,13 +8,13 @@ local store = require "moonpie.redux.store"
 local character = require "game.rules.character"
 local turn = require "game.rules.turn"
 
-local keysettings = {}
+local keySettings = {}
 
 local function process_turn(player_action)
   store.dispatch(turn.actions.process(player_action))
 end
 
-keysettings.combat_map = {
+keySettings.combatMap = {
   ["down"] = function()
     local player_character = character.selectors.getPlayer(store.getState())
     process_turn(character.actions.move(
@@ -50,24 +50,24 @@ keysettings.combat_map = {
 
 }
 
-local function set_mapping(mapping)
+local function setMapping(mapping)
   for k, v in pairs(mapping) do
     keyboard:hotkey(k, v)
   end
 end
 
-local function remove_mapping(mapping)
+local function removeMapping(mapping)
   for k in pairs(mapping) do
     keyboard:hotkey(k, nil)
   end
 end
 
-function keysettings.enable_combat_map()
-  set_mapping(keysettings.combat_map)
+function keySettings.enableCombatMap()
+  setMapping(keySettings.combatMap)
 end
 
-function keysettings.disable_combat_map()
-  remove_mapping(keysettings.combat_map)
+function keySettings.disableCombatMap()
+  removeMapping(keySettings.combatMap)
 end
 
-return keysettings
+return keySettings

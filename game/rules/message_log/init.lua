@@ -8,6 +8,6 @@ return {
     add = require "game.rules.message_log.actions.add"
   },
   selectors = {
-    get_last = require "game.rules.message_log.selectors.get_last"
+    getLast = require "game.rules.message_log.selectors.get_last"
   }
 }

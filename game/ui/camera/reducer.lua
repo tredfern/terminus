@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.camera.actions.types"
+local types = require "game.ui.camera.actions.types"
 local createSlice = require "moonpie.redux.create_slice"
 
 return createSlice {

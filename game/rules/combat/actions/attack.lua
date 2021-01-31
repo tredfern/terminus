@@ -3,12 +3,12 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local set_health = require "game.rules.character.actions.set_health"
 local types = require "game.rules.combat.actions.types"
 local message_log = require "game.rules.message_log"
 local helper = require "game.rules.combat.helper"
 
 return function(source, target)
+  local Character = require "game.rules.character"
   if source == target then return {} end
 
   return setmetatable({
@@ -18,7 +18,7 @@ return function(source, target)
       local hit, atk_roll, def_roll = helper.resolve_attack(source.attack, target.defense)
 
       if hit then
-        dispatch(set_health(target, target.health - 1))
+        dispatch(Character.actions.setHealth(target, target.health - 1))
       end
 
       -- Message Log Entry

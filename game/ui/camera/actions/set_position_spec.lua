@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.camera.actions.set_position", function()
-  local set_position = require "game.rules.camera.actions.set_position"
+describe("game.ui.camera.actions.set_position", function()
+  local set_position = require "game.ui.camera.actions.set_position"
 
   it("takes an x and y for the camera location", function()
     local sp = set_position(38, 94)

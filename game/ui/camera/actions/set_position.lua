@@ -3,14 +3,14 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.camera.actions.types"
+local types = require "game.ui.camera.actions.types"
 
-return function(width, height)
+return function(x, y)
   return {
-    type = types.camera_set_dimensions,
+    type = types.camera_set_position,
     payload = {
-      width = width,
-      height = height
+      x = x,
+      y = y
     }
   }
 end

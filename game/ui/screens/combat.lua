@@ -31,11 +31,11 @@ local combat_screen = components("combat_screen", function()
     },
 
     mounted = function()
-      keyboard_map.enable_combat_map()
+      keyboard_map.enableCombatMap()
     end,
 
     unmounted = function()
-      keyboard_map.disable_combat_map()
+      keyboard_map.disableCombatMap()
     end
   }
 end)

@@ -6,7 +6,7 @@
 local increment = require "game.rules.turn.actions.increment"
 local Character = require "game.rules.character"
 local Enemy = require "game.rules.enemy"
-local Camera = require "game.rules.camera"
+local Camera = require "game.ui.camera"
 local GameState = require "game.rules.game_state"
 
 return function(player_action)

@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.camera.selectors.get", function()
-  local get = require "game.rules.camera.selectors.get"
+describe("game.ui.camera.selectors.get", function()
+  local get = require "game.ui.camera.selectors.get"
 
   it("returns the camera from state", function()
     local c = {}

@@ -11,6 +11,7 @@ return {
     add = require "game.rules.character.actions.add",
     move = require "game.rules.character.actions.move",
     remove = require "game.rules.character.actions.remove",
+    setHealth = require "game.rules.character.actions.set_health",
     setName = require "game.rules.character.actions.set_name",
     setPosition = require "game.rules.character.actions.set_position",
     types = require "game.rules.character.actions.types"

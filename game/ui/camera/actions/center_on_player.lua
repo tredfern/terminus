@@ -5,7 +5,7 @@
 
 local character = require "game.rules.character"
 local store = require "moonpie.redux.store"
-local setPosition = require "game.rules.camera.actions.set_position"
+local setPosition = require "game.ui.camera.actions.set_position"
 
 return function(width, height)
   width = width or 0
