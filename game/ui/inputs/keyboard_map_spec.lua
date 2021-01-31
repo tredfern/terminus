@@ -23,6 +23,14 @@ describe("game.ui.inputs.keyboard", function()
       assert.spy(character.actions.move).was_not.called()
     end)
 
+    it("can show/hide grid lines", function()
+      mock_store({})
+      local Settings = require "game.settings"
+      spy.on(Settings.actions, "toggleOption")
+      key_simulator:keyPressed("shift+g")
+      assert.spy(Settings.actions.toggleOption).was.called_with("show_grid_lines")
+    end)
+
     describe("character movement", function()
       local player_character
 

@@ -9,6 +9,7 @@ local connect = require "moonpie.redux.connect"
 local character = require "game.rules.character"
 local camera = require "game.ui.camera"
 local store = require "moonpie.redux.store"
+local Settings = require "game.settings"
 
 local tile_width = 32
 local tile_height = 32
@@ -16,8 +17,17 @@ local tile_height = 32
 local function draw_tile(x, y, color)
   love.graphics.setColor(color)
   love.graphics.rectangle("fill", x * tile_width, y*tile_height, tile_width, tile_height)
+end
+
+local function drawGrid(tilesWide, tilesHigh)
   love.graphics.setColor(colors(colors.grid_lines))
-  love.graphics.rectangle("line", x * tile_width, y*tile_height, tile_width, tile_height)
+  for x = 1, tilesWide do
+    love.graphics.line(x * tile_width, 1, x * tile_width, tilesHigh * tile_height)
+  end
+
+  for y = 1, tilesHigh do
+    love.graphics.line(1, y * tile_height, tilesWide * tile_width, y * tile_height)
+  end
 end
 
 local function draw_character(x, y, is_enemy)
@@ -35,15 +45,16 @@ local combat_map = components("combat_map", function(props)
     camera = props.camera,
     characters = props.characters,
     map = props.map,
+    showGrid = props.showGrid,
 
     afterLayout = function(self)
       -- Set Camera Dimensions
-      local tilesWide = self.box.width / tile_width
-      local tilesHigh = self.box.height / tile_height
+      self.tilesWide = self.box.width / tile_width
+      self.tilesHigh = self.box.height / tile_height
 
       -- Disabling triggers prevents redundant events from triggering
-      store.dispatch(camera.actions.setDimensions(tilesWide, tilesHigh), true)
-      store.dispatch(camera.actions.centerOnPlayer(tilesWide, tilesHigh), true)
+      store.dispatch(camera.actions.setDimensions(self.tilesWide, self.tilesHigh), true)
+      store.dispatch(camera.actions.centerOnPlayer(self.tilesWide, self.tilesHigh), true)
     end,
 
     drawComponent = function(self)
@@ -63,6 +74,10 @@ local combat_map = components("combat_map", function(props)
           v.y - self.camera.y,
           v.is_enemy)
       end
+
+      if self.showGrid then
+        drawGrid(self.tilesWide, self.tilesHigh)
+      end
     end
   }
 end)
@@ -72,7 +87,8 @@ return connect(combat_map,
     return {
       camera = camera.selectors.get(state),
       characters = character.selectors.getAll(state),
-      map = state.map
+      map = state.map,
+      showGrid = Settings.selectors.getOption(state, "show_grid_lines")
   }
   end
 )

@@ -46,6 +46,10 @@ keySettings.combatMap = {
       player_character.x,
       player_character.y - 1
     ))
+  end,
+  ["shift+g"] = function()
+    local Settings = require "game.settings"
+    store.dispatch(Settings.actions.toggleOption("show_grid_lines"))
   end
 
 }

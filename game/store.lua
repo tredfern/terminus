@@ -14,6 +14,7 @@ store.reset = function()
       characters = require "game.rules.character.reducer",
       map = require "game.rules.map.reducer",
       message_log = require "game.rules.message_log.reducer",
+      settings = require "game.settings.reducer",
       turn = require "game.rules.turn.reducer"
   })
 end
