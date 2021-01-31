@@ -20,6 +20,7 @@ local function draw_tile(x, y, color)
 end
 
 local function drawGrid(tilesWide, tilesHigh)
+  love.graphics.setLineWidth(1)
   love.graphics.setColor(colors(colors.grid_lines))
   for x = 1, tilesWide do
     love.graphics.line(x * tile_width, 1, x * tile_width, tilesHigh * tile_height)
@@ -49,8 +50,8 @@ local combat_map = components("combat_map", function(props)
 
     afterLayout = function(self)
       -- Set Camera Dimensions
-      self.tilesWide = self.box.width / tile_width
-      self.tilesHigh = self.box.height / tile_height
+      self.tilesWide = math.ceil(self.box.width / tile_width)
+      self.tilesHigh = math.ceil(self.box.height / tile_height)
 
       -- Disabling triggers prevents redundant events from triggering
       store.dispatch(camera.actions.setDimensions(self.tilesWide, self.tilesHigh), true)
@@ -58,7 +59,6 @@ local combat_map = components("combat_map", function(props)
     end,
 
     drawComponent = function(self)
-
       for x = 1, self.map.width do
         for y = 1, self.map.height do
           draw_tile(
