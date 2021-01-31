@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.camera.actions.center_on_player", function()
-  local center_on_player = require "game.rules.camera.actions.center_on_player"
+  local centerOnPlayer = require "game.rules.camera.actions.center_on_player"
   local types = require "game.rules.camera.actions.types"
   local mock_store = require "mock_store"
 
@@ -15,7 +15,7 @@ describe("game.rules.camera.actions.center_on_player", function()
       }
     })
 
-    local action = center_on_player(10, 10)
+    local action = centerOnPlayer(10, 10)
     assert.equals(types.camera_set_position, action.type)
     assert.equals(1, action.payload.x)
     assert.equals(14, action.payload.y)

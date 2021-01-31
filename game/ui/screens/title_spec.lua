@@ -13,11 +13,11 @@ describe("game.ui.screens.title", function()
 
   it("triggers new game on the app if new game is clicked", function()
     local app = require "game.app"
-    mock(app, "new_game")
+    mock(app, "newGame")
 
     -- instantiate the title component to test it
     local component = title()
-    component:find_by_id("new_game_button"):click()
-    assert.spy(app.new_game).was.called()
+    component:findByID("newGame_button"):click()
+    assert.spy(app.newGame).was.called()
   end)
 end)

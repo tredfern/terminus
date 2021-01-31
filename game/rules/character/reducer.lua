@@ -4,13 +4,13 @@
 -- https://opensource.org/licenses/MIT
 
 local types = require "game.rules.character.actions.types"
-local create_slice = require "moonpie.redux.create_slice"
+local createSlice = require "moonpie.redux.create_slice"
 local tables = require "moonpie.tables"
 
-return create_slice {
+return createSlice {
   initial_state = { },
   [types.character_add] = function(state, action)
-    return tables.concat_array(state, { action.payload.character })
+    return tables.concatArray(state, { action.payload.character })
   end,
   [types.character_remove] = function(state, action)
     return tables.select(state,

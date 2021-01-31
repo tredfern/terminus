@@ -5,14 +5,14 @@
 
 local character = require "game.rules.character"
 local store = require "moonpie.redux.store"
-local set_position = require "game.rules.camera.actions.set_position"
+local setPosition = require "game.rules.camera.actions.set_position"
 
 return function(width, height)
   width = width or 0
   height = height or 0
-  local c = character.selectors.get_player(store.get_state())
+  local c = character.selectors.getPlayer(store.getState())
   if c then
-    return set_position(
+    return setPosition(
       -width / 2 + c.x,
       -height / 2 + c.y
     )

@@ -17,8 +17,8 @@ return function(character, x, y)
     y = y
   },
   {
-    __call = function(self, dispatch, get_state)
-      local targets = get_by_position(get_state(), self.x, self.y)
+    __call = function(self, dispatch, getState)
+      local targets = get_by_position(getState(), self.x, self.y)
       if #targets > 0 then
         dispatch(combat.actions.attack(self.character, targets[1]))
       else

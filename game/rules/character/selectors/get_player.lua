@@ -7,7 +7,7 @@ local tables = require "moonpie.tables"
 
 return function(state)
   assert(state.characters)
-  return tables.find_first(state.characters,
+  return tables.findFirst(state.characters,
     function(c)
       return c.is_player_controlled
     end

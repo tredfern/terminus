@@ -4,26 +4,26 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.map", function()
-  local map = require "game.rules.map"
+  local Map = require "game.rules.map"
 
   it("can create a map", function()
-    local m = map.create(40, 28)
+    local m = Map.create(40, 28)
     assert.equals(40, m.width)
     assert.equals(28, m.height)
   end)
 
   it("defines actions available", function()
-    assert.not_nil(map.actions.types)
-    assert.not_nil(map.actions.set)
+    assert.not_nil(Map.actions.types)
+    assert.not_nil(Map.actions.set)
   end)
 
   it("defines the selectors available", function()
-    assert.not_nil(map.selectors.get_dimensions)
-    assert.not_nil(map.selectors.get_rooms)
-    assert.not_nil(map.selectors.get_terrain)
+    assert.not_nil(Map.selectors.getDimensions)
+    assert.not_nil(Map.selectors.getRooms)
+    assert.not_nil(Map.selectors.getTerrain)
   end)
 
   it("defines map generators", function()
-    assert.not_nil(map.generators.dungeon)
+    assert.not_nil(Map.generators.dungeon)
   end)
 end)

@@ -16,7 +16,7 @@ end
 
 keysettings.combat_map = {
   ["down"] = function()
-    local player_character = character.selectors.get_player(store.get_state())
+    local player_character = character.selectors.getPlayer(store.getState())
     process_turn(character.actions.move(
       player_character,
       player_character.x,
@@ -24,7 +24,7 @@ keysettings.combat_map = {
     ))
   end,
   ["left"] = function()
-    local player_character = character.selectors.get_player(store.get_state())
+    local player_character = character.selectors.getPlayer(store.getState())
     process_turn(character.actions.move(
       player_character,
       player_character.x - 1,
@@ -32,7 +32,7 @@ keysettings.combat_map = {
     ))
   end,
   ["right"]= function()
-    local player_character = character.selectors.get_player(store.get_state())
+    local player_character = character.selectors.getPlayer(store.getState())
     process_turn(character.actions.move(
       player_character,
       player_character.x + 1,
@@ -40,7 +40,7 @@ keysettings.combat_map = {
     ))
   end,
   ["up"] = function()
-    local player_character = character.selectors.get_player(store.get_state())
+    local player_character = character.selectors.getPlayer(store.getState())
     process_turn(character.actions.move(
       player_character,
       player_character.x,

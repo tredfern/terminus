@@ -4,9 +4,9 @@
 -- https://opensource.org/licenses/MIT
 
 local types = require "game.rules.camera.actions.types"
-local create_slice = require "moonpie.redux.create_slice"
+local createSlice = require "moonpie.redux.create_slice"
 
-return create_slice {
+return createSlice {
   initial_state = {
     x = 1,
     y = 1

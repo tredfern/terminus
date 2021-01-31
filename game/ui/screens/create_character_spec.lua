@@ -28,16 +28,16 @@ describe("game.ui.screens.create_character", function()
     spy.on(app, "combat")
 
     local c = moonpie.test_render(create_character())
-    c:find_by_id("button_done"):click()
+    c:findByID("button_done"):click()
     assert.spy(app.combat).was.called()
   end)
 
   it("dispatch set character name action on done", function()
     local c = moonpie.test_render(create_character())
-    local textbox = c:find_by_id("character_name")
+    local textbox = c:findByID("character_name")
     textbox:set_text("Foo")
 
-    c:find_by_id("button_done"):click()
+    c:findByID("button_done"):click()
 
     assert.equals(1, #store.get_actions(character.actions.types.character_set_name))
     local action = store.get_actions(character.actions.types.character_set_name)[1]

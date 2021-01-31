@@ -27,7 +27,7 @@ local character_stats = components("character_stats", function(props)
 end)
 
 return connect(character_stats, function(state)
-  local player = character.selectors.get_player(state)
+  local player = character.selectors.getPlayer(state)
   if player then
     return {
       character_name = player.name,

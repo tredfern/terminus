@@ -16,15 +16,15 @@ local tile_height = 32
 local function draw_tile(x, y, color)
   love.graphics.setColor(color)
   love.graphics.rectangle("fill", x * tile_width, y*tile_height, tile_width, tile_height)
-  love.graphics.setColor(colors.dark_gray)
+  love.graphics.setColor(colors(colors.dark_accent))
   love.graphics.rectangle("line", x * tile_width, y*tile_height, tile_width, tile_height)
 end
 
 local function draw_character(x, y, is_enemy)
   if is_enemy then
-    love.graphics.setColor(colors.red)
+    love.graphics.setColor(colors.danger)
   else
-    love.graphics.setColor(colors.magenta)
+    love.graphics.setColor(colors.success)
   end
   love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
 end
@@ -36,17 +36,17 @@ local combat_map = components("combat_map", function(props)
     characters = props.characters,
     map = props.map,
 
-    after_layout = function(self)
+    afterLayout = function(self)
       -- Set Camera Dimensions
-      local tileswide = self.box.width / tile_width
-      local tileshigh = self.box.height / tile_height
+      local tilesWide = self.box.width / tile_width
+      local tilesHigh = self.box.height / tile_height
 
       -- Disabling triggers prevents redundant events from triggering
-      store.dispatch(camera.actions.set_dimensions(tileswide, tileshigh), true)
-      store.dispatch(camera.actions.center_on_player(tileswide, tileshigh), true)
+      store.dispatch(camera.actions.setDimensions(tilesWide, tilesHigh), true)
+      store.dispatch(camera.actions.centerOnPlayer(tilesWide, tilesHigh), true)
     end,
 
-    draw_component = function(self)
+    drawComponent = function(self)
 
       for x = 1, self.map.width do
         for y = 1, self.map.height do
@@ -71,7 +71,7 @@ return connect(combat_map,
   function(state)
     return {
       camera = camera.selectors.get(state),
-      characters = character.selectors.get_all(state),
+      characters = character.selectors.getAll(state),
       map = state.map
   }
   end

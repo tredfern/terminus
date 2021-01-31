@@ -4,42 +4,42 @@
 -- https://opensource.org/licenses/MIT
 
 local increment = require "game.rules.turn.actions.increment"
-local character = require "game.rules.character"
-local enemy = require "game.rules.enemy"
-local camera = require "game.rules.camera"
-local game_state = require "game.rules.game_state"
+local Character = require "game.rules.character"
+local Enemy = require "game.rules.enemy"
+local Camera = require "game.rules.camera"
+local GameState = require "game.rules.game_state"
 
 return function(player_action)
-  return function(dispatch, get_state)
+  return function(dispatch, getState)
     dispatch(increment())
     dispatch(player_action)
 
-    local enemies = character.selectors.get_enemies(get_state())
+    local enemies = Character.selectors.getEnemies(getState())
     if enemies then
       for _, e in ipairs(enemies) do
-        dispatch(enemy.actions.think(e))
+        dispatch(Enemy.actions.think(e))
       end
     end
 
     -- Check for dead characters
-    local dead = character.selectors.get_dead(get_state())
+    local dead = Character.selectors.getDead(getState())
     if dead then
-      local player_died = false
+      local playerDied = false
       for _, e in ipairs(dead) do
-        player_died = player_died or e.is_player_controlled
-        dispatch(character.actions.remove(e))
+        playerDied = playerDied or e.is_player_controlled
+        dispatch(Character.actions.remove(e))
       end
 
-      if player_died then
-        dispatch(game_state.actions.game_over())
+      if playerDied then
+        dispatch(GameState.actions.gameOver())
         return
       end
     end
 
     -- Update camera position to follow character
-    local cam = camera.selectors.get(get_state())
+    local cam = Camera.selectors.get(getState())
     if cam then
-      dispatch(camera.actions.center_on_player(cam.width, cam.height))
+      dispatch(Camera.actions.centerOnPlayer(cam.width, cam.height))
     end
   end
 end

@@ -18,7 +18,7 @@ describe("game.ui.widgets.game_view", function()
 
   it("displays content from game_view state", function()
     local rendered = moonpie.test_render(game_view({ id = "game_view_test" }))
-    assert.not_nil(rendered:find_by_id("mock_view"))
+    assert.not_nil(rendered:findByID("mock_view"))
   end)
 
   it("handles when game_view is nil", function()

@@ -9,9 +9,9 @@ local styles = moonpie.ui.styles
 
 styles.button = moonpie.tables.merge(
   {
-    corner_radius_x = 15,
-    corner_radius_y = 15,
-    font_name = "headline",
+    cornerRadiusX = 15,
+    cornerRadiusY = 15,
+    fontName = "headline",
     padding = { left = 15, right = 15, top = 8, bottom = 8 },
     vertical_align = "middle"
   },
@@ -30,8 +30,8 @@ styles["stats"] = {
   width = "25%",
   height = "100%",
   border = 2,
-  border_color = "light_accent",
-  background_color = "dark_accent"
+  borderColor = "light_accent",
+  backgroundColor = "dark_accent"
 }
 
 styles["stats_content"] = {
@@ -39,7 +39,7 @@ styles["stats_content"] = {
 }
 
 styles.textbox_text = {
-  font_size = 18,
+  fontSize = 18,
 }
 
 --layouts
@@ -54,29 +54,29 @@ styles.main_menu_button = {
 
 styles.message_log = {
   padding = 10,
-  font_size = 15
+  fontSize = 15
 }
 
 styles.panel = {
   color = "light_shade",
-  border_color = "light_accent",
+  borderColor = "light_accent",
   margin = 2
 }
 
 styles.panel_primary = {
   color = "main",
-  border_color = "main",
+  borderColor = "main",
 }
 
 styles.panel_secondary = {
   color = "dark_accent",
-  border_color = "dark_shade"
+  borderColor = "dark_shade"
 }
 
 styles.panel_title = {
-  background_color = "background",
-  font_name = "headline",
-  font_size = 16,
+  backgroundColor = "background",
+  fontName = "headline",
+  fontSize = 16,
   margin = { left = 25 },
   padding = { left = 6, right = 6, top = 2, bottom = 2 }
 }
@@ -85,11 +85,11 @@ styles.panel_contents = {
   color = "text",
   margin = { left = 8, right = 8, bottom = 8 },
   padding = 8,
-  corner_radius_x = 16,
-  corner_radius_y = 16,
-  background_color = "background",
-  font_name = "default",
-  font_size = 14
+  cornerRadiusX = 16,
+  cornerRadiusY = 16,
+  backgroundColor = "background",
+  fontName = "default",
+  fontSize = 14
 }
 
 styles.primary = {
@@ -100,7 +100,7 @@ styles.primary = {
 styles.textbox = moonpie.tables.merge({
     width = 250,
     height = 25,
-    font_size = 14,
-    font_name = "default"
+    fontSize = 14,
+    fontName = "default"
   },
   styles.textbox)

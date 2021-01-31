@@ -31,7 +31,7 @@ colors.dark_accent = "outer_space_crayola"
 colors.dark_shade = "oxford_blue"
 
 colors.button_default = "main"
-colors.button_default_hover = colors.lighten(colors:get_color("main"), 0.2)
+colors.button_default_hover = colors.lighten(colors:getColor("main"), 0.2)
 colors.button_text = colors.light_shade
 colors.primary = colors.main
 colors.info = colors.beaver

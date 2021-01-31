@@ -10,7 +10,7 @@ describe("game.ui.widgets.panel", function()
     local p = panel {
       title = "Some Place"
     }
-    assert.equals("Some Place", p:find_by_id("panel_title").text)
+    assert.equals("Some Place", p:findByID("panel_title").text)
   end)
 
   it("renders out specified child", function()
@@ -20,6 +20,6 @@ describe("game.ui.widgets.panel", function()
       contents = w
     }
 
-    assert.equals(w, p:find_by_id("panel_contents")[1])
+    assert.equals(w, p:findByID("panel_contents")[1])
   end)
 end)

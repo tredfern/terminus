@@ -21,7 +21,7 @@ function generator.create_node(x, y, width, height)
       if self.room then return self.room end
 
       if self.left and self.right then
-        if math_ext.coinflip() then
+        if math_ext.coinFlip() then
           return self.left:pick_room()
         else
           return self.right:pick_room()

@@ -8,7 +8,7 @@ describe("game.store", function()
     local store = require "game.store"
     assert.is_table(store)
     assert.is_function(store.dispatch)
-    assert.is_table(store.get_state())
+    assert.is_table(store.getState())
   end)
 
   it("can reset the store to the start state", function()

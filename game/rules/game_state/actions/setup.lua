@@ -3,32 +3,32 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local character = require "game.rules.character"
+local Character = require "game.rules.character"
 local map = require "game.rules.map"
 local tables = require "moonpie.tables"
-local message_log = require "game.rules.message_log"
+local MessageLog = require "game.rules.message_log"
 
 return function()
-  return function(dispatch, get_state)
+  return function(dispatch, getState)
     dispatch(map.actions.set(
       map.generators.dungeon.generate(50, 50)
     ))
-    local rooms = map.selectors.get_rooms(get_state())
+    local rooms = map.selectors.getRooms(getState())
 
-    local player_start_room = tables.pick_random(rooms)
+    local playerStartRoom = tables.pickRandom(rooms)
 
-    dispatch(character.actions.add(
-      character.create {
-        x = player_start_room.x + math.floor(player_start_room.width / 2),
-        y = player_start_room.y + math.floor(player_start_room.height / 2),
+    dispatch(Character.actions.add(
+      Character.create {
+        x = playerStartRoom.x + math.floor(playerStartRoom.width / 2),
+        y = playerStartRoom.y + math.floor(playerStartRoom.height / 2),
         is_player_controlled = true
       }
     ))
 
     for _ = 1,8 do
-      local r = tables.pick_random(rooms)
-      dispatch(character.actions.add(
-        character.create {
+      local r = tables.pickRandom(rooms)
+      dispatch(Character.actions.add(
+        Character.create {
           is_enemy = true,
           x = r.x + math.floor(r.width / 2),
           y = r.y + math.floor(r.height / 2),
@@ -36,7 +36,7 @@ return function()
       ))
     end
 
-    dispatch(message_log.actions.add(
+    dispatch(MessageLog.actions.add(
       "Welcome to the jungle!"
     ))
   end

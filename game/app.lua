@@ -29,12 +29,12 @@ function app.quit()
   love.event.quit()
 end
 
-function app.game_menu()
+function app.gameMenu()
   local t = require("game.ui.widgets.game_menu")
   moonpie.render("modal", t())
 end
 
-function app.new_game()
+function app.newGame()
   store.dispatch(game_state.actions.setup())
   local create_character = require "game.ui.screens.create_character"
   app.render(create_character())
@@ -45,5 +45,5 @@ function app.combat()
   app.render(combat())
 end
 
-moonpie.keyboard.hot_keys["escape"] = app.game_menu
+moonpie.keyboard:hotkey("escape", app.gameMenu)
 return app

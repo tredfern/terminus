@@ -14,7 +14,7 @@ describe("game.rules.game_state.actions.setup", function()
     captured_actions[#captured_actions + 1] = action
   end)
 
-  local get_state = function()
+  local getState = function()
     return {
       map = {
         rooms = {
@@ -28,7 +28,7 @@ describe("game.rules.game_state.actions.setup", function()
     captured_actions = {}
 
     local s = setup()
-    s(dispatch_spy, get_state)
+    s(dispatch_spy, getState)
   end)
 
   it("dispatch create character action for player character", function()

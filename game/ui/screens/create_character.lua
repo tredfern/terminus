@@ -36,7 +36,7 @@ local create_character = components("create_character", function(props)
             caption = "Done",
             style = "align-right",
             click = function()
-              store.dispatch(character.actions.set_name(
+              store.dispatch(character.actions.setName(
                 edit_character,
                 character_name:get_text()
               ))
@@ -47,13 +47,13 @@ local create_character = components("create_character", function(props)
       }
     },
     mounted = function()
-      character_name:set_focus()
+      character_name:setFocus()
     end
   }
 end)
 
 return connect(create_character, function(state)
   return {
-    character = character.selectors.get_player(state)
+    character = character.selectors.getPlayer(state)
   }
 end)

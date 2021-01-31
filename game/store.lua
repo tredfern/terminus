@@ -8,7 +8,7 @@ local combine_reducers = require "moonpie.redux.combine_reducers"
 
 
 store.reset = function()
-  store.create_store(
+  store.createStore(
     combine_reducers {
       camera = require "game.rules.camera.reducer",
       characters = require "game.rules.character.reducer",

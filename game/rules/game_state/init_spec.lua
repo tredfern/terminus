@@ -11,6 +11,6 @@ describe("game.rules.game_state", function()
   end)
 
   it("has an action to end the game", function()
-    assert.not_nil(game_state.actions.game_over)
+    assert.not_nil(game_state.actions.gameOver)
   end)
 end)

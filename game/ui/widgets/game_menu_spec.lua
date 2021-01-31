@@ -4,36 +4,36 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.ui.widgets.game_menu", function()
-  local game_menu = require "game.ui.widgets.game_menu"
+  local gameMenu = require "game.ui.widgets.game_menu"
   local app = require "game.app"
 
 
   it("instantiates a component", function()
-    assert.not_nil(game_menu())
+    assert.not_nil(gameMenu())
   end)
 
   it("shows as a modal", function()
-    assert.equals("modal", game_menu().target_layer)
+    assert.equals("modal", gameMenu().target_layer)
   end)
 
   it("can redirect to title screen", function()
     local s = spy.on(app, "title")
-    local menu = game_menu()
-    menu:find_by_id("btn_title_screen"):click()
+    local menu = gameMenu()
+    menu:findByID("btn_title_screen"):click()
     assert.spy(s).was_called()
-    assert.is_true(menu:needs_removal())
+    assert.is_true(menu:needsRemoval())
   end)
 
   it("can exit the game", function()
     local s = spy.on(app, "quit")
-    local menu = game_menu()
-    menu:find_by_id("btn_quit"):click()
+    local menu = gameMenu()
+    menu:findByID("btn_quit"):click()
     assert.spy(s).was_called()
   end)
 
   it("can close the menu", function()
-    local menu = game_menu()
-    menu:find_by_id("btn_resume"):click()
-    assert.is_true(menu:needs_removal())
+    local menu = gameMenu()
+    menu:findByID("btn_resume"):click()
+    assert.is_true(menu:needsRemoval())
   end)
 end)

@@ -8,13 +8,13 @@ local tables = require "moonpie.tables"
 
 local mock_reducer = function(state, action)
   return tables.assign({}, state, {
-    actions = tables.concat_array(state.actions, { action })
+    actions = tables.concatArray(state.actions, { action })
   })
 end
 
 function store.get_action_groups()
-  local actions = store.get_state().actions or {}
-  return moonpie.utility.tables.group_by(actions, function(a) return a.type end)
+  local actions = store.getState().actions or {}
+  return moonpie.utility.tables.groupBy(actions, function(a) return a.type end)
 end
 
 function store.get_actions(type)
@@ -23,6 +23,6 @@ function store.get_actions(type)
 end
 
 return function(stub_state)
-  store.create_store(mock_reducer, stub_state)
+  store.createStore(mock_reducer, stub_state)
   return store
 end

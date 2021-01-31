@@ -13,10 +13,10 @@ local main_menu = components("main_menu", function()
     title = "terminus",
     contents = {
       components.button {
-        id = "new_game_button",
+        id = "newGame_button",
         style = "main_menu_button",
         caption = "New Campaign",
-        click = app.new_game
+        click = app.newGame
       },
       components.button { style = "main_menu_button", caption = "Options" },
       components.button {

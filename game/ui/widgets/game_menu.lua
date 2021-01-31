@@ -7,9 +7,9 @@ local components = require "moonpie.ui.components"
 local panel = require "game.ui.widgets.panel"
 local app = require "game.app"
 
-return components("game_menu", function()
-  local game_menu_instance
-  game_menu_instance = {
+return components("gameMenu", function()
+  local gameMenu_instance
+  gameMenu_instance = {
     target_layer = "modal",
     style = "align-center align-middle",
     panel {
@@ -20,14 +20,14 @@ return components("game_menu", function()
           id = "btn_resume",
           style = "main_menu_button",
           caption = "Resume",
-          click = function() game_menu_instance:remove() end
+          click = function() gameMenu_instance:remove() end
         },
         components.button {
           id = "btn_title_screen",
           style = "main_menu_button",
           caption = "Abandon Campaign",
           click = function()
-            game_menu_instance:remove()
+            gameMenu_instance:remove()
             app.title()
           end
         },
@@ -41,5 +41,5 @@ return components("game_menu", function()
       }
     }
   }
-  return game_menu_instance
+  return gameMenu_instance
 end)
