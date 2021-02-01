@@ -32,3 +32,13 @@ I'm focusing my inspiration on games from the past. Certainly there will be idea
 **[Everything Epyx](https://en.wikipedia.org/wiki/Epyx)** - I grew up looking at everything Epyx released. I loved their motto even as a kid of combining strategy with action. Some of their games that are influencing my thinking on this project are, Temple of Apshai Trilogy, Dragonriders of Pern (I'm serious, I played that game a ton),
 
 An interesting tidbit I learned from research is that Epyx did the port of Rogue to non-Unix platforms.
+
+### Contributing / Building from Source
+
+Terminus runs in Love2D and you will need to download the appropriate version for your system first - [Download Love2D](https://love2d.org/).
+```
+$ git clone git@github.com:tredfern/terminus.git
+$ cd terminus
+$ git submodule update --init
+$ path/to/love .
+```
