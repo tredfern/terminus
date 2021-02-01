@@ -7,6 +7,13 @@
 
 # Terminus Game Design
 
+> ### Table of Contents
+> - [Concept](#Concept)
+> - [Inspiration](#Inspiration)
+> - [Creation](#Creation)
+> - [Risks](#Risks)
+> - [Milestones](#Milestones)
+
 ## Concept
 
 An RPG based game/system set in a sci-fi universe. Player is one of a small group of soldiers that
@@ -20,22 +27,36 @@ alternate routes. Or maybe a more skill focus that allows the character more abi
 ## Inspiration
 
 **What are some similar projects / games?**
+
 [Force 7](https://www.mobygames.com/game/c64/force-7) - There was this game on the C64 where you had a crew and needed to eliminate all these aliens in various rooms.
+
 [Cogmind](https://www.gridsagegames.com/cogmind/) - similar genre and also sci-fi. Different play styles available and need to keep alert level down.
+
 [Dungeon of the Endless](https://www.mergegames.com/dungeon-of-the-endless) - Random generated dungeon of rooms where you are trying to get to the top level
+
 [Rimworld](https://rimworldgame.com/) - If the game evolves into more of a base-building mechanic
+
 [Shadowgrounds](https://shadowgroundsgame.com/) - Aliens attacking a base and working through levels to solve/protect it
+
 [Metamorphisis Alpha](https://www.drivethrurpg.com/product/58985/Metamorphosis-Alpha-4th-Edition) - Never played this, but the general story is similar and a strong basis for inspiration.
+
 [Traveller](https://en.wikipedia.org/wiki/Traveller_%28role-playing_game%29) - Never played this, character design is interesting. Generally seen as a very open-ended RPG system in a sci-fi world that can help inspire how to face certain design decisions for the underlying mechanics.
 
 
+
 **What stories, pictures, books, songs, art, or people come to mind when thinking about this game**
+
 _Orphans in the Sky_ - I read this book as a child and remember it still. 
+
 _Aliens_ - Both from Newt's survival session on her own to the marines fighting their way in
+
 _Diehard_ - Facing off against an invading force on your own. Identifying your enemy and their intentions
+
 _Lost in Space_ - Traveling to a new world, a catastrophe happens and people band together to survive
 
 **Doodle a picture/sketch for the project**
+
+TODO
 
 **What is FUN about this project? This can be fun for you to do, and/or fun to play!**
 - A game with a clear milestones to completion!
@@ -57,30 +78,33 @@ Potential deeper themes:
 * However, action-based game would allow the chaos of the situation to feel more present
 
 **Put together a color palette that fits your mood for this project**
-[First palette idea](https://coolors.co/0a2239-132e32-21a5d0-ac9281-fbfbf2-f0e100-c42021-2c6e49) includes colors for success/warning/danger text
+
+* [First palette idea](https://coolors.co/0a2239-132e32-21a5d0-ac9281-fbfbf2-f0e100-c42021-2c6e49) includes colors for success/warning/danger text
 
 **What emotions should the game invoke?**
-_Tension_: Am I going to make it out of this room?
-_Success_: I managed to save those people before fire devoured the room they were trapped in
-_Discovery_: Ohhh, that's an interesting solution. If I vent out the room, the fires go out. Or, wait a second, you are telling me that they are the bad guy!?
-_Failure is learning_: I died again! But I want to try once more because I discovered a new idea
+* _Tension_: Am I going to make it out of this room?
+* _Success_: I managed to save those people before fire devoured the room they were trapped in
+* _Discovery_: Ohhh, that's an interesting solution. If I vent out the room, the fires go out. Or, wait a second, you are telling me that they are the bad guy!?
+* _Failure is learning_: I died again! But I want to try once more because I discovered a new idea
 
 **Is there a world? Describe how it works**
+
 Humans have reached the point where we are ready to attempt to colonize the stars! We are advanced enough to produce many incredible technologies, but FTL travel and communication does not exist. You want a year? **2342** (I've learned never put a future date that you can live to see for your story)
 
 The world for this game will be encapsulated within a space ship. 
-_Colony Ship_: This is a STL colony ship that is able to freeze people and awaken them reliably. Ship AI using robots where the stewards during the journey. 
-_Gravity_: There is something that allows gravity to work as normal for the purposes of this game. Maybe it is artificially generated, maybe the ship is a large rotating donut.
-_Aliens_: When the humans had set forth, they had not received any communication or evidence of alien life
-_Artificial Intelligence_: Computers are extremely advanced and far surpass the response capabilities of humans in nearly all situations. But the only emotions they have developed are those that have been created by the human algorithms that seeded AI programs. AI's are not megalomaniacs bent on controlling the world, but they are precise and calculating and not impacted by moral dilemmas.
-_Robots_: The ship AI has the capability to create new robots from various facilities about the ship. Most robots are geared for maintenance functionality and not combat. Majority of robots need to stay in contact with the Ship AI in order to function. A few advanced and self-sufficient robots are on the ship to monitor the situation in case anything seems to be off.
-_Medical_: Medical technology is extremely advanced. Genetic modification is normal for all species at this point, and was necessary following the climate collapse of 2047. This reduced the amount of death from disease and genetic flaws, but genetics is too complex to allow creating "perfect" people and variety is the best defense to an ever evolving universe.
-_Military_: People still beat each other up. Since they are unaware of what danger await them in the universe a significant portion of the colony ship were military trained personnel.
+* _Colony Ship_: This is a STL colony ship that is able to freeze people and awaken them reliably. Ship AI using robots where the stewards during the journey. 
+* _Gravity_: There is something that allows gravity to work as normal for the purposes of this game. Maybe it is artificially generated, maybe the ship is a large rotating donut.
+* _Aliens_: When the humans had set forth, they had not received any communication or evidence of alien life
+* _Artificial Intelligence_: Computers are extremely advanced and far surpass the response capabilities of humans in nearly all situations. But the only emotions they have developed are those that have been created by the human algorithms that seeded AI programs. AI's are not megalomaniacs bent on controlling the world, but they are precise and calculating and not impacted by moral dilemmas.
+* _Robots_: The ship AI has the capability to create new robots from various facilities about the ship. Most robots are geared for maintenance functionality and not combat. Majority of robots need to stay in contact with the Ship AI in order to function. A few advanced and self-sufficient robots are on the ship to monitor the situation in case anything seems to be off.
+* _Medical_: Medical technology is extremely advanced. Genetic modification is normal for all species at this point, and was necessary following the climate collapse of 2047. This reduced the amount of death from disease and genetic flaws, but genetics is too complex to allow creating "perfect" people and variety is the best defense to an ever evolving universe.
+* _Military_: People still beat each other up. Since they are unaware of what danger await them in the universe a significant portion of the colony ship were military trained personnel.
 
 
 **Is there a story? How does it go? What is the perspective? What arc does it follow?**
-[Kurt Vonnegut's 5 story arcs](http://msmcclure.com/pdf/Five%20Story%20Arcs.pdf)
-[More story arc information](https://nofilmschool.com/2016/11/emotional-arcs-6-storytelling-kurt-vonnegut)
+
+* [Kurt Vonnegut's 5 story arcs](http://msmcclure.com/pdf/Five%20Story%20Arcs.pdf)
+* [More story arc information](https://nofilmschool.com/2016/11/emotional-arcs-6-storytelling-kurt-vonnegut)
 
 Arc of the story is likely the "Man in a Hole", or possibly "From Bad to Worse"
 
@@ -124,10 +148,12 @@ Replay-ability will be important for this game, which might sabotage some of the
   - Negative feedback from early releases results in what is the point thinking
 
 **How big does the project feel?**
-It feels big. There is art, an RPG mechanics system that needs to be developed, a story. But it also feels achievable in that the basic arc could come together relatively quickly and it could just continue to get developed.
+
+It feels big. Like, wow this is really big, big. There is art, an RPG mechanics system that needs to be developed, a story. But it also feels achievable in that the basic arc could come together relatively quickly and it could just continue to get developed.
 
 
 **What is SCARY about this project?**
+
 - Graphics for the game are intimidating. What will look good and fit the vibe?
 - Story telling - Roguelikes sometimes drop lots of text, but I find it hard to read. I assume others would feel similar. How to tell a story through the basic images available?
 
@@ -154,23 +180,25 @@ A game with:
 - A couple of different environments
 
 
-#### Key Milestones
-##### 0. Basic foundations
+## Key Milestones
+### 0. Basic foundations <-- I am Here -->
 This is some next steps to lay good foundations depending on what comes up next
   - Load/Save game: Always a tricky thing to work out, building this in early should be easier than deferring to the last moment. Use a save game slot system
   - Options screen: Simple ability to set resolution for game, change key maps. This is to prevent anything being too rigid to change later
-  - In game screens:
-    - Show character details
+  - Character Details Screen: Something in game to pop-up a display over the map
 
-##### 1. Simple never ending roguelike
+### 1. Simple never ending roguelike
 This should focus on moving the character around an testing the combat system
+  - Inventory to equip melee and ranged weapon
   - Create enemy spawners that trigger new enemies whenever rooms are empty
   - Combat has some strategic feel
-  - Inventory to equip melee and ranged weapon
+    - Ranged Combat
+    - Melee Combat
   - Character generation gives some ability scores and combat skills
   - AI that charges the player down
+  - Some ability to heal character
 
-##### 2. Expanding the map system
+### 2. Expanding the map system
 Expanding the maps slightly
   - Ladders that go up/down. When returning to a previous level the level should look like it did when you left
   - Introduce skill checks like a computer terminal that opens a door, 
@@ -179,7 +207,7 @@ Expanding the maps slightly
   - "Static" rooms that could be used for key plot points
   - Map zoom out display
 
-##### 3. Improved AI
+### 3. Improved AI
   - Patrolling AI that moves from room to room 
   - Guard AI that stays in room until the player enters
   - Repair AI that fixes up enemy units that are damaged
@@ -188,7 +216,7 @@ Expanding the maps slightly
     - AI Holding rooms that are cleared
     - AI Follow player and assist in battle
 
-##### 4. Story Events
+### 4. Story Events
   - Introduce quests
   - Messages that can happen describing what is going on
   - Intro screen setting up the scene
