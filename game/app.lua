@@ -40,6 +40,11 @@ function app.newGame()
   app.render(create_character())
 end
 
+function app.options(returnScreen)
+  local options = require "game.ui.screens.options"
+  app.render(options({ returnScreen = returnScreen }))
+end
+
 function app.combat()
   local combat = require "game.ui.screens.combat"
   app.render(combat())

@@ -29,4 +29,11 @@ describe("game.app", function()
       assert.not_nil(moonpie.ui.current.findByID("combat_screen"))
     end)
   end)
+
+  it("can show an option screen with the right return screen", function()
+    local returnScreen = function() end
+    app.options(returnScreen)
+    assert.not_nil(moonpie.ui.current.findByID("options_screen"))
+    assert.equals(returnScreen, moonpie.ui.current.findByID("close_button").click)
+  end)
 end)

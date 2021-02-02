@@ -23,6 +23,34 @@ styles.combat_map = {
   height = "100%"
 }
 
+styles.full_screen_panel = {
+  color = "light_shade",
+  borderColor = "light_accent",
+  margin = 5,
+  width = "100%",
+  height = "100%"
+}
+
+styles.full_screen_panel_title = {
+  backgroundColor = "background",
+  fontName = "headline",
+  fontSize = 24,
+  margin = { left = 25 },
+  padding = { left = 6, right = 6, top = 2, bottom = 2 }
+}
+
+styles.full_screen_panel_contents = {
+  color = "text",
+  margin = { left = 8, right = 8, bottom = 8 },
+  padding = 8,
+  cornerRadiusX = 16,
+  cornerRadiusY = 16,
+  backgroundColor = "background",
+  fontName = "default",
+  fontSize = 14,
+  height = "95%"
+}
+
 styles["main_screen"] = {
   width = "75%"
 }

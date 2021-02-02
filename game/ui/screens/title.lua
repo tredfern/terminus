@@ -18,7 +18,11 @@ local main_menu = components("main_menu", function()
         caption = "New Campaign",
         click = app.newGame
       },
-      components.button { style = "main_menu_button", caption = "Options" },
+      components.button {
+        id = "options_button",
+        style = "main_menu_button",
+        caption = "Options",
+        click = function() app.options(app.title) end },
       components.button {
         style = "main_menu_button",
         caption = "Exit",

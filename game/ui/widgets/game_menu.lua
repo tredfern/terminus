@@ -31,7 +31,15 @@ return components("gameMenu", function()
             app.title()
           end
         },
-        components.button { style = "main_menu_button", caption = "Options" },
+        components.button {
+          id = "btnOptions",
+          style = "main_menu_button",
+          caption = "Options",
+          click = function()
+            gameMenu_instance:remove()
+            app.options(app.combat)
+          end
+        },
         components.button {
           id = "btn_quit",
           style = "main_menu_button",
