@@ -32,7 +32,7 @@ describe("game.ui.screens.options", function()
     local btnApply = screen:findByID("btnApply")
     btnApply:click()
 
-    assert.spy(love.window.setMode).was.called_with(640, 480)
+    assert.spy(love.window.setMode).was.called_with(640, 480, { fullscreen = false })
   end)
 
   it("tells moonpie to resize the window", function()

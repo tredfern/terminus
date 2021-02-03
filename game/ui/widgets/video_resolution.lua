@@ -27,18 +27,33 @@ local VideoResolution = Components("video_resolution", function()
     modeIndex = index,
     resolutionWidth = curWidth,
     resolutionHeight = curHeight,
+    fullScreen = false,
     getResolution = function(self)
       return { width = self.resolutionWidth, height = self.resolutionHeight }
     end,
+    getFullScreen = function(self)
+      return self.fullScreen
+    end,
     render = function(self)
       return {
-        Components.button { id = "btnPrev", caption = "<<-",
-          click = function() updateResolution(self.modeIndex + 1) end},
-        Components.text {
-          id = "displayText",
-          text = string.format("%d x %d", self.resolutionWidth, self.resolutionHeight) },
-        Components.button { id = "btnNext", caption = "->>",
-          click = function() updateResolution(self.modeIndex - 1) end },
+        {
+          Components.button { id = "btnPrev", caption = "<<-",
+            click = function() updateResolution(self.modeIndex + 1) end},
+          Components.text {
+            id = "displayText",
+            text = string.format("%d x %d", self.resolutionWidth, self.resolutionHeight) },
+          Components.button { id = "btnNext", caption = "->>",
+            click = function() updateResolution(self.modeIndex - 1) end },
+        },
+        {
+          Components.checkbox { id = "chkFullScreen",
+            caption = "Full Screen",
+            value = self.fullScreen,
+            click = function()
+              component:update { fullScreen = not component.fullScreen }
+            end
+          }
+        }
       }
     end
   }

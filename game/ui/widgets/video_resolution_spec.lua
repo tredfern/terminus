@@ -41,4 +41,13 @@ describe("game.ui.widgets.video_resolution", function()
     assert.equals(600, subject:getResolution().height)
   end)
 
+  it("has an option for full screen", function()
+    local subject = VideoResolution()
+    local render = moonpie.test_render(subject)
+    local fullScreen = render:findByID("chkFullScreen")
+
+    fullScreen:click()
+    assert.is_true(subject:getFullScreen())
+  end)
+
 end)

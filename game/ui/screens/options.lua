@@ -21,7 +21,8 @@ local OptionsScreen = Components("options_screen", function(props)
           caption = "Apply",
           click = function()
             local res = videoResolution:getResolution()
-            love.window.setMode(res.width, res.height)
+            local fullScreen = videoResolution:getFullScreen()
+            love.window.setMode(res.width, res.height, { fullscreen = fullScreen })
             moonpie.resize(res.width, res.height)
           end
         },
