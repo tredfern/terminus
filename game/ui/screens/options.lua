@@ -9,6 +9,7 @@ local VideoResolution = require "game.ui.widgets.video_resolution"
 
 local OptionsScreen = Components("options_screen", function(props)
   local videoResolution = VideoResolution { id = "videoResolution" }
+
   return {
     id = "options_screen",
     FullScreenPanel {
