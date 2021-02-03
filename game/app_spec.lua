@@ -34,6 +34,6 @@ describe("game.app", function()
     local returnScreen = function() end
     app.options(returnScreen)
     assert.not_nil(moonpie.ui.current.findByID("options_screen"))
-    assert.equals(returnScreen, moonpie.ui.current.findByID("close_button").click)
+    assert.equals(returnScreen, moonpie.ui.current.findByID("btnClose").click)
   end)
 end)
