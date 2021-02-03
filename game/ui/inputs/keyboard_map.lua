@@ -50,6 +50,10 @@ keySettings.combatMap = {
   ["shift+g"] = function()
     local Settings = require "game.settings"
     store.dispatch(Settings.actions.toggleOption("show_grid_lines"))
+  end,
+  ["tab"] = function()
+    local app = require "game.app"
+    app.characterDetails()
   end
 
 }

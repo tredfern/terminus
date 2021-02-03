@@ -31,6 +31,13 @@ describe("game.ui.inputs.keyboard", function()
       assert.spy(Settings.actions.toggleOption).was.called_with("show_grid_lines")
     end)
 
+    it("can show the character detail screen", function()
+      local app = require "game.app"
+      stub(app, "characterDetails")
+      key_simulator:keyPressed("tab")
+      assert.spy(app.characterDetails).was.called()
+    end)
+
     describe("character movement", function()
       local player_character
 

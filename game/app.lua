@@ -50,5 +50,10 @@ function app.combat()
   app.render(combat())
 end
 
+function app.characterDetails()
+  local CharacterDetails = require "game.ui.screens.character_details"
+  app.render(CharacterDetails())
+end
+
 moonpie.keyboard:hotkey("escape", app.gameMenu)
 return app
