@@ -19,4 +19,13 @@ describe("game.serializer", function()
     serializer.save("file/path", dataToSave)
     assert.spy(love.filesystem.write).was.called()
   end)
+
+  it("can deserialize data from a file", function()
+    local binser = require "binser"
+    local fileData = binser.serialize("hello, world")
+    MockLove.mock(love.filesystem, "read", spy.new(function() return fileData end))
+    assert.equals("hello, world", serializer.load("file/path"))
+    assert.spy(love.filesystem.read).was.called_with("file/path")
+
+  end)
 end)

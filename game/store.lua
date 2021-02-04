@@ -6,17 +6,22 @@
 local store = require "moonpie.redux.store"
 local combine_reducers = require "moonpie.redux.combine_reducers"
 
+local function getReducers()
+  return combine_reducers {
+    camera = require "game.ui.camera.reducer",
+    characters = require "game.rules.character.reducer",
+    map = require "game.rules.map.reducer",
+    message_log = require "game.rules.message_log.reducer",
+    settings = require "game.settings.reducer",
+    turn = require "game.rules.turn.reducer"
+  }
+end
 
-store.reset = function()
+store.reset = function(state)
   store.createStore(
-    combine_reducers {
-      camera = require "game.ui.camera.reducer",
-      characters = require "game.rules.character.reducer",
-      map = require "game.rules.map.reducer",
-      message_log = require "game.rules.message_log.reducer",
-      settings = require "game.settings.reducer",
-      turn = require "game.rules.turn.reducer"
-  })
+    getReducers(),
+    state
+  )
 end
 
 store.reset()

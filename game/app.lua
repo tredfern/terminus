@@ -7,6 +7,7 @@ require "assets.stylesheet"
 local store = require "game.store"
 local game_state = require "game.rules.game_state"
 local app = {}
+local saveGameName = "game.dat"
 
 function app.load()
   app.title()
@@ -55,9 +56,17 @@ function app.characterDetails()
   app.render(CharacterDetails())
 end
 
+function app.continue()
+  local serializer = require "game.serializer"
+  local loadSave = serializer.load(saveGameName)
+
+  store.reset(loadSave)
+  app.combat()
+end
+
 function app.saveGame()
   local serializer = require "game.serializer"
-  serializer.save("game.dat", store.getState())
+  serializer.save(saveGameName, store.getState())
 end
 
 moonpie.keyboard:hotkey("escape", app.gameMenu)

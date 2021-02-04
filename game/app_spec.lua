@@ -41,4 +41,32 @@ describe("game.app", function()
     app.characterDetails()
     assert.not_nil(moonpie.ui.current.findByID("character_details_screen"))
   end)
+
+  describe("continue save game", function()
+    it("retrieves save game data from the serializer", function()
+      local serializer = require "game.serializer"
+      mock(serializer, "load")
+
+      app.continue()
+      assert.spy(serializer.load).was.called_with("game.dat")
+    end)
+
+    it("sets the store state to the loaded state", function()
+      local serializer = require "game.serializer"
+
+      local state = {}
+
+      local old = serializer.load
+      serializer.load = function() return state end
+
+      local store = require "game.store"
+      mock(store, "reset")
+
+      stub(app, "combat")
+      app.continue()
+      app.combat:revert()
+      assert.spy(store.reset).was.called_with(state)
+      serializer.load = old
+    end)
+  end)
 end)
