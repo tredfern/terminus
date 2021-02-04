@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local character = require "game.rules.character.character"
+local helper = require "game.rules.character.helper"
 
 
 return {
@@ -16,7 +16,7 @@ return {
     setPosition = require "game.rules.character.actions.set_position",
     types = require "game.rules.character.actions.types"
   },
-  create = function(props) return character:new(props) end,
+  create = helper.newCharacter,
   reducer = require "game.rules.character.reducer",
   selectors = {
     getAll = require "game.rules.character.selectors.get_all",

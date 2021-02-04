@@ -26,7 +26,7 @@ return function(player_action)
     if dead then
       local playerDied = false
       for _, e in ipairs(dead) do
-        playerDied = playerDied or e.is_player_controlled
+        playerDied = playerDied or e.isPlayerControlled
         dispatch(Character.actions.remove(e))
       end
 

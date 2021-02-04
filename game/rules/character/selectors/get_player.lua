@@ -9,7 +9,7 @@ return function(state)
   assert(state.characters)
   return tables.findFirst(state.characters,
     function(c)
-      return c.is_player_controlled
+      return c.isPlayerControlled
     end
   )
 end

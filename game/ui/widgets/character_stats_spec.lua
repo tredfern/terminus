@@ -10,7 +10,7 @@ describe("game.ui.widgets.character_stats", function()
 
   before_each(function()
     local character = {
-      is_player_controlled = true,
+      isPlayerControlled = true,
       name = "Foo",
       health = 15
     }

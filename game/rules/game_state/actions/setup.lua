@@ -21,7 +21,7 @@ return function()
       Character.create {
         x = playerStartRoom.x + math.floor(playerStartRoom.width / 2),
         y = playerStartRoom.y + math.floor(playerStartRoom.height / 2),
-        is_player_controlled = true
+        isPlayerControlled = true
       }
     ))
 
@@ -29,7 +29,7 @@ return function()
       local r = tables.pickRandom(rooms)
       dispatch(Character.actions.add(
         Character.create {
-          is_enemy = true,
+          isEnemy = true,
           x = r.x + math.floor(r.width / 2),
           y = r.y + math.floor(r.height / 2),
         }

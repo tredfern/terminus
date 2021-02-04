@@ -7,7 +7,7 @@ describe("game.rules.character.selectors.get_enemies", function()
   local get_enemies = require "game.rules.character.selectors.get_enemies"
 
   it("returns all non-player characters", function()
-    local p = { is_player_controlled = true }
+    local p = { isPlayerControlled = true }
     local e1, e2, e3 = {}, {}, {}
     local state = {
       characters = {

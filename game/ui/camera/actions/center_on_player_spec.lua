@@ -11,7 +11,7 @@ describe("game.ui.camera.actions.center_on_player", function()
   it("centers on the player location", function()
     mock_store({
       characters = {
-        { is_player_controlled = true, x = 6, y = 19 }
+        { isPlayerControlled = true, x = 6, y = 19 }
       }
     })
 

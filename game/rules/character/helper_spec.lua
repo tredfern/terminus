@@ -4,49 +4,42 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.character.character", function()
-  local character = require "game.rules.character.character"
+  local characterHelper = require "game.rules.character.helper"
 
-  it("instantiates a character class", function()
-    local c = character()
+  it("instantiates a new character", function()
+    local c = characterHelper.newCharacter()
     assert.equals(0, c.x)
     assert.equals(0, c.y)
   end)
 
-  it("can set the position", function()
-    local c = character()
-    c:set_position(20, 28)
-    assert.equals(20, c.x)
-    assert.equals(28, c.y)
-  end)
-
   it("can be player controlled", function()
-    local c = character { is_player_controlled = true }
-    assert.is_true(c.is_player_controlled)
+    local c = characterHelper.newCharacter { isPlayerControlled = true }
+    assert.is_true(c.isPlayerControlled)
   end)
 
   it("can be identified as an enemy", function()
-    local c = character { is_enemy = true }
-    assert.is_true(c.is_enemy)
+    local c = characterHelper.newCharacter { isEnemy = true }
+    assert.is_true(c.isEnemy)
   end)
 
   it("can initialize it's position", function()
-    local c = character { x = 142, y = 192 }
+    local c = characterHelper.newCharacter { x = 142, y = 192 }
     assert.equals(142, c.x)
     assert.equals(192, c.y)
   end)
 
   it("has a health of 10 to start", function()
-    local c = character {}
+    local c = characterHelper.newCharacter {}
     assert.equals(10, c.health)
   end)
 
   it("has a defense of 50", function()
-    local c = character {}
+    local c = characterHelper.newCharacter {}
     assert.equals(50, c.defense)
   end)
 
   it("has an attack of 50", function()
-    local c= character {}
+    local c= characterHelper.newCharacter {}
     assert.equals(50, c.attack)
   end)
 end)

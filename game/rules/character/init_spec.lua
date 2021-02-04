@@ -8,7 +8,7 @@ describe("game.rules.character", function()
 
   it("has an entity that can be instantiated", function()
     local c = character.create {
-      is_player_controlled = true,
+      isPlayerControlled = true,
       x = 3,
       y = 4
     }

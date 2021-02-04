@@ -6,6 +6,6 @@
 local tables = require "moonpie.tables"
 return function(state)
   return tables.select(state.characters, function(c)
-    return not c.is_player_controlled
+    return not c.isPlayerControlled
   end)
 end

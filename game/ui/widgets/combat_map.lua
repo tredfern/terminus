@@ -31,8 +31,8 @@ local function drawGrid(tilesWide, tilesHigh)
   end
 end
 
-local function draw_character(x, y, is_enemy)
-  if is_enemy then
+local function draw_character(x, y, isEnemy)
+  if isEnemy then
     love.graphics.setColor(colors.danger)
   else
     love.graphics.setColor(colors.success)
@@ -72,7 +72,7 @@ local combat_map = components("combat_map", function(props)
         draw_character(
           v.x - self.camera.x,
           v.y - self.camera.y,
-          v.is_enemy)
+          v.isEnemy)
       end
 
       if self.showGrid then

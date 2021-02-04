@@ -9,10 +9,10 @@ describe("game.rules.turn.actions.process", function()
   local mock_dispatch = require "mock_dispatch"
   local mock_store = require "mock_store"
 
-  local player = { x = 5, y = 3, is_player_controlled = true, health = 3 }
-  local enemy1 = { is_player_controlled = false, health = 2 }
-  local enemy2 = { is_player_controlled = false, health = 1 }
-  local enemy3 = { is_player_controlled = false, health = 0 }
+  local player = { x = 5, y = 3, isPlayerControlled = true, health = 3 }
+  local enemy1 = { isPlayerControlled = false, health = 2 }
+  local enemy2 = { isPlayerControlled = false, health = 1 }
+  local enemy3 = { isPlayerControlled = false, health = 0 }
   local cam = { x = 0, y = 0, width = 20, height = 40 }
 
   local store = require "moonpie.redux.store"

@@ -10,7 +10,7 @@ describe("game.ui.screens.character_details", function()
   before_each(function()
     mockStore {
       characters = {
-        { is_player_controlled = true, name = "My Name" }
+        { isPlayerControlled = true, name = "My Name" }
       }
     }
   end)

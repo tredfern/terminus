@@ -36,7 +36,7 @@ describe("game.rules.game_state.actions.setup", function()
       captured_actions,
       function(c) return
         c.type == character.actions.types.character_add and
-        c.payload.character.is_player_controlled
+        c.payload.character.isPlayerControlled
       end)
     )
   end)
@@ -46,7 +46,7 @@ describe("game.rules.game_state.actions.setup", function()
       captured_actions,
       function(c) return
         c.type == character.actions.types.character_add and
-        c.payload.character.is_enemy
+        c.payload.character.isEnemy
       end)
     )
   end)
