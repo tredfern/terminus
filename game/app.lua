@@ -55,5 +55,10 @@ function app.characterDetails()
   app.render(CharacterDetails())
 end
 
+function app.saveGame()
+  local serializer = require "game.serializer"
+  serializer.save("game.dat", store.getState())
+end
+
 moonpie.keyboard:hotkey("escape", app.gameMenu)
 return app

@@ -23,6 +23,14 @@ return components("gameMenu", function()
           click = function() gameMenu_instance:remove() end
         },
         components.button {
+          id = "btnSaveGame",
+          style = "main_menu_button",
+          caption = "Save Game",
+          click = function()
+            app.saveGame()
+          end
+        },
+        components.button {
           id = "btn_title_screen",
           style = "main_menu_button",
           caption = "Abandon Campaign",
