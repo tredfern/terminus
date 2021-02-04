@@ -26,6 +26,23 @@ describe("game.serializer", function()
     MockLove.mock(love.filesystem, "read", spy.new(function() return fileData end))
     assert.equals("hello, world", serializer.load("file/path"))
     assert.spy(love.filesystem.read).was.called_with("file/path")
+  end)
 
+  it("can serialize and deserialize a realistic looking store", function()
+    local character = require "game.rules.character"
+    local map = require "game.rules.map"
+
+    local state = {
+      characters = {
+        character.create(),
+        character.create(),
+        character.create()
+      },
+      map = map.create { width = 100, 200 }
+    }
+
+    local s = serializer.serialize(state)
+    local out = serializer.deserialize(s)[1]
+    assert.has_no_errors(function() out.map:get_terrain(30, 29) end)
   end)
 end)

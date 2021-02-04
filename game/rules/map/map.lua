@@ -8,6 +8,7 @@ local terrain = require "game.rules.map.terrain"
 local grid = require "moonpie.collections.grid"
 
 local map = {}
+map.defaultTerrain = terrain.blank
 
 function map:constructor(props)
   props = props or {}
@@ -22,7 +23,7 @@ function map:get_index(x, y)
 end
 
 function map:get_terrain(x, y)
-  return self.data:get(x, y) or terrain.blank
+  return self.data:get(x, y) or self.defaultTerrain
 end
 
 function map:set_terrain(x, y, v)
