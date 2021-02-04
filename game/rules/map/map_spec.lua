@@ -24,7 +24,7 @@ describe("game.rules.map.map", function()
 
   it("returns the terrain for a specific tile", function()
     local m = map:new { width = 320, height = 938 }
-    local t = m:get_terrain(4, 9)
+    local t = m:getTerrain(4, 9)
     assert.not_nil(t)
   end)
 
@@ -38,16 +38,16 @@ describe("game.rules.map.map", function()
     local m = map:new { width = 5, height = 5 }
     for x = 1, 5 do
       for y = 1, 5 do
-        m:set_terrain(x, y, "filled")
+        m:setTerrain(x, y, "filled")
       end
     end
 
-    assert.equals(terrain.blank, m:get_terrain(6, 3))
-    assert.equals(terrain.blank, m:get_terrain(3, 6))
-    assert.equals(terrain.blank, m:get_terrain(-1, 3))
-    assert.equals(terrain.blank, m:get_terrain(6, 53))
-    assert.equals(terrain.blank, m:get_terrain(0, 0))
-    assert.equals(terrain.blank, m:get_terrain(0, 3))
-    assert.equals(terrain.blank, m:get_terrain(1, 0))
+    assert.equals(terrain.blank, m:getTerrain(6, 3))
+    assert.equals(terrain.blank, m:getTerrain(3, 6))
+    assert.equals(terrain.blank, m:getTerrain(-1, 3))
+    assert.equals(terrain.blank, m:getTerrain(6, 53))
+    assert.equals(terrain.blank, m:getTerrain(0, 0))
+    assert.equals(terrain.blank, m:getTerrain(0, 3))
+    assert.equals(terrain.blank, m:getTerrain(1, 0))
   end)
 end)

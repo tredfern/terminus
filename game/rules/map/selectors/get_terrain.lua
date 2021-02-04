@@ -4,5 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return function(state, x, y)
-  return state.map:get_terrain(x, y)
+  return state.map:getTerrain(x, y)
 end

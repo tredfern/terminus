@@ -102,13 +102,13 @@ function generator.add_border_walls(map, node)
     generator.add_border_walls(map, node.right)
   else
     for x = 0, node.width - 1 do
-      map:set_terrain(node.x + x, node.y, terrain.boundary)
-      map:set_terrain(node.x + x, node.y + node.height, terrain.boundary)
+      map:setTerrain(node.x + x, node.y, terrain.boundary)
+      map:setTerrain(node.x + x, node.y + node.height, terrain.boundary)
     end
 
     for y = 0, node.height - 1 do
-      map:set_terrain(node.x, node.y + y, terrain.boundary)
-      map:set_terrain(node.x + node.width, node.y + y, terrain.boundary)
+      map:setTerrain(node.x, node.y + y, terrain.boundary)
+      map:setTerrain(node.x + node.width, node.y + y, terrain.boundary)
     end
   end
 end
@@ -125,7 +125,7 @@ function generator.add_rooms(map, node)
 
   for x = 0, node.room.width - 1 do
     for y = 0, node.room.height - 1 do
-      map:set_terrain(node.room.x + x, node.room.y + y, terrain.room)
+      map:setTerrain(node.room.x + x, node.room.y + y, terrain.room)
     end
   end
 end
@@ -155,8 +155,8 @@ function generator.build_corridor(map, start_x, start_y, end_x, end_y)
   local p = path.straight(start_x, start_y, end_x, end_y)
 
   for _, v in ipairs(p) do
-    if map:get_terrain(v.x, v.y) == terrain.blank then
-      map:set_terrain(v.x, v.y, terrain.corridor)
+    if map:getTerrain(v.x, v.y) == terrain.blank then
+      map:setTerrain(v.x, v.y, terrain.corridor)
     end
   end
 end

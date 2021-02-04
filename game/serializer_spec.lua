@@ -43,6 +43,6 @@ describe("game.serializer", function()
 
     local s = serializer.serialize(state)
     local out = serializer.deserialize(s)[1]
-    assert.has_no_errors(function() out.map:get_terrain(30, 29) end)
+    assert.has_no_errors(function() out.map:getTerrain(30, 29) end)
   end)
 end)

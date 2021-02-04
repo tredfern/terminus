@@ -18,15 +18,11 @@ function map:constructor(props)
   self.rooms = {}
 end
 
-function map:get_index(x, y)
-  return self.width * y + x
-end
-
-function map:get_terrain(x, y)
+function map:getTerrain(x, y)
   return self.data:get(x, y) or self.defaultTerrain
 end
 
-function map:set_terrain(x, y, v)
+function map:setTerrain(x, y, v)
   self.data:set(x, y, v)
 end
 

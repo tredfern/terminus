@@ -54,7 +54,7 @@ describe("game.ui.inputs.keyboard", function()
             player_character
           },
           map = {
-            get_terrain = function() return {} end
+            getTerrain = function() return {} end
           }
         })
       end)

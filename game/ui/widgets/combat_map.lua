@@ -64,7 +64,7 @@ local combat_map = components("combat_map", function(props)
           draw_tile(
             x - self.camera.x,
             y - self.camera.y,
-            self.map:get_terrain(x, y).color)
+            self.map:getTerrain(x, y).color)
         end
       end
 
