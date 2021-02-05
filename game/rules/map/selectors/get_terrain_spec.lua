@@ -4,12 +4,12 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.map.selectors.getTerrain", function()
-  local map = require "game.rules.map.map"
+  local mapHelper = require "game.rules.map.helper"
   local terrain = require "game.rules.map.terrain"
   local getTerrain = require "game.rules.map.selectors.get_terrain"
 
   it("returns terrain for a specific square", function()
-    local m = map:new { width = 100, height = 100 }
+    local m = mapHelper:new { width = 100, height = 100 }
     m:setTerrain(5, 9, terrain.grass)
     assert.equals(terrain.grass, getTerrain({ map = m }, 5, 9))
     assert.equals(terrain.blank, getTerrain({ map = m }, 150, 290))

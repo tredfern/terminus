@@ -3,17 +3,17 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.map.map", function()
-  local map = require "game.rules.map.map"
+describe("game.rules.map.helper", function()
+  local mapHelper = require "game.rules.map.helper"
 
   it("sets width and height to 0 if not provided", function()
-    local m = map:new()
+    local m = mapHelper:new()
     assert.equals(0, m.width)
     assert.equals(0, m.height)
   end)
 
   it("constructs a map with a width and height", function()
-    local m = map:new {
+    local m = mapHelper:new {
       width = 32,
       height = 938
     }
@@ -23,19 +23,19 @@ describe("game.rules.map.map", function()
   end)
 
   it("returns the terrain for a specific tile", function()
-    local m = map:new { width = 320, height = 938 }
+    local m = mapHelper:new { width = 320, height = 938 }
     local t = m:getTerrain(4, 9)
     assert.not_nil(t)
   end)
 
   it("has an empty room array to start", function()
-    local m = map:new { width = 200, height = 200 }
+    local m = mapHelper:new { width = 200, height = 200 }
     assert.not_nil(m.rooms)
   end)
 
   it("returns terrain.blank when requesting out of range", function()
     local terrain = require "game.rules.map.terrain"
-    local m = map:new { width = 5, height = 5 }
+    local m = mapHelper:new { width = 5, height = 5 }
     for x = 1, 5 do
       for y = 1, 5 do
         m:setTerrain(x, y, "filled")

@@ -82,8 +82,8 @@ function generator.create_rooms(node)
 end
 
 function generator.generate(width, height)
-  local map = require "game.rules.map.map"
-  local new_map = map:new { width = width, height = height }
+  local mapHelper = require "game.rules.map.helper"
+  local new_map = mapHelper:new { width = width, height = height }
 
   local root = generator.create_node(1, 1, new_map.width, new_map.height)
   generator.divide(root, 1, DEPTH)

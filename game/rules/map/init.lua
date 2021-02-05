@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local map_entity = require "game.rules.map.map"
+local mapHelper = require "game.rules.map.helper"
 
 return {
   actions = {
@@ -11,7 +11,7 @@ return {
     types = require "game.rules.map.actions.types"
   },
   create = function(w, h)
-    return map_entity:new {
+    return mapHelper:new {
       width = w,
       height = h
     }
