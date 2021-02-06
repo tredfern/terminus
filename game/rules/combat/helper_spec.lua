@@ -31,4 +31,19 @@ describe("game.rules.combat.helper", function()
       assert.equals(30, def)
     end)
   end)
+
+  describe("skill based attack roles", function()
+    it("succeeds if the roll is less than the attacker skill", function()
+      mock_random.setreturnvalues { 11, 4 }
+      assert.is_true(helper.attackRoll(15))
+      assert.is_true(helper.attackRoll(10))
+    end)
+
+    it("returns the attack role as well", function()
+      mock_random.setreturnvalues { 11 }
+      local success, attackRoll = helper.attackRoll(16)
+      assert.is_true(success)
+      assert.equals(11, attackRoll)
+    end)
+  end)
 end)

@@ -15,7 +15,8 @@ return function(source, target)
     type = types.combat_attack,
   }, {
     __call = function(_, dispatch)
-      local hit, atk_roll, def_roll = helper.resolve_attack(source.attack, target.defense)
+      local skill = source.skills.unarmed:getScore()
+      local hit, attackRoll = helper.attackRoll(skill)
 
       if hit then
         dispatch(Character.actions.setHealth(target, target.health - 1))
@@ -25,8 +26,8 @@ return function(source, target)
       local src = source.name or tostring(source)
       local trg = target.name or tostring(target)
       local str = string.format(
-        "%s attacked %s and %s! (%d, %d)",
-        src, trg, hit and "Hit" or "Missed", atk_roll, def_roll)
+        "%s attacked %s and %s! (%d/%d)",
+        src, trg, hit and "Hit" or "Missed", attackRoll, skill)
       dispatch(message_log.actions.add(str))
     end
   })

@@ -12,4 +12,9 @@ function helper.resolve_attack(attack, defense)
   return atk_roll <= attack and def_roll > defense, atk_roll, def_roll
 end
 
+function helper.attackRoll(attackerSkill)
+  local attackRoll = math.random(20)
+  return attackRoll < attackerSkill, attackRoll
+end
+
 return helper
