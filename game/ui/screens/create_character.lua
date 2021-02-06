@@ -8,11 +8,12 @@ local store = require "moonpie.redux.store"
 local connect = require "moonpie.redux.connect"
 local app = require "game.app"
 local character = require "game.rules.character"
-local panel = require "game.ui.widgets.panel"
+local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
+local characterAbilities = require "game.ui.widgets.character_abilities"
 
 local create_character = components("create_character", function(props)
 
-  local edit_character = props.character
+  local editCharacter = props.character
   local character_name = components.textbox {
     id = "character_name",
     click = function(self) self:set_focus() end,
@@ -22,13 +23,18 @@ local create_character = components("create_character", function(props)
 
   return {
     id = "create_character_screen",
-    panel {
-      width = "50%",
-      style = "align-middle align-center",
+    fullScreenPanel {
       title = "Create Character",
       contents = {
         padding = 6,
-        character_name,
+        {
+          components.h3 { text = "Name"},
+          character_name,
+        },
+        {
+          components.h3 { text = "Ability Scores"},
+          characterAbilities { id = "characterAbilities", character = editCharacter }
+        },
         {
           margin = 4,
           components.button {
@@ -37,7 +43,7 @@ local create_character = components("create_character", function(props)
             style = "align-right",
             click = function()
               store.dispatch(character.actions.setName(
-                edit_character,
+                editCharacter,
                 character_name:get_text()
               ))
               app.combat()

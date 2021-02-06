@@ -23,10 +23,10 @@
 
 Skills will have a base attribute that determines the starting point for the ability and then modified based on the abilities of the character. Untrained skills have a significant penalty
 
-#### Combat Skills
-_Unarmed_: Fighting without weapons
-_Blades_: Using bladed weapons
-_Handguns_: 
-_Throwing_:
+Skills will be organized in categories that help link general abilities together. For example, all combat skills will coordinate together. This will give a general assessment on the abilities of the character in a particular domain.
 
-#### Technical Skills
+Categories for skills are: _Athletic_, _Combat_, _Crafting_, _Social_, _Science_, _Engineering_, _Sly_, _Miscellaneous_
+(These could likely be simplified in the future but are to provide a large brainstorm list to see how it connects together)
+
+[Detailed Skills Sheet](https://www.dropbox.com/scl/fi/64dgbehojo358j0upqk61/Skills-Table.gsheet?dl=0&rlkey=0rp9z2zh2was8h0km3zyga914)
+

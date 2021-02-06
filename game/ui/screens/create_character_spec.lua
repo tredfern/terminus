@@ -8,7 +8,8 @@ describe("game.ui.screens.create_character", function()
   local character = require "game.rules.character"
   local mock_store = require "mock_store"
   local player = {
-    isPlayerControlled = true, x = 19, y = 28
+    isPlayerControlled = true, x = 19, y = 28,
+    abilities = {}
   }
   local store
 
@@ -43,6 +44,11 @@ describe("game.ui.screens.create_character", function()
     local action = store.get_actions(character.actions.types.character_set_name)[1]
     assert.equals(player, action.payload.character)
     assert.equals("Foo", action.payload.name)
+  end)
+
+  it("displays the character abilities section", function()
+    local c = moonpie.test_render(create_character())
+    assert.not_nil(c:findByID("characterAbilities"))
   end)
 
 end)

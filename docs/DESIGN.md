@@ -181,13 +181,13 @@ A game with:
 
 
 ## Key Milestones
-### 0. Basic foundations <-- I am Here -->
+### 0. Basic foundations [COMPLETED]
 This is some next steps to lay good foundations depending on what comes up next
   - Load/Save game: Always a tricky thing to work out, building this in early should be easier than deferring to the last moment. Use a save game slot system
   - Options screen: Simple ability to set resolution for game, change key maps. This is to prevent anything being too rigid to change later
   - Character Details Screen: Something in game to pop-up a display over the map
 
-### 1. Simple never ending roguelike
+### 1. Simple never ending roguelike <-- I am Here -->
 This should focus on moving the character around an testing the combat system
   - Inventory to equip melee and ranged weapon
   - Create enemy spawners that trigger new enemies whenever rooms are empty

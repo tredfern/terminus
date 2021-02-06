@@ -42,4 +42,16 @@ describe("game.rules.character.character", function()
     local c= characterHelper.newCharacter {}
     assert.equals(50, c.attack)
   end)
+
+  it("sets up default abilities", function()
+    local c = characterHelper.newCharacter()
+
+    assert.equals(10, c.abilities.strength)
+    assert.equals(10, c.abilities.agility)
+    assert.equals(10, c.abilities.endurance)
+    assert.equals(10, c.abilities.wit)
+    assert.equals(10, c.abilities.education)
+    assert.equals(10, c.abilities.social)
+
+  end)
 end)
