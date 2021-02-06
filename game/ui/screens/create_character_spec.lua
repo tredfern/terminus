@@ -51,4 +51,9 @@ describe("game.ui.screens.create_character", function()
     assert.not_nil(c:findByID("characterAbilities"))
   end)
 
+  it("displays the character skills section", function()
+    local c = moonpie.test_render(create_character())
+    assert.not_nil(c:findByID("characterSkills"))
+  end)
+
 end)
