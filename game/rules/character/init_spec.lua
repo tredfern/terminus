@@ -41,4 +41,8 @@ describe("game.rules.character", function()
     assert.not_nil(character.actions.setPosition)
   end)
 
+  it("provides access to the skills library", function()
+    assert.not_nil(character.skills)
+  end)
+
 end)

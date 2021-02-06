@@ -38,15 +38,4 @@ describe("game.rules.combat.actions.attack", function()
     assert.is_true(mock_dispatch:received_action(
       message_types.message_log_add))
   end)
-
-  it("rolls to resolve the attack", function()
-    local helper = require "game.rules.combat.helper"
-    spy.on(helper, "attackRoll")
-
-    local target = { health = 8 }
-    local atk = attack(attacker, target)
-    atk(mock_dispatch)
-
-    assert.spy(helper.attackRoll).was.called_with(20)
-  end)
 end)

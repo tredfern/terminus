@@ -24,5 +24,6 @@ return {
     getDead = require "game.rules.character.selectors.get_dead",
     getEnemies = require "game.rules.character.selectors.get_enemies",
     getPlayer = require "game.rules.character.selectors.get_player",
-  }
+  },
+  skills = require "game.rules.character.skills"
 }
