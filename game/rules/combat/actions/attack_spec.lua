@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.combat.actions.attack", function()
+  require "game.data.skills"
   local attack = require "game.rules.combat.actions.attack"
   local mock_dispatch = require "mock_dispatch"
   local attacker = {

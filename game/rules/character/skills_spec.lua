@@ -53,11 +53,4 @@ describe("game.rules.character.skills", function()
 
     assert.equals(8, skills.pilot(character))
   end)
-
-  it("has some basic skills set up", function()
-    assert.not_nil(skills.unarmed)
-    assert.not_nil(skills.blade)
-    assert.not_nil(skills.handgun)
-    assert.not_nil(skills.throwing)
-  end)
 end)
