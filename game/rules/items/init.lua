@@ -23,7 +23,8 @@ function Items.canUseItem(item, character)
   return false
 end
 
-Items.describe { key = "sword", name = "Sword" }
+Items.describe { key = "sword", name = "Sword", skills = { "blade" } }
+Items.describe { key = "laserGun", name = "Laser Gun", skills = { "handgun" } }
 Items.describe { key = "healthPack", name = "Health Pack" }
 Items.describe { key = "keycard", name = "Keycard" }
 

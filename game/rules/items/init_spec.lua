@@ -19,6 +19,7 @@ describe("game.rules.items", function()
     assert.not_nil(Items.list.sword)
     assert.not_nil(Items.list.healthPack)
     assert.not_nil(Items.list.keycard)
+    assert.not_nil(Items.list.laserGun)
   end)
 
   it("can specify what skills are necessary to use item", function()

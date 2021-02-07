@@ -27,6 +27,7 @@ return function()
     dispatch(Character.actions.addItemToInventory(player, Items.list.sword))
     dispatch(Character.actions.addItemToInventory(player, Items.list.keycard))
     dispatch(Character.actions.addItemToInventory(player, Items.list.healthPack))
+    dispatch(Character.actions.addItemToInventory(player, Items.list.laserGun))
 
     for _ = 1,8 do
       local r = tables.pickRandom(rooms)
