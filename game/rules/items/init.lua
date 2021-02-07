@@ -8,8 +8,19 @@ Items.list = {}
 
 function Items.describe(props)
   Items.list[props.key] = {
-    name = props.name
+    name = props.name,
+    skills = props.skills
   }
+end
+
+function Items.canUseItem(item, character)
+  if item.skills == nil or #item.skills == 0 then return true end
+
+  for _, v in ipairs(item.skills) do
+    if character.skills[v] then return true end
+  end
+
+  return false
 end
 
 Items.describe { key = "sword", name = "Sword" }
