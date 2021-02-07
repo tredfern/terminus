@@ -9,13 +9,11 @@ local Character = require "game.rules.character"
 
 return Components("character_skills", function(props)
   local skillData = {}
-  for _, v in pairs(Character.skills) do
-    if type(v) == "table" then
-      skillData[#skillData + 1] = {
-        skill = v,
-        score = v(props.character)
-      }
-    end
+  for _, v in pairs(Character.skills.list) do
+    skillData[#skillData + 1] = {
+      skill = v,
+      score = v(props.character)
+    }
   end
   return {
     width = "15%",

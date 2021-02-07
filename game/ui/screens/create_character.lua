@@ -17,7 +17,7 @@ local create_character = components("create_character", function(props)
   local editCharacter = props.character
   local character_name = components.textbox {
     id = "character_name",
-    click = function(self) self:set_focus() end,
+    click = function(self) self:setFocus() end,
     width = "100%",
   }
   character_name:set_text("Papageno")

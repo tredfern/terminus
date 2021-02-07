@@ -4,22 +4,22 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.character.skills", function()
-  local skills = require "game.rules.character.skills"
+  local Skills = require "game.rules.character.skills"
   local attributes = require "game.rules.character.attributes"
 
   it("can define skills", function()
-    skills({
+    Skills.describe({
       name = "Rifles",
       key = "rifles",
       attribute = attributes.strength
     })
 
-    assert.equals("Rifles", skills.rifles.name)
-    assert.equals(attributes.strength, skills.rifles.attribute)
+    assert.equals("Rifles", Skills.list.rifles.name)
+    assert.equals(attributes.strength, Skills.list.rifles.attribute)
   end)
 
   it("can calculate the character's base skill", function()
-    skills({
+    Skills.describe({
       name = "Carousing",
       key = "carousing",
       attribute = attributes.social
@@ -34,11 +34,11 @@ describe("game.rules.character.skills", function()
       }
     }
 
-    assert.equals(13, skills.carousing(character))
+    assert.equals(13, Skills.list.carousing(character))
   end)
 
   it("can have an untrained modified value for skills", function()
-    skills {
+    Skills.describe {
       name = "Pilot",
       key = "pilot",
       attribute = attributes.education,
@@ -51,6 +51,6 @@ describe("game.rules.character.skills", function()
       skills = { }
     }
 
-    assert.equals(8, skills.pilot(character))
+    assert.equals(8, Skills.list.pilot(character))
   end)
 end)

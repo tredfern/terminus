@@ -8,9 +8,9 @@ describe("game.ui.widgets.character_skills", function()
   local Character = require "game.rules.character"
 
   it("displays all the character skills", function()
-    Character.skills { name = "Computers", key = "computers", attribute = Character.attributes.education }
-    Character.skills { name = "Mechanics", key = "mechanics", attribute = Character.attributes.education }
-    Character.skills { name = "Lock Picking", key = "lockPicking", attribute = Character.attributes.agility }
+    Character.skills.describe { name = "Computers", key = "computers", attribute = Character.attributes.education }
+    Character.skills.describe { name = "Mechanics", key = "mechanics", attribute = Character.attributes.education }
+    Character.skills.describe { name = "Lock Picking", key = "lockPicking", attribute = Character.attributes.agility }
 
     local character = {
       attributes = {
