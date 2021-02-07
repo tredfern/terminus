@@ -26,6 +26,10 @@ function characterHelper.createDefaultSkills()
   }
 end
 
+function characterHelper.createDefaultInventory()
+  return {}
+end
+
 function characterHelper.newCharacter(props)
   props = props or {}
   local c = {
@@ -34,10 +38,9 @@ function characterHelper.newCharacter(props)
     isPlayerControlled = props.isPlayerControlled,
     isEnemy = props.isEnemy,
     health = 10,
-    attack = 50,
-    defense = 50,
     attributes = characterHelper.createDefaultAttributes(),
-    skills = characterHelper.createDefaultSkills()
+    skills = characterHelper.createDefaultSkills(),
+    inventory = characterHelper.createDefaultInventory()
   }
 
   return c

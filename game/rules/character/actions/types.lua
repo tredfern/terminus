@@ -5,6 +5,7 @@
 
 return {
   character_add = "CHARACTER_ADD",
+  character_add_item_to_inventory = "CHARACTER_ADD_ITEM_TO_INVENTORY",
   character_attack = "CHARACTER_ATTACK",
   character_move = "CHARACTER_MOVE",
   character_remove = "CHARACTER_REMOVE",

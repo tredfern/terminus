@@ -33,16 +33,6 @@ describe("game.rules.character.character", function()
     assert.equals(10, c.health)
   end)
 
-  it("has a defense of 50", function()
-    local c = characterHelper.newCharacter {}
-    assert.equals(50, c.defense)
-  end)
-
-  it("has an attack of 50", function()
-    local c= characterHelper.newCharacter {}
-    assert.equals(50, c.attack)
-  end)
-
   it("sets up default attributes", function()
     local attributes = require "game.rules.character.attributes"
     local c = characterHelper.newCharacter()
@@ -53,5 +43,10 @@ describe("game.rules.character.character", function()
     assert.in_range(3, 18, c.attributes[attributes.wit])
     assert.in_range(3, 18, c.attributes[attributes.education])
     assert.in_range(3, 18, c.attributes[attributes.social])
+  end)
+
+  it("sets up an empty inventory", function()
+    local c = characterHelper.newCharacter()
+    assert.equals(0, #c.inventory)
   end)
 end)
