@@ -10,6 +10,7 @@ local app = {}
 local saveGameName = "game.dat"
 
 function app.load()
+  game_state.actions.loadCoreData()
   app.title()
 end
 

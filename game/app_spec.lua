@@ -7,6 +7,16 @@ describe("game.app", function()
   -- App is the central glue module that loads up the modules and links things together
   local app = require "game.app"
 
+
+  it("loads the core data", function()
+    local gameState = require "game.rules.game_state"
+    spy.on(gameState.actions, "loadCoreData")
+    app.load()
+
+    assert.spy(gameState.actions.loadCoreData).was.called()
+
+  end)
+
   it("can render scenes", function()
     app.render({ id = "foo" })
     assert.not_nil(moonpie.ui.current.findByID("foo"))

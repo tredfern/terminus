@@ -15,13 +15,6 @@ describe("game.rules.items", function()
     assert.equals("Short sword", Items.list.shortsword.name)
   end)
 
-  it("add some test items to the game", function()
-    assert.not_nil(Items.list.sword)
-    assert.not_nil(Items.list.healthPack)
-    assert.not_nil(Items.list.keycard)
-    assert.not_nil(Items.list.laserGun)
-  end)
-
   it("can specify what skills are necessary to use item", function()
     Items.describe {
       name = "Medkit",
