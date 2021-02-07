@@ -11,7 +11,7 @@ local function performRoll(score)
   return roll <= score, roll
 end
 
-return function(source, target)
+return function(source, target, skill)
   local Character = require "game.rules.character"
   if source == target then return {} end
 
@@ -19,7 +19,6 @@ return function(source, target)
     type = types.combat_attack,
   }, {
     __call = function(_, dispatch)
-      local skill = Character.skills.unarmed(source)
       local hit, attackRoll = performRoll(skill)
 
       if hit then

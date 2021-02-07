@@ -8,6 +8,12 @@ describe("game.rules.character.actions.move", function()
   local types = require "game.rules.character.actions.types"
   local mock_dispatch = require "mock_dispatch"
   local wrap_in_function = require "wrap_in_function"
+  local Skills = require "game.rules.character.skills"
+  local Attributes = require "game.rules.character.attributes"
+
+  before_each(function()
+    Skills:define { name = "Unarmed", key = "unarmed", attribute = Attributes.strength }
+  end)
 
   it("dispatches a set_position message to move the character to the correct coordinates", function()
     local c = {}
@@ -21,7 +27,14 @@ describe("game.rules.character.actions.move", function()
   end)
 
   it("dispatches an attack action if there is another character in the square attempting to move to", function()
-    local player = {}
+    local player = {
+      attributes = {
+        [Attributes.strength] = 10
+      },
+      skills = {
+        unarmed = 0
+      }
+    }
     local enemy = { x = 20, y = 11 }
     local state = {
       characters = {

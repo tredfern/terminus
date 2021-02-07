@@ -6,6 +6,7 @@
 local types = require "game.rules.character.actions.types"
 local get_by_position = require "game.rules.character.selectors.get_by_position"
 local set_position = require "game.rules.character.actions.set_position"
+local skills = require "game.rules.character.skills"
 
 return function(character, x, y)
   local combat = require "game.rules.combat"
@@ -20,7 +21,7 @@ return function(character, x, y)
     __call = function(self, dispatch, getState)
       local targets = get_by_position(getState(), self.x, self.y)
       if #targets > 0 then
-        dispatch(combat.actions.attack(self.character, targets[1]))
+        dispatch(combat.actions.attack(self.character, targets[1], skills.unarmed(self.character)))
       else
         dispatch(set_position(self.character, self.x, self.y))
       end
