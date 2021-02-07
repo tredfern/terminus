@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local Character = require "game.rules.character"
+local Items = require "game.rules.items"
 local map = require "game.rules.map"
 local tables = require "moonpie.tables"
 local MessageLog = require "game.rules.message_log"
@@ -17,13 +18,15 @@ return function()
 
     local playerStartRoom = tables.pickRandom(rooms)
 
-    dispatch(Character.actions.add(
-      Character.create {
+    local player = Character.create {
         x = playerStartRoom.x + math.floor(playerStartRoom.width / 2),
         y = playerStartRoom.y + math.floor(playerStartRoom.height / 2),
         isPlayerControlled = true
       }
-    ))
+    dispatch(Character.actions.add(player))
+    dispatch(Character.actions.addItemToInventory(player, Items.list.sword))
+    dispatch(Character.actions.addItemToInventory(player, Items.list.keycard))
+    dispatch(Character.actions.addItemToInventory(player, Items.list.healthPack))
 
     for _ = 1,8 do
       local r = tables.pickRandom(rooms)

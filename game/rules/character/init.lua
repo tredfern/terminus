@@ -9,6 +9,7 @@ local helper = require "game.rules.character.helper"
 return {
   actions = {
     add = require "game.rules.character.actions.add",
+    addItemToInventory = require "game.rules.character.actions.add_item_to_inventory",
     move = require "game.rules.character.actions.move",
     remove = require "game.rules.character.actions.remove",
     setHealth = require "game.rules.character.actions.set_health",

@@ -4,10 +4,10 @@
 -- https://opensource.org/licenses/MIT
 
 local Components = require "moonpie.ui.components"
-local FullScreenPanel = require "game.ui.widgets.full_screen_panel"
-local Character = require "game.rules.character"
 local connect = require "moonpie.redux.connect"
-
+local FullScreenPanel = require "game.ui.widgets.full_screen_panel"
+local CharacterInventory = require "game.ui.widgets.character_inventory"
+local Character = require "game.rules.character"
 
 local CharacterDetails = Components("character_details", function(props)
   local app = require "game.app"
@@ -19,6 +19,13 @@ local CharacterDetails = Components("character_details", function(props)
       id = "screenPanel",
       title = props.characterName,
       contents = {
+        {
+          Components.h3 { text = "Inventory" },
+          CharacterInventory {
+            id = "characterInventory",
+            inventory = props.character.inventory 
+          },
+        },
         Components.button { id = "btnClose", caption = "Close", click = app.combat }
       }
     }
@@ -31,6 +38,7 @@ return connect(
   function(state)
     local player = Character.selectors.getPlayer(state)
     return {
+      character = player,
       characterName = player.name
     }
   end
