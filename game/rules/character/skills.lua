@@ -23,6 +23,20 @@ function Skills.performCheck(skill)
   return roll <= skill:getScore(), roll
 end
 
+function Skills:define(props)
+  Skills[props.key] = setmetatable(props, {
+    __call = Skills.calculate
+  })
+end
+
+function Skills.calculate(skill, character)
+  local untrained = skill.untrained or 0
+  return character.attributes[skill.attribute] + (character.skills[skill.key] or untrained)
+end
 
 
-return Skills
+
+
+return setmetatable(Skills, {
+  __call = Skills.define
+})
