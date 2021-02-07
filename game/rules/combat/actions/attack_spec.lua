@@ -7,8 +7,9 @@ describe("game.rules.combat.actions.attack", function()
   local attack = require "game.rules.combat.actions.attack"
   local mock_dispatch = require "mock_dispatch"
   local attacker = {
+    attributes = {},
     skills = {
-      unarmed = { getScore = function() return 20 end }
+      unarmed = 20
     }
   }
 

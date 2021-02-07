@@ -9,7 +9,8 @@ describe("game.ui.screens.create_character", function()
   local mock_store = require "mock_store"
   local player = {
     isPlayerControlled = true, x = 19, y = 28,
-    abilities = {}
+    attributes = {},
+    skills = {}
   }
   local store
 
@@ -48,7 +49,7 @@ describe("game.ui.screens.create_character", function()
 
   it("displays the character abilities section", function()
     local c = moonpie.test_render(create_character())
-    assert.not_nil(c:findByID("characterAbilities"))
+    assert.not_nil(c:findByID("characterAttributes"))
   end)
 
   it("displays the character skills section", function()

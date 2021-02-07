@@ -6,6 +6,11 @@
 local types = require "game.rules.combat.actions.types"
 local message_log = require "game.rules.message_log"
 
+local function performRoll(score)
+  local roll = math.random(20)
+  return roll <= score, roll
+end
+
 return function(source, target)
   local Character = require "game.rules.character"
   if source == target then return {} end
@@ -14,8 +19,8 @@ return function(source, target)
     type = types.combat_attack,
   }, {
     __call = function(_, dispatch)
-      local skill = source.skills.unarmed
-      local hit, attackRoll = Character.skills.performCheck(skill)
+      local skill = Character.skills.unarmed(source)
+      local hit, attackRoll = performRoll(skill)
 
       if hit then
         dispatch(Character.actions.setHealth(target, target.health - 1))
@@ -26,7 +31,7 @@ return function(source, target)
       local trg = target.name or tostring(target)
       local str = string.format(
         "%s attacked %s and %s! (%d/%d)",
-        src, trg, hit and "Hit" or "Missed", attackRoll, skill:getScore())
+        src, trg, hit and "Hit" or "Missed", attackRoll, skill)
       dispatch(message_log.actions.add(str))
     end
   })

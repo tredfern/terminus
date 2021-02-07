@@ -43,24 +43,15 @@ describe("game.rules.character.character", function()
     assert.equals(50, c.attack)
   end)
 
-  it("sets up default abilities", function()
+  it("sets up default attributes", function()
+    local attributes = require "game.rules.character.attributes"
     local c = characterHelper.newCharacter()
 
-    assert.in_range(3, 18, c.abilities.strength)
-    assert.in_range(3, 18, c.abilities.agility)
-    assert.in_range(3, 18, c.abilities.endurance)
-    assert.in_range(3, 18, c.abilities.wit)
-    assert.in_range(3, 18, c.abilities.education)
-    assert.in_range(3, 18, c.abilities.social)
-  end)
-
-  it("sets up some default skills", function()
-    local c = characterHelper.newCharacter()
-
-    assert.in_range(3, 18, c.skills.throwing:getScore())
-    assert.in_range(3, 18, c.skills.unarmed:getScore())
-    assert.in_range(3, 18, c.skills.blade:getScore())
-    assert.in_range(3, 18, c.skills.handgun:getScore())
-
+    assert.in_range(3, 18, c.attributes[attributes.strength])
+    assert.in_range(3, 18, c.attributes[attributes.agility])
+    assert.in_range(3, 18, c.attributes[attributes.endurance])
+    assert.in_range(3, 18, c.attributes[attributes.wit])
+    assert.in_range(3, 18, c.attributes[attributes.education])
+    assert.in_range(3, 18, c.attributes[attributes.social])
   end)
 end)

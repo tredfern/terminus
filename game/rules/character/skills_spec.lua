@@ -7,46 +7,6 @@ describe("game.rules.character.skills", function()
   local skills = require "game.rules.character.skills"
   local attributes = require "game.rules.character.attributes"
 
-
-  it("create a skill associated with a character attribute", function()
-    local character = {
-      abilities = {
-        agility = 15
-      }
-    }
-
-    local skill = skills.newSkill(
-      "Throwing Stuff",
-      character,
-      "agility"
-    )
-
-    assert.equals("Throwing Stuff", skill.name)
-    assert.equals(15, skill:getScore())
-  end)
-
-  it("can perform skill checks", function()
-    local mockRandom = require "moonpie.test_helpers.mock_random"
-
-    mockRandom.setreturnvalues { 15, 12, 11, 18 , 19}
-
-    local character = {
-      abilities = {
-        agility = 15
-      }
-    }
-    local skill = skills.newSkill("Billiards", character, "agility")
-    assert.is_true(skills.performCheck(skill))
-    assert.is_true(skills.performCheck(skill))
-    assert.is_true(skills.performCheck(skill))
-    assert.is_false(skills.performCheck(skill))
-    local success, roll = skills.performCheck(skill)
-
-    assert.is_false(success)
-    assert.equals(19, roll)
-
-  end)
-
   it("can define skills", function()
     skills({
       name = "Rifles",
@@ -92,5 +52,12 @@ describe("game.rules.character.skills", function()
     }
 
     assert.equals(8, skills.pilot(character))
+  end)
+
+  it("has some basic skills set up", function()
+    assert.not_nil(skills.unarmed)
+    assert.not_nil(skills.blade)
+    assert.not_nil(skills.handgun)
+    assert.not_nil(skills.throwing)
   end)
 end)

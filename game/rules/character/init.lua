@@ -16,6 +16,7 @@ return {
     setPosition = require "game.rules.character.actions.set_position",
     types = require "game.rules.character.actions.types"
   },
+  attributes = require "game.rules.character.attributes",
   create = helper.newCharacter,
   reducer = require "game.rules.character.reducer",
   selectors = {

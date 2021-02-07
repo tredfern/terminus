@@ -9,7 +9,7 @@ local connect = require "moonpie.redux.connect"
 local app = require "game.app"
 local character = require "game.rules.character"
 local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
-local characterAbilities = require "game.ui.widgets.character_abilities"
+local characterAttributes = require "game.ui.widgets.character_attributes"
 local characterSkills = require "game.ui.widgets.character_skills"
 
 local create_character = components("create_character", function(props)
@@ -33,8 +33,8 @@ local create_character = components("create_character", function(props)
           character_name,
         },
         {
-          { components.h3 { text = "Ability Scores"} },
-          characterAbilities { id = "characterAbilities", character = editCharacter }
+          { components.h3 { text = "Attributes"} },
+          characterAttributes { id = "characterAttributes", character = editCharacter }
         },
         {
           { components.h3 { text = "Skills" } },

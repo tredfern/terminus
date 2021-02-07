@@ -5,24 +5,6 @@
 
 local Skills = {}
 
-function Skills.getScore(skill)
-  return skill.character.abilities[skill.ability]
-end
-
-function Skills.newSkill(name, character, ability)
-  return {
-    name = name,
-    getScore = Skills.getScore,
-    character = character,
-    ability = ability
-  }
-end
-
-function Skills.performCheck(skill)
-  local roll = math.random(20)
-  return roll <= skill:getScore(), roll
-end
-
 function Skills:define(props)
   Skills[props.key] = setmetatable(props, {
     __call = Skills.calculate
@@ -31,11 +13,18 @@ end
 
 function Skills.calculate(skill, character)
   local untrained = skill.untrained or 0
-  return character.attributes[skill.attribute] + (character.skills[skill.key] or untrained)
+  return (character.attributes[skill.attribute] or 0) + (character.skills[skill.key] or untrained)
 end
 
+local function setupDefault()
+  local attributes = require "game.rules.character.attributes"
+  Skills:define { name = "Unarmed", key = "unarmed", attribute = attributes.strength }
+  Skills:define { name = "Blade", key = "blade", attribute = attributes.agility }
+  Skills:define { name = "Handgun", key = "handgun", attribute = attributes.agility }
+  Skills:define { name = "Throwing", key = "throwing", attribute = attributes.agility }
+end
 
-
+setupDefault()
 
 return setmetatable(Skills, {
   __call = Skills.define

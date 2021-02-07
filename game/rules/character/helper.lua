@@ -6,26 +6,23 @@
 local characterHelper = {}
 local dice = require "moonpie.math.dice"
 
-function characterHelper.createDefaultAbilities()
+function characterHelper.createDefaultAttributes()
+  local attributes = require "game.rules.character.attributes"
   local cup = dice.parse("3d6")
-  return {
-    strength = cup(),
-    agility = cup(),
-    endurance = cup(),
-    wit = cup(),
-    education = cup(),
-    social = cup()
-  }
+
+  local out = {}
+  for _, v in pairs(attributes) do
+    out[v] = cup()
+  end
+  return out
 end
 
-function characterHelper.createDefaultSkills(character)
-  local skills = require "game.rules.character.skills"
+function characterHelper.createDefaultSkills()
   return {
-    throwing = skills.newSkill("Throwing", character, "agility"),
-    blade = skills.newSkill("Blade", character, "agility"),
-    unarmed = skills.newSkill("Unarmed", character, "strength"),
-    handgun = skills.newSkill("Handgun", character, "agility")
-
+    throwing = 0,
+    blade = 0,
+    unarmed = 0,
+    handgun = 0,
   }
 end
 
@@ -39,10 +36,10 @@ function characterHelper.newCharacter(props)
     health = 10,
     attack = 50,
     defense = 50,
-    abilities = characterHelper.createDefaultAbilities()
+    attributes = characterHelper.createDefaultAttributes(),
+    skills = characterHelper.createDefaultSkills()
   }
 
-  c.skills = characterHelper.createDefaultSkills(c)
   return c
 end
 
