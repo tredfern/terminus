@@ -23,7 +23,7 @@ local CharacterDetails = Components("character_details", function(props)
           Components.h3 { text = "Inventory" },
           CharacterInventory {
             id = "characterInventory",
-            inventory = props.character.inventory 
+            inventory = props.character.inventory
           },
         },
         Components.button { id = "btnClose", caption = "Close", click = app.combat }
