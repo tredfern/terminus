@@ -9,6 +9,7 @@ Items.list = {}
 function Items.describe(props)
   Items.list[props.key] = {
     name = props.name,
+    equipSlot = props.equipSlot,
     skills = props.skills
   }
 end

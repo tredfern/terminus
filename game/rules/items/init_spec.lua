@@ -29,6 +29,16 @@ describe("game.rules.items", function()
     assert.array_includes("firstaid", Items.list.medkit.skills)
   end)
 
+  it("describes the slot an item can be equipped", function()
+    Items.describe {
+      name = "Crossbow",
+      key = "crossbow",
+      equipSlot = "ranged"
+    }
+
+    assert.equals("ranged", Items.list.crossbow.equipSlot)
+  end)
+
   describe("checking character proficiency", function()
     before_each(function()
       Items.describe {

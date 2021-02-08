@@ -10,6 +10,9 @@ return function(character, item)
     payload = {
       character = character,
       item = item
-    }
+    },
+    validate = function(self)
+      return self.payload.item ~= nil and self.payload.item.equipSlot ~= nil
+    end
   }
 end

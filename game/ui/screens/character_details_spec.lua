@@ -10,7 +10,7 @@ describe("game.ui.screens.character_details", function()
   before_each(function()
     mockStore {
       characters = {
-        { isPlayerControlled = true, name = "My Name" }
+        { isPlayerControlled = true, name = "My Name", inventory = {} }
       }
     }
   end)
@@ -36,5 +36,10 @@ describe("game.ui.screens.character_details", function()
   it("displays the character inventory", function()
     local cd = CharacterDetails()
     assert.not_nil(cd:findByID("characterInventory"))
+  end)
+
+  it("displays the equipped items", function()
+    local cd = CharacterDetails()
+    assert.not_nil(cd:findByID("characterEquipment"))
   end)
 end)

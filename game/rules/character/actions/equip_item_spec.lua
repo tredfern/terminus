@@ -15,4 +15,23 @@ describe("game.rules.character.actions.equip_item", function()
     assert.equals(character, action.payload.character)
     assert.equals(item, action.payload.item)
   end)
+
+  it("is invalid if the item is nil or has no equipment slot", function()
+    local character = {}
+    local item = {}
+    local action = equipItem(character, item)
+    assert.is_false(action:validate())
+    action = equipItem(character, nil)
+    assert.is_false(action:validate())
+  end)
+
+  it("is valid if the item has an equip slot", function()
+    local character = {}
+    local item = { equipSlot = "melee" }
+    local action = equipItem(character, item)
+
+    assert.is_true(action:validate())
+  end)
+
+
 end)

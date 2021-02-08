@@ -9,6 +9,7 @@ local FullScreenPanel = require "game.ui.widgets.full_screen_panel"
 local CharacterAttributes = require "game.ui.widgets.character_attributes"
 local CharacterSkills = require "game.ui.widgets.character_skills"
 local CharacterInventory = require "game.ui.widgets.character_inventory"
+local CharacterEquipment = require "game.ui.widgets.character_equipment"
 local Character = require "game.rules.character"
 
 local CharacterDetails = Components("character_details", function(props)
@@ -28,6 +29,13 @@ local CharacterDetails = Components("character_details", function(props)
         {
           { Components.h3 { text = "Skills" } },
           CharacterSkills { character = props.character }
+        },
+        {
+          { Components.h3 { text = "Equipped" } },
+          CharacterEquipment {
+            id = "characterEquipment",
+            equipSlots = props.character.inventory.equipSlots
+          },
         },
         {
           Components.h3 { text = "Inventory" },
