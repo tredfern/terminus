@@ -8,18 +8,16 @@ describe("game.ui.widgets.character_attributes", function()
 
   it("display the character stats", function()
     local attributes = require "game.rules.character.attributes"
-    local character = {
-      attributes = {
-        [attributes.strength] = 15,
-        [attributes.agility] = 12,
-        [attributes.endurance] = 18,
-        [attributes.wit] = 21,
-        [attributes.education] = 13,
-        [attributes.social] = 19
-      }
+    local sampleAttributes = {
+      [attributes.strength] = 15,
+      [attributes.agility] = 12,
+      [attributes.endurance] = 18,
+      [attributes.wit] = 21,
+      [attributes.education] = 13,
+      [attributes.social] = 19
     }
     local widget = characterAttributes {
-      character = character
+      attributes = sampleAttributes
     }
 
 

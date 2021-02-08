@@ -34,7 +34,7 @@ local create_character = components("create_character", function(props)
         },
         {
           { components.h3 { text = "Attributes"} },
-          characterAttributes { id = "characterAttributes", character = editCharacter }
+          characterAttributes { id = "characterAttributes", attributes = editCharacter.attributes }
         },
         {
           { components.h3 { text = "Skills" } },

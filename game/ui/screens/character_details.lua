@@ -6,6 +6,8 @@
 local Components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
 local FullScreenPanel = require "game.ui.widgets.full_screen_panel"
+local CharacterAttributes = require "game.ui.widgets.character_attributes"
+local CharacterSkills = require "game.ui.widgets.character_skills"
 local CharacterInventory = require "game.ui.widgets.character_inventory"
 local Character = require "game.rules.character"
 
@@ -19,6 +21,14 @@ local CharacterDetails = Components("character_details", function(props)
       id = "screenPanel",
       title = props.characterName,
       contents = {
+        {
+          { Components.h3 { text = "Attributes" } },
+          CharacterAttributes { attributes = props.character.attributes }
+        },
+        {
+          { Components.h3 { text = "Skills" } },
+          CharacterSkills { character = props.character }
+        },
         {
           Components.h3 { text = "Inventory" },
           CharacterInventory {

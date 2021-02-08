@@ -14,7 +14,7 @@ end
 
 return Components("character_attributes", function(props)
   local attributes = require "game.rules.character.attributes"
-  local characterAttributes = props.character.attributes or {}
+  local characterAttributes = props.attributes or {}
 
   return {
     width = "15%",
