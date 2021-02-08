@@ -27,7 +27,9 @@ function characterHelper.createDefaultSkills()
 end
 
 function characterHelper.createDefaultInventory()
-  return {}
+  return {
+    equipSlots = {}
+  }
 end
 
 function characterHelper.newCharacter(props)

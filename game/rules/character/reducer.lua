@@ -20,6 +20,13 @@ return createSlice {
     return state
   end,
 
+  [types.character_equip_item] = function(state, action)
+    local character = action.payload.character
+    local item = action.payload.item
+    character.inventory.equipSlots[item.equipSlot] = item
+    return state
+  end,
+
   [types.character_remove] = function(state, action)
     return tables.select(state,
     function(character)

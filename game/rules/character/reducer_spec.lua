@@ -89,6 +89,23 @@ describe("game.rules.character.reducer", function()
     assert.equals(54, new_state.characters[1].health)
   end)
 
+  describe("CHARACTER_EQUIP_ITEM", function()
+    it("equips the item into the slot specified for the item", function()
+      local character = { inventory = { equipSlots = {} } }
+      local item = { equipSlot = "melee" }
+      local state = { characters = { character } }
+      characters_reducer(state, {
+        type = types.character_equip_item,
+        payload = {
+          character = character,
+          item = item
+        }
+      })
+
+      assert.equals(item, character.inventory.equipSlots.melee)
+    end)
+  end)
+
   describe("CHARACTER_ADD_ITEM_TO_INVENTORY", function()
     it("adds items to the character inventory", function()
       local character = { inventory = {} }
