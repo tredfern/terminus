@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local helper = require "game.rules.character.helper"
+local factory = require "game.rules.character.factory"
 
 
 return {
@@ -19,7 +19,7 @@ return {
     types = require "game.rules.character.actions.types"
   },
   attributes = require "game.rules.character.attributes",
-  create = helper.newCharacter,
+  create = factory.newCharacter,
   reducer = require "game.rules.character.reducer",
   selectors = {
     getAll = require "game.rules.character.selectors.get_all",

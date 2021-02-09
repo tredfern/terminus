@@ -4,38 +4,38 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.character.character", function()
-  local characterHelper = require "game.rules.character.helper"
+  local characterFactory = require "game.rules.character.factory"
 
   it("instantiates a new character", function()
-    local c = characterHelper.newCharacter()
+    local c = characterFactory.newCharacter()
     assert.equals(0, c.x)
     assert.equals(0, c.y)
   end)
 
   it("can be player controlled", function()
-    local c = characterHelper.newCharacter { isPlayerControlled = true }
+    local c = characterFactory.newCharacter { isPlayerControlled = true }
     assert.is_true(c.isPlayerControlled)
   end)
 
   it("can be identified as an enemy", function()
-    local c = characterHelper.newCharacter { isEnemy = true }
+    local c = characterFactory.newCharacter { isEnemy = true }
     assert.is_true(c.isEnemy)
   end)
 
   it("can initialize it's position", function()
-    local c = characterHelper.newCharacter { x = 142, y = 192 }
+    local c = characterFactory.newCharacter { x = 142, y = 192 }
     assert.equals(142, c.x)
     assert.equals(192, c.y)
   end)
 
   it("has a health of 10 to start", function()
-    local c = characterHelper.newCharacter {}
+    local c = characterFactory.newCharacter {}
     assert.equals(10, c.health)
   end)
 
   it("sets up default attributes", function()
     local attributes = require "game.rules.character.attributes"
-    local c = characterHelper.newCharacter()
+    local c = characterFactory.newCharacter()
 
     assert.in_range(3, 18, c.attributes[attributes.strength])
     assert.in_range(3, 18, c.attributes[attributes.agility])
@@ -46,12 +46,18 @@ describe("game.rules.character.character", function()
   end)
 
   it("sets up an empty inventory", function()
-    local c = characterHelper.newCharacter()
+    local c = characterFactory.newCharacter()
     assert.equals(0, #c.inventory)
   end)
 
   it("sets up the equipment slots on the inventory", function()
-    local c = characterHelper.newCharacter()
+    local c = characterFactory.newCharacter()
     assert.not_nil(c.inventory.equipSlots)
+  end)
+
+  it("gives the character a name", function()
+    local c = characterFactory.newCharacter()
+    assert.not_nil(c.name)
+    assert.is_string(c.name)
   end)
 end)

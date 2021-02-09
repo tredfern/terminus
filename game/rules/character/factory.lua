@@ -3,10 +3,10 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local characterHelper = {}
+local characterFactory = {}
 local dice = require "moonpie.math.dice"
 
-function characterHelper.createDefaultAttributes()
+function characterFactory.createDefaultAttributes()
   local attributes = require "game.rules.character.attributes"
   local cup = dice.parse("3d6")
 
@@ -17,7 +17,7 @@ function characterHelper.createDefaultAttributes()
   return out
 end
 
-function characterHelper.createDefaultSkills()
+function characterFactory.createDefaultSkills()
   return {
     throwing = 0,
     blade = 0,
@@ -26,13 +26,19 @@ function characterHelper.createDefaultSkills()
   }
 end
 
-function characterHelper.createDefaultInventory()
+function characterFactory.createDefaultInventory()
   return {
     equipSlots = {}
   }
 end
 
-function characterHelper.newCharacter(props)
+function characterFactory.getName()
+  local names = require "game.rules.character.names"
+  local n = names.generate()
+  return string.format("%s %s", n.first , n.last)
+end
+
+function characterFactory.newCharacter(props)
   props = props or {}
   local c = {
     x = props.x or 0,
@@ -40,12 +46,13 @@ function characterHelper.newCharacter(props)
     isPlayerControlled = props.isPlayerControlled,
     isEnemy = props.isEnemy,
     health = 10,
-    attributes = characterHelper.createDefaultAttributes(),
-    skills = characterHelper.createDefaultSkills(),
-    inventory = characterHelper.createDefaultInventory()
+    attributes = characterFactory.createDefaultAttributes(),
+    skills = characterFactory.createDefaultSkills(),
+    inventory = characterFactory.createDefaultInventory(),
+    name = characterFactory.getName()
   }
 
   return c
 end
 
-return characterHelper
+return characterFactory

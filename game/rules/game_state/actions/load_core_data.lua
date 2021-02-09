@@ -6,4 +6,5 @@
 return function()
   require "game.data.skills"
   require "game.data.items"
+  require "game.data.character_names"
 end
