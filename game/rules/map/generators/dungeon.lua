@@ -33,7 +33,7 @@ end
 
 function generator.divide_on_x(node)
   local border = math.floor(node.width / 4)
-  local p = math.random(border, node.width - border)
+  local p = love.math.random(border, node.width - border)
 
   node.left = generator.create_node(node.x, node.y, p, node.height)
   node.right = generator.create_node(node.x + p, node.y, node.width - p, node.height)
@@ -41,7 +41,7 @@ end
 
 function generator.divide_on_y(node)
   local border = math.floor(node.height / 4)
-  local p = math.random(border, node.height - border)
+  local p = love.math.random(border, node.height - border)
 
   node.left = generator.create_node(node.x, node.y, node.width, p)
   node.right = generator.create_node(node.x, node.y + p, node.width, node.height - p)
@@ -71,10 +71,10 @@ function generator.create_rooms(node)
   end
 
 
-  local width = math.random(math.ceil(node.width / 2), node.width - 1)
-  local height = math.random(math.ceil(node.height / 2), node.height - 1)
-  local x = node.x + math.random(node.width - width)
-  local y = node.y + math.random(node.height - height)
+  local width = love.math.random(math.ceil(node.width / 2), node.width - 1)
+  local height = love.math.random(math.ceil(node.height / 2), node.height - 1)
+  local x = node.x + love.math.random(node.width - width)
+  local y = node.y + love.math.random(node.height - height)
 
   node.room = {
     x = x, y = y, width = width, height = height
@@ -141,11 +141,11 @@ function generator.add_corridors(map, node)
     local start_room = node.left:pick_room()
     local end_room = node.right:pick_room()
     -- pick 2 connecting points
-    local start_x = math.random(start_room.x, start_room.x + start_room.width - 1)
-    local start_y = math.random(start_room.y, start_room.y + start_room.height - 1)
+    local start_x = love.math.random(start_room.x, start_room.x + start_room.width - 1)
+    local start_y = love.math.random(start_room.y, start_room.y + start_room.height - 1)
 
-    local end_x = math.random(end_room.x, end_room.x + end_room.width - 1)
-    local end_y = math.random(end_room.y, end_room.y + end_room.height - 1)
+    local end_x = love.math.random(end_room.x, end_room.x + end_room.width - 1)
+    local end_y = love.math.random(end_room.y, end_room.y + end_room.height - 1)
 
     generator.build_corridor(map, start_x, start_y, end_x, end_y)
   end

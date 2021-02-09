@@ -7,7 +7,7 @@ local types = require "game.rules.combat.actions.types"
 local message_log = require "game.rules.message_log"
 
 local function performRoll(score)
-  local roll = math.random(20)
+  local roll = love.math.random(20)
   return roll <= score, roll
 end
 

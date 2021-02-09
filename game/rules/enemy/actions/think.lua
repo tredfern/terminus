@@ -7,8 +7,8 @@ local character = require "game.rules.character"
 
 return function(enemy)
   return function(dispatch)
-    local randx = math.random(-1, 1)
-    local randy = math.random(-1, 1)
+    local randx = love.math.random(-1, 1)
+    local randy = love.math.random(-1, 1)
 
     dispatch(character.actions.move(
       enemy,
