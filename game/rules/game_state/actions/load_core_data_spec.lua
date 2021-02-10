@@ -20,7 +20,7 @@ describe("game.rules.game_state.actions.load_core_data", function()
   end)
 
   it("loads the core skills", function()
-    local Skills = require "game.rules.character.skills"
+    local Skills = require "game.rules.skills"
     assert.not_nil(Skills.list.handgun)
     assert.not_nil(Skills.list.blade)
   end)

@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.character.skills", function()
-  local Skills = require "game.rules.character.skills"
+describe("game.rules.skills", function()
+  local Skills = require "game.rules.skills"
   local attributes = require "game.rules.character.attributes"
 
   it("can define skills", function()

@@ -8,7 +8,7 @@ describe("game.rules.character.actions.move", function()
   local types = require "game.rules.character.actions.types"
   local mock_dispatch = require "mock_dispatch"
   local wrap_in_function = require "wrap_in_function"
-  local Skills = require "game.rules.character.skills"
+  local Skills = require "game.rules.skills"
   local Attributes = require "game.rules.character.attributes"
 
   before_each(function()

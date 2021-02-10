@@ -5,11 +5,11 @@
 
 local Components = require "moonpie.ui.components"
 local tables = require "moonpie.tables"
-local Character = require "game.rules.character"
+local Skills = require "game.rules.skills"
 
 return Components("character_skills", function(props)
   local skillData = {}
-  for _, v in pairs(Character.skills.list) do
+  for _, v in pairs(Skills.list) do
     skillData[#skillData + 1] = {
       skill = v,
       score = v(props.character)

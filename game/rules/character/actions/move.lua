@@ -6,7 +6,7 @@
 local types = require "game.rules.character.actions.types"
 local get_by_position = require "game.rules.character.selectors.get_by_position"
 local set_position = require "game.rules.character.actions.set_position"
-local skills = require "game.rules.character.skills"
+local skills = require "game.rules.skills"
 
 return function(character, x, y)
   local combat = require "game.rules.combat"

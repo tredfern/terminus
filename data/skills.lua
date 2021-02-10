@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Skills = require "game.rules.character.skills"
+local Skills = require "game.rules.skills"
 local Attributes = require "game.rules.character.attributes"
 
 Skills.describe { name = "Unarmed", key = "unarmed", attribute = Attributes.strength }
