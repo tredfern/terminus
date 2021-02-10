@@ -35,7 +35,7 @@ end
 function characterFactory.getName()
   local names = require "game.rules.character.names"
   local n = names.generate()
-  return string.format("%s %s", n.first , n.last)
+  return string.format("%s %s", n.first or "" , n.last or "")
 end
 
 function characterFactory.newCharacter(props)
