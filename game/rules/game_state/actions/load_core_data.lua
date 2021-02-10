@@ -4,7 +4,9 @@
 -- https://opensource.org/licenses/MIT
 
 return function()
-  require "data.skills"
-  require "data.items"
-  require "data.character_names"
+  return function()
+    require "data.skills"
+    require "data.items"
+    require "data.character_names"
+  end
 end

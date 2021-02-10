@@ -7,7 +7,8 @@ describe("game.rules.game_state.actions.load_core_data", function()
   local loadCoreData = require "game.rules.game_state.actions.load_core_data"
 
   before_each(function()
-    loadCoreData()
+    local action = loadCoreData()
+    action()
   end)
 
   it("loads the core items", function()
