@@ -5,26 +5,39 @@
 
 local Skills = require "game.rules.skills"
 local Character = require "game.rules.character"
+local EquipSlots = require "game.rules.character.equip_slots"
+local MessageLog = require "game.rules.message_log"
+
+local attackMessage = "%s is attacking %s with their %s..."
+local hitMessage = "and hits (%d/%d) for %d points of damage!"
+local missMessage = "and misses! (%d/%d)"
 
 local function createSuccessResult(dispatch, _, defender, _)
-  return function()
-    dispatch(Character.actions.setHealth(defender, defender.health - 1))
+  return function(target, roll)
+    local damage = 1
+    dispatch(MessageLog.actions.add(string.format(hitMessage, roll, target, damage)))
+    dispatch(Character.actions.setHealth(defender, defender.health - damage))
   end
 end
 
-local function createMissResult(_, _, _, _)
-  return function()
+local function createMissResult(dispatch, _, _, _)
+  return function(target, roll)
+    dispatch(MessageLog.actions.add(string.format(missMessage, roll, target)))
   end
 end
 
-return function(attacker, defender, item)
-  return function(_, dispatch)
+return function(attacker, defender)
+  return function(dispatch)
+    -- get the weapon
+    local weapon = attacker.inventory.equipSlots[EquipSlots.melee]
+    if weapon == nil then return end
+    dispatch(MessageLog.actions.add(string.format(attackMessage, attacker.name, defender.name, weapon.name)))
     -- Figure out skill and perform check
-    local skill = Skills.list[item.skills[1]]
+    local skill = Skills.list[weapon.skills[1]]
     local performAttack = Skills.actions.perform(
       skill, attacker,
-      createSuccessResult(dispatch, attacker, defender, item),
-      createMissResult(dispatch, attacker, defender, item)
+      createSuccessResult(dispatch, attacker, defender, weapon),
+      createMissResult(dispatch, attacker, defender, weapon)
     )
     dispatch(performAttack)
   end

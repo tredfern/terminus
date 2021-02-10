@@ -8,5 +8,6 @@ describe("game.rules.combat", function()
 
   it("has actions for resolving combat", function()
     assert.not_nil(combat.actions.attack)
+    assert.not_nil(combat.actions.meleeAttack)
   end)
 end)

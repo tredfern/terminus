@@ -26,15 +26,10 @@ describe("game.rules.character.actions.move", function()
     assert.is_true(mock_dispatch:received_action(types.character_set_position))
   end)
 
-  it("dispatches an attack action if there is another character in the square attempting to move to", function()
-    local player = {
-      attributes = {
-        [Attributes.strength] = 10
-      },
-      skills = {
-        unarmed = 0
-      }
-    }
+  it("creates a melee attack action if there is another character in the square attempting to move to", function()
+    local Combat = require "game.rules.combat"
+    spy.on(Combat.actions, "meleeAttack")
+    local player = { }
     local enemy = { x = 20, y = 11 }
     local state = {
       characters = {
@@ -45,8 +40,6 @@ describe("game.rules.character.actions.move", function()
     local action = character_move(player, 20, 11)
     action(mock_dispatch, wrap_in_function(state))
 
-    local combat_action_types = require "game.rules.combat.actions.types"
-    assert.is_true(mock_dispatch:received_action(
-      combat_action_types.combat_attack))
+    assert.spy(Combat.actions.meleeAttack).was.called_with(player, enemy)
   end)
 end)

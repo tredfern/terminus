@@ -5,6 +5,7 @@
 
 return {
   actions = {
-    attack = require "game.rules.combat.actions.attack"
+    attack = require "game.rules.combat.actions.attack",
+    meleeAttack = require "game.rules.combat.actions.melee_attack"
   }
 }

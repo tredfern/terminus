@@ -17,7 +17,7 @@ describe("game.rules.character", function()
     assert.equals(3, c.x)
   end)
 
-  it("has selectors to find characters", function()
+  it("has selectors to retrieve information about characters", function()
     assert.not_nil(character.selectors)
     assert.not_nil(character.selectors.getPlayer)
     assert.not_nil(character.selectors.getAll)
