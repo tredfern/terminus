@@ -7,6 +7,7 @@ local tables = require "moonpie.tables"
 
 return setmetatable({
   dispatched = {},
+  processComplex = false,
   received_action = function(self, action)
     if action == nil then return false end
 
@@ -14,7 +15,12 @@ return setmetatable({
   end
 }, {
   __call = function(self, action)
-    if type(action) == "function" then return end
+    if type(action) == "function" then
+      if self.processComplex then
+        action({}, self)
+      end
+      return
+    end
     self.dispatched[#self.dispatched + 1] = action
   end
 })

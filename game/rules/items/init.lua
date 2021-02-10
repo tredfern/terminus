@@ -7,11 +7,7 @@ local Items = {}
 Items.list = {}
 
 function Items.describe(props)
-  Items.list[props.key] = {
-    name = props.name,
-    equipSlot = props.equipSlot,
-    skills = props.skills
-  }
+  Items.list[props.key] = props
 end
 
 function Items.canUseItem(item, character)
