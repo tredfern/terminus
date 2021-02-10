@@ -53,4 +53,8 @@ describe("game.rules.skills", function()
 
     assert.equals(8, Skills.list.pilot(character))
   end)
+
+  it("has skill actions", function()
+    assert.not_nil(Skills.actions.perform)
+  end)
 end)

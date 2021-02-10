@@ -17,4 +17,7 @@ function Skills.calculate(skill, character)
   return (character.attributes[skill.attribute] or 0) + (character.skills[skill.key] or untrained)
 end
 
+Skills.actions = {
+  perform = require "game.rules.skills.actions.perform"
+}
 return Skills
