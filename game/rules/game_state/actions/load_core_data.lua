@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return function()
-  require "game.data.skills"
-  require "game.data.items"
-  require "game.data.character_names"
+  require "data.skills"
+  require "data.items"
+  require "data.character_names"
 end

@@ -20,7 +20,7 @@ local create_character = components("create_character", function(props)
     click = function(self) self:setFocus() end,
     width = "100%",
   }
-  character_name:set_text("Papageno")
+  character_name:set_text(props.character.name)
 
   return {
     id = "create_character_screen",
