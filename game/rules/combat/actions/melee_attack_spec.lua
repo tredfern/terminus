@@ -14,6 +14,7 @@ describe("game.rules.combat.actions.melee_attack", function()
     Skills.describe { key = "club", attribute = "strength" }
 
     attacker = {
+      name = "attacker",
       attributes = {
         dexterity = 10,
         strength = 3
@@ -24,9 +25,9 @@ describe("game.rules.combat.actions.melee_attack", function()
       },
       inventory = { equipSlots = {} }
     }
-    defender = { health = 10 }
-    weapon = { skills = { "blade" } }
-    missWeapon = { skills = { "club" }}
+    defender = { name = "defender", health = 10 }
+    weapon = { name = "weapon", skills = { "blade" } }
+    missWeapon = { name = "missWeapon", skills = { "club" }}
     MockDispatch.processComplex = true
   end)
 
