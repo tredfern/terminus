@@ -7,6 +7,7 @@ require "assets.themes.standard"
 
 local styles = moonpie.ui.styles
 local colors = require "moonpie.graphics.colors"
+local sounds = require "assets.sounds"
 
 styles.button = moonpie.tables.merge(
   {
@@ -78,7 +79,8 @@ styles.main_menu = {
 }
 
 styles.main_menu_button = {
-  display = "block"
+  display = "block",
+  clickSound = sounds.click
 }
 
 styles.message_log = {
