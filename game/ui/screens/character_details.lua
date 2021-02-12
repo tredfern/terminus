@@ -11,6 +11,7 @@ local CharacterSkills = require "game.ui.widgets.character_skills"
 local CharacterInventory = require "game.ui.widgets.character_inventory"
 local CharacterEquipment = require "game.ui.widgets.character_equipment"
 local Character = require "game.rules.character"
+local Keyboard = require "moonpie.keyboard"
 
 local CharacterDetails = Components("character_details", function(props)
   local app = require "game.app"
@@ -46,7 +47,15 @@ local CharacterDetails = Components("character_details", function(props)
         },
         Components.button { id = "btnClose", caption = "Close", click = app.combat }
       }
-    }
+    },
+
+    mounted = function()
+      Keyboard:hotkey("tab", app.combat)
+    end,
+
+    unmounted = function()
+      Keyboard:hotkey("tab", nil)
+    end
 
   }
 end)

@@ -14,7 +14,6 @@ describe("game.app", function()
     app.load()
 
     assert.spy(gameState.actions.loadCoreData).was.called()
-
   end)
 
   it("can render scenes", function()
@@ -52,6 +51,13 @@ describe("game.app", function()
     assert.not_nil(moonpie.ui.current.findByID("character_details_screen"))
   end)
 
+  it("tracks the current state", function()
+    app.combat()
+    assert.equals("combat_screen", app.currentScreen)
+    app.characterDetails()
+    assert.equals("character_details", app.currentScreen)
+  end)
+
   describe("continue save game", function()
     it("retrieves save game data from the serializer", function()
       local serializer = require "game.serializer"
@@ -79,4 +85,5 @@ describe("game.app", function()
       serializer.load = old
     end)
   end)
+
 end)

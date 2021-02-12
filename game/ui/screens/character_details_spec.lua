@@ -42,4 +42,17 @@ describe("game.ui.screens.character_details", function()
     local cd = CharacterDetails()
     assert.not_nil(cd:findByID("characterEquipment"))
   end)
+
+  it("closes the screen if tab is pressed", function()
+    local app = require "game.app"
+    stub(app, "combat")
+
+    local cd = CharacterDetails()
+    cd:mounted()
+
+    local Keyboard = require "moonpie.keyboard"
+    Keyboard:keyPressed("tab")
+
+    assert.stub(app.combat).was.called()
+  end)
 end)

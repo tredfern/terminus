@@ -19,6 +19,7 @@ function app.render(scene)
     "ui",
     moonpie.ui.components.body(scene)
   )
+  app.currentScreen = scene.name
 end
 
 function app.title()
