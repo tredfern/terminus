@@ -5,21 +5,56 @@
 
 # Terminus
 
-Terminus is at this point just a project code name to work under.
+Terminus is a working title for a rogue-style project. 
 
 ## Goals
-* 100% Test Coverage
-* Easy to mod and extend
-* Repeatable game play
-* A feeling of a story
+### Fun
+The game should be fun to play. That fun should come from the combination of challenge and discovery.
+
+### 99% Unit Test Coverage
+A strange goal perhaps. I believe that TDD can assist any project. Because of the planned complexity of interactions between entities, unit tests will provide a foundation to validate those interactions and potentially test balance.
+
+### Easy to Mod
+The game should feel like a framework that could be extended. Similar to creating an RPG system where the adventures, items and characters can be created by anyone.
+
+
+### High Replay Value
+The game should have either different challenges or feel so different every time that it encourages people to play again.
+
+
+### A Feeling of Story
+The game should have a feeling that a story is occurring and the player is contributing to the creation of that story.
+
 
 ## Development
 
-Development is at least partially being performed on [Twitch](https://twitch.tv/turtlecoder). 
-Streams are currently scheduled for:
-Saturdays 13:00-15:00 EST
-Sundays 11:00-12:00 EST
+[**Weekly Blog Posts**](https://wheretheredfern.code) giving a brief overview of the code changes implemented and screenshots of progress.
 
+[**Live Coding on Twitch**](https://twitch.tv/wheretheredferncodes)
+Saturdays & Sundays 13:00-15:00 EST.
+
+[**Milestone Progress**](https://github.com/tredfern/terminus/milestones) will track significant changes and progress.
+
+[**Builds / Releases**](https://github.com/tredfern/terminus/releases) will be automatically created for every tagged push.
+
+## Concept
+
+An RPG based game/system set in a sci-fi universe. Player is one of a small group of soldiers that
+awakens on a ship/space station/moon base to a major disaster in progress. Player needs to navigate rogue robots and 
+damaged systems to repair the ship to save the rest of the crew. 
+
+Play styles could vary between more combat expertise, which will increase survivability but might limit exploration
+or other skill opportunities. Or maybe using more survival skills which will help with finding supplies and
+alternate routes. Or maybe a more skill focus that allows the character more abilities to explore and solve problems.
+
+## Theme / Setting
+
+_Survival Theme: The hero desire to keep taking a step forward even when facing overwhelming odds just to survive._
+
+Potential deeper themes:
+* When society is collapsing, what is the balance between preserving ourselves and preserving the people around us?
+* Turn-based game that allows the player time to think and choose actions
+* However, action-based game would allow the chaos of the situation to feel more present
 
 ## Inspiration
 
@@ -35,7 +70,73 @@ I'm focusing my inspiration on games from the past. Certainly there will be idea
 
 An interesting tidbit I learned from research is that Epyx did the port of Rogue to non-Unix platforms.
 
-### Contributing / Building from Source
+**[Force 7](https://www.mobygames.com/game/c64/force-7)** - There was this game on the C64 where you had a crew and needed to eliminate all these aliens in various rooms.
+
+**[Cogmind](https://www.gridsagegames.com/cogmind/)** - similar genre and also sci-fi. Different play styles available and need to keep alert level down.
+
+**[Dungeon of the Endless](https://www.mergegames.com/dungeon-of-the-endless)** - Random generated dungeon of rooms where you are trying to get to the top level
+
+**[Rimworld](https://rimworldgame.com/)** - If the game evolves into more of a base-building mechanic
+
+**[Shadowgrounds](https://shadowgroundsgame.com/)** - Aliens attacking a base and working through levels to solve/protect it
+
+**[Metamorphisis Alpha](https://www.drivethrurpg.com/product/58985/Metamorphosis-Alpha-4th-Edition)** - Never played this, but the general story is similar and a strong basis for inspiration.
+
+**[Traveller](https://en.wikipedia.org/wiki/Traveller_%28role-playing_game%29)** - Never played this, character design is interesting. Generally seen as a very open-ended RPG system in a sci-fi world that can help inspire how to face certain design decisions for the underlying mechanics.
+
+#### Books / Movies
+_Orphans in the Sky_ - I read this book as a child and remember it still. 
+
+_Aliens_ - Both from Newt's survival session on her own to the marines fighting their way in
+
+_Diehard_ - Facing off against an invading force on your own. Identifying your enemy and their intentions
+
+_Lost in Space_ - Traveling to a new world, a catastrophe happens and people band together to survive
+
+## Key Milestones
+### 0. Basic foundations [COMPLETED]
+This is some next steps to lay good foundations depending on what comes up next
+  - Load/Save game: Always a tricky thing to work out, building this in early should be easier than deferring to the last moment. Use a save game slot system
+  - Options screen: Simple ability to set resolution for game, change key maps. This is to prevent anything being too rigid to change later
+  - Character Details Screen: Something in game to pop-up a display over the map
+
+### 1. Simple never ending roguelike <-- I am Here -->
+This should focus on moving the character around an testing the combat system
+  - Inventory to equip melee and ranged weapon
+  - Create enemy spawners that trigger new enemies whenever rooms are empty
+  - Combat has some strategic feel
+    - Ranged Combat
+    - Melee Combat
+  - Character generation gives some ability scores and combat skills
+  - AI that charges the player down
+  - Some ability to heal character
+
+### 2. Expanding the map system
+Expanding the maps slightly
+  - Ladders that go up/down. When returning to a previous level the level should look like it did when you left
+  - Introduce skill checks like a computer terminal that opens a door, 
+  - Items are added to rooms/corridors that could serve a function for skill checks
+  - Description generators for rooms
+  - "Static" rooms that could be used for key plot points
+  - Map zoom out display
+
+### 3. Improved AI
+  - Patrolling AI that moves from room to room 
+  - Guard AI that stays in room until the player enters
+  - Repair AI that fixes up enemy units that are damaged
+  - Fleeing AI that runs after taking a certain amount of damage
+  - Introduce Allies that assist player
+    - AI Holding rooms that are cleared
+    - AI Follow player and assist in battle
+
+### 4. Story Events
+  - Introduce quests
+  - Messages that can happen describing what is going on
+  - Intro screen setting up the scene
+  - Define a story arc based on the levels that you move through
+  - Introduce different environment conditions (Fire and Vacuum)
+
+## Contributing / Building from Source
 
 Terminus runs in Love2D and you will need to download the appropriate version for your system first - [Download Love2D](https://love2d.org/).
 ```
