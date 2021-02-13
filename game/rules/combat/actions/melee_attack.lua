@@ -27,7 +27,9 @@ return function(attacker, defender)
   return function(dispatch)
     -- get the weapon
     local weapon = attacker.inventory.equipSlots[EquipSlots.melee]
-    if weapon == nil then return end
+    if weapon == nil then
+      weapon = { skill = "unarmed", damage = "1d3" }
+    end
     -- Figure out skill and perform check
     local skill = Skills.chooseSkill.forItem(attacker, weapon)
     local defSkill = Skills.chooseSkill.forMeleeDefense(defender)

@@ -13,6 +13,7 @@ describe("game.rules.combat.actions.melee_attack", function()
     Skills.describe { key = "blade", attribute = "dexterity" }
     Skills.describe { key = "club", attribute = "strength" }
     Skills.describe { key = "dodge", attribute = "dexterity" }
+    Skills.describe { key = "unarmed", attribute = "strength" }
 
     attacker = {
       name = "attacker",
@@ -22,7 +23,8 @@ describe("game.rules.combat.actions.melee_attack", function()
       },
       skills = {
         blade = 8,
-        club = -1
+        club = -1,
+        unarmed = 20
       },
       inventory = { equipSlots = {} }
     }
@@ -77,10 +79,18 @@ describe("game.rules.combat.actions.melee_attack", function()
     assert.spy(Character.actions.setHealth).was_not.called()
   end)
 
-  it("does nothing if no weapon equipped", function()
+  it("uses unarmed weapon if no weapon equipped", function()
     attacker.inventory.equipSlots.melee = nil
+    spy.on(Skills.actions, "opposedCheck")
+
     local action = MeleeAttack(attacker, defender)
-    assert.has_no_errors(action)
+    action(MockDispatch)
+
+    assert.spy(Skills.actions.opposedCheck).was.called_with(
+      attacker, Skills.list.unarmed,
+      defender, Skills.list.dodge,
+      match.is_function()
+    )
   end)
 
   it("the defender can dodge out of the way", function()
@@ -94,4 +104,5 @@ describe("game.rules.combat.actions.melee_attack", function()
 
     assert.spy(Character.actions.setHealth).was_not.called()
   end)
+
 end)
