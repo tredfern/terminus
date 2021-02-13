@@ -17,7 +17,7 @@ return setmetatable({
   __call = function(self, action)
     if type(action) == "function" then
       if self.processComplex then
-        action({}, self)
+        action(self, {})
       end
       return
     end

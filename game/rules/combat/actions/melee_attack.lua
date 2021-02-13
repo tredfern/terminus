@@ -4,21 +4,21 @@
 -- https://opensource.org/licenses/MIT
 
 local Skills = require "game.rules.skills"
-local Character = require "game.rules.character"
 local EquipSlots = require "game.rules.character.equip_slots"
 local MessageLog = require "game.rules.message_log"
 
-local hitMessage = "%s hits %s for %d points of damage!"
+local hitMessage = "%s hits %s!"
 local missMessage = "%s misses %s."
 
-local function createAttackResult(dispatch, attacker, defender)
+local function createAttackResult(dispatch, attacker, defender, weapon)
+  local Combat = require "game.rules.combat"
+
   return function(winner)
     if winner == defender then
       dispatch(MessageLog.actions.add(string.format(missMessage, attacker.name, defender.name)))
     else
-      local damage = 1
-      dispatch(MessageLog.actions.add(string.format(hitMessage, attacker.name, defender.name, damage)))
-      dispatch(Character.actions.setHealth(defender, defender.health - damage))
+      dispatch(MessageLog.actions.add(string.format(hitMessage, attacker.name, defender.name)))
+      dispatch(Combat.actions.dealDamage(defender, weapon.damage))
     end
   end
 end
@@ -34,7 +34,7 @@ return function(attacker, defender)
     local performAttack = Skills.actions.opposedCheck(
       attacker, skill,
       defender, defSkill,
-      createAttackResult(dispatch, attacker, defender)
+      createAttackResult(dispatch, attacker, defender, weapon)
     )
     dispatch(performAttack)
   end

@@ -33,8 +33,8 @@ describe("game.rules.combat.actions.melee_attack", function()
       skills = { dodge = 0 },
       health = 10
     }
-    weapon = { name = "weapon", skill = "blade"  }
-    missWeapon = { name = "missWeapon", skill = "club" }
+    weapon = { name = "weapon", skill = "blade", damage = "1d8"  }
+    missWeapon = { name = "missWeapon", skill = "club", damage = "1d10" }
     MockDispatch.processComplex = true
   end)
 
@@ -57,13 +57,13 @@ describe("game.rules.combat.actions.melee_attack", function()
 
   it("deals damage on successful hit", function()
     attacker.inventory.equipSlots.melee = weapon
-    local Character = require "game.rules.character"
-    spy.on(Character.actions, "setHealth")
+    local Combat = require "game.rules.combat"
+    spy.on(Combat.actions, "dealDamage")
 
     local action = MeleeAttack(attacker, defender)
     action(MockDispatch)
 
-    assert.spy(Character.actions.setHealth).was.called_with(defender, defender.health - 1)
+    assert.spy(Combat.actions.dealDamage).was.called_with(defender, weapon.damage)
   end)
 
   it("does not deal damage on a miss", function()
