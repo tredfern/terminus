@@ -33,7 +33,7 @@ return function(attacker, defender)
     local weapon = attacker.inventory.equipSlots[EquipSlots.melee]
     if weapon == nil then return end
     -- Figure out skill and perform check
-    local skill = Skills.list[weapon.skills[1]]
+    local skill = Skills.chooseSkill.forItem(attacker, weapon)
     local performAttack = Skills.actions.perform(
       skill, attacker,
       createSuccessResult(dispatch, attacker, defender, weapon),
