@@ -11,6 +11,7 @@ local character = require "game.rules.character"
 local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
 local characterAttributes = require "game.ui.widgets.character_attributes"
 local characterSkills = require "game.ui.widgets.character_skills"
+local labelPair = require "game.ui.widgets.label_pair"
 
 local create_character = components("create_character", function(props)
 
@@ -34,7 +35,13 @@ local create_character = components("create_character", function(props)
         },
         {
           { components.h3 { text = "Attributes"} },
-          characterAttributes { id = "characterAttributes", attributes = editCharacter.attributes }
+          characterAttributes { id = "characterAttributes", attributes = editCharacter.attributes },
+          labelPair {
+            margin = { left = 10 },
+            width = "15%",
+            label = "Health:",
+            value = editCharacter.health
+          }
         },
         {
           { components.h3 { text = "Skills" } },

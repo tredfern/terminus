@@ -5,6 +5,7 @@
 
 describe("game.rules.character.character", function()
   local characterFactory = require "game.rules.character.factory"
+  local attributes = require "game.rules.character.attributes"
 
   it("instantiates a new character", function()
     local c = characterFactory.newCharacter()
@@ -28,13 +29,12 @@ describe("game.rules.character.character", function()
     assert.equals(192, c.y)
   end)
 
-  it("has a health of 10 to start", function()
-    local c = characterFactory.newCharacter {}
-    assert.equals(10, c.health)
+  it("has a health of 10 + endurance to start", function()
+    local c = characterFactory.newCharacter()
+    assert.equals(10 + c.attributes[attributes.endurance], c.health)
   end)
 
   it("sets up default attributes", function()
-    local attributes = require "game.rules.character.attributes"
     local c = characterFactory.newCharacter()
 
     assert.in_range(3, 18, c.attributes[attributes.strength])

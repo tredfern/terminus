@@ -5,9 +5,9 @@
 
 local characterFactory = {}
 local dice = require "moonpie.math.dice"
+local attributes = require "game.rules.character.attributes"
 
 function characterFactory.createDefaultAttributes()
-  local attributes = require "game.rules.character.attributes"
   local cup = dice.parse("3d6")
 
   local out = {}
@@ -38,6 +38,10 @@ function characterFactory.getName()
   return string.format("%s %s", n.first or "" , n.last or "")
 end
 
+function characterFactory.calculateHealth(character)
+  return 10 + character.attributes[attributes.endurance]
+end
+
 function characterFactory.newCharacter(props)
   props = props or {}
   local c = {
@@ -45,12 +49,12 @@ function characterFactory.newCharacter(props)
     y = props.y or 0,
     isPlayerControlled = props.isPlayerControlled,
     isEnemy = props.isEnemy,
-    health = 10,
     attributes = characterFactory.createDefaultAttributes(),
     skills = characterFactory.createDefaultSkills(),
     inventory = characterFactory.createDefaultInventory(),
     name = characterFactory.getName()
   }
+  c.health = characterFactory.calculateHealth(c)
 
   return c
 end
