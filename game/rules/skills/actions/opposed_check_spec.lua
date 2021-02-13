@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.skills.actions.opposed_check.lua", function()
+  local mockDispatch = require "mock_dispatch"
   local opposedCheck = require "game.rules.skills.actions.opposed_check"
   local Skills = require "game.rules.skills"
   Skills.describe { key = "diplomacy", attribute = "social" }
@@ -22,7 +23,7 @@ describe("game.rules.skills.actions.opposed_check.lua", function()
     local callback = spy.new(function() end)
 
     local action = opposedCheck(aggressor, Skills.list.diplomacy, defender, Skills.list.insight, callback)
-    action()
+    action(mockDispatch)
 
     assert.spy(callback).was_called_with(aggressor, defender)
   end)
@@ -40,7 +41,7 @@ describe("game.rules.skills.actions.opposed_check.lua", function()
     local callback = spy.new(function() end)
 
     local action = opposedCheck(aggressor, Skills.list.diplomacy, defender, Skills.list.insight, callback)
-    action()
+    action(mockDispatch)
 
     assert.spy(callback).was_called_with(defender, aggressor)
   end)
