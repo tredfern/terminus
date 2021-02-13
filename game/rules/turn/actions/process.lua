@@ -8,6 +8,7 @@ local Character = require "game.rules.character"
 local Enemy = require "game.rules.enemy"
 local Camera = require "game.ui.camera"
 local GameState = require "game.rules.game_state"
+local Map = require "game.rules.map"
 
 return function(player_action)
   return function(dispatch, getState)
@@ -18,6 +19,13 @@ return function(player_action)
     if enemies then
       for _, e in ipairs(enemies) do
         dispatch(Enemy.actions.think(e))
+      end
+    end
+
+    local spawners = Map.selectors.getEnemySpawners(getState())
+    if spawners then
+      for _, spawner in ipairs(spawners) do
+        dispatch(Enemy.actions.checkSpawnEnemy(spawner))
       end
     end
 

@@ -5,6 +5,7 @@
 
 return {
   actions = {
+    checkSpawnEnemy = require "game.rules.enemy.actions.check_spawn_enemy",
     think = require "game.rules.enemy.actions.think"
   }
 }

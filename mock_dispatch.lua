@@ -12,6 +12,10 @@ return setmetatable({
     if action == nil then return false end
 
     return tables.any(self.dispatched, function(d) return d.type == action end)
+  end,
+  reset = function(self)
+    self.dispatched = {}
+    self.processComplex = false
   end
 }, {
   __call = function(self, action)
