@@ -5,6 +5,11 @@
 
 local Audio = require "moonpie.audio"
 
-return {
+local sounds = {
   click = Audio.getStatic("assets/sounds/click_sound.wav"),
 }
+
+sounds.click:setVolume(0.08)
+
+
+return sounds
