@@ -13,9 +13,10 @@ return function(aggressor, aggSkill, defender, defSkill, callback)
 
     local aggRoll = skillCheck()
     local defRoll = skillCheck()
-    print("Contested roll:", (aggTarget - aggRoll), (defTarget - defRoll))
+    local aggSucceed = aggRoll < aggTarget
+    local defSucceed = defRoll < defTarget
 
-    if aggTarget - aggRoll > defTarget - defRoll then
+    if aggSucceed and not defSucceed then
       callback(aggressor, defender)
     else
       callback(defender, aggressor)
