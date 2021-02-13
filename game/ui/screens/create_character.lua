@@ -41,6 +41,7 @@ local create_character = components("create_character", function(props)
             width = "15%",
             label = "Health:",
             value = editCharacter.health
+
           }
         },
         {
