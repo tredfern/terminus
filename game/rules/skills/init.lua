@@ -18,6 +18,7 @@ function Skills.calculate(skill, character)
 end
 
 Skills.actions = {
+  opposedCheck = require "game.rules.skills.actions.opposed_check",
   perform = require "game.rules.skills.actions.perform",
 }
 Skills.chooseSkill = require "game.rules.skills.choose_skill"

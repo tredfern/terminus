@@ -55,6 +55,7 @@ describe("game.rules.skills", function()
   end)
 
   it("has skill actions", function()
+    assert.not_nil(Skills.actions.opposedCheck)
     assert.not_nil(Skills.actions.perform)
   end)
 

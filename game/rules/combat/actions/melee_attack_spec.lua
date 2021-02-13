@@ -12,6 +12,7 @@ describe("game.rules.combat.actions.melee_attack", function()
   before_each(function()
     Skills.describe { key = "blade", attribute = "dexterity" }
     Skills.describe { key = "club", attribute = "strength" }
+    Skills.describe { key = "dodge", attribute = "dexterity" }
 
     attacker = {
       name = "attacker",
@@ -25,7 +26,13 @@ describe("game.rules.combat.actions.melee_attack", function()
       },
       inventory = { equipSlots = {} }
     }
-    defender = { name = "defender", health = 10 }
+    defender = { name = "defender",
+      attributes = {
+        dexterity = 3
+      },
+      skills = { dodge = 0 },
+      health = 10
+    }
     weapon = { name = "weapon", skill = "blade"  }
     missWeapon = { name = "missWeapon", skill = "club" }
     MockDispatch.processComplex = true
@@ -35,16 +42,16 @@ describe("game.rules.combat.actions.melee_attack", function()
     MockDispatch.processComplex = false
   end)
 
-  it("makes an attack roll based on the a source skill using the item to attack with", function()
+  it("makes a contested attack roll based on weapon and defender", function()
     attacker.inventory.equipSlots.melee = weapon
-    spy.on(Skills.actions, "perform")
+    spy.on(Skills.actions, "opposedCheck")
 
     local action = MeleeAttack(attacker, defender)
     action(MockDispatch)
 
-    assert.spy(Skills.actions.perform).was.called_with(Skills.list.blade,
-      attacker,
-      match.is_function(),
+    assert.spy(Skills.actions.opposedCheck).was.called_with(
+      attacker, Skills.list.blade,
+      defender, Skills.list.dodge,
       match.is_function())
   end)
 
@@ -74,5 +81,17 @@ describe("game.rules.combat.actions.melee_attack", function()
     attacker.inventory.equipSlots.melee = nil
     local action = MeleeAttack(attacker, defender)
     assert.has_no_errors(action)
+  end)
+
+  it("the defender can dodge out of the way", function()
+    attacker.inventory.equipSlots.melee = weapon
+    local Character = require "game.rules.character"
+    spy.on(Character.actions, "setHealth")
+
+    defender.skills.dodge = 20
+    local action = MeleeAttack(attacker, defender)
+    action(MockDispatch)
+
+    assert.spy(Character.actions.setHealth).was_not.called()
   end)
 end)

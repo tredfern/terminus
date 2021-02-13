@@ -10,5 +10,10 @@ function chooseSkill.forItem(_, item)
   return Skills.list[item.skill]
 end
 
+function chooseSkill.forMeleeDefense(_)
+  local Skills = require "game.rules.skills"
+  return Skills.list.dodge
+end
+
 
 return chooseSkill

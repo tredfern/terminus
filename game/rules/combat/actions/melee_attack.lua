@@ -8,22 +8,18 @@ local Character = require "game.rules.character"
 local EquipSlots = require "game.rules.character.equip_slots"
 local MessageLog = require "game.rules.message_log"
 
-local hitMessage = "%s attacks %s. The %s hits for %d points of damage! (%d / %d)"
-local missMessage = "%s misses %s. (%d / %d)"
+local hitMessage = "%s hits %s for %d points of damage!"
+local missMessage = "%s misses %s."
 
-local function createSuccessResult(dispatch, attacker, defender, weapon)
-  return function(target, roll)
-    local damage = 1
-    dispatch(MessageLog.actions.add(string.format(hitMessage,
-      attacker.name, defender.name,
-      weapon.name, damage, roll, target)))
-    dispatch(Character.actions.setHealth(defender, defender.health - damage))
-  end
-end
-
-local function createMissResult(dispatch, attacker, defender, _)
-  return function(target, roll)
-    dispatch(MessageLog.actions.add(string.format(missMessage, attacker.name, defender.name, roll, target)))
+local function createAttackResult(dispatch, attacker, defender)
+  return function(winner)
+    if winner == defender then
+      dispatch(MessageLog.actions.add(string.format(missMessage, attacker.name, defender.name)))
+    else
+      local damage = 1
+      dispatch(MessageLog.actions.add(string.format(hitMessage, attacker.name, defender.name, damage)))
+      dispatch(Character.actions.setHealth(defender, defender.health - damage))
+    end
   end
 end
 
@@ -34,10 +30,11 @@ return function(attacker, defender)
     if weapon == nil then return end
     -- Figure out skill and perform check
     local skill = Skills.chooseSkill.forItem(attacker, weapon)
-    local performAttack = Skills.actions.perform(
-      skill, attacker,
-      createSuccessResult(dispatch, attacker, defender, weapon),
-      createMissResult(dispatch, attacker, defender, weapon)
+    local defSkill = Skills.chooseSkill.forMeleeDefense(defender)
+    local performAttack = Skills.actions.opposedCheck(
+      attacker, skill,
+      defender, defSkill,
+      createAttackResult(dispatch, attacker, defender)
     )
     dispatch(performAttack)
   end
