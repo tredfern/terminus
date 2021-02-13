@@ -136,6 +136,44 @@ Expanding the maps slightly
   - Define a story arc based on the levels that you move through
   - Introduce different environment conditions (Fire and Vacuum)
 
+## Technical Notes
+
+### Framework
+
+This project depends on the [Moonpie](https://github.com/tredfern/moonpie) framework for [Love2D](https://love2d.org).
+This framework is designed to organize code into clear separation of responsibilities. This allows for the ability
+to create unit tests efficiently for any point of the system that can benefit from testing.
+
+The key pieces of the framework are the `store` and `ui.components`. The `ui.components` provide an easy way to define
+the UI in a responsive way. Making it easy to layout the style and various controls necessary for displaying and
+receiving user input. The `store` manages the game state and all the information happening in the game.
+
+Both of these patterns are similar in spirit to [React-Redux](https://react-redux.js.org/). By isolating state and
+making sure all updates are coordinated through actions and reducers, we can easily control state changes and centralize
+the updates.
+
+### Project Organization
+
+The project is organized around the concept of `rules`. Rules represent some either complex interactions or entity in
+the game. For example, currently there is a `character` rule section, and a `combat` rule section. Each with it's own
+concerns. Within any rules domain, there can be `actions` which can be dispatched to the store, `selectors` which
+retrieve values from state, or any other `custom` functionality that makes the most sense for this section of the rules.
+
+By separating into various section, each rules area can control a section of state. If any other rules area wants to
+modify another rules state section, it dispatches the appropriate action to the other rule for those to be handle.
+
+#### An Example
+
+Characters manage the various bits of information like, how much health do I have, what is my name, what team am I on, etc...
+Combat manages the interaction between potentially characters, but could be other entities as well. But has no
+state of it's own that it manages.
+
+When a character `attacks` another character. A combat action is dispatched to resolve the attack and encapsulate all
+the rules about how combat is resolved. The combat might need to check-in with the `skills` rules and to figure out
+how some competing skill checks get resolved. Depending on that resolution it will dispatch updates to the character
+that some damage has occurred, or some ammunition is consumed, etc...
+
+
 ## Contributing / Building from Source
 
 Terminus runs in Love2D and you will need to download the appropriate version for your system first - [Download Love2D](https://love2d.org/).
