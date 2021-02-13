@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-return {
-  set = "MAP_SET",
-  map_add_enemy_spawner = "MAP_ADD_ENEMY_SPAWNER"
-}
+return function(state)
+  if state.map == nil then return {} end
+  return state.map.enemySpawners or {}
+end

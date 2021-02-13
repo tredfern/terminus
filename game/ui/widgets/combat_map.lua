@@ -10,6 +10,7 @@ local character = require "game.rules.character"
 local camera = require "game.ui.camera"
 local store = require "moonpie.redux.store"
 local Settings = require "game.settings"
+local Map = require "game.rules.map"
 
 local tile_width = 32
 local tile_height = 32
@@ -40,11 +41,17 @@ local function draw_character(x, y, isEnemy)
   love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
 end
 
+local function drawSpawner(x, y)
+  love.graphics.setColor(colors.warning)
+  love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
+end
+
 
 local combat_map = components("combat_map", function(props)
   return {
     camera = props.camera,
     characters = props.characters,
+    enemySpawners = props.enemySpawners,
     map = props.map,
     showGrid = props.showGrid,
 
@@ -68,6 +75,10 @@ local combat_map = components("combat_map", function(props)
         end
       end
 
+      for _, v in ipairs(self.enemySpawners) do
+        drawSpawner(v.x - self.camera.x, v.y - self.camera.y)
+      end
+
       for _, v in ipairs(self.characters) do
         draw_character(
           v.x - self.camera.x,
@@ -87,6 +98,7 @@ return connect(combat_map,
     return {
       camera = camera.selectors.get(state),
       characters = character.selectors.getAll(state),
+      enemySpawners = Map.selectors.getEnemySpawners(state),
       map = state.map,
       showGrid = Settings.selectors.getOption(state, "show_grid_lines")
   }

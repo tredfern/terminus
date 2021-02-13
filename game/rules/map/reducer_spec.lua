@@ -16,4 +16,15 @@ describe("game.rules.map.reducer", function()
 
     assert.equals(map, state)
   end)
+
+  it("can add enemy spawners to the map", function()
+    local map = { width = 100, height = 100 }
+    local state = reducer(map, {
+      type = types.map_add_enemy_spawner,
+      payload = { x = 12, y = 15 }
+    })
+
+    assert.equals(12, state.enemySpawners[1].x)
+    assert.equals(15, state.enemySpawners[1].y)
+  end)
 end)

@@ -31,12 +31,9 @@ return function()
 
     for _ = 1,8 do
       local r = tables.pickRandom(rooms)
-      dispatch(Character.actions.add(
-        Character.create {
-          isEnemy = true,
-          x = r.x + math.floor(r.width / 2),
-          y = r.y + math.floor(r.height / 2),
-        }
+      dispatch(map.actions.addEnemySpawner(
+        r.x + love.math.random(r.width) - 1,
+        r.y + love.math.random(r.height) - 1
       ))
     end
 

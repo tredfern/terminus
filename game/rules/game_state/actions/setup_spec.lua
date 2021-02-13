@@ -41,12 +41,11 @@ describe("game.rules.game_state.actions.setup", function()
     )
   end)
 
-  it("adds some random enemies", function()
+  it("adds some random enemies spawners", function()
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
-        c.type == character.actions.types.character_add and
-        c.payload.character.isEnemy
+        c.type == map.actions.types.map_add_enemy_spawner
       end)
     )
   end)
