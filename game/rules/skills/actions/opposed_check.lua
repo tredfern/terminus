@@ -13,6 +13,7 @@ return function(aggressor, aggSkill, defender, defSkill, callback)
 
     local aggRoll = skillCheck()
     local defRoll = skillCheck()
+    print("Contested roll:", (aggTarget - aggRoll), (defTarget - defRoll))
 
     if aggTarget - aggRoll > defTarget - defRoll then
       callback(aggressor, defender)
