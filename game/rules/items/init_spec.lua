@@ -15,18 +15,14 @@ describe("game.rules.items", function()
     assert.equals("Short sword", Items.list.shortsword.name)
   end)
 
-  it("can specify what skills are necessary to use item", function()
+  it("can specify what skill is necessary to use item", function()
     Items.describe {
       name = "Medkit",
       key = "medkit",
-      skills = {
-        "doctor",
-        "firstaid"
-      }
+      skill = "firstaid"
     }
 
-    assert.array_includes("doctor", Items.list.medkit.skills)
-    assert.array_includes("firstaid", Items.list.medkit.skills)
+    assert.equals("firstaid", Items.list.medkit.skill)
   end)
 
   it("describes the slot an item can be equipped", function()
@@ -48,7 +44,7 @@ describe("game.rules.items", function()
       Items.describe {
         name = "Bandage",
         key = "bandage",
-        skills = { "firstaid", "doctor" }
+        skill = "firstaid"
       }
     end)
 
@@ -58,7 +54,7 @@ describe("game.rules.items", function()
     end)
 
     it("allows character to use item if has skill specified", function()
-      local c = { skills = { doctor = 0 } }
+      local c = { skills = { firstaid = 0 } }
       assert.is_true(Items.canUseItem(Items.list.bandage, c))
     end)
 

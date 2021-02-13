@@ -11,15 +11,7 @@ function Items.describe(props)
 end
 
 function Items.canUseItem(item, character)
-  if item.skills == nil or #item.skills == 0 then return true end
-
-  for _, v in ipairs(item.skills) do
-    if character.skills[v] then return true end
-  end
-
-  return false
+  return item.skill == nil or character.skills[item.skill] ~= nil
 end
-
-
 
 return Items

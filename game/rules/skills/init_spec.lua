@@ -55,6 +55,11 @@ describe("game.rules.skills", function()
   end)
 
   it("has skill actions", function()
+    assert.not_nil(Skills.actions.opposedCheck)
     assert.not_nil(Skills.actions.perform)
+  end)
+
+  it("can choose skills for different situations", function()
+    assert.not_nil(Skills.chooseSkill)
   end)
 end)
