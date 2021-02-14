@@ -7,7 +7,6 @@ describe("game.rules.combat", function()
   local combat = require "game.rules.combat"
 
   it("has actions for resolving combat", function()
-    assert.not_nil(combat.actions.attack)
     assert.not_nil(combat.actions.dealDamage)
     assert.not_nil(combat.actions.meleeAttack)
   end)

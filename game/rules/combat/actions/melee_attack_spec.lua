@@ -10,6 +10,7 @@ describe("game.rules.combat.actions.melee_attack", function()
   local MockDispatch = require "mock_dispatch"
 
   before_each(function()
+    MockDispatch:reset()
     Skills.describe { key = "blade", attribute = "dexterity" }
     Skills.describe { key = "club", attribute = "strength" }
     Skills.describe { key = "dodge", attribute = "dexterity" }
@@ -103,6 +104,10 @@ describe("game.rules.combat.actions.melee_attack", function()
     action(MockDispatch)
 
     assert.spy(Character.actions.setHealth).was_not.called()
+  end)
+
+  it("does not attack itself", function()
+    assert.is_nil(MeleeAttack(attacker, attacker))
   end)
 
 end)

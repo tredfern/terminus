@@ -24,6 +24,7 @@ local function createAttackResult(dispatch, attacker, defender, weapon)
 end
 
 return function(attacker, defender)
+  if attacker == defender then return end
   return function(dispatch)
     -- get the weapon
     local weapon = attacker.inventory.equipSlots[EquipSlots.melee]
