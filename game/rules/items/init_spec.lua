@@ -39,12 +39,18 @@ describe("game.rules.items", function()
     before_each(function()
       Items.describe {
         name = "Easy to Use",
-        key = "easy_to_use"
+        key = "easy_to_use",
+        usable = true
       }
       Items.describe {
         name = "Bandage",
         key = "bandage",
-        skill = "firstaid"
+        skill = "firstaid",
+        usable = true
+      }
+      Items.describe {
+        name = "Unusable",
+        key = "unusable"
       }
     end)
 
@@ -61,6 +67,11 @@ describe("game.rules.items", function()
     it("returns false if character does not have skill", function()
       local c = { skills = { } }
       assert.is_false(Items.canUseItem(Items.list.bandage, c))
+    end)
+
+    it("is not allowed to use unusable items", function()
+      local c = { skills = { } }
+      assert.is_false(Items.canUseItem(Items.list.unusable, c))
     end)
   end)
 end)

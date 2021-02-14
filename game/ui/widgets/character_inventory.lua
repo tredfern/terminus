@@ -9,9 +9,17 @@ local tables = require "moonpie.tables"
 
 return Components("character_inventory", function(props)
   return {
+    width = "15%",
     tables.map(props.inventory, function(item, index)
+      local id = "inventoryItem" .. tostring(index)
+      local useButton
+      if item.usable then
+        useButton = Components.button { caption = "Use", id = id .. "UseButton", style = "button-small align-right" }
+      end
+
       return {
-        Components.text { text = item.name, id = "inventoryItem" .. tostring(index) }
+        Components.text { text = item.name, id = id },
+        useButton
       }
     end)
   }

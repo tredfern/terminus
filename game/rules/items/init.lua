@@ -11,6 +11,7 @@ function Items.describe(props)
 end
 
 function Items.canUseItem(item, character)
+  if not item.usable then return false end
   return item.skill == nil or character.skills[item.skill] ~= nil
 end
 
