@@ -74,4 +74,15 @@ describe("game.rules.items", function()
       assert.is_false(Items.canUseItem(Items.list.unusable, c))
     end)
   end)
+
+  describe("using items", function()
+    it("calls the item useHandler", function()
+      Items.describe { name = "UseFunction", key = "useFunction", usable = true,
+        useHandler = spy.new(function() end)
+      }
+
+      Items.use(Items.list.useFunction)
+      assert.spy(Items.list.useFunction.useHandler).was.called_with(Items.list.useFunction)
+    end)
+  end)
 end)

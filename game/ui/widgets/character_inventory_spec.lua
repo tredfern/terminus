@@ -31,4 +31,20 @@ describe("game.ui.widgets.character_inventory", function()
     local item1UseButton = widget:findByID("inventoryItem1UseButton")
     assert.not_nil(item1UseButton)
   end)
+
+  it("call the item use routine when use button is pushed", function()
+    local Items = require "game.rules.items"
+    stub(Items, "use")
+
+    local widget = characterInventory {
+      inventory = {
+        { name = "Health Kit", usable = true }
+      }
+    }
+
+    local item1UseButton = widget:findByID("inventoryItem1UseButton")
+    item1UseButton:click()
+
+    assert.stub(Items.use).was.called_with(widget.inventory[1])
+  end)
 end)

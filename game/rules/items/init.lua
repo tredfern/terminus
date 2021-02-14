@@ -15,4 +15,8 @@ function Items.canUseItem(item, character)
   return item.skill == nil or character.skills[item.skill] ~= nil
 end
 
+function Items.use(item)
+  item:useHandler()
+end
+
 return Items
