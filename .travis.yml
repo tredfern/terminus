@@ -2,6 +2,7 @@ language: python
 sudo: false
 env:
   matrix:
+  - LUA="lua=5.3"
   - LUA="luajit=2.1"
 before_install:
 - pip install hererocks

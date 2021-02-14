@@ -15,7 +15,9 @@ styles.button = moonpie.tables.merge(
     cornerRadiusY = 15,
     fontName = "headline",
     padding = { left = 15, right = 15, top = 8, bottom = 8 },
-    vertical_align = "middle"
+    vertical_align = "middle",
+    clickSound = sounds.click,
+    hoverSound = sounds.hover
   },
   styles.button
 )
@@ -80,7 +82,8 @@ styles.main_menu = {
 
 styles.main_menu_button = {
   display = "block",
-  clickSound = sounds.click
+  clickSound = sounds.click,
+  hoverSound = sounds.hover
 }
 
 styles.message_log = {
