@@ -11,6 +11,7 @@ local tables = require "moonpie.tables"
 return Components("character_inventory", function(props)
   return {
     inventory = props.inventory,
+    character = props.character,
     width = "15%",
 
     tables.map(props.inventory, function(item, index)
@@ -22,7 +23,7 @@ return Components("character_inventory", function(props)
           id = id .. "UseButton",
           style = "button-small align-right",
           click = function()
-            Items.use(item)
+            Items.use(item, props.character)
           end
         }
       end

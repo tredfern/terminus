@@ -9,8 +9,9 @@ return setmetatable({
   dispatched = {},
   processComplex = false,
   received_action = function(self, action)
-    if action == nil then return false end
-
+    if action == nil then
+      print("searching for nil action in mock dispatch")
+    end
     return tables.any(self.dispatched, function(d) return d.type == action end)
   end,
   reset = function(self)

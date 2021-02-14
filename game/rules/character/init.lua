@@ -11,6 +11,7 @@ return {
     add = require "game.rules.character.actions.add",
     addItemToInventory = require "game.rules.character.actions.add_item_to_inventory",
     equipItem = require "game.rules.character.actions.equip_item",
+    heal = require "game.rules.character.actions.heal",
     move = require "game.rules.character.actions.move",
     remove = require "game.rules.character.actions.remove",
     setHealth = require "game.rules.character.actions.set_health",

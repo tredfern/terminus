@@ -39,12 +39,13 @@ describe("game.ui.widgets.character_inventory", function()
     local widget = characterInventory {
       inventory = {
         { name = "Health Kit", usable = true }
-      }
+      },
+      character = {}
     }
 
     local item1UseButton = widget:findByID("inventoryItem1UseButton")
     item1UseButton:click()
 
-    assert.stub(Items.use).was.called_with(widget.inventory[1])
+    assert.stub(Items.use).was.called_with(widget.inventory[1], widget.character)
   end)
 end)

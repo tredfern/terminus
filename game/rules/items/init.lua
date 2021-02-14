@@ -15,8 +15,9 @@ function Items.canUseItem(item, character)
   return item.skill == nil or character.skills[item.skill] ~= nil
 end
 
-function Items.use(item)
-  item:useHandler()
+function Items.use(item, character)
+  local store = require "game.store"
+  item:useHandler(character, store.dispatch)
 end
 
 return Items

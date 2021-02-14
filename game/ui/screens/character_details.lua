@@ -43,7 +43,8 @@ local CharacterDetails = Components("character_details", function(props)
           {
             CharacterInventory {
               id = "characterInventory",
-              inventory = props.character.inventory
+              inventory = props.character.inventory,
+              character = props.character
             },
           }
         },

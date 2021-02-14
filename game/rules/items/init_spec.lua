@@ -80,9 +80,15 @@ describe("game.rules.items", function()
       Items.describe { name = "UseFunction", key = "useFunction", usable = true,
         useHandler = spy.new(function() end)
       }
+      local character = {}
+      local store = require "game.store"
 
-      Items.use(Items.list.useFunction)
-      assert.spy(Items.list.useFunction.useHandler).was.called_with(Items.list.useFunction)
+      Items.use(Items.list.useFunction, character)
+      assert.spy(Items.list.useFunction.useHandler).was.called_with(
+        Items.list.useFunction,
+        character,
+        store.dispatch
+      )
     end)
   end)
 end)

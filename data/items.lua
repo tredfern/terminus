@@ -8,5 +8,13 @@ local equipSlots = require "game.rules.character.equip_slots"
 
 Items.describe { key = "sword", name = "Sword", skill = "blade", equipSlot = equipSlots.melee, damage = "1d6" }
 Items.describe { key = "laserGun", name = "Laser Gun", skill = "handgun" }
-Items.describe { key = "healthPack", name = "Health Pack", usable = true, useHandler = function() end }
+Items.describe {
+  key = "healthPack",
+  name = "Health Pack",
+  usable = true,
+  useHandler = function(_, user, dispatch)
+    local Character = require "game.rules.character"
+    dispatch(Character.actions.heal(user))
+  end
+}
 Items.describe { key = "keycard", name = "Keycard" }
