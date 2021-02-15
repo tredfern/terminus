@@ -11,13 +11,19 @@ local camera = require "game.ui.camera"
 local store = require "moonpie.redux.store"
 local Settings = require "game.settings"
 local Map = require "game.rules.map"
+local Image = require "moonpie.graphics.image"
+local tables = require "moonpie.tables"
 
 local tile_width = 32
 local tile_height = 32
+local floorTiles = {
+  Image.load("assets/graphics/floor-1.png"),
+  Image.load("assets/graphics/floor-2.png")
+}
 
 local function draw_tile(x, y, color)
   love.graphics.setColor(color)
-  love.graphics.rectangle("fill", x * tile_width, y*tile_height, tile_width, tile_height)
+  love.graphics.draw(floorTiles[2], x * tile_width, y * tile_height)
 end
 
 local function drawGrid(tilesWide, tilesHigh)
@@ -68,10 +74,13 @@ local combat_map = components("combat_map", function(props)
     drawComponent = function(self)
       for x = 1, self.map.width do
         for y = 1, self.map.height do
-          draw_tile(
-            x - self.camera.x,
-            y - self.camera.y,
-            self.map:getTerrain(x, y).color)
+          local terrain = self.map:getTerrain(x, y)
+          if not terrain.noImage then
+            draw_tile(
+              x - self.camera.x,
+              y - self.camera.y,
+              terrain.color)
+          end
         end
       end
 

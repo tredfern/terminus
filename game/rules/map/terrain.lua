@@ -8,7 +8,8 @@ local colors = require "moonpie.graphics.colors"
 return {
   blank = {
     color = colors.oxford_blue,
-    blocks_movement = true
+    blocks_movement = true,
+    noImage = true,
   },
   boundary = {
     color = colors.gray
@@ -26,7 +27,7 @@ return {
     color = colors.lighten(colors.pakistan_green, 1.2)
   },
   room = {
-    color = colors.bronze
+    color = colors.white
   },
   water = {
     color = colors.lighten(colors.oxford_blue, 2.2)
