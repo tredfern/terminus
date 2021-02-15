@@ -23,6 +23,7 @@ return {
   selectors = {
     getDimensions = require "game.rules.map.selectors.get_dimensions",
     getEnemySpawners = require "game.rules.map.selectors.get_enemy_spawners",
+    getNeighborTerrain = require "game.rules.map.selectors.get_neighbor_terrain",
     getRooms = require "game.rules.map.selectors.get_rooms",
     getTerrain = require "game.rules.map.selectors.get_terrain"
   }

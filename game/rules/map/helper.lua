@@ -27,4 +27,17 @@ function map:setTerrain(x, y, v)
 end
 
 
+function map:getNeighbors(x, y)
+  return {
+    nw = self:getTerrain(x - 1, y - 1),
+    n = self:getTerrain(x, y - 1),
+    ne = self:getTerrain(x + 1, y - 1),
+    w = self:getTerrain(x - 1, y),
+    e = self:getTerrain(x + 1, y),
+    sw = self:getTerrain(x - 1, y + 1),
+    s = self:getTerrain(x, y + 1),
+    se = self:getTerrain(x + 1, y + 1)
+  }
+end
+
 return class(map)

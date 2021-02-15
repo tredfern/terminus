@@ -15,7 +15,7 @@ return {
     color = colors.gray
   },
   corridor = {
-    color = colors.beaver
+    color = colors(colors.light_accent)
   },
   dirt = {
     color = colors.lighten(colors.beaver, 0.8)
@@ -28,6 +28,11 @@ return {
   },
   room = {
     color = colors.white
+  },
+  wall = {
+    type = "wall",
+    color = colors.white,
+    blocks_movement = true,
   },
   water = {
     color = colors.lighten(colors.oxford_blue, 2.2)

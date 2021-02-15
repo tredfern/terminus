@@ -89,28 +89,12 @@ function generator.generate(width, height)
   generator.divide(root, 1, DEPTH)
   generator.create_rooms(root)
 
-  -- generator.add_border_walls(map, root)
   generator.add_rooms(new_map, root)
   generator.add_corridors(new_map, root)
 
+  generator.fillWalls(new_map)
+
   return new_map
-end
-
-function generator.add_border_walls(map, node)
-  if node.left or node.right then
-    generator.add_border_walls(map, node.left)
-    generator.add_border_walls(map, node.right)
-  else
-    for x = 0, node.width - 1 do
-      map:setTerrain(node.x + x, node.y, terrain.boundary)
-      map:setTerrain(node.x + x, node.y + node.height, terrain.boundary)
-    end
-
-    for y = 0, node.height - 1 do
-      map:setTerrain(node.x, node.y + y, terrain.boundary)
-      map:setTerrain(node.x + node.width, node.y + y, terrain.boundary)
-    end
-  end
 end
 
 function generator.add_rooms(map, node)
@@ -157,6 +141,26 @@ function generator.build_corridor(map, start_x, start_y, end_x, end_y)
   for _, v in ipairs(p) do
     if map:getTerrain(v.x, v.y) == terrain.blank then
       map:setTerrain(v.x, v.y, terrain.corridor)
+    end
+  end
+end
+
+function generator.fillWalls(map)
+  for x = 1, map.width do
+    for y = 1, map.height do
+      if map:getTerrain(x, y) == terrain.blank then
+        local neighbors = map:getNeighbors(x, y)
+        if (neighbors.nw ~= terrain.blank and neighbors.nw ~= terrain.wall) or
+          (neighbors.n ~= terrain.blank and neighbors.n ~= terrain.wall) or
+          (neighbors.ne ~= terrain.blank and neighbors.ne ~= terrain.wall) or
+          (neighbors.w ~= terrain.blank and neighbors.w ~= terrain.wall) or
+          (neighbors.e ~= terrain.blank and neighbors.e ~= terrain.wall) or
+          (neighbors.sw ~= terrain.blank and neighbors.sw ~= terrain.wall) or
+          (neighbors.s ~= terrain.blank and neighbors.s ~= terrain.wall) or
+          (neighbors.se ~= terrain.blank and neighbors.se ~= terrain.wall) then
+              map:setTerrain(x, y, terrain.wall)
+        end
+      end
     end
   end
 end
