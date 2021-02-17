@@ -6,8 +6,27 @@
 local components = require "moonpie.ui.components"
 local panel = require "game.ui.widgets.panel"
 local app = require "game.app"
+local Image = require "moonpie.graphics.image"
+local events = require "moonpie.events"
+local colors = require "moonpie.graphics.colors"
 
+local c = colors(colors.light_shade)
+local starField = love.graphics.newParticleSystem(Image.load("assets/graphics/particles/circle.png"))
+  starField:setParticleLifetime(2, 5) -- Particles live at least 2s and at most 5s.
+	starField:setEmissionRate(25)
+  starField:setSizes(0.05, 0.1)
+	starField:setSizeVariation(0.5)
+	starField:setLinearAcceleration(-220, -220, 220, 220) -- Random movement in all directions.
+	starField:setColors(c[1], c[2], c[3], 1, c[1], c[2], c[3], 0)
+  starField:setEmissionArea("borderrectangle", 50, 50)
+  starField:setTangentialAcceleration(10, 100)
+
+events.beforeUpdate:add(function()
+  local dt = love.timer.getDelta()
+  starField:update(dt)
+end)
 local main_menu = components("main_menu", function()
+
   return panel {
     style = "main_menu panel_primary align-center align-middle",
     title = "terminus",
@@ -34,7 +53,12 @@ local main_menu = components("main_menu", function()
         caption = "Exit",
         click = app.quit
       },
-    }
+    },
+
+    drawComponent = function()
+      love.graphics.setColor({ 1, 1, 1, 1})
+      love.graphics.draw(starField, 130, 130)
+    end
   }
 end)
 
