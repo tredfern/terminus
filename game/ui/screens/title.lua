@@ -55,15 +55,15 @@ local main_menu = components("main_menu", function()
       },
     },
 
-    drawComponent = function()
-      love.graphics.setColor({ 1, 1, 1, 1})
-      love.graphics.draw(starField, 130, 130)
-    end
   }
 end)
 
 return components("title_screen", function()
   return {
-    main_menu()
+    main_menu(),
+    drawComponent = function(self)
+      love.graphics.setColor({ 1, 1, 1, 1})
+      love.graphics.draw(starField, self.box.width/ 2, self.box.height / 2)
+    end
   }
 end)

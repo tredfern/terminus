@@ -110,13 +110,15 @@ local function drawGrid(tilesWide, tilesHigh)
   end
 end
 
-local function draw_character(x, y, isEnemy)
-  if isEnemy then
-    love.graphics.setColor(colors.danger)
-  else
-    love.graphics.setColor(colors.success)
-  end
-  love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
+local function draw_character(x, y)
+  local characterImage = Image.load("assets/graphics/simple-character-1.png")
+  love.graphics.setColor(colors.white)
+  love.graphics.draw(characterImage, x * tile_width, y * tile_height)
+end
+
+local function draw_enemy(x, y)
+  local alien = Image.load("assets/graphics/alien_1.png")
+  love.graphics.draw(alien, x * tile_width, y * tile_height)
 end
 
 local function drawSpawner(x, y)
@@ -165,10 +167,11 @@ local combat_map = components("combat_map", function(props)
       end
 
       for _, v in ipairs(self.characters) do
-        draw_character(
-          v.x - self.camera.x,
-          v.y - self.camera.y,
-          v.isEnemy)
+        if v.isEnemy then
+          draw_enemy(v.x - self.camera.x, v.y - self.camera.y)
+        else
+          draw_character(v.x - self.camera.x, v.y - self.camera.y, v.isEnemy)
+        end
       end
 
       if self.showGrid then
