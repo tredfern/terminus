@@ -5,7 +5,7 @@
 
 # Terminus
 
-Terminus is a working title for a rogue-style project. 
+Develop a game that combines my _learnings of systems thinking_, _opinions on software engineering_, and _love for games that give control to the player to influence the world_.
 
 ## Goals
 ### Fun
