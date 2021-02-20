@@ -4,6 +4,9 @@
 -- https://opensource.org/licenses/MIT
 
 local Character = require "game.rules.character"
+local aiRoutines = {
+  randomMove = require "game.rules.enemy.ai.random_movement"
+}
 local randomChance = 2
 
 return function(spawner)
@@ -14,7 +17,8 @@ return function(spawner)
         Character.create {
           x = spawner.x,
           y = spawner.y,
-          isEnemy = true
+          isEnemy = true,
+          ai = aiRoutines.randomMove
         }
       ))
     end

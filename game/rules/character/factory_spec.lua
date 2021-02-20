@@ -60,4 +60,13 @@ describe("game.rules.character.character", function()
     assert.not_nil(c.name)
     assert.is_string(c.name)
   end)
+
+  it("can have an ai routine assigned to it", function()
+    local aiRoutine = function() end
+    local c = characterFactory.newCharacter {
+      ai = aiRoutine
+    }
+
+    assert.equals(aiRoutine, c.ai)
+  end)
 end)

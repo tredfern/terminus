@@ -52,7 +52,8 @@ function characterFactory.newCharacter(props)
     attributes = characterFactory.createDefaultAttributes(),
     skills = characterFactory.createDefaultSkills(),
     inventory = characterFactory.createDefaultInventory(),
-    name = characterFactory.getName()
+    name = characterFactory.getName(),
+    ai = props.ai
   }
   c.health = characterFactory.calculateHealth(c)
 

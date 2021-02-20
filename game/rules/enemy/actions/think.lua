@@ -3,17 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local character = require "game.rules.character"
-
 return function(enemy)
   return function(dispatch)
-    local randx = love.math.random(-1, 1)
-    local randy = love.math.random(-1, 1)
-
-    dispatch(character.actions.move(
-      enemy,
-      enemy.x + randx,
-      enemy.y + randy
-    ))
+    enemy:ai(dispatch)
   end
 end

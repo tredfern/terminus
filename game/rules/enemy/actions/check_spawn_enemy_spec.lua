@@ -27,4 +27,12 @@ describe("game.rules.enemy.actions.check_spawn_enemy", function()
 
     assert.is_false(mockDispatch:received_action("CHARACTER_ADD"))
   end)
+
+  it("attaches an ai to the newly created character", function()
+    local action = checkSpawnEnemy({ x = 12, y = 19 })
+    mockRandom.setreturnvalues({ 1 })
+    action(mockDispatch)
+
+    assert.not_nil(mockDispatch.dispatched[1].payload.character.ai)
+  end)
 end)

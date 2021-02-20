@@ -6,18 +6,17 @@
 describe("game.rules.enemy.actions.think", function()
   local think = require "game.rules.enemy.actions.think"
   local character = require "game.rules.character"
-  local mock_dispatch = require "mock_dispatch"
+  local mockDispatch = require "mock_dispatch"
 
-  it("dispatches a move action to an adjacent square", function()
+
+  it("calls the ai routine for the enemy", function()
     local enemy = {
-      x = 6,
-      y = 9
+      ai = spy.new(function() end)
     }
 
-    spy.on(character.actions, "move")
     local action = think(enemy)
-    action(mock_dispatch)
+    action(mockDispatch)
 
-    assert.spy(character.actions.move).was.called()
+    assert.spy(enemy.ai).was.called_with(enemy, mockDispatch)
   end)
 end)
