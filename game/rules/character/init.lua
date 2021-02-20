@@ -13,6 +13,7 @@ return {
     equipItem = require "game.rules.character.actions.equip_item",
     heal = require "game.rules.character.actions.heal",
     move = require "game.rules.character.actions.move",
+    pickupItems = require "game.rules.character.actions.pickup_items",
     remove = require "game.rules.character.actions.remove",
     setHealth = require "game.rules.character.actions.set_health",
     setName = require "game.rules.character.actions.set_name",

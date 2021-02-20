@@ -8,8 +8,9 @@ local Items = {
     add = require "game.rules.items.actions.add"
   },
   selectors = {
-    getAll = require "game.rules.items.selectors.get_all"
-  }
+    getAll = require "game.rules.items.selectors.get_all",
+    getByPosition = require "game.rules.items.selectors.get_by_position"
+  },
 }
 Items.list = {}
 

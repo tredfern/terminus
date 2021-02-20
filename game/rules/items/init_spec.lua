@@ -115,5 +115,6 @@ describe("game.rules.items", function()
 
   it("has selectors to retrieve items", function()
     assert.not_nil(Items.selectors.getAll)
+    assert.not_nil(Items.selectors.getByPosition)
   end)
 end)

@@ -55,7 +55,8 @@ describe("game.ui.inputs.keyboard", function()
           },
           map = {
             getTerrain = function() return {} end
-          }
+          },
+          items = { }
         })
       end)
 
@@ -80,6 +81,13 @@ describe("game.ui.inputs.keyboard", function()
       it("can move right", function()
         key_simulator:keyPressed("left")
         assert.spy(character.actions.move).was.called_with(player_character, 19, 32)
+        assert.spy(turn.actions.process).was.called()
+      end)
+
+      it("can pickup items", function()
+        spy.on(character.actions, "pickupItems")
+        key_simulator:keyPressed("g")
+        assert.spy(character.actions.pickupItems).was.called_with(player_character)
         assert.spy(turn.actions.process).was.called()
       end)
     end)
