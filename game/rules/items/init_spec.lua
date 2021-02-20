@@ -91,4 +91,21 @@ describe("game.rules.items", function()
       )
     end)
   end)
+
+  describe("cloning items", function()
+    Items.describe { key = "cloneMe", name = "Clone me", propA = true, propB = false }
+    it("can clone an item", function()
+      local c = Items.list.cloneMe:clone()
+      assert.equals("cloneMe", c.key)
+      assert.equals("Clone me", c.name)
+      assert.equals(true, c.propA)
+      assert.equals(false, c.propB)
+    end)
+
+    it("can take additional values to cloning to overwrite values of the item", function()
+      local c = Items.list.cloneMe:clone { x = 19, y = 18 }
+      assert.equals(19, c.x)
+      assert.equals(18, c.y)
+    end)
+  end)
 end)

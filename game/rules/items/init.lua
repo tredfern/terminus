@@ -6,7 +6,17 @@
 local Items = {}
 Items.list = {}
 
+local function clone(item, props)
+  props = props or {}
+
+  return setmetatable(
+    props,
+    { __index = item }
+  )
+end
+
 function Items.describe(props)
+  props.clone = clone
   Items.list[props.key] = props
 end
 
