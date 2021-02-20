@@ -26,6 +26,6 @@ describe("game.rules.enemy.ai.random_movement", function()
     randomMovement(c, mockDispatch)
 
     assert.spy(character.actions.move).was_called_with(c, 11, 24)
-    
+
   end)
 end)

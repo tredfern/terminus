@@ -5,7 +5,6 @@
 
 describe("game.rules.enemy.actions.think", function()
   local think = require "game.rules.enemy.actions.think"
-  local character = require "game.rules.character"
   local mockDispatch = require "mock_dispatch"
 
 
