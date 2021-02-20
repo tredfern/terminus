@@ -18,4 +18,16 @@ describe("game.rules.items.reducer", function()
 
     assert.array_includes(item, state)
   end)
+
+  it("can remove an item from state", function()
+    local item = {}
+    local state = reducer({ item }, {
+      type = types.remove,
+      payload = {
+        item = item
+      }
+    })
+
+    assert.not_array_includes(item, state)
+  end)
 end)

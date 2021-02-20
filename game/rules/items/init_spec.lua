@@ -111,6 +111,7 @@ describe("game.rules.items", function()
 
   it("has actions to manage items", function()
     assert.not_nil(Items.actions.add)
+    assert.not_nil(Items.actions.remove)
   end)
 
   it("has selectors to retrieve items", function()

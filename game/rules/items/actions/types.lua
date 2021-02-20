@@ -4,5 +4,6 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  items_add = "ITEMS_ADD"
+  items_add = "ITEMS_ADD",
+  remove = "ITEMS_REMOVE"
 }

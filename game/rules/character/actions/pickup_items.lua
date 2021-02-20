@@ -12,6 +12,7 @@ return function(character)
     local itemsInPosition = Items.selectors.getByPosition(getState(), character.x, character.y)
     for _, v in ipairs(itemsInPosition) do
       dispatch(addItemToInventory(character, v))
+      dispatch(Items.actions.remove(v))
     end
   end
 end

@@ -5,7 +5,8 @@
 
 local Items = {
   actions = {
-    add = require "game.rules.items.actions.add"
+    add = require "game.rules.items.actions.add",
+    remove = require "game.rules.items.actions.remove"
   },
   selectors = {
     getAll = require "game.rules.items.selectors.get_all",
