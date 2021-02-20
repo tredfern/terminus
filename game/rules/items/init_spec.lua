@@ -108,4 +108,12 @@ describe("game.rules.items", function()
       assert.equals(18, c.y)
     end)
   end)
+
+  it("has actions to manage items", function()
+    assert.not_nil(Items.actions.add)
+  end)
+
+  it("has selectors to retrieve items", function()
+    assert.not_nil(Items.selectors.getAll)
+  end)
 end)

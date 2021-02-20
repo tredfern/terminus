@@ -10,6 +10,7 @@ local function getReducers()
   return combine_reducers {
     camera = require "game.ui.camera.reducer",
     characters = require "game.rules.character.reducer",
+    items = require "game.rules.items.reducer",
     map = require "game.rules.map.reducer",
     message_log = require "game.rules.message_log.reducer",
     settings = require "game.settings.reducer",

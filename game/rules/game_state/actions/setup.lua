@@ -34,6 +34,18 @@ return function()
       ))
     end
 
+
+    -- Add some random items to some random rooms
+    for _ = 1, 10 do
+      local r = tables.pickRandom(rooms)
+      dispatch(Items.actions.add(
+        Items.list.healthPack, {
+          x = r.x + love.math.random(r.width) - 1,
+          y = r.y + love.math.random(r.height) - 1
+        }
+      ))
+    end
+
     dispatch(MessageLog.actions.add(
       "Welcome to the jungle!"
     ))

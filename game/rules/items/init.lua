@@ -3,7 +3,14 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Items = {}
+local Items = {
+  actions = {
+    add = require "game.rules.items.actions.add"
+  },
+  selectors = {
+    getAll = require "game.rules.items.selectors.get_all"
+  }
+}
 Items.list = {}
 
 local function clone(item, props)

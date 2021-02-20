@@ -12,6 +12,7 @@ local store = require "moonpie.redux.store"
 local Settings = require "game.settings"
 local Map = require "game.rules.map"
 local Image = require "moonpie.graphics.image"
+local Items = require "game.rules.items"
 
 local tile_width = 32
 local tile_height = 32
@@ -126,6 +127,11 @@ local function drawSpawner(x, y)
   love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
 end
 
+local function drawItem(_, x, y)
+  love.graphics.setColor(colors(colors.main))
+  love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
+end
+
 
 local combat_map = components("combat_map", function(props)
   return {
@@ -133,6 +139,7 @@ local combat_map = components("combat_map", function(props)
     characters = props.characters,
     enemySpawners = props.enemySpawners,
     map = props.map,
+    items = props.items,
     showGrid = props.showGrid,
 
     afterLayout = function(self)
@@ -166,6 +173,10 @@ local combat_map = components("combat_map", function(props)
         drawSpawner(v.x - self.camera.x, v.y - self.camera.y)
       end
 
+      for _, v in ipairs(self.items) do
+        drawItem(v, v.x - self.camera.x, v.y - self.camera.y)
+      end
+
       for _, v in ipairs(self.characters) do
         if v.isEnemy then
           draw_enemy(v.x - self.camera.x, v.y - self.camera.y)
@@ -188,6 +199,7 @@ return connect(combat_map,
       characters = character.selectors.getAll(state),
       enemySpawners = Map.selectors.getEnemySpawners(state),
       map = state.map,
+      items = Items.selectors.getAll(state),
       showGrid = Settings.selectors.getOption(state, "show_grid_lines")
   }
   end
