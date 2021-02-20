@@ -13,10 +13,10 @@ describe("game.rules.enemy.actions.think", function()
     local enemy = {
       ai = spy.new(function() end)
     }
-
+    local getState = function() end
     local action = think(enemy)
-    action(mockDispatch)
+    action(mockDispatch, getState)
 
-    assert.spy(enemy.ai).was.called_with(enemy, mockDispatch)
+    assert.spy(enemy.ai).was.called_with(enemy, mockDispatch, getState)
   end)
 end)

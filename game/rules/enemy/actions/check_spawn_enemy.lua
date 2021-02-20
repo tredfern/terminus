@@ -5,8 +5,10 @@
 
 local Character = require "game.rules.character"
 local aiRoutines = {
-  randomMove = require "game.rules.enemy.ai.random_movement"
+  require "game.rules.enemy.ai.move_towards_player",
+  require "game.rules.enemy.ai.random_movement"
 }
+local tables = require "moonpie.tables"
 local randomChance = 2
 
 return function(spawner)
@@ -18,7 +20,7 @@ return function(spawner)
           x = spawner.x,
           y = spawner.y,
           isEnemy = true,
-          ai = aiRoutines.randomMove
+          ai = tables.pickRandom(aiRoutines)
         }
       ))
     end

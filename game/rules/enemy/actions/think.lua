@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return function(enemy)
-  return function(dispatch)
-    enemy:ai(dispatch)
+  return function(dispatch, getState)
+    enemy:ai(dispatch, getState)
   end
 end
