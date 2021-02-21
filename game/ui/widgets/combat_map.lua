@@ -127,9 +127,14 @@ local function drawSpawner(x, y)
   love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
 end
 
-local function drawItem(_, x, y)
-  love.graphics.setColor(colors(colors.main))
-  love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
+local function drawItem(item, x, y)
+  if item.image then
+    love.graphics.setColor(colors.white)
+    love.graphics.draw(item.image, x * tile_width, y * tile_height)
+  else
+    love.graphics.setColor(colors(colors.main))
+    love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
+  end
 end
 
 

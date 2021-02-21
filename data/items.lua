@@ -5,6 +5,7 @@
 
 local Items = require "game.rules.items"
 local equipSlots = require "game.rules.character.equip_slots"
+local Image = require "moonpie.graphics.image"
 
 Items.describe { key = "sword", name = "Sword", skill = "blade", equipSlot = equipSlots.melee, damage = "1d6" }
 Items.describe { key = "laserGun", name = "Laser Gun", skill = "handgun" }
@@ -15,6 +16,7 @@ Items.describe {
   useHandler = function(_, user, dispatch)
     local Character = require "game.rules.character"
     dispatch(Character.actions.heal(user))
-  end
+  end,
+  image = Image.load("assets/graphics/healthkit.png")
 }
 Items.describe { key = "keycard", name = "Keycard" }
