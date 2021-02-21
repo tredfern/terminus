@@ -9,6 +9,7 @@ local app = require "game.app"
 local Image = require "moonpie.graphics.image"
 local events = require "moonpie.events"
 local colors = require "moonpie.graphics.colors"
+local audio = require "assets.sounds"
 
 local c = colors(colors.light_shade)
 local starField = love.graphics.newParticleSystem(Image.load("assets/graphics/particles/circle.png"))
@@ -54,6 +55,13 @@ local main_menu = components("main_menu", function()
         click = app.quit
       },
     },
+
+    mounted = function()
+      audio.titleTrack:play()
+    end,
+    unmounted = function()
+      audio.titleTrack:stop()
+    end
 
   }
 end)

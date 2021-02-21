@@ -21,11 +21,14 @@ end
 
 local sounds = {
   click = wrapper(Audio.getStatic("assets/sounds/click_sound.wav")),
-  hover = wrapper(Audio.getStatic("assets/sounds/hover_sound.wav"))
+  hover = wrapper(Audio.getStatic("assets/sounds/hover_sound.wav")),
+  titleTrack = Audio.getStreaming("assets/music/title.wav")
 }
 
 sounds.click.setVolume(0.08)
 sounds.hover.setVolume(0.03)
+sounds.titleTrack:setLooping(true)
+sounds.titleTrack:setVolume(0.5)
 
 
 return sounds
