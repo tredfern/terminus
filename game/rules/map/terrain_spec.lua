@@ -6,23 +6,14 @@
 describe("game.rules.map.terrain", function()
   local terrain = require "game.rules.map.terrain"
 
-  it("has a grass terrain", function()
-    assert.not_nil(terrain.grass)
-    assert.not_nil(terrain.grass.color)
-  end)
-
-  it("has a water terrain", function()
-    assert.not_nil(terrain.water)
-    assert.not_nil(terrain.water.color)
-  end)
-
-  it("has a dirt terrain", function()
-    assert.not_nil(terrain.dirt)
-    assert.not_nil(terrain.dirt.color)
+  it("can describe terrain", function()
+    terrain.describe { key = "newRoom", blocksMovement = false }
+    assert.not_nil(terrain.list.newRoom)
+    assert.is_false(terrain.list.newRoom.blocksMovement)
   end)
 
   it("has a blank and impassable terrain", function()
-    assert.not_nil(terrain.blank)
-    assert.is_true(terrain.blank.blocks_movement)
+    assert.not_nil(terrain.list.blank)
+    assert.is_true(terrain.list.blank.blocksMovement)
   end)
 end)

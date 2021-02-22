@@ -8,5 +8,6 @@ return function()
     require "data.skills"
     require "data.items"
     require "data.character_names"
+    require "data.terrains"
   end
 end

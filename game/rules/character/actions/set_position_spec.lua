@@ -20,7 +20,7 @@ describe("game.rules.character.actions.set_position", function()
   it("is invalid if terrain blocks movement", function()
     local sp = set_position({}, 5, 3)
     local map = {
-      getTerrain = function() return { blocks_movement = true } end
+      getTerrain = function() return { blocksMovement = true } end
     }
     assert.is_false(sp:validate({ map = map }))
   end)

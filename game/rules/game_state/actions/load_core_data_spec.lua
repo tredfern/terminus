@@ -24,4 +24,10 @@ describe("game.rules.game_state.actions.load_core_data", function()
     assert.not_nil(Skills.list.handgun)
     assert.not_nil(Skills.list.blade)
   end)
+
+  it("loads the core terrains", function()
+    local Terrain = require "game.rules.map.terrain"
+    assert.not_nil(Terrain.list.room)
+    assert.not_nil(Terrain.list.corridor)
+  end)
 end)

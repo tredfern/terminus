@@ -16,7 +16,7 @@ return function(character, x, y)
     },
     validate = function(self, state)
       local terrain = map.selectors.getTerrain(state, self.payload.x, self.payload.y)
-      return not terrain.blocks_movement
+      return not terrain.blocksMovement
     end
   }
 end

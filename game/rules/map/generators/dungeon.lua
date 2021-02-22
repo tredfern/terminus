@@ -109,7 +109,7 @@ function generator.add_rooms(map, node)
 
   for x = 0, node.room.width - 1 do
     for y = 0, node.room.height - 1 do
-      map:setTerrain(node.room.x + x, node.room.y + y, terrain.room)
+      map:setTerrain(node.room.x + x, node.room.y + y, terrain.list.room)
     end
   end
 end
@@ -139,8 +139,8 @@ function generator.build_corridor(map, start_x, start_y, end_x, end_y)
   local p = path.straight(start_x, start_y, end_x, end_y)
 
   for _, v in ipairs(p) do
-    if map:getTerrain(v.x, v.y) == terrain.blank then
-      map:setTerrain(v.x, v.y, terrain.corridor)
+    if map:getTerrain(v.x, v.y) == terrain.list.blank then
+      map:setTerrain(v.x, v.y, terrain.list.corridor)
     end
   end
 end
@@ -148,17 +148,17 @@ end
 function generator.fillWalls(map)
   for x = 1, map.width do
     for y = 1, map.height do
-      if map:getTerrain(x, y) == terrain.blank then
+      if map:getTerrain(x, y) == terrain.list.blank then
         local neighbors = map:getNeighbors(x, y)
-        if (neighbors.nw ~= terrain.blank and neighbors.nw ~= terrain.wall) or
-          (neighbors.n ~= terrain.blank and neighbors.n ~= terrain.wall) or
-          (neighbors.ne ~= terrain.blank and neighbors.ne ~= terrain.wall) or
-          (neighbors.w ~= terrain.blank and neighbors.w ~= terrain.wall) or
-          (neighbors.e ~= terrain.blank and neighbors.e ~= terrain.wall) or
-          (neighbors.sw ~= terrain.blank and neighbors.sw ~= terrain.wall) or
-          (neighbors.s ~= terrain.blank and neighbors.s ~= terrain.wall) or
-          (neighbors.se ~= terrain.blank and neighbors.se ~= terrain.wall) then
-              map:setTerrain(x, y, terrain.wall)
+        if (neighbors.nw ~= terrain.list.blank and neighbors.nw ~= terrain.list.wall) or
+          (neighbors.n ~= terrain.list.blank and neighbors.n ~= terrain.list.wall) or
+          (neighbors.ne ~= terrain.list.blank and neighbors.ne ~= terrain.list.wall) or
+          (neighbors.w ~= terrain.list.blank and neighbors.w ~= terrain.list.wall) or
+          (neighbors.e ~= terrain.list.blank and neighbors.e ~= terrain.list.wall) or
+          (neighbors.sw ~= terrain.list.blank and neighbors.sw ~= terrain.list.wall) or
+          (neighbors.s ~= terrain.list.blank and neighbors.s ~= terrain.list.wall) or
+          (neighbors.se ~= terrain.list.blank and neighbors.se ~= terrain.list.wall) then
+              map:setTerrain(x, y, terrain.list.wall)
         end
       end
     end

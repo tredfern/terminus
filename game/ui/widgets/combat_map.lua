@@ -55,46 +55,46 @@ local function drawWall(map, x, y, dx, dy)
   love.graphics.setColor(colors.white)
   -- depending on that orientation, figure out the 4 quadrants of the wall to render
   -- Northwest corner
-  if not neighbors.n.blocks_movement and not neighbors.w.blocks_movement then
+  if not neighbors.n.blocksMovement and not neighbors.w.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.northandwest, sx, sy)
-  elseif not neighbors.n.blocks_movement then
+  elseif not neighbors.n.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.north, sx, sy)
-  elseif not neighbors.w.blocks_movement then
+  elseif not neighbors.w.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.west, sx, sy)
-  elseif not neighbors.nw.blocks_movement then
+  elseif not neighbors.nw.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.northwest, sx, sy)
   end
 
   -- Northeast corner
-  if not neighbors.n.blocks_movement and not neighbors.e.blocks_movement then
+  if not neighbors.n.blocksMovement and not neighbors.e.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.northandeast, sx + 16, sy)
-  elseif not neighbors.n.blocks_movement then
+  elseif not neighbors.n.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.north, sx + 16, sy)
-  elseif not neighbors.e.blocks_movement then
+  elseif not neighbors.e.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.east, sx + 16, sy)
-  elseif not neighbors.ne.blocks_movement then
+  elseif not neighbors.ne.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.northeast, sx + 16, sy)
   end
 
   -- South west corner
-  if not neighbors.s.blocks_movement and not neighbors.w.blocks_movement then
+  if not neighbors.s.blocksMovement and not neighbors.w.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.southandwest, sx, sy + 16)
-  elseif not neighbors.s.blocks_movement then
+  elseif not neighbors.s.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.south, sx, sy + 16)
-  elseif not neighbors.w.blocks_movement then
+  elseif not neighbors.w.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.west, sx, sy + 16)
-  elseif not neighbors.sw.blocks_movement then
+  elseif not neighbors.sw.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.southwest, sx, sy + 16)
   end
 
   -- southeast corner
-  if not neighbors.s.blocks_movement and not neighbors.e.blocks_movement then
+  if not neighbors.s.blocksMovement and not neighbors.e.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.southandeast, sx + 16, sy + 16)
-  elseif not neighbors.s.blocks_movement then
+  elseif not neighbors.s.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.south, sx + 16, sy + 16)
-  elseif not neighbors.e.blocks_movement then
+  elseif not neighbors.e.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.east, sx + 16, sy + 16)
-  elseif not neighbors.se.blocks_movement then
+  elseif not neighbors.se.blocksMovement then
     love.graphics.draw(wallImage, wallQuads.southeast, sx + 16, sy + 16)
   end
 end
