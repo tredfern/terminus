@@ -15,6 +15,7 @@ return {
     move = require "game.rules.character.actions.move",
     pickupItems = require "game.rules.character.actions.pickup_items",
     remove = require "game.rules.character.actions.remove",
+    removeItemFromInventory = require "game.rules.character.actions.remove_item_from_inventory",
     setHealth = require "game.rules.character.actions.set_health",
     setName = require "game.rules.character.actions.set_name",
     setPosition = require "game.rules.character.actions.set_position",

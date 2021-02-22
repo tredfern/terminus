@@ -22,7 +22,7 @@ end
 local sounds = {
   click = wrapper(Audio.getStatic("assets/sounds/click_sound.wav")),
   hover = wrapper(Audio.getStatic("assets/sounds/hover_sound.wav")),
-  titleTrack = Audio.getStreaming("assets/music/title.wav")
+  titleTrack = Audio.getStreaming("assets/music/title.ogg")
 }
 
 sounds.click.setVolume(0.08)

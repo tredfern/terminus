@@ -106,7 +106,7 @@ describe("game.rules.character.reducer", function()
     end)
   end)
 
-  describe("CHARACTER_ADD_ITEM_TO_INVENTORY", function()
+  describe("Inventory Management", function()
     it("adds items to the character inventory", function()
       local character = { inventory = {} }
       local item = {}
@@ -121,6 +121,22 @@ describe("game.rules.character.reducer", function()
       })
 
       assert.equals(item, character.inventory[1])
+    end)
+
+    it("can remove item from character inventory", function()
+      local item = {}
+      local character = { inventory = { item } }
+      local state = { characters = { character } }
+
+      characters_reducer(state, {
+        type = types.remove_item_from_inventory,
+        payload = {
+          character = character,
+          item = item
+        }
+      })
+
+      assert.not_array_includes(item, character.inventory)
     end)
   end)
 end)

@@ -36,6 +36,19 @@ return createSlice {
     end)
   end,
 
+  [types.remove_item_from_inventory] = function(state, action)
+    local character = action.payload.character
+    local item = action.payload.item
+
+    for i = 1, #character.inventory do
+      if character.inventory[i] == item then
+        table.remove(character.inventory, i)
+        break
+      end
+    end
+    return state
+  end,
+
   [types.character_set_health] = function(state, action)
     local c = action.payload.character
     c.health = action.payload.health
