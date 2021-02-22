@@ -12,12 +12,12 @@ describe("game.ui.widgets.character_inventory", function()
   end)
 
   it("shows the items from the character inventory", function()
-    local widget = characterInventory({
+    local widget = moonpie.test_render(characterInventory({
       inventory = {
         { name = "Sword" },
         { name = "Health Pack" }
       }
-    })
+    }))
 
     local item1 = widget:findByID("inventoryItem1")
     local item2 = widget:findByID("inventoryItem2")
@@ -27,11 +27,11 @@ describe("game.ui.widgets.character_inventory", function()
   end)
 
   it("adds a button to use an item if usable", function()
-    local widget = characterInventory {
+    local widget = moonpie.test_render(characterInventory {
       inventory = {
         { name = "Health Kit", useHandler = function() end }
       }
-    }
+    })
 
     local item1UseButton = widget:findByID("inventoryItem1UseButton")
     assert.not_nil(item1UseButton)
@@ -41,12 +41,12 @@ describe("game.ui.widgets.character_inventory", function()
     local Items = require "game.rules.items"
     spy.on(Items.actions, "use")
 
-    local widget = characterInventory {
+    local widget = moonpie.test_render(characterInventory {
       inventory = {
         { name = "Health Kit", useHandler = function() end }
       },
       character = {}
-    }
+    }):findByID("characterInventory")
 
     local item1UseButton = widget:findByID("inventoryItem1UseButton")
     item1UseButton:click()
