@@ -5,7 +5,8 @@
 
 local tables = require "moonpie.tables"
 
-return setmetatable({
+local mockDispatch = setmetatable({
+
   dispatched = {},
   processComplex = false,
   received_action = function(self, action)
@@ -29,3 +30,10 @@ return setmetatable({
     self.dispatched[#self.dispatched + 1] = action
   end
 })
+
+mockDispatch.asFunction = function(...)
+  return mockDispatch(...)
+end
+
+
+return mockDispatch

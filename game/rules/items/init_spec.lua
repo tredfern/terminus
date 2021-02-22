@@ -75,23 +75,6 @@ describe("game.rules.items", function()
     end)
   end)
 
-  describe("using items", function()
-    it("calls the item useHandler", function()
-      Items.describe { name = "UseFunction", key = "useFunction", usable = true,
-        useHandler = spy.new(function() end)
-      }
-      local character = {}
-      local store = require "game.store"
-
-      Items.use(Items.list.useFunction, character)
-      assert.spy(Items.list.useFunction.useHandler).was.called_with(
-        Items.list.useFunction,
-        character,
-        store.dispatch
-      )
-    end)
-  end)
-
   describe("cloning items", function()
     Items.describe { key = "cloneMe", name = "Clone me", propA = true, propB = false }
     it("can clone an item", function()
@@ -112,10 +95,19 @@ describe("game.rules.items", function()
   it("has actions to manage items", function()
     assert.not_nil(Items.actions.add)
     assert.not_nil(Items.actions.remove)
+    assert.not_nil(Items.actions.use)
   end)
 
   it("has selectors to retrieve items", function()
     assert.not_nil(Items.selectors.getAll)
     assert.not_nil(Items.selectors.getByPosition)
+  end)
+
+  it("can identify usable items", function()
+    local usable = { useHandler = function() end }
+    local unusable = { }
+
+    assert.is_true(Items.isUsable(usable))
+    assert.is_false(Items.isUsable(unusable))
   end)
 end)

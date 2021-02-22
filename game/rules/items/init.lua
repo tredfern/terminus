@@ -6,7 +6,8 @@
 local Items = {
   actions = {
     add = require "game.rules.items.actions.add",
-    remove = require "game.rules.items.actions.remove"
+    remove = require "game.rules.items.actions.remove",
+    use = require "game.rules.items.actions.use"
   },
   selectors = {
     getAll = require "game.rules.items.selectors.get_all",
@@ -34,9 +35,8 @@ function Items.canUseItem(item, character)
   return item.skill == nil or character.skills[item.skill] ~= nil
 end
 
-function Items.use(item, character)
-  local store = require "game.store"
-  item:useHandler(character, store.dispatch)
+function Items.isUsable(item)
+  return item.useHandler ~= nil
 end
 
 return Items

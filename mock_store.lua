@@ -22,6 +22,10 @@ function store.get_actions(type)
   return groups[type]
 end
 
+function store.receivedAction(type)
+  return #store.get_actions(type) > 1
+end
+
 return function(stub_state)
   store.createStore(mock_reducer, stub_state)
   return store

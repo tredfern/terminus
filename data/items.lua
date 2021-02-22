@@ -12,8 +12,7 @@ Items.describe { key = "laserGun", name = "Laser Gun", skill = "handgun" }
 Items.describe {
   key = "healthPack",
   name = "Health Pack",
-  usable = true,
-  useHandler = function(_, user, dispatch)
+  useHandler = function(_, dispatch, user)
     local Character = require "game.rules.character"
     dispatch(Character.actions.heal(user))
   end,

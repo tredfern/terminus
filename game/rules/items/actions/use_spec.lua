@@ -11,15 +11,15 @@ describe("game.rules.items.actions.use", function()
     mockDispatch:reset()
   end)
 
-  it("calls the item use handler", function()
+  it("calls the item use handler with dispatch", function()
     local item = {
       useHandler = spy.new(function() end)
     }
 
     local action = use(item)
-    action(mockDispatch)
+    action(mockDispatch.asFunction)
 
-    assert.spy(item.useHandler).was.called_with(item, nil)
+    assert.spy(item.useHandler).was.called_with(item, mockDispatch.asFunction, nil)
   end)
 
   it("passes the user of the item to the handler", function()
@@ -27,9 +27,9 @@ describe("game.rules.items.actions.use", function()
     local user = {}
 
     local action = use(item, user)
-    action(mockDispatch)
+    action(mockDispatch.asFunction)
 
-    assert.spy(item.useHandler).was.called_with(item, user)
+    assert.spy(item.useHandler).was.called_with(item, mockDispatch.asFunction, user)
   end)
 
   it("removes the item from the characters inventory if it is a consumable", function()

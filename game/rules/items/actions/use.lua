@@ -3,11 +3,11 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Character = require "game.rules.character"
+local removeItemFromInventory = require "game.rules.character.actions.remove_item_from_inventory"
 
 return function(item, user)
   return function(dispatch)
-    item:useHandler(user)
-    dispatch(Character.actions.removeItemFromInventory(user, item))
+    item:useHandler(dispatch, user)
+    dispatch(removeItemFromInventory(user, item))
   end
 end

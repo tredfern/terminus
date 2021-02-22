@@ -5,6 +5,11 @@
 
 describe("game.ui.widgets.character_inventory", function()
   local characterInventory = require "game.ui.widgets.character_inventory"
+  local mockStore = require "mock_store"
+
+  setup(function()
+    mockStore({})
+  end)
 
   it("shows the items from the character inventory", function()
     local widget = characterInventory({
@@ -24,7 +29,7 @@ describe("game.ui.widgets.character_inventory", function()
   it("adds a button to use an item if usable", function()
     local widget = characterInventory {
       inventory = {
-        { name = "Health Kit", usable = true }
+        { name = "Health Kit", useHandler = function() end }
       }
     }
 
@@ -34,11 +39,11 @@ describe("game.ui.widgets.character_inventory", function()
 
   it("call the item use routine when use button is pushed", function()
     local Items = require "game.rules.items"
-    stub(Items, "use")
+    spy.on(Items.actions, "use")
 
     local widget = characterInventory {
       inventory = {
-        { name = "Health Kit", usable = true }
+        { name = "Health Kit", useHandler = function() end }
       },
       character = {}
     }
@@ -46,6 +51,6 @@ describe("game.ui.widgets.character_inventory", function()
     local item1UseButton = widget:findByID("inventoryItem1UseButton")
     item1UseButton:click()
 
-    assert.stub(Items.use).was.called_with(widget.inventory[1], widget.character)
+    assert.spy(Items.actions.use).was.called_with(widget.inventory[1], widget.character)
   end)
 end)

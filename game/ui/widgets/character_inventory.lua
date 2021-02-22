@@ -6,6 +6,7 @@
 local Items = require "game.rules.items"
 local Components = require "moonpie.ui.components"
 local tables = require "moonpie.tables"
+local store = require "moonpie.redux.store"
 
 
 return Components("character_inventory", function(props)
@@ -17,13 +18,13 @@ return Components("character_inventory", function(props)
     tables.map(props.inventory, function(item, index)
       local id = "inventoryItem" .. tostring(index)
       local useButton
-      if item.usable then
+      if Items.isUsable(item) then
         useButton = Components.button {
           caption = "Use",
           id = id .. "UseButton",
           style = "button-small align-right",
           click = function()
-            Items.use(item, props.character)
+            store.dispatch(Items.actions.use(item, props.character))
           end
         }
       end
