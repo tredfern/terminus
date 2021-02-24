@@ -117,7 +117,13 @@ local function draw_character(x, y)
   love.graphics.draw(characterImage, x * tile_width, y * tile_height)
 end
 
-local function draw_enemy(x, y)
+local function draw_enemy(x, y, health)
+  if health < 10 then
+    love.graphics.setColor(colors.danger)
+  else
+    love.graphics.setColor(colors.white)
+  end
+
   local alien = Image.load("assets/graphics/alien_1.png")
   love.graphics.draw(alien, x * tile_width, y * tile_height)
 end
@@ -184,7 +190,7 @@ local combat_map = components("combat_map", function(props)
 
       for _, v in ipairs(self.characters) do
         if v.isEnemy then
-          draw_enemy(v.x - self.camera.x, v.y - self.camera.y)
+          draw_enemy(v.x - self.camera.x, v.y - self.camera.y, v.health)
         else
           draw_character(v.x - self.camera.x, v.y - self.camera.y, v.isEnemy)
         end
