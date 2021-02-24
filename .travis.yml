@@ -18,7 +18,7 @@ script:
 - busted --run=travis
 after_success:
 - echo $TRAVIS_BUILD_DIR/lua_install
-- luacov-coveralls --exclude $TRAVIS_BUILD_DIR/lua_install/share ./ext
+- luacov-coveralls --exclude ./ext --exclude $TRAVIS_BUILD_DIR/lua_install/share
 before_deploy:
 - cd $TRAVIS_BUILD_DIR
 - zip -r -x.git/* -xlua_install/* $TRAVIS_BUILD_DIR/../terminus-$TRAVIS_TAG-$TRAVIS_BUILD_NUMBER.love
