@@ -25,6 +25,12 @@ store.reset = function(state)
   )
 end
 
+store.dumpState = function()
+  local printTable = require "moonpie.utility.print_table"
+  local stateString = printTable(store.getState())
+  love.filesystem.write("game_state.dump", stateString)
+end
+
 store.reset()
 
 return store

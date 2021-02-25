@@ -10,6 +10,8 @@ local app = {}
 local saveGameName = "game.dat"
 
 function app.load()
+  local keyboard = require "moonpie.keyboard"
+  keyboard:hotkey("f10", store.dumpState)
   store.dispatch(game_state.actions.loadCoreData())
   app.title()
 end
