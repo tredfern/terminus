@@ -7,6 +7,17 @@ local types = require "game.rules.character.actions.types"
 local createSlice = require "moonpie.redux.create_slice"
 local tables = require "moonpie.tables"
 
+local function createInventorySlot(item)
+  return {
+    item = item,
+    quantity = 1
+  }
+end
+
+local function findItemInInventory(inventory, item)
+  return tables.findFirst(inventory, function(i) return i.item.key == item.key end)
+end
+
 return createSlice {
   initial_state = { },
 
@@ -16,7 +27,12 @@ return createSlice {
 
   [types.character_add_item_to_inventory] = function(state, action)
     local character = action.payload.character
-    character.inventory[#character.inventory + 1] = action.payload.item
+    local slot = findItemInInventory(character.inventory, action.payload.item)
+    if slot then
+      slot.quantity = slot.quantity + 1
+    else
+      character.inventory[#character.inventory + 1] = createInventorySlot(action.payload.item)
+    end
     return state
   end,
 
@@ -39,13 +55,13 @@ return createSlice {
   [types.remove_item_from_inventory] = function(state, action)
     local character = action.payload.character
     local item = action.payload.item
-
-    for i = 1, #character.inventory do
-      if character.inventory[i] == item then
-        table.remove(character.inventory, i)
-        break
-      end
+    local slot, index = findItemInInventory(character.inventory, item)
+    if slot.quantity > 1 then
+      slot.quantity = slot.quantity - 1
+    else
+      table.remove(character.inventory, index)
     end
+
     return state
   end,
 

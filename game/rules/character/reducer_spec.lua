@@ -109,7 +109,7 @@ describe("game.rules.character.reducer", function()
   describe("Inventory Management", function()
     it("adds items to the character inventory", function()
       local character = { inventory = {} }
-      local item = {}
+      local item = { key = "a" }
       local state = { characters = { character } }
 
       characters_reducer(state, {
@@ -120,12 +120,13 @@ describe("game.rules.character.reducer", function()
         }
       })
 
-      assert.equals(item, character.inventory[1])
+      assert.equals(item, character.inventory[1].item)
+      assert.equals(1, character.inventory[1].quantity)
     end)
 
     it("can remove item from character inventory", function()
       local item = {}
-      local character = { inventory = { item } }
+      local character = { inventory = { { item = item, quantity = 1 } } }
       local state = { characters = { character } }
 
       characters_reducer(state, {
@@ -136,7 +137,55 @@ describe("game.rules.character.reducer", function()
         }
       })
 
-      assert.not_array_includes(item, character.inventory)
+      assert.equals(0, #character.inventory)
+    end)
+
+    it("can remove item from character inventory", function()
+      local item = { key = "a" }
+      local character = { inventory = { { item = item, quantity = 3 } } }
+      local state = { characters = { character } }
+
+      characters_reducer(state, {
+        type = types.remove_item_from_inventory,
+        payload = {
+          character = character,
+          item = item
+        }
+      })
+
+      assert.equals(2, character.inventory[1].quantity)
+    end)
+
+    it("increases quantity of items by 1 for stackable items", function()
+      local item = { key = "itemA", isStackable = true }
+      local item2 = { key = "itemA", isStackable = true }
+      local item3 = { key = "itemA", isStackable = true }
+      local character = { inventory = { } }
+      local state = { characters = { character } }
+
+      characters_reducer(state, {
+        type = types.character_add_item_to_inventory,
+        payload = {
+          character = character,
+          item = item }
+      })
+
+      characters_reducer(state, {
+        type = types.character_add_item_to_inventory,
+        payload = {
+          character = character,
+          item = item2 }
+      })
+
+      characters_reducer(state, {
+        type = types.character_add_item_to_inventory,
+        payload = {
+          character = character,
+          item = item3 }
+      })
+
+      assert.equals(3, character.inventory[1].quantity)
+      assert.equals("itemA", character.inventory[1].item.key)
     end)
   end)
 end)
