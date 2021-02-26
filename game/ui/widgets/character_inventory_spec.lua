@@ -14,8 +14,8 @@ describe("game.ui.widgets.character_inventory", function()
   it("shows the items from the character inventory", function()
     local widget = moonpie.test_render(characterInventory({
       inventory = {
-        { name = "Sword" },
-        { name = "Health Pack" }
+        { item = { name = "Sword" }, quantity = 1 },
+        { item = { name = "Health Pack" }, quantity = 3 }
       }
     }))
 
@@ -29,7 +29,7 @@ describe("game.ui.widgets.character_inventory", function()
   it("adds a button to use an item if usable", function()
     local widget = moonpie.test_render(characterInventory {
       inventory = {
-        { name = "Health Kit", useHandler = function() end }
+        { item = { name = "Health Kit", useHandler = function() end } }
       }
     })
 
@@ -43,7 +43,7 @@ describe("game.ui.widgets.character_inventory", function()
 
     local widget = moonpie.test_render(characterInventory {
       inventory = {
-        { name = "Health Kit", useHandler = function() end }
+        { item = { name = "Health Kit", useHandler = function() end }, quantity = 1 }
       },
       character = {}
     }):findByID("characterInventory")
@@ -51,6 +51,6 @@ describe("game.ui.widgets.character_inventory", function()
     local item1UseButton = widget:findByID("inventoryItem1UseButton")
     item1UseButton:click()
 
-    assert.spy(Items.actions.use).was.called_with(widget.inventory[1], widget.character)
+    assert.spy(Items.actions.use).was.called_with(widget.inventory[1].item, widget.character)
   end)
 end)
