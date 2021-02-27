@@ -8,7 +8,6 @@ local actionTypes = require "game.rules.items.actions.types"
 local tables = require "moonpie.tables"
 
 return createSlice {
-  initial_state = {},
   [actionTypes.items_add] = function(state, action)
     state[#state + 1] = action.payload.item
     return state

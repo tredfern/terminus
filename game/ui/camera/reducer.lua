@@ -7,10 +7,10 @@ local types = require "game.ui.camera.actions.types"
 local createSlice = require "moonpie.redux.create_slice"
 
 return createSlice {
-  initial_state = {
+  initialState = function() return {
     x = 1,
     y = 1
-  },
+  } end,
   [types.camera_set_dimensions] = function(state, action)
     state.width = action.payload.width
     state.height = action.payload.height

@@ -7,9 +7,9 @@ local create_slice = require "moonpie.redux.create_slice"
 local types = require "game.rules.turn.actions.types"
 
 return create_slice({
-  initial_state = {
+  initialState = function() return {
     counter = 0
-  },
+  } end,
   [types.increment] = function(state)
     if not state.counter then
       state.counter = 1

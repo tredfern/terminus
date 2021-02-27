@@ -19,8 +19,6 @@ local function findItemInInventory(inventory, item)
 end
 
 return createSlice {
-  initial_state = { },
-
   [types.character_add] = function(state, action)
     return tables.concatArray(state, { action.payload.character })
   end,

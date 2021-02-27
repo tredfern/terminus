@@ -7,7 +7,6 @@ local createSlice = require "moonpie.redux.create_slice"
 local types = require "game.settings.actions.types"
 
 return createSlice {
-  initial_state = {},
   [types.settings_set_option] = function(state, action)
     state[action.payload.name] = action.payload.value
     return state
