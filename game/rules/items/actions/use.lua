@@ -8,6 +8,8 @@ local removeItemFromInventory = require "game.rules.character.actions.remove_ite
 return function(item, user)
   return function(dispatch)
     item:useHandler(dispatch, user)
-    dispatch(removeItemFromInventory(user, item))
+    if item.consumeOnUse then
+      dispatch(removeItemFromInventory(user, item))
+    end
   end
 end

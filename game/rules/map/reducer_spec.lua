@@ -27,4 +27,15 @@ describe("game.rules.map.reducer", function()
     assert.equals(12, state.enemySpawners[1].x)
     assert.equals(15, state.enemySpawners[1].y)
   end)
+
+  it("can remove enemy spawners from the map", function()
+    local spawner = { }
+    local state = {
+      enemySpawners = { spawner }
+    }
+
+
+    state = reducer(state, { type = types.remove_enemy_spawner, payload = { spawner = spawner } })
+    assert.equals(0, #state.enemySpawners)
+  end)
 end)

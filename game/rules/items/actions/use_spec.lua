@@ -32,9 +32,9 @@ describe("game.rules.items.actions.use", function()
     assert.spy(item.useHandler).was.called_with(item, mockDispatch.asFunction, user)
   end)
 
-  it("removes the item from the characters inventory if it is a consumable", function()
+  it("removes the item from the characters inventory", function()
     local Character = require "game.rules.character"
-    local item = { useHandler = function() end, consumable = true }
+    local item = { useHandler = function() end, consumeOnUse = true }
     local user = { inventory = { item } }
 
     local action = use(item, user)
@@ -43,5 +43,15 @@ describe("game.rules.items.actions.use", function()
     assert.is_true(mockDispatch:received_action(Character.actions.types.remove_item_from_inventory))
     assert.equals(item, mockDispatch.dispatched[1].payload.item)
     assert.equals(user, mockDispatch.dispatched[1].payload.character)
+  end)
+
+  it("if item is marked as not consumable than do not remove item", function()
+    local Character = require "game.rules.character"
+    local item = { useHandler = function() end, consumeOnUse = false }
+    local user = { inventory = { item } }
+
+    local action = use(item, user)
+    action(mockDispatch)
+    assert.is_false(mockDispatch:received_action(Character.actions.types.remove_item_from_inventory))
   end)
 end)

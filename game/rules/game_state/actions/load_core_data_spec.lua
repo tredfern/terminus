@@ -16,7 +16,7 @@ describe("game.rules.game_state.actions.load_core_data", function()
 
     -- Check a couple of default ones
     assert.not_nil(Items.list.sword)
-    assert.not_nil(Items.list.laserGun)
+    assert.not_nil(Items.list.healthPack)
   end)
 
   it("loads the core skills", function()

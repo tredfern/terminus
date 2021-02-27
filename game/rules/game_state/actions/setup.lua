@@ -46,6 +46,14 @@ return function()
       ))
     end
 
+    local r = tables.pickRandom(rooms)
+    dispatch(Items.actions.add(
+      Items.list.sprayBottle, {
+        x = r.x + love.math.random(r.width) - 1,
+        y = r.y + love.math.random(r.height) - 1
+      }
+    ))
+
     dispatch(MessageLog.actions.add(
       "Welcome to the jungle!"
     ))
