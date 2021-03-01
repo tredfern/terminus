@@ -73,5 +73,10 @@ function app.saveGame()
   serializer.save(saveGameName, store.getState())
 end
 
+function app.gameOver()
+  local gameOver = require "game.ui.screens.game_over"
+  app.render(gameOver())
+end
+
 moonpie.keyboard:hotkey("escape", app.gameMenu)
 return app

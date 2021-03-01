@@ -39,6 +39,13 @@ describe("game.app", function()
     end)
   end)
 
+  describe("game over screen", function()
+    it("renders the game over screen", function()
+      app.gameOver()
+      assert.not_nil(moonpie.ui.current.findByID("gameOverScreen"))
+    end)
+  end)
+
   it("can show an option screen with the right return screen", function()
     local returnScreen = function() end
     app.options(returnScreen)

@@ -7,6 +7,6 @@
 return function()
   return function()
     local app = require "game.app"
-    app.title()
+    app.gameOver()
   end
 end
