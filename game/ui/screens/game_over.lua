@@ -8,7 +8,6 @@ local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
 local connect = require "moonpie.redux.connect"
 local app = require "game.app"
 local Map = require "game.rules.map"
-local Character = require "game.rules.character"
 
 local function result(isVictory)
   if isVictory then
