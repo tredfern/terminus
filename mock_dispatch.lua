@@ -23,7 +23,8 @@ local mockDispatch = setmetatable({
   __call = function(self, action)
     if type(action) == "function" then
       if self.processComplex then
-        action(self, {})
+        local store = require "moonpie.redux.store"
+        action(self, store.getState)
       end
       return
     end

@@ -73,14 +73,13 @@ describe("game.rules.turn.actions.process", function()
     assert.spy(character.actions.remove).was.called_with(enemy3)
   end)
 
-  it("dispatches the game over action if player is dead", function()
+  it("checks the game over state each turn", function()
     local game_state = require "game.rules.game_state"
-    spy.on(game_state.actions, "gameOver")
-    player.health = 0
+    spy.on(game_state.actions, "checkGameOver")
     local action = process({})
     action(mock_dispatch, store.getState)
 
-    assert.spy(game_state.actions.gameOver).was.called()
+    assert.spy(game_state.actions.checkGameOver).was.called()
 
   end)
 end)

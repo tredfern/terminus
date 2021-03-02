@@ -32,15 +32,8 @@ return function(player_action)
     -- Check for dead characters
     local dead = Character.selectors.getDead(getState())
     if dead then
-      local playerDied = false
       for _, e in ipairs(dead) do
-        playerDied = playerDied or e.isPlayerControlled
         dispatch(Character.actions.remove(e))
-      end
-
-      if playerDied then
-        dispatch(GameState.actions.gameOver())
-        return
       end
     end
 
@@ -49,5 +42,7 @@ return function(player_action)
     if cam then
       dispatch(Camera.actions.centerOnPlayer(cam.width, cam.height))
     end
+
+    dispatch(GameState.actions.checkGameOver())
   end
 end

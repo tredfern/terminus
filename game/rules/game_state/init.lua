@@ -5,6 +5,7 @@
 
 return {
   actions = {
+    checkGameOver = require "game.rules.game_state.actions.check_game_over",
     gameOver = require "game.rules.game_state.actions.game_over",
     loadCoreData = require "game.rules.game_state.actions.load_core_data",
     setup = require "game.rules.game_state.actions.setup"

@@ -6,15 +6,10 @@
 describe("game.rules.game_state", function()
   local game_state = require "game.rules.game_state"
 
-  it("has an action to setup the game", function()
-    assert.not_nil(game_state.actions.setup)
-  end)
-
-  it("has an action to end the game", function()
+  it("specifies the actions for the gameState", function()
+    assert.not_nil(game_state.actions.checkGameOver)
     assert.not_nil(game_state.actions.gameOver)
-  end)
-
-  it("has an action to load the core data for the game", function()
     assert.not_nil(game_state.actions.loadCoreData)
+    assert.not_nil(game_state.actions.setup)
   end)
 end)
