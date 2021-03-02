@@ -17,9 +17,13 @@ describe("game.rules.game_state.actions", function()
     mockDispatch.processComplex = false
   end)
 
+  before_each(function()
+    mock(app)
+    app.gameOver:clear()
+  end)
+
 
   it("triggers the game over action if the player has zero health", function()
-    mock(app)
     mockStore({
       characters = {
         { isPlayerControlled = true, health = 0 }
@@ -33,8 +37,19 @@ describe("game.rules.game_state.actions", function()
   end)
 
   it("triggers the game over action if the player does not exist in the characters state", function()
-    mock(app)
     mockStore({ characters = { {}, {} } }) -- adding a couple "placeholder" characters so not empty
+
+    local action = checkGameOver()
+    mockDispatch(action)
+
+    assert.spy(app.gameOver).was.called()
+  end)
+
+  it("triggers the game over action if their are no spawners left on the map", function()
+    mockStore({
+      characters = { { isPlayerControlled = true, health = 10 } },
+      map = { enemySpawners = {} }
+    })
 
     local action = checkGameOver()
     mockDispatch(action)

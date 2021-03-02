@@ -35,8 +35,7 @@ end)
 
 return connect(gameOver, function(state)
   local enemySpawners = Map.selectors.getEnemySpawners(state)
-  local enemies = Character.selectors.getEnemies(state)
   return {
-    victory = #enemySpawners == 0 and #enemies == 0
+    victory = #enemySpawners == 0
   }
 end)

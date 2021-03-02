@@ -26,7 +26,7 @@ return function()
     dispatch(Character.actions.add(player))
     dispatch(Character.actions.equipItem(player, Items.list.sword:clone()))
 
-    for _ = 1,8 do
+    for _ = 1,2 do
       local r = tables.pickRandom(rooms)
       dispatch(map.actions.addEnemySpawner(
         r.x + love.math.random(r.width) - 1,
