@@ -6,7 +6,7 @@
 describe("game.rules.enemy.actions.check_spawn_enemy", function()
   local checkSpawnEnemy = require "game.rules.enemy.actions.check_spawn_enemy"
   local mockRandom = require "moonpie.test_helpers.mock_random"
-  local mockDispatch = require "mock_dispatch"
+  local mockDispatch = require "test_helpers.mock_dispatch"
 
   before_each(function()
     mockDispatch:reset()

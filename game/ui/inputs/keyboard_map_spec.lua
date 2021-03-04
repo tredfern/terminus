@@ -6,7 +6,7 @@
 describe("game.ui.inputs.keyboard", function()
   local keyboard_map = require "game.ui.inputs.keyboard_map"
   local key_simulator = require "moonpie.keyboard"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
   local character = require "game.rules.character"
   local turn = require "game.rules.turn"
 
@@ -24,7 +24,7 @@ describe("game.ui.inputs.keyboard", function()
     end)
 
     it("can show/hide grid lines", function()
-      mock_store({})
+      mockStore({})
       local Settings = require "game.settings"
       spy.on(Settings.actions, "toggleOption")
       key_simulator:keyPressed("shift+g")
@@ -49,7 +49,7 @@ describe("game.ui.inputs.keyboard", function()
           health = 1
         }
 
-        mock_store({
+        mockStore({
           characters = {
             player_character
           },

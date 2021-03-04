@@ -6,10 +6,10 @@
 describe("game.ui.camera.actions.center_on_player", function()
   local centerOnPlayer = require "game.ui.camera.actions.center_on_player"
   local types = require "game.ui.camera.actions.types"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
 
   it("centers on the player location", function()
-    mock_store({
+    mockStore({
       characters = {
         { isPlayerControlled = true, x = 6, y = 19 }
       }

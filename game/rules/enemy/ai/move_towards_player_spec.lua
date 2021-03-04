@@ -5,7 +5,7 @@
 
 describe("game.rules.enemy.ai.move_towards_player", function()
   local moveTowardsPlayer = require "game.rules.enemy.ai.move_towards_player"
-  local mockDispatch = require "mock_dispatch"
+  local mockDispatch = require "test_helpers.mock_dispatch"
 
   it("dispatches a move action in the direction of the player", function()
     local character = require "game.rules.character"

@@ -5,10 +5,10 @@
 
 describe("game.ui.widgets.message_log", function()
   local message_log = require "game.ui.widgets.message_log"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
 
   before_each(function()
-    mock_store {
+    mockStore {
       message_log = {
         { message = "1" },
         { message = "2" },

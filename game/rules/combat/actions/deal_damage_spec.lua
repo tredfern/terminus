@@ -5,7 +5,7 @@
 
 describe("game.rules.combat.actions.deal_damage", function()
   local dealDamage = require "game.rules.combat.actions.deal_damage"
-  local mockDispatch = require "mock_dispatch"
+  local mockDispatch = require "test_helpers.mock_dispatch"
   local Character = require "game.rules.character"
 
   it("adjusts the characters health by a random die roll of the damage", function()

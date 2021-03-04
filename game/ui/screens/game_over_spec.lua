@@ -5,7 +5,7 @@
 
 describe("game.ui.screens.game_over", function()
   local gameOver = require "game.ui.screens.game_over"
-  local mockStore = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
 
   it("can switch back to the title screen", function()
     local app = require "game.app"

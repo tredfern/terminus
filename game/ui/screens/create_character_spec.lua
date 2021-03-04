@@ -6,7 +6,7 @@
 describe("game.ui.screens.create_character", function()
   local create_character = require "game.ui.screens.create_character"
   local character = require "game.rules.character"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
   local player = {
     name = "Papageno",
     isPlayerControlled = true, x = 19, y = 28,
@@ -16,7 +16,7 @@ describe("game.ui.screens.create_character", function()
   local store
 
   before_each(function()
-    store = mock_store({
+    store = mockStore ({
       characters = {
         player
       },

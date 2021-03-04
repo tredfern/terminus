@@ -5,7 +5,7 @@
 
 describe("game.ui.widgets.character_inventory", function()
   local characterInventory = require "game.ui.widgets.character_inventory"
-  local mockStore = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
 
   setup(function()
     mockStore({})

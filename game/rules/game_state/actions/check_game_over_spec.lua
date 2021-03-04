@@ -5,8 +5,8 @@
 
 describe("game.rules.game_state.actions", function()
   local checkGameOver = require "game.rules.game_state.actions.check_game_over"
-  local mockDispatch = require "mock_dispatch"
-  local mockStore = require "mock_store"
+  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockStore = require "test_helpers.mock_store"
   local app = require "game.app"
 
   setup(function()

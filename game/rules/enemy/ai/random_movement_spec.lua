@@ -5,7 +5,7 @@
 
 describe("game.rules.enemy.ai.random_movement", function()
   local randomMovement = require "game.rules.enemy.ai.random_movement"
-  local mockDispatch = require "mock_dispatch"
+  local mockDispatch = require "test_helpers.mock_dispatch"
 
   it("dispatches a move action", function()
     local characterActionTypes = require "game.rules.character.actions.types"

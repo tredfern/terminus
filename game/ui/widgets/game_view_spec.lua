@@ -5,11 +5,11 @@
 
 describe("game.ui.widgets.game_view", function()
   local game_view = require "game.ui.widgets.game_view"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
   local mock_view = { id = "mock_view" }
 
   before_each(function()
-    mock_store {
+    mockStore {
       game_view = {
         current = mock_view
       }
@@ -22,7 +22,7 @@ describe("game.ui.widgets.game_view", function()
   end)
 
   it("handles when game_view is nil", function()
-    mock_store {}
+    mockStore {}
     assert.has_no_errors(function()
       moonpie.test_render(game_view({ id = "game_view_test" }))
     end)

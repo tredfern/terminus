@@ -5,7 +5,7 @@
 
 describe("game.rules.enemy.actions.think", function()
   local think = require "game.rules.enemy.actions.think"
-  local mockDispatch = require "mock_dispatch"
+  local mockDispatch = require "test_helpers.mock_dispatch"
 
 
   it("calls the ai routine for the enemy", function()

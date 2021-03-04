@@ -5,7 +5,7 @@
 
 describe("game.ui.widgets.combat_map", function()
   local combat_map = require "game.ui.widgets.combat_map"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
 
   it("renders a component", function()
     assert.is_table(combat_map())
@@ -13,14 +13,14 @@ describe("game.ui.widgets.combat_map", function()
 
   it("connects to the characters state of the store", function()
     local c = {}
-    mock_store({ characters = { c }})
+    mockStore({ characters = { c }})
     local map = combat_map()
     assert.same({ c }, map.characters)
   end)
 
   it("connects to the map state of the store", function()
     local map_state = {}
-    mock_store({
+    mockStore({
       character = {},
       map = map_state
     })
@@ -31,7 +31,7 @@ describe("game.ui.widgets.combat_map", function()
 
   it("connects the camera state to the component", function()
     local camera = {}
-    mock_store({
+    mockStore({
       camera = camera
     })
 

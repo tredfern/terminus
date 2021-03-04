@@ -6,7 +6,7 @@
 
 describe("game.ui.widgets.character_stats", function()
   local character_stats = require "game.ui.widgets.character_stats"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
 
   before_each(function()
     local character = {
@@ -15,7 +15,7 @@ describe("game.ui.widgets.character_stats", function()
       health = 15
     }
 
-    mock_store {
+    mockStore {
       characters = {
         character
       }

@@ -5,11 +5,11 @@
 
 describe("game.ui.widgets.turn_counter", function()
   local turn_counter = require "game.ui.widgets.turn_counter"
-  local mock_store = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
   local moonpie = require "moonpie"
 
   it("displays the turn number", function()
-    mock_store({
+    mockStore({
       turn = {
         counter = 85
       }

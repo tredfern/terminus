@@ -6,8 +6,8 @@
 describe("game.rules.turn.actions.process", function()
   local process = require "game.rules.turn.actions.process"
   local turn_types = require "game.rules.turn.actions.types"
-  local mock_dispatch = require "mock_dispatch"
-  local mock_store = require "mock_store"
+  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockStore = require "test_helpers.mock_store"
 
   local player = { x = 5, y = 3, isPlayerControlled = true, health = 3 }
   local enemy1 = { isPlayerControlled = false, health = 2 }
@@ -17,7 +17,7 @@ describe("game.rules.turn.actions.process", function()
 
   local store = require "moonpie.redux.store"
   before_each(function()
-    mock_store {
+    mockStore {
       characters = {
         enemy2, player, enemy1, enemy3
       },
@@ -29,18 +29,18 @@ describe("game.rules.turn.actions.process", function()
     local player_action = { type = "player_action" }
 
     local action = process(player_action)
-    action(mock_dispatch, store.getState)
+    action(mockDispatch, store.getState)
 
-    assert.is_true(mock_dispatch:received_action("player_action"))
+    assert.is_true(mockDispatch:received_action("player_action"))
   end)
 
   it("increments the turn when processed", function()
     local player_action = {}
     local action = process(player_action)
 
-    action(mock_dispatch, store.getState)
+    action(mockDispatch, store.getState)
 
-    assert.is_true(mock_dispatch:received_action(turn_types.increment))
+    assert.is_true(mockDispatch:received_action(turn_types.increment))
   end)
 
   it("triggers thinking for all non-player characters", function()
@@ -48,7 +48,7 @@ describe("game.rules.turn.actions.process", function()
     spy.on(enemy.actions, "think")
 
     local action = process({})
-    action(mock_dispatch, store.getState)
+    action(mockDispatch, store.getState)
 
     assert.spy(enemy.actions.think).was.called(3)
   end)
@@ -58,7 +58,7 @@ describe("game.rules.turn.actions.process", function()
     spy.on(camera.actions, "centerOnPlayer")
 
     local action = process({})
-    action(mock_dispatch, store.getState)
+    action(mockDispatch, store.getState)
 
     assert.spy(camera.actions.centerOnPlayer).was.called_with(20, 40)
   end)
@@ -68,7 +68,7 @@ describe("game.rules.turn.actions.process", function()
     spy.on(character.actions, "remove")
 
     local action = process({})
-    action(mock_dispatch, store.getState)
+    action(mockDispatch, store.getState)
 
     assert.spy(character.actions.remove).was.called_with(enemy3)
   end)
@@ -77,7 +77,7 @@ describe("game.rules.turn.actions.process", function()
     local game_state = require "game.rules.game_state"
     spy.on(game_state.actions, "checkGameOver")
     local action = process({})
-    action(mock_dispatch, store.getState)
+    action(mockDispatch, store.getState)
 
     assert.spy(game_state.actions.checkGameOver).was.called()
 

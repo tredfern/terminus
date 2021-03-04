@@ -5,7 +5,7 @@
 
 describe("game.ui.widgets.scoreboard", function()
   local scoreboard = require "game.ui.widgets.scoreboard"
-  local mockStore = require "mock_store"
+  local mockStore = require "test_helpers.mock_store"
 
   it("displays the total number of enemies", function()
     local state = {
