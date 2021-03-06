@@ -36,7 +36,7 @@ describe("game.rules.game_state.actions.setup", function()
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
-        c.type == character.actions.types.character_add and
+        c.type == character.actions.types.ADD and
         c.payload.character.isPlayerControlled
       end)
     )
@@ -46,7 +46,7 @@ describe("game.rules.game_state.actions.setup", function()
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
-        c.type == map.actions.types.map_add_enemy_spawner
+        c.type == map.actions.types.ADD_ENEMY_SPAWNER
       end)
     )
   end)
@@ -55,7 +55,7 @@ describe("game.rules.game_state.actions.setup", function()
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
-        c.type == map.actions.types.set
+        c.type == map.actions.types.SET
       end)
     )
   end)

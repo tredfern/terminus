@@ -4,11 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.character.actions.add", function()
-  local character_add = require "game.rules.character.actions.add"
+  local addCharacter = require "game.rules.character.actions.add"
 
   it("specifies the new character to add to the store", function()
     local c = {}
-    local act = character_add(c)
+    local act = addCharacter(c)
 
     assert.equals("CHARACTER_ADD", act.type)
     assert.equals(c, act.payload.character)

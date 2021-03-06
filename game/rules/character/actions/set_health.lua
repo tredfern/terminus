@@ -7,7 +7,7 @@ local types = require "game.rules.character.actions.types"
 
 return function(character, health)
   return {
-    type = types.character_set_health,
+    type = types.SET_HEALTH,
     payload = {
       character = character,
       health = health

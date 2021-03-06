@@ -11,7 +11,7 @@ describe("game.rules.character.actions.set_position", function()
     local c = {}
     local sp = set_position(c, 89, 38)
     assert.not_nil(sp.type)
-    assert.equals(types.character_set_position, sp.type)
+    assert.equals(types.SET_POSITION, sp.type)
     assert.equals(c, sp.payload.character)
     assert.equals(89, sp.payload.x)
     assert.equals(38, sp.payload.y)

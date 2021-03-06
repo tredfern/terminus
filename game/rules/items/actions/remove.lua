@@ -7,7 +7,7 @@ local actionTypes = require "game.rules.items.actions.types"
 
 return function(item)
   return {
-    type = actionTypes.remove,
+    type = actionTypes.REMOVE,
     payload = { item = item }
   }
 end

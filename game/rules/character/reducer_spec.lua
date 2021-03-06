@@ -12,10 +12,10 @@ describe("game.rules.character.reducer", function()
     assert.equals(state, characters_reducer(state, { type = "random_action" }))
   end)
 
-  it("adds new characters to the store through the character_add action", function()
+  it("adds new characters to the store through the ADD action", function()
     local new_char = {}
     local add = {
-      type = types.character_add,
+      type = types.ADD,
       payload = {
         character = new_char
       }
@@ -29,7 +29,7 @@ describe("game.rules.character.reducer", function()
     local character = {}
     local keep_character = {}
     local state = { character, keep_character }
-    local action = { type = types.character_remove, payload = { character = character } }
+    local action = { type = types.REMOVE, payload = { character = character } }
 
     local new_state = characters_reducer(state, action)
     assert.not_array_includes(character, new_state)
@@ -39,7 +39,7 @@ describe("game.rules.character.reducer", function()
   it("can set the character to the specified position", function()
     local character = { x = 3, y = 8 }
     local state = { character }
-    local action = { type = types.character_set_position,
+    local action = { type = types.SET_POSITION,
       payload = {
         character = character,
         x = 4,
@@ -58,7 +58,7 @@ describe("game.rules.character.reducer", function()
     local character = {}
     local state = { character }
     local action = {
-      type = types.character_set_name,
+      type = types.SET_NAME,
       payload = {
         character = character,
         name = "Papageno"
@@ -79,7 +79,7 @@ describe("game.rules.character.reducer", function()
     local character = { health = 84 }
     local state = { characters = { character } }
     local new_state = characters_reducer(state, {
-      type = types.character_set_health,
+      type = types.SET_HEALTH,
       payload = {
         character = character,
         health = 54
@@ -95,7 +95,7 @@ describe("game.rules.character.reducer", function()
       local item = { equipSlot = "melee" }
       local state = { characters = { character } }
       characters_reducer(state, {
-        type = types.character_equip_item,
+        type = types.EQUIP_ITEM,
         payload = {
           character = character,
           item = item
@@ -113,7 +113,7 @@ describe("game.rules.character.reducer", function()
       local state = { characters = { character } }
 
       characters_reducer(state, {
-        type = types.character_add_item_to_inventory,
+        type = types.ADD_ITEM_TO_INVENTORY,
         payload = {
           character = character,
           item = item
@@ -130,7 +130,7 @@ describe("game.rules.character.reducer", function()
       local state = { characters = { character } }
 
       characters_reducer(state, {
-        type = types.remove_item_from_inventory,
+        type = types.REMOVE_ITEM_FROM_INVENTORY,
         payload = {
           character = character,
           item = item
@@ -146,7 +146,7 @@ describe("game.rules.character.reducer", function()
       local state = { characters = { character } }
 
       characters_reducer(state, {
-        type = types.remove_item_from_inventory,
+        type = types.REMOVE_ITEM_FROM_INVENTORY,
         payload = {
           character = character,
           item = item
@@ -164,21 +164,21 @@ describe("game.rules.character.reducer", function()
       local state = { characters = { character } }
 
       characters_reducer(state, {
-        type = types.character_add_item_to_inventory,
+        type = types.ADD_ITEM_TO_INVENTORY,
         payload = {
           character = character,
           item = item }
       })
 
       characters_reducer(state, {
-        type = types.character_add_item_to_inventory,
+        type = types.ADD_ITEM_TO_INVENTORY,
         payload = {
           character = character,
           item = item2 }
       })
 
       characters_reducer(state, {
-        type = types.character_add_item_to_inventory,
+        type = types.ADD_ITEM_TO_INVENTORY,
         payload = {
           character = character,
           item = item3 }

@@ -7,7 +7,7 @@ local types = require "game.rules.character.actions.types"
 
 return function(character)
   return {
-    type = types.character_add,
+    type = types.ADD,
     payload = {
       character = character
     }

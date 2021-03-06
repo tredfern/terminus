@@ -10,7 +10,7 @@ describe("game.rules.items.reducer", function()
   it("can add items to the state", function()
     local item = {}
     local state = reducer({}, {
-      type = types.items_add,
+      type = types.ADD,
       payload = {
         item = item
       }
@@ -22,7 +22,7 @@ describe("game.rules.items.reducer", function()
   it("can remove an item from state", function()
     local item = {}
     local state = reducer({ item }, {
-      type = types.remove,
+      type = types.REMOVE,
       payload = {
         item = item
       }

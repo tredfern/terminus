@@ -7,7 +7,7 @@ local types = require "game.rules.map.actions.types"
 
 return function(spawner)
   return {
-    type = types.remove_enemy_spawner,
+    type = types.REMOVE_ENEMY_SPAWNER,
     payload = {
       spawner = spawner
     }

@@ -12,7 +12,7 @@ describe("game.rules.character.actions.remove", function()
     local action = remove(c)
 
     assert.not_nil(action.type)
-    assert.equals(types.character_remove, action.type)
+    assert.equals(types.REMOVE, action.type)
     assert.equals(c, action.payload.character)
   end)
 end)

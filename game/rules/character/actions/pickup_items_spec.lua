@@ -21,7 +21,7 @@ describe("game.rules.character.actions.pickup_items", function()
     local action = pickupItems(c)
     action(mockDispatch, getState)
 
-    assert.is_true(mockDispatch:received_action(character.actions.types.character_add_item_to_inventory))
+    assert.is_true(mockDispatch:received_action(character.actions.types.ADD_ITEM_TO_INVENTORY))
     assert.equals(pickup, mockDispatch.dispatched[1].payload.item)
   end)
 
@@ -32,6 +32,6 @@ describe("game.rules.character.actions.pickup_items", function()
     local action = pickupItems(c)
     action(mockDispatch, getState)
 
-    assert.is_true(mockDispatch:received_action(itemActionTypes.remove))
+    assert.is_true(mockDispatch:received_action(itemActionTypes.REMOVE))
   end)
 end)

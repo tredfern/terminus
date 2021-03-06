@@ -6,7 +6,7 @@
 local types = require "game.rules.character.actions.types"
 return function(character, item)
   return {
-    type = types.character_equip_item,
+    type = types.EQUIP_ITEM,
     payload = {
       character = character,
       item = item

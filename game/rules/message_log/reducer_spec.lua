@@ -10,7 +10,7 @@ describe("game.rules.message_log.reducer", function()
   it("stores messages from the add action", function()
     local state = {}
     state = reducer(state, {
-      type = types.message_log_add,
+      type = types.ADD,
       payload = { message = "Hello Message Log" }
     })
 
@@ -19,7 +19,7 @@ describe("game.rules.message_log.reducer", function()
 
   it("creates a new state if nil", function()
     local state = reducer(nil, {
-      type = types.message_log_add,
+      type = types.ADD,
       payload = { message = "Hello" }
     })
 

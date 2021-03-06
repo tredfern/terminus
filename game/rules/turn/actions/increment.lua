@@ -7,6 +7,6 @@ local types = require "game.rules.turn.actions.types"
 
 return function()
   return {
-    type = types.increment
+    type = types.INCREMENT
   }
 end

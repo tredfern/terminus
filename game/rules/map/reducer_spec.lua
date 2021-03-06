@@ -10,7 +10,7 @@ describe("game.rules.map.reducer", function()
   it("sets the state to the value of the map on the set action", function()
     local map = {}
     local state = reducer({}, {
-      type = types.set,
+      type = types.SET,
       payload = map
     })
 
@@ -20,7 +20,7 @@ describe("game.rules.map.reducer", function()
   it("can add enemy spawners to the map", function()
     local map = { width = 100, height = 100 }
     local state = reducer(map, {
-      type = types.map_add_enemy_spawner,
+      type = types.ADD_ENEMY_SPAWNER,
       payload = { x = 12, y = 15 }
     })
 
@@ -35,7 +35,7 @@ describe("game.rules.map.reducer", function()
     }
 
 
-    state = reducer(state, { type = types.remove_enemy_spawner, payload = { spawner = spawner } })
+    state = reducer(state, { type = types.REMOVE_ENEMY_SPAWNER, payload = { spawner = spawner } })
     assert.equals(0, #state.enemySpawners)
   end)
 end)

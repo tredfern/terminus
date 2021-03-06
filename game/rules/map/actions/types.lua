@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  set = "MAP_SET",
-  map_add_enemy_spawner = "MAP_ADD_ENEMY_SPAWNER",
-  remove_enemy_spawner = "REMOVE_ENEMY_SPAWNER"
+  SET = "MAP_SET",
+  ADD_ENEMY_SPAWNER = "MAP_ADD_ENEMY_SPAWNER",
+  REMOVE_ENEMY_SPAWNER = "MAP_REMOVE_ENEMY_SPAWNER"
 }

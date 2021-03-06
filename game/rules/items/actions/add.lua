@@ -7,7 +7,7 @@ local types = require "game.rules.items.actions.types"
 
 return function(item, props)
   return {
-    type = types.items_add,
+    type = types.ADD,
     payload = {
       item = item:clone(props)
     }

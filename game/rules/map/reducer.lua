@@ -8,16 +8,16 @@ local types = require "game.rules.map.actions.types"
 local tables = require "moonpie.tables"
 
 return create_slice {
-  [types.map_add_enemy_spawner] = function(state, action)
+  [types.ADD_ENEMY_SPAWNER] = function(state, action)
     state.enemySpawners = state.enemySpawners or {}
     state.enemySpawners[#state.enemySpawners + 1] = action.payload
     return state
   end,
-  [types.remove_enemy_spawner] = function(state, action)
+  [types.REMOVE_ENEMY_SPAWNER] = function(state, action)
     state.enemySpawners = tables.select(state.enemySpawners, function(v) return v ~= action.payload.spawner end)
     return state
   end,
-  [types.set] = function(_, action)
+  [types.SET] = function(_, action)
     return action.payload
   end
 }

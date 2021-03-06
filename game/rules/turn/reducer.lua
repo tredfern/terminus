@@ -10,7 +10,7 @@ return create_slice({
   initialState = function() return {
     counter = 0
   } end,
-  [types.increment] = function(state)
+  [types.INCREMENT] = function(state)
     if not state.counter then
       state.counter = 1
     else

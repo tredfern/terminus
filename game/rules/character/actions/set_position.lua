@@ -8,7 +8,7 @@ local map = require "game.rules.map"
 
 return function(character, x, y)
   return {
-    type = types.character_set_position,
+    type = types.SET_POSITION,
     payload = {
       character = character,
       x = x,

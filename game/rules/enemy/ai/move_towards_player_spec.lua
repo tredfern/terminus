@@ -22,6 +22,6 @@ describe("game.rules.enemy.ai.move_towards_player", function()
     moveTowardsPlayer(enemy, mockDispatch, getState)
 
     assert.spy(character.actions.move).was.called_with(enemy, 14, 17)
-    assert.is_true(mockDispatch:received_action(character.actions.types.character_move))
+    assert.is_true(mockDispatch:received_action(character.actions.types.MOVE))
   end)
 end)

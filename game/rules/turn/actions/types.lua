@@ -4,5 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  increment = "TURN_INCREMENT"
+  INCREMENT = "TURN_INCREMENT"
 }

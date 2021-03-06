@@ -9,7 +9,7 @@ return function(x, y)
     payload = {
       x = x, y = y
     },
-    type = types.map_add_enemy_spawner
+    type = types.ADD_ENEMY_SPAWNER
 
   }
 end

@@ -11,7 +11,7 @@ return function(character, x, y)
   local combat = require "game.rules.combat"
 
   return setmetatable({
-    type = types.character_move,
+    type = types.MOVE,
     character = character,
     x = x,
     y = y

@@ -7,7 +7,7 @@ local types = require "game.rules.message_log.actions.types"
 
 return function(message)
   return {
-    type = types.message_log_add,
+    type = types.ADD,
     payload = {
       message = message
     }

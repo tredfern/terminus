@@ -13,7 +13,7 @@ describe("game.rules.character.actions.heal", function()
     local action = heal(character)
 
     action(mockDispatch)
-    assert.is_true(mockDispatch:received_action(types.character_set_health))
+    assert.is_true(mockDispatch:received_action(types.SET_HEALTH))
 
   end)
 end)

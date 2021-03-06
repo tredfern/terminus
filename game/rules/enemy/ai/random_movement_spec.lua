@@ -12,7 +12,7 @@ describe("game.rules.enemy.ai.random_movement", function()
     local character = { x = 4, y = 8 }
     randomMovement(character, mockDispatch)
 
-    assert.is_true(mockDispatch:received_action(characterActionTypes.character_move))
+    assert.is_true(mockDispatch:received_action(characterActionTypes.MOVE))
   end)
 
   it("dispatches a move action to a random adjacent square", function()

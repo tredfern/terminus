@@ -11,6 +11,6 @@ describe("game.rules.map.actions.remove_enemy_spawner", function()
 
     local action = removeEnemySpawner(spawner)
     assert.equals(spawner, action.payload.spawner)
-    assert.equals("REMOVE_ENEMY_SPAWNER", action.type)
+    assert.equals("MAP_REMOVE_ENEMY_SPAWNER", action.type)
   end)
 end)

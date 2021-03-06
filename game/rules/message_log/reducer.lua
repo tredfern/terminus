@@ -8,7 +8,7 @@ local types = require "game.rules.message_log.actions.types"
 
 
 return create_slice {
-  [types.message_log_add] = function(state, action)
+  [types.ADD] = function(state, action)
     state = state or {}
     state[#state + 1] = action.payload
     return state

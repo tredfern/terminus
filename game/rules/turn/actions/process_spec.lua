@@ -40,7 +40,7 @@ describe("game.rules.turn.actions.process", function()
 
     action(mockDispatch, store.getState)
 
-    assert.is_true(mockDispatch:received_action(turn_types.increment))
+    assert.is_true(mockDispatch:received_action(turn_types.INCREMENT))
   end)
 
   it("triggers thinking for all non-player characters", function()

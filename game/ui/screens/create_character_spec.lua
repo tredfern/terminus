@@ -42,8 +42,8 @@ describe("game.ui.screens.create_character", function()
 
     c:findByID("button_done"):click()
 
-    assert.equals(1, #store.get_actions(character.actions.types.character_set_name))
-    local action = store.get_actions(character.actions.types.character_set_name)[1]
+    assert.equals(1, #store.get_actions(character.actions.types.SET_NAME))
+    local action = store.get_actions(character.actions.types.SET_NAME)[1]
     assert.equals(player, action.payload.character)
     assert.equals("Foo", action.payload.name)
   end)

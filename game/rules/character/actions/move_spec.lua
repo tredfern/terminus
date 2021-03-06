@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.character.actions.move", function()
-  local character_move = require "game.rules.character.actions.move"
+  local MOVE = require "game.rules.character.actions.move"
   local types = require "game.rules.character.actions.types"
   local mockDispatch = require "test_helpers.mock_dispatch"
   local wrap_in_function = require "wrap_in_function"
@@ -20,10 +20,10 @@ describe("game.rules.character.actions.move", function()
     local state = {
       characters = { c }
     }
-    local action = character_move(c, 19, 10)
+    local action = MOVE(c, 19, 10)
 
     action(mockDispatch, wrap_in_function(state))
-    assert.is_true(mockDispatch:received_action(types.character_set_position))
+    assert.is_true(mockDispatch:received_action(types.SET_POSITION))
   end)
 
   it("creates a melee attack action if there is another character in the square attempting to move to", function()
@@ -37,7 +37,7 @@ describe("game.rules.character.actions.move", function()
       }
     }
 
-    local action = character_move(player, 20, 11)
+    local action = MOVE(player, 20, 11)
     action(mockDispatch, wrap_in_function(state))
 
     assert.spy(Combat.actions.meleeAttack).was.called_with(player, enemy)

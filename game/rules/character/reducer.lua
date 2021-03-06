@@ -19,11 +19,11 @@ local function findItemInInventory(inventory, item)
 end
 
 return createSlice {
-  [types.character_add] = function(state, action)
+  [types.ADD] = function(state, action)
     return tables.concatArray(state, { action.payload.character })
   end,
 
-  [types.character_add_item_to_inventory] = function(state, action)
+  [types.ADD_ITEM_TO_INVENTORY] = function(state, action)
     local character = action.payload.character
     local slot = findItemInInventory(character.inventory, action.payload.item)
     if slot then
@@ -34,14 +34,14 @@ return createSlice {
     return state
   end,
 
-  [types.character_equip_item] = function(state, action)
+  [types.EQUIP_ITEM] = function(state, action)
     local character = action.payload.character
     local item = action.payload.item
     character.inventory.equipSlots[item.equipSlot] = item
     return state
   end,
 
-  [types.character_remove] = function(state, action)
+  [types.REMOVE] = function(state, action)
     return tables.select(state,
     function(character)
       if character ~= action.payload.character then
@@ -50,7 +50,7 @@ return createSlice {
     end)
   end,
 
-  [types.remove_item_from_inventory] = function(state, action)
+  [types.REMOVE_ITEM_FROM_INVENTORY] = function(state, action)
     local character = action.payload.character
     local item = action.payload.item
     local slot, index = findItemInInventory(character.inventory, item)
@@ -63,19 +63,19 @@ return createSlice {
     return state
   end,
 
-  [types.character_set_health] = function(state, action)
+  [types.SET_HEALTH] = function(state, action)
     local c = action.payload.character
     c.health = action.payload.health
     return state
   end,
 
-  [types.character_set_name] = function(state, action)
+  [types.SET_NAME] = function(state, action)
     local c = action.payload.character
     c.name = action.payload.name
     return state
   end,
 
-  [types.character_set_position] = function(state, action)
+  [types.SET_POSITION] = function(state, action)
     local c = action.payload.character
     c.x = action.payload.x
     c.y = action.payload.y

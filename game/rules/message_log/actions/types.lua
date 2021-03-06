@@ -4,5 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  message_log_add = "MESSAGE_LOG_ADD"
+  ADD = "MESSAGE_LOG_ADD"
 }

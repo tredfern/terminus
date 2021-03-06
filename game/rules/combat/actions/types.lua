@@ -4,5 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  combat_attack = "COMBAT_ATTACK"
+  ATTACK = "COMBAT_ATTACK"
 }
