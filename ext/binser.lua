@@ -289,7 +289,7 @@ local function newbinser()
             accum[#accum + 1] = number_to_str(visited[x])
         else
             if check_custom_type(x, visited, accum) then return end
-            error("Cannot serialize this userdata.")
+            error("Cannot serialize this userdata.", x)
         end
     end
 

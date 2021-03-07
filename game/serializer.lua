@@ -6,12 +6,26 @@
 local Serializer = {}
 local binser = require "binser"
 
+function Serializer.registerResources(bin)
+  local image = require "moonpie.graphics.image"
+
+  for k, v in pairs(image.store) do
+    bin.registerResource(v, k)
+  end
+end
+
 function Serializer.serialize(data)
-  return binser.serialize(data)
+  local bin = binser.newbinser()
+
+  Serializer.registerResources(bin)
+  return bin.serialize(data)
 end
 
 function Serializer.deserialize(data)
-  return binser.deserialize(data)
+  local bin = binser.newbinser()
+
+  Serializer.registerResources(bin)
+  return bin.deserialize(data)
 end
 
 function Serializer.save(file, data)

@@ -4,9 +4,9 @@
 -- https://opensource.org/licenses/MIT
 
 
-local character = require "game.rules.character"
 
 return function(char, dispatch)
+  local character = require "game.rules.character"
   local x = love.math.random(-1, 1)
   local y = love.math.random(-1, 1)
 

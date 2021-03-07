@@ -3,10 +3,10 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local character = require "game.rules.character"
 
 
 return function(npc, dispatch, getState)
+  local character = require "game.rules.character"
   local player = character.selectors.getPlayer(getState())
 
   local x = 0
