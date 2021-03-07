@@ -4,13 +4,26 @@
 -- https://opensource.org/licenses/MIT
 
 local Components = require "moonpie.ui.components"
+local Character = require "game.rules.character"
+local store = require "game.store"
 
-local function createLabelPair(label, value)
-  return {
-    Components.text { text = label },
-    Components.text { id = label .. "Stat", text = value, style ="align-right" }
+local labelPair = Components("characterAttributeLabelPair", function(props)
+  local buttons = {
+    display = "inline", padding = { right = 3 },
   }
-end
+  if props.editable then
+    buttons[1] = Components.button { id = props.label .. "Increase", caption = "+", style = "button-small", }
+    buttons[2] = Components.button { id = props.label .. "Decrease", caption = "-", style = "button-small", }
+  end
+
+  return {
+    attribute = props.attribute,
+    value = props.value,
+    buttons,
+    Components.text { text = props.label },
+    Components.text { id = props.label .. "Stat", text = props.value, style ="align-right" },
+  }
+end)
 
 return Components("character_attributes", function(props)
   local attributes = require "game.rules.character.attributes"
@@ -18,11 +31,35 @@ return Components("character_attributes", function(props)
 
   return {
     width = "15%",
-    createLabelPair("Strength", characterAttributes[attributes.strength]),
-    createLabelPair("Agility", characterAttributes[attributes.agility]),
-    createLabelPair("Endurance", characterAttributes[attributes.endurance]),
-    createLabelPair("Wit", characterAttributes[attributes.wit]),
-    createLabelPair("Education", characterAttributes[attributes.education]),
-    createLabelPair("Social", characterAttributes[attributes.social]),
+    labelPair {
+      label = "Strength",
+      value = characterAttributes[attributes.strength],
+      editable = props.editable
+    },
+    labelPair {
+      label = "Agility",
+      value = characterAttributes[attributes.agility],
+      editable = props.editable
+    },
+    labelPair {
+      label = "Endurance",
+      value = characterAttributes[attributes.endurance],
+      editable = props.editable
+    },
+    labelPair {
+      label = "Education",
+      value = characterAttributes[attributes.education],
+      editable = props.editable
+    },
+    labelPair {
+      label = "Wit",
+      value = characterAttributes[attributes.wit],
+      editable = props.editable
+    },
+    labelPair {
+      label = "Social",
+      value = characterAttributes[attributes.social],
+      editable = props.editable
+    },
   }
 end)

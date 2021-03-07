@@ -63,6 +63,12 @@ return createSlice {
     return state
   end,
 
+  [types.SET_ATTRIBUTE] = function(state, action)
+    local character = action.payload.character
+    character.attributes[action.payload.attribute] = action.payload.value
+    return state
+  end,
+
   [types.SET_HEALTH] = function(state, action)
     local c = action.payload.character
     c.health = action.payload.health

@@ -35,13 +35,15 @@ local create_character = components("create_character", function(props)
         },
         {
           { components.h3 { text = "Attributes"} },
-          characterAttributes { id = "characterAttributes", attributes = editCharacter.attributes },
+          characterAttributes {
+            id = "characterAttributes", attributes = editCharacter.attributes,
+            editable = true, character = editCharacter
+          },
           labelPair {
             margin = { left = 10 },
             width = "15%",
             label = "Health:",
             value = editCharacter.health
-
           }
         },
         {
