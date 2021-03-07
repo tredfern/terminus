@@ -129,8 +129,9 @@ local function draw_enemy(x, y, health)
 end
 
 local function drawSpawner(x, y)
-  love.graphics.setColor(colors.warning)
-  love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
+  love.graphics.setColor(colors.white)
+  local spawner = Image.load("assets/graphics/spawner.png")
+  love.graphics.draw(spawner, x * tile_width, y * tile_height)
 end
 
 local function drawItem(item, x, y)
