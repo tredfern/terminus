@@ -17,7 +17,7 @@ describe("game.ui.widgets.character_attributes", function()
   }
 
   it("display the character stats", function()
-    local widget = characterAttributes { attributes = sampleAttributes }
+    local widget = moonpie.test_render(characterAttributes { attributes = sampleAttributes })
 
     assert.equals("15", widget:findByID("StrengthStat").text)
     assert.equals("12", widget:findByID("AgilityStat").text)
@@ -31,7 +31,7 @@ describe("game.ui.widgets.character_attributes", function()
   end)
 
   it("provides plus/minus buttons if the attributes are editable", function()
-    local widget = characterAttributes { attributes = sampleAttributes, editable = true }
+    local widget = moonpie.test_render(characterAttributes { attributes = sampleAttributes, editable = true })
     assert.not_nil(widget:findByID("StrengthIncrease"))
     assert.not_nil(widget:findByID("StrengthDecrease"))
     assert.not_nil(widget:findByID("WitIncrease"))

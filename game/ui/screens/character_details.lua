@@ -25,7 +25,7 @@ local CharacterDetails = Components("character_details", function(props)
       contents = {
         {
           { Components.h3 { text = "Attributes" } },
-          CharacterAttributes { attributes = props.character.attributes }
+          CharacterAttributes { attributes = props.character.attributes, character = props.character }
         },
         {
           { Components.h3 { text = "Skills" } },
