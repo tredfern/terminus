@@ -6,6 +6,7 @@
 local types = require "game.rules.character.actions.types"
 local get_by_position = require "game.rules.character.selectors.get_by_position"
 local set_position = require "game.rules.character.actions.set_position"
+local sounds = require "assets.sounds"
 
 return function(character, x, y)
   local combat = require "game.rules.combat"
@@ -22,6 +23,10 @@ return function(character, x, y)
       if #targets > 0 then
         dispatch(combat.actions.meleeAttack(self.character, targets[1]))
       else
+        if self.character.isPlayerControlled then
+          sounds.walk:play()
+        end
+
         dispatch(set_position(self.character, self.x, self.y))
       end
     end

@@ -6,6 +6,7 @@
 local Skills = require "game.rules.skills"
 local EquipSlots = require "game.rules.character.equip_slots"
 local MessageLog = require "game.rules.message_log"
+local Sounds = require "assets.sounds"
 
 local hitMessage = "%s hits %s!"
 local missMessage = "%s misses %s."
@@ -17,6 +18,7 @@ local function createAttackResult(dispatch, attacker, defender, weapon)
     if winner == defender then
       dispatch(MessageLog.actions.add(string.format(missMessage, attacker.name, defender.name)))
     else
+      Sounds.hit:play()
       dispatch(MessageLog.actions.add(string.format(hitMessage, attacker.name, defender.name)))
       dispatch(Combat.actions.dealDamage(defender, weapon.damage))
     end
@@ -34,6 +36,7 @@ return function(attacker, defender)
     -- Figure out skill and perform check
     local skill = Skills.chooseSkill.forItem(attacker, weapon)
     local defSkill = Skills.chooseSkill.forMeleeDefense(defender)
+    Sounds.attack:play()
     local performAttack = Skills.actions.opposedCheck(
       attacker, skill,
       defender, defSkill,
