@@ -187,7 +187,7 @@ This is some next steps to lay good foundations depending on what comes up next
   - Options screen: Simple ability to set resolution for game, change key maps. This is to prevent anything being too rigid to change later
   - Character Details Screen: Something in game to pop-up a display over the map
 
-### 1. Simple never ending roguelike <-- I am Here -->
+### 1. Simple never ending roguelike [COMPLETED]
 This should focus on moving the character around an testing the combat system
   - Inventory to equip melee and ranged weapon
   - Create enemy spawners that trigger new enemies whenever rooms are empty
@@ -198,7 +198,7 @@ This should focus on moving the character around an testing the combat system
   - AI that charges the player down
   - Some ability to heal character
 
-### 2. Expanding the map system
+### 2. Expanding the map system << I Am Here >>
 Expanding the maps slightly
   - Ladders that go up/down. When returning to a previous level the level should look like it did when you left
   - Introduce skill checks like a computer terminal that opens a door, 
