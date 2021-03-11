@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/tredfern/terminus.svg?branch=main)](https://travis-ci.com/tredfern/terminus)
 [![Coverage Status](https://coveralls.io/repos/github/tredfern/terminus/badge.svg?branch=main)](https://coveralls.io/github/tredfern/terminus?branch=main)
-[![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/tredfern/terminus/2)](https://github.com/tredfern/terminus/milestone/2)
+[![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/tredfern/terminus/2)](https://github.com/tredfern/terminus/milestone/3)
 [![Love2D Version](https://img.shields.io/badge/love2d-11.3-pink.svg)](https://love2d.org)
 
 # Terminus
@@ -93,52 +93,12 @@ _Diehard_ - Facing off against an invading force on your own. Identifying your e
 
 _Lost in Space_ - Traveling to a new world, a catastrophe happens and people band together to survive
 
-## Key Milestones
-### 0. Basic foundations [COMPLETED]
-This is some next steps to lay good foundations depending on what comes up next
-  - Load/Save game: Always a tricky thing to work out, building this in early should be easier than deferring to the last moment. Use a save game slot system
-  - Options screen: Simple ability to set resolution for game, change key maps. This is to prevent anything being too rigid to change later
-  - Character Details Screen: Something in game to pop-up a display over the map
 
-### 1. Simple roguelike [COMPLETED]
-This should focus on moving the character around an testing the combat system
-  - Inventory to equip melee and ranged weapon
-  - Create enemy spawners that trigger new enemies whenever rooms are empty
-  - Combat has some strategic feel
-    - Ranged Combat
-    - Melee Combat
-  - Character generation gives some ability scores and combat skills
-  - AI that charges the player down
-  - Some ability to heal character
+## Game Design Documentation
+Design documentation for the game can be found in the [docs folder of the repo](/docs). This will outline any milestones,
+project plans, different design considerations or other information about the game.
 
-### 2. Focus on Game play << I Am Here >>
-Work on game mechanics and find some elements of fun. Improve foundations (but not necessarily content) for graphics, UI, sounds, and music.
-  - Ladders that go up/down. When returning to a previous level the level should look like it did when you left
-  - Introduce skill checks like a computer terminal that opens a door, 
-  - Items are added to rooms/corridors that could serve a function for skill checks
-  - Description generators for rooms
-  - "Static" rooms that could be used for key plot points
-  - Map zoom out display
-
-### 3. Improved AI
-  - Patrolling AI that moves from room to room 
-  - Guard AI that stays in room until the player enters
-  - Repair AI that fixes up enemy units that are damaged
-  - Fleeing AI that runs after taking a certain amount of damage
-  - Introduce Allies that assist player
-    - AI Holding rooms that are cleared
-    - AI Follow player and assist in battle
-
-### 4. Story Events
-  - Introduce quests
-  - Messages that can happen describing what is going on
-  - Intro screen setting up the scene
-  - Define a story arc based on the levels that you move through
-  - Introduce different environment conditions (Fire and Vacuum)
-
-## Technical Notes
-
-### Framework
+## Framework
 
 This project depends on the [Moonpie](https://github.com/tredfern/moonpie) framework for [Love2D](https://love2d.org).
 This framework is designed to organize code into clear separation of responsibilities. This allows for the ability
@@ -152,7 +112,7 @@ Both of these patterns are similar in spirit to [React-Redux](https://react-redu
 making sure all updates are coordinated through actions and reducers, we can easily control state changes and centralize
 the updates.
 
-### Project Organization
+## Project Organization
 
 The project is organized around the concept of `rules`. Rules represent some either complex interactions or entity in
 the game. For example, currently there is a `character` rule section, and a `combat` rule section. Each with it's own

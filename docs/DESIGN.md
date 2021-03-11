@@ -16,13 +16,17 @@
 
 ## Concept
 
-An RPG based game/system set in a sci-fi universe. Player is one of a small group of soldiers that
-awakens on a ship/space station/moon base to a major disaster in progress. Player needs to navigate rogue robots and 
-damaged systems to repair the ship to save the rest of the crew. 
+An RPG based game/system set in a sci-fi universe. Player 
+is one of a small group of travellers that awakens on a ship/space 
+station/moon base to a major disaster in progress. Player needs to 
+navigate rogue robots and damaged systems to repair the ship to save 
+the rest of the crew. 
 
-Play styles could vary between more combat expertise, which will increase survivability but might limit exploration
-or other skill opportunities. Or maybe using more survival skills which will help with finding supplies and
-alternate routes. Or maybe a more skill focus that allows the character more abilities to explore and solve problems.
+Play styles could vary between more combat expertise, which will 
+increase survivability but might limit exploration or other skill 
+opportunities. Or maybe using more survival skills which will help 
+with finding supplies and alternate routes. Or maybe a more skill 
+focus that allows the character more abilities to explore and solve problems.
 
 ## Inspiration
 
@@ -56,7 +60,7 @@ _Lost in Space_ - Traveling to a new world, a catastrophe happens and people ban
 
 **Doodle a picture/sketch for the project**
 
-TODO
+[First Concept](https://www.dropbox.com/s/13muv93r2z11g4w/concept-art-1-zoom.png?raw=1)
 
 **What is FUN about this project? This can be fun for you to do, and/or fun to play!**
 - A game with a clear milestones to completion!
@@ -166,59 +170,3 @@ _Time to start breaking down your idea to get some milestones and steps together
 
 ### Scoping
 _Describe the elements of the game/project that are in/out of scope. Use your thoughts from risk combined with creativity to identify the things you really need, and those things that will make the project less likely to succeed._
-
-### Milestones
-#### Goal: First public release
-A game with:
-- Basic Character Generation
-- Combat mechanics
-- Small variety of enemies
-- Basic skill checks
-- Something that feels like a spaceship
-- A story exists, but not necessarily good
-- Some items that can be found and used
-- A couple of different environments
-
-
-## Key Milestones
-### 0. Basic foundations [COMPLETED]
-This is some next steps to lay good foundations depending on what comes up next
-  - Load/Save game: Always a tricky thing to work out, building this in early should be easier than deferring to the last moment. Use a save game slot system
-  - Options screen: Simple ability to set resolution for game, change key maps. This is to prevent anything being too rigid to change later
-  - Character Details Screen: Something in game to pop-up a display over the map
-
-### 1. Simple never ending roguelike [COMPLETED]
-This should focus on moving the character around an testing the combat system
-  - Inventory to equip melee and ranged weapon
-  - Create enemy spawners that trigger new enemies whenever rooms are empty
-  - Combat has some strategic feel
-    - Ranged Combat
-    - Melee Combat
-  - Character generation gives some ability scores and combat skills
-  - AI that charges the player down
-  - Some ability to heal character
-
-### 2. Expanding the map system << I Am Here >>
-Expanding the maps slightly
-  - Ladders that go up/down. When returning to a previous level the level should look like it did when you left
-  - Introduce skill checks like a computer terminal that opens a door, 
-  - Items are added to rooms/corridors that could serve a function for skill checks
-  - Description generators for rooms
-  - "Static" rooms that could be used for key plot points
-  - Map zoom out display
-
-### 3. Improved AI
-  - Patrolling AI that moves from room to room 
-  - Guard AI that stays in room until the player enters
-  - Repair AI that fixes up enemy units that are damaged
-  - Fleeing AI that runs after taking a certain amount of damage
-  - Introduce Allies that assist player
-    - AI Holding rooms that are cleared
-    - AI Follow player and assist in battle
-
-### 4. Story Events
-  - Introduce quests
-  - Messages that can happen describing what is going on
-  - Intro screen setting up the scene
-  - Define a story arc based on the levels that you move through
-  - Introduce different environment conditions (Fire and Vacuum)
