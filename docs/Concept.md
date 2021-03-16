@@ -60,7 +60,7 @@ _Lost in Space_ - Traveling to a new world, a catastrophe happens and people ban
 
 **Doodle a picture/sketch for the project**
 
-[First Concept](https://www.dropbox.com/s/13muv93r2z11g4w/concept-art-1-zoom.png?raw=1)
+![First Concept](https://www.dropbox.com/s/13muv93r2z11g4w/concept-art-1-zoom.png?raw=1)
 
 **What is FUN about this project? This can be fun for you to do, and/or fun to play!**
 - A game with a clear milestones to completion!

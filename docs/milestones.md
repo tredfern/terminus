@@ -30,7 +30,44 @@ This should focus on moving the character around an testing the combat system
 ### 2. Gameplay Focus << I Am Here >>
 This milestone will be complete when there is game that has received feedback from at least 1 person that I do not know.
 
-Expanding the maps slightly
+- UI Improvements
+  - Hot slots for items that are equipped
+  - Better hotkeys that can be reconfigured
+  - Message display should be more intuitive
+  - Animating UI elements
+- Graphics
+  - Animations for moving, fighting etc...
+  - Start getting more specific on palette for colors
+  - Visual additions, blood trails on ground etc...
+  - Shader effects, lighting or other kinds of things
+  - Tighten up how resolution will work, and how the map should display that
+- Sounds
+  - Sounds kind of clip on replay, better management of them
+  - Better control of sound volume
+  - Sounds for pick up items, defeated enemy, etc...
+- Music
+  - Some soundtrack during game
+  - Victory music/sounds for rewards
+- Gameplay
+  - Game needs to start taking on the elements that make it more fun
+  - Items should have more interesting interactions
+  - All ability scores should serve a purpose
+  - Additional NPC's that are not enemies
+  - Add more items
+- Maps
+  - Specific room types
+    - Engineering, bridge, storage, medbay, quarters, etc...
+    - Specific rooms should have different items
+  - Rooms should be able to have predesigned layouts
+  - Ladders that lead to new levels
+  - Doors!
+- Other stuff
+  - Refactor some of the state management
+    - Position of items, characters, etc... should be centralized
+    - Graphics for animations might need a more central state
+    - How to allow walking animations so there is kind of a play between the turns?
+  - Line of Sight
+  - Add a prototype for crafting mechanics? Because you know, everything needs a crafting mechanic these days.
   - Ladders that go up/down. When returning to a previous level the level should look like it did when you left
   - Introduce skill checks like a computer terminal that opens a door, 
   - Items are added to rooms/corridors that could serve a function for skill checks

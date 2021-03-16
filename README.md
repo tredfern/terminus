@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/tredfern/terminus.svg?branch=main)](https://travis-ci.com/tredfern/terminus)
 [![Coverage Status](https://coveralls.io/repos/github/tredfern/terminus/badge.svg?branch=main)](https://coveralls.io/github/tredfern/terminus?branch=main)
-[![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/tredfern/terminus/2)](https://github.com/tredfern/terminus/milestone/3)
+[![GitHub milestone](https://img.shields.io/github/milestones/progress-percent/tredfern/terminus/3)](https://github.com/tredfern/terminus/milestone/3)
 [![Love2D Version](https://img.shields.io/badge/love2d-11.3-pink.svg)](https://love2d.org)
 
 # Terminus
