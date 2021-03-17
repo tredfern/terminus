@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.character.selectors.get_enemies", function()
-  local get_enemies = require "game.rules.character.selectors.get_enemies"
+describe("game.rules.npcs.selectors.get_enemies", function()
+  local getEnemies = require "game.rules.npcs.selectors.get_enemies"
 
   it("returns all non-player characters", function()
     local p = { isPlayerControlled = true }
@@ -15,7 +15,7 @@ describe("game.rules.character.selectors.get_enemies", function()
       }
     }
 
-    local result = get_enemies(state)
+    local result = getEnemies(state)
     assert.array_includes(e1, result)
     assert.array_includes(e2, result)
     assert.array_includes(e3, result)

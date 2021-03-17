@@ -5,7 +5,7 @@
 
 local Components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
-local Character = require "game.rules.character"
+local npcs = require "game.rules.npcs"
 local Map = require "game.rules.map"
 
 local scoreboard = Components("scoreboard", function(props)
@@ -31,7 +31,7 @@ end)
 return connect(
   scoreboard,
   function(state)
-    local enemies = Character.selectors.getEnemies(state)
+    local enemies = npcs.selectors.getEnemies(state)
     local spawners = Map.selectors.getEnemySpawners(state)
     return {
       enemyCount = #enemies,

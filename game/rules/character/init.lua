@@ -30,6 +30,5 @@ return {
     getAttribute = require "game.rules.character.selectors.get_attribute",
     getByPosition = require "game.rules.character.selectors.get_by_position",
     getDead = require "game.rules.character.selectors.get_dead",
-    getEnemies = require "game.rules.character.selectors.get_enemies",
   }
 }

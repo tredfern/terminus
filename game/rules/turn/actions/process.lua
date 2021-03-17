@@ -5,6 +5,7 @@
 
 local increment = require "game.rules.turn.actions.increment"
 local Character = require "game.rules.character"
+local NPCs = require "game.rules.npcs"
 local Enemy = require "game.rules.enemy"
 local Camera = require "game.ui.camera"
 local GameState = require "game.rules.game_state"
@@ -15,7 +16,7 @@ return function(player_action)
     dispatch(increment())
     dispatch(player_action)
 
-    local enemies = Character.selectors.getEnemies(getState())
+    local enemies = NPCs.selectors.getEnemies(getState())
     if enemies then
       for _, e in ipairs(enemies) do
         dispatch(Enemy.actions.think(e))
