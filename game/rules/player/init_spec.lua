@@ -8,6 +8,7 @@ describe("game.rules.player", function()
 
   it("has the actions the player can perform", function()
     assert.not_nil(player.actions.move)
+    assert.not_nil(player.actions.pickupItems)
   end)
 
   it("has selectors to retrieve player values", function()

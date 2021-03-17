@@ -5,7 +5,6 @@
 
 local keyboard = require "moonpie.keyboard"
 local store = require "moonpie.redux.store"
-local character = require "game.rules.character"
 local player = require "game.rules.player"
 local turn = require "game.rules.turn"
 local moveDirections = require "game.rules.movement_directions"
@@ -30,8 +29,7 @@ keySettings.combatMap = {
     process_turn(player.actions.move(moveDirections.north))
   end,
   ["g"] = function()
-    local player_character = player.selectors.getPlayerCharacter(store.getState())
-    process_turn(character.actions.pickupItems(player_character))
+    process_turn(player.actions.pickupItems())
   end,
   ["shift+g"] = function()
     local Settings = require "game.settings"
