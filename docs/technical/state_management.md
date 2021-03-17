@@ -54,3 +54,6 @@ Positions
 
 Skills
 : Manages the skills that are associated with characters. Keeping skills as a separate section to make the rules management around skills and increasing them more isolated
+
+Turn
+: Manages the mechanics of processing each turn and the logic that needs to take place within it
