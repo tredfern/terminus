@@ -4,6 +4,9 @@
 -- https://opensource.org/licenses/MIT
 
 return {
+  actions = {
+    move = require "game.rules.player.actions.move"
+  },
   selectors = {
     getPlayerCharacter = require "game.rules.player.selectors.get_player_character"
   }

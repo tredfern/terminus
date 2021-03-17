@@ -8,6 +8,7 @@ local store = require "moonpie.redux.store"
 local character = require "game.rules.character"
 local player = require "game.rules.player"
 local turn = require "game.rules.turn"
+local moveDirections = require "game.rules.movement_directions"
 
 local keySettings = {}
 
@@ -17,36 +18,16 @@ end
 
 keySettings.combatMap = {
   ["down"] = function()
-    local player_character = player.selectors.getPlayerCharacter(store.getState())
-    process_turn(character.actions.move(
-      player_character,
-      player_character.x,
-      player_character.y + 1
-    ))
+    process_turn(player.actions.move(moveDirections.south))
   end,
   ["left"] = function()
-    local player_character = player.selectors.getPlayerCharacter(store.getState())
-    process_turn(character.actions.move(
-      player_character,
-      player_character.x - 1,
-      player_character.y
-    ))
+    process_turn(player.actions.move(moveDirections.west))
   end,
   ["right"]= function()
-    local player_character = player.selectors.getPlayerCharacter(store.getState())
-    process_turn(character.actions.move(
-      player_character,
-      player_character.x + 1,
-      player_character.y
-    ))
+    process_turn(player.actions.move(moveDirections.east))
   end,
   ["up"] = function()
-    local player_character = player.selectors.getPlayerCharacter(store.getState())
-    process_turn(character.actions.move(
-      player_character,
-      player_character.x,
-      player_character.y - 1
-    ))
+    process_turn(player.actions.move(moveDirections.north))
   end,
   ["g"] = function()
     local player_character = player.selectors.getPlayerCharacter(store.getState())
