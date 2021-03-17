@@ -10,7 +10,7 @@ local CharacterAttributes = require "game.ui.widgets.character_attributes"
 local CharacterSkills = require "game.ui.widgets.character_skills"
 local CharacterInventory = require "game.ui.widgets.character_inventory"
 local CharacterEquipment = require "game.ui.widgets.character_equipment"
-local Character = require "game.rules.character"
+local Player = require "game.rules.player"
 local Keyboard = require "moonpie.keyboard"
 
 local CharacterDetails = Components("character_details", function(props)
@@ -66,7 +66,7 @@ end)
 return connect(
   CharacterDetails,
   function(state)
-    local player = Character.selectors.getPlayer(state)
+    local player = Player.selectors.getPlayerCharacter(state)
     return {
       character = player,
       characterName = player.name

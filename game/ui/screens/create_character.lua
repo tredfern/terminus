@@ -8,6 +8,7 @@ local store = require "moonpie.redux.store"
 local connect = require "moonpie.redux.connect"
 local app = require "game.app"
 local character = require "game.rules.character"
+local player = require "game.rules.player"
 local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
 local characterAttributes = require "game.ui.widgets.character_attributes"
 local characterSkills = require "game.ui.widgets.character_skills"
@@ -75,6 +76,6 @@ end)
 
 return connect(create_character, function(state)
   return {
-    character = character.selectors.getPlayer(state)
+    character = player.selectors.getPlayerCharacter(state)
   }
 end)

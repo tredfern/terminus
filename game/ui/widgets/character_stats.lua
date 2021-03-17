@@ -5,7 +5,7 @@
 
 local components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
-local character = require "game.rules.character"
+local player = require "game.rules.player"
 
 local character_stats = components("character_stats", function(props)
   return {
@@ -27,11 +27,11 @@ local character_stats = components("character_stats", function(props)
 end)
 
 return connect(character_stats, function(state)
-  local player = character.selectors.getPlayer(state)
-  if player then
+  local pc = player.selectors.getPlayerCharacter(state)
+  if pc then
     return {
-      character_name = player.name,
-      character_health = player.health
+      character_name = pc.name,
+      character_health = pc.health
     }
   end
 end)

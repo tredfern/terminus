@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.character.selectors.get_player", function()
-  local get_player = require "game.rules.character.selectors.get_player"
+  local getPlayerCharacter = require "game.rules.player.selectors.get_player_character"
 
   it("can search state and return the player character if it exists", function()
     local player = { isPlayerControlled = true }
@@ -14,8 +14,6 @@ describe("game.rules.character.selectors.get_player", function()
       }
     }
 
-    assert.equals(player, get_player(state))
+    assert.equals(player, getPlayerCharacter(state))
   end)
-
-
 end)
