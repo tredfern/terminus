@@ -5,8 +5,8 @@
 
 local Character = require "game.rules.character"
 local aiRoutines = {
-  require "game.rules.enemy.ai.move_towards_player",
-  require "game.rules.enemy.ai.random_movement"
+  require "game.rules.npcs.ai.move_towards_player",
+  require "game.rules.npcs.ai.random_movement"
 }
 local tables = require "moonpie.tables"
 local randomChance = 2

@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.enemy.actions.think", function()
-  local think = require "game.rules.enemy.actions.think"
+describe("game.rules.npcs.actions.think", function()
+  local think = require "game.rules.npcs.actions.think"
   local mockDispatch = require "test_helpers.mock_dispatch"
 
 

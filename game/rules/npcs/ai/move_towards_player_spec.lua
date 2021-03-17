@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.enemy.ai.move_towards_player", function()
-  local moveTowardsPlayer = require "game.rules.enemy.ai.move_towards_player"
+describe("game.rules.npcs.ai.move_towards_player", function()
+  local moveTowardsPlayer = require "game.rules.npcs.ai.move_towards_player"
   local mockDispatch = require "test_helpers.mock_dispatch"
 
   it("dispatches a move action in the direction of the player", function()

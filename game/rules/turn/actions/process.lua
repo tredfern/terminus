@@ -19,7 +19,7 @@ return function(player_action)
     local enemies = NPCs.selectors.getEnemies(getState())
     if enemies then
       for _, e in ipairs(enemies) do
-        dispatch(Enemy.actions.think(e))
+        dispatch(NPCs.actions.think(e))
       end
     end
 

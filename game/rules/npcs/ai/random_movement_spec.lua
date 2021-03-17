@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.enemy.ai.random_movement", function()
-  local randomMovement = require "game.rules.enemy.ai.random_movement"
+describe("game.rules.npcs.ai.random_movement", function()
+  local randomMovement = require "game.rules.npcs.ai.random_movement"
   local mockDispatch = require "test_helpers.mock_dispatch"
 
   it("dispatches a move action", function()

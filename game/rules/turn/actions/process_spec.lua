@@ -44,13 +44,13 @@ describe("game.rules.turn.actions.process", function()
   end)
 
   it("triggers thinking for all non-player characters", function()
-    local enemy = require "game.rules.enemy"
-    spy.on(enemy.actions, "think")
+    local npcs = require "game.rules.npcs"
+    spy.on(npcs.actions, "think")
 
     local action = process({})
     action(mockDispatch, store.getState)
 
-    assert.spy(enemy.actions.think).was.called(3)
+    assert.spy(npcs.actions.think).was.called(3)
   end)
 
   it("tracks the camera around the player with player center on screen", function()
