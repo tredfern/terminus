@@ -7,6 +7,7 @@ describe("game.rules.npcs", function()
   local npcs = require "game.rules.npcs"
 
   it("has actions to for NPCs to perform", function()
+    assert.not_nil(npcs.actions.checkSpawnEnemy)
     assert.not_nil(npcs.actions.think)
   end)
 

@@ -6,7 +6,6 @@
 local increment = require "game.rules.turn.actions.increment"
 local Character = require "game.rules.character"
 local NPCs = require "game.rules.npcs"
-local Enemy = require "game.rules.enemy"
 local Camera = require "game.ui.camera"
 local GameState = require "game.rules.game_state"
 local Map = require "game.rules.map"
@@ -26,7 +25,7 @@ return function(player_action)
     local spawners = Map.selectors.getEnemySpawners(getState())
     if spawners then
       for _, spawner in ipairs(spawners) do
-        dispatch(Enemy.actions.checkSpawnEnemy(spawner))
+        dispatch(NPCs.actions.checkSpawnEnemy(spawner))
       end
     end
 
