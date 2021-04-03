@@ -66,7 +66,7 @@ end)
 return connect(
   CharacterDetails,
   function(state)
-    local player = Player.selectors.getPlayerCharacter(state)
+    local player = Player.selectors.getPlayer(state)
     return {
       character = player,
       characterName = player.name

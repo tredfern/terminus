@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local characters = require "game.rules.character"
-local findPlayer = require "game.rules.player.selectors.get_player_character"
+local findPlayer = require "game.rules.player.selectors.get_player"
 
 return function()
   return function(dispatch, getState)

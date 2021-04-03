@@ -3,6 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local imageMgr = require "moonpie.graphics.image"
 local class = require "moonpie.class"
 local sprite = class({})
 
@@ -17,6 +18,10 @@ end
 
 function sprite.fromImage(imageData)
   return sprite:new(imageData)
+end
+
+function sprite.fromFile(imageFile)
+  return sprite:new(imageMgr.load(imageFile))
 end
 
 return sprite

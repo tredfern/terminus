@@ -5,10 +5,12 @@
 
 return {
   actions = {
+    add = require "game.rules.player.actions.add",
+    equipItem = require "game.rules.player.actions.equip_item",
     move = require "game.rules.player.actions.move",
     pickupItems = require "game.rules.player.actions.pickup_items",
   },
   selectors = {
-    getPlayerCharacter = require "game.rules.player.selectors.get_player_character"
+    getPlayer = require "game.rules.player.selectors.get_player"
   }
 }

@@ -76,6 +76,6 @@ end)
 
 return connect(create_character, function(state)
   return {
-    character = player.selectors.getPlayerCharacter(state)
+    character = player.selectors.getPlayer(state)
   }
 end)
