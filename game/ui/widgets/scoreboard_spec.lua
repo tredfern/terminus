@@ -24,10 +24,8 @@ describe("game.ui.widgets.scoreboard", function()
   it("displays the total number of spawners", function()
     local state = {
       characters = { },
-      map = {
-        enemySpawners = {
-          {}, {}, {}
-        }
+      world = {
+        { spawner = true }, { spawner = true }, { spawner = true }
       }
     }
     mockStore(state)

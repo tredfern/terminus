@@ -2,14 +2,14 @@
 --
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
-local types = require "game.rules.map.actions.types"
 
-return function(x, y)
+local actionTypes = require "game.rules.world.actions.types"
+
+return function(entity)
   return {
+    type = actionTypes.ENTITY_ADD,
     payload = {
-      x = x, y = y
-    },
-    type = types.ADD_ENEMY_SPAWNER
-
+      entity = entity
+    }
   }
 end

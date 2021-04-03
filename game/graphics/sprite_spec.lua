@@ -35,6 +35,6 @@ describe("game.graphics.sprite", function()
     test:draw(10, 20)
     assert.spy(love.graphics.setColor).was.called_with(test.color)
     assert.spy(love.graphics.draw).was.called_with(test.imageData, 10, 20)
-    
+
   end)
 end)

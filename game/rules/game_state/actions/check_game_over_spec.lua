@@ -46,12 +46,21 @@ describe("game.rules.game_state.actions", function()
   end)
 
   it("triggers the game over action if their are no spawners left on the map", function()
+    -- spawner around
     mockStore({
       characters = { { isPlayerControlled = true, health = 10 } },
-      map = { enemySpawners = {} }
+      world = { { spawner = true } }
     })
 
     local action = checkGameOver()
+    mockDispatch(action)
+    assert.spy(app.gameOver).was.not_called()
+
+    -- spawner not around
+    mockStore({
+      characters = { { isPlayerControlled = true, health = 10 } },
+      world = { { } }
+    })
     mockDispatch(action)
 
     assert.spy(app.gameOver).was.called()

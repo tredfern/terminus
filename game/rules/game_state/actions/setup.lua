@@ -3,12 +3,12 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Character = require "game.rules.character"
 local Items = require "game.rules.items"
 local map = require "game.rules.map"
 local tables = require "moonpie.tables"
 local MessageLog = require "game.rules.message_log"
 local Player = require "game.rules.player"
+local Aliens = require "game.rules.aliens"
 
 return function()
   return function(dispatch, getState)
@@ -26,12 +26,11 @@ return function()
 
     for _ = 1,2 do
       local r = tables.pickRandom(rooms)
-      dispatch(map.actions.addEnemySpawner(
+      dispatch(Aliens.actions.addSpawner(
         r.x + love.math.random(r.width) - 1,
         r.y + love.math.random(r.height) - 1
       ))
     end
-
 
     -- Add some random items to some random rooms
     for _ = 1, 10 do

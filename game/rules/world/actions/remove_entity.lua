@@ -3,13 +3,13 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.map.actions.types"
+local actionTypes = require "game.rules.world.actions.types"
 
-return function(spawner)
+return function(entity)
   return {
-    type = types.REMOVE_ENEMY_SPAWNER,
+    type = actionTypes.ENTITY_REMOVE,
     payload = {
-      spawner = spawner
+      entity = entity
     }
   }
 end

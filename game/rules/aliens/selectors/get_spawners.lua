@@ -4,6 +4,6 @@
 -- https://opensource.org/licenses/MIT
 
 return function(state)
-  if state.map == nil then return {} end
-  return state.map.enemySpawners or {}
+  local World = require "game.rules.world"
+  return World.selectors.getAllWithComponents(state, "spawner")
 end

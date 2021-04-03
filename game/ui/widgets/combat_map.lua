@@ -10,7 +10,6 @@ local character = require "game.rules.character"
 local camera = require "game.ui.camera"
 local store = require "moonpie.redux.store"
 local Settings = require "game.settings"
-local Map = require "game.rules.map"
 local Image = require "moonpie.graphics.image"
 local Items = require "game.rules.items"
 local World = require "game.rules.world"
@@ -22,10 +21,10 @@ local floorTiles = {
   Image.load("assets/graphics/floor-2.png")
 }
 
-local function getScreenCoordinate(camera, x, y)
+local function getScreenCoordinate(cam, x, y)
   return
-    (x - camera.x) * tile_width,
-    (y - camera.y) * tile_height
+    (x - cam.x) * tile_width,
+    (y - cam.y) * tile_height
 end
 
 local function draw_tile(x, y, color)
@@ -129,12 +128,6 @@ local function draw_enemy(x, y, health)
   love.graphics.draw(alien, x * tile_width, y * tile_height)
 end
 
-local function drawSpawner(x, y)
-  love.graphics.setColor(colors.white)
-  local spawner = Image.load("assets/graphics/spawner.png")
-  love.graphics.draw(spawner, x * tile_width, y * tile_height)
-end
-
 local function drawItem(item, x, y)
   if item.image then
     love.graphics.setColor(colors.white)
@@ -145,13 +138,10 @@ local function drawItem(item, x, y)
   end
 end
 
-
-
 local combat_map = components("combat_map", function(props)
   return {
     camera = props.camera,
     characters = props.characters,
-    enemySpawners = props.enemySpawners,
     drawableEntities = props.drawableEntities,
     map = props.map,
     items = props.items,
@@ -184,10 +174,6 @@ local combat_map = components("combat_map", function(props)
         end
       end
 
-      for _, v in ipairs(self.enemySpawners) do
-        drawSpawner(v.x - self.camera.x, v.y - self.camera.y)
-      end
-
       for _, v in ipairs(self.items) do
         drawItem(v, v.x - self.camera.x, v.y - self.camera.y)
       end
@@ -215,7 +201,6 @@ return connect(combat_map,
     return {
       camera = camera.selectors.get(state),
       characters = character.selectors.getAll(state),
-      enemySpawners = Map.selectors.getEnemySpawners(state),
       drawableEntities = World.selectors.getAllWithComponents(state, "x", "y", "sprite"),
       map = state.map,
       items = Items.selectors.getAll(state),

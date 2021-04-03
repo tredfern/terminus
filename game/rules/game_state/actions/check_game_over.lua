@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Map = require "game.rules.map"
 local Player = require "game.rules.player"
+local Aliens = require "game.rules.aliens"
 
 return function()
   local gameOver = require "game.rules.game_state.actions.game_over"
@@ -16,7 +16,7 @@ return function()
       dispatch(gameOver())
     end
 
-    local spawners = Map.selectors.getEnemySpawners(state)
+    local spawners = Aliens.selectors.getSpawners(state)
     if spawners == nil or #spawners == 0 then
       dispatch(gameOver())
     end

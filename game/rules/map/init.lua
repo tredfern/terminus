@@ -7,8 +7,6 @@ local mapHelper = require "game.rules.map.helper"
 
 return {
   actions = {
-    addEnemySpawner = require "game.rules.map.actions.add_enemy_spawner",
-    removeEnemySpawner = require "game.rules.map.actions.remove_enemy_spawner",
     set = require "game.rules.map.actions.set",
     types = require "game.rules.map.actions.types"
   },
@@ -23,8 +21,6 @@ return {
   },
   selectors = {
     getDimensions = require "game.rules.map.selectors.get_dimensions",
-    getEnemySpawners = require "game.rules.map.selectors.get_enemy_spawners",
-    getEnemySpawnerAt = require "game.rules.map.selectors.get_enemy_spawner_at",
     getNeighborTerrain = require "game.rules.map.selectors.get_neighbor_terrain",
     getRooms = require "game.rules.map.selectors.get_rooms",
     getTerrain = require "game.rules.map.selectors.get_terrain"

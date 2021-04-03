@@ -8,7 +8,7 @@ local Character = require "game.rules.character"
 local NPCs = require "game.rules.npcs"
 local Camera = require "game.ui.camera"
 local GameState = require "game.rules.game_state"
-local Map = require "game.rules.map"
+local Aliens = require "game.rules.aliens"
 
 return function(player_action)
   return function(dispatch, getState)
@@ -22,7 +22,7 @@ return function(player_action)
       end
     end
 
-    local spawners = Map.selectors.getEnemySpawners(getState())
+    local spawners = Aliens.selectors.getSpawners(getState())
     if spawners then
       for _, spawner in ipairs(spawners) do
         dispatch(NPCs.actions.checkSpawnEnemy(spawner))

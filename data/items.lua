@@ -23,11 +23,11 @@ Items.describe {
   name = "Anti-Spawn Spray",
   consumeOnUse = false,
   useHandler = function(_, dispatch, user)
-    local Map = require "game.rules.map"
+    local Aliens = require "game.rules.aliens"
     local store = require "game.store"
-    local spawner = Map.selectors.getEnemySpawnerAt(store.getState(), user.x, user.y)
+    local spawner = Aliens.selectors.getSpawnerAt(store.getState(), user.x, user.y)
     if spawner then
-      dispatch(Map.actions.removeEnemySpawner(spawner))
+      dispatch(Aliens.actions.removeSpawner(spawner))
     end
   end,
   image = Image.load("assets/graphics/spray-bottle.png")

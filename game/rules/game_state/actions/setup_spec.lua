@@ -46,7 +46,7 @@ describe("game.rules.game_state.actions.setup", function()
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
-        c.type == map.actions.types.ADD_ENEMY_SPAWNER
+        c.type == "ENTITY_ADD" and c.payload.entity.spawner
       end)
     )
   end)

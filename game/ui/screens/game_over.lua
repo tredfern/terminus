@@ -7,7 +7,7 @@ local Components = require "moonpie.ui.components"
 local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
 local connect = require "moonpie.redux.connect"
 local app = require "game.app"
-local Map = require "game.rules.map"
+local Aliens = require "game.rules.aliens"
 
 local function result(isVictory)
   if isVictory then
@@ -33,7 +33,7 @@ end)
 
 
 return connect(gameOver, function(state)
-  local enemySpawners = Map.selectors.getEnemySpawners(state)
+  local enemySpawners = Aliens.selectors.getSpawners(state)
   return {
     victory = #enemySpawners == 0
   }
