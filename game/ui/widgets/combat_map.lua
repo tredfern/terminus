@@ -13,6 +13,7 @@ local Settings = require "game.settings"
 local Map = require "game.rules.map"
 local Image = require "moonpie.graphics.image"
 local Items = require "game.rules.items"
+local World = require "game.rules.world"
 
 local tile_width = 32
 local tile_height = 32
@@ -20,6 +21,12 @@ local floorTiles = {
   Image.load("assets/graphics/floor-1.png"),
   Image.load("assets/graphics/floor-2.png")
 }
+
+local function getScreenCoordinate(camera, x, y)
+  return
+    (x - camera.x) * tile_width,
+    (y - camera.y) * tile_height
+end
 
 local function draw_tile(x, y, color)
   love.graphics.setColor(color)
@@ -111,12 +118,6 @@ local function drawGrid(tilesWide, tilesHigh)
   end
 end
 
-local function draw_character(x, y)
-  local characterImage = Image.load("assets/graphics/simple-character-1.png")
-  love.graphics.setColor(colors.white)
-  love.graphics.draw(characterImage, x * tile_width, y * tile_height)
-end
-
 local function draw_enemy(x, y, health)
   if health < 10 then
     love.graphics.setColor(colors.danger)
@@ -145,11 +146,13 @@ local function drawItem(item, x, y)
 end
 
 
+
 local combat_map = components("combat_map", function(props)
   return {
     camera = props.camera,
     characters = props.characters,
     enemySpawners = props.enemySpawners,
+    drawableEntities = props.drawableEntities,
     map = props.map,
     items = props.items,
     showGrid = props.showGrid,
@@ -192,9 +195,12 @@ local combat_map = components("combat_map", function(props)
       for _, v in ipairs(self.characters) do
         if v.isEnemy then
           draw_enemy(v.x - self.camera.x, v.y - self.camera.y, v.health)
-        else
-          draw_character(v.x - self.camera.x, v.y - self.camera.y, v.isEnemy)
         end
+      end
+
+      for _, v in ipairs(self.drawableEntities) do
+        local sx, sy = getScreenCoordinate(self.camera, v.x, v.y)
+        v.sprite:draw(sx, sy)
       end
 
       if self.showGrid then
@@ -210,6 +216,7 @@ return connect(combat_map,
       camera = camera.selectors.get(state),
       characters = character.selectors.getAll(state),
       enemySpawners = Map.selectors.getEnemySpawners(state),
+      drawableEntities = World.selectors.getAllWithComponents(state, "x", "y", "sprite"),
       map = state.map,
       items = Items.selectors.getAll(state),
       showGrid = Settings.selectors.getOption(state, "show_grid_lines")

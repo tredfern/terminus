@@ -6,9 +6,11 @@
 local imageMgr = require "moonpie.graphics.image"
 local class = require "moonpie.class"
 local sprite = class({})
+local colors = require "game.graphics.colors"
 
 function sprite:constructor(imageData)
   self.imageData = imageData
+  self.color = colors.drawDefault
 end
 
 
@@ -22,6 +24,11 @@ end
 
 function sprite.fromFile(imageFile)
   return sprite:new(imageMgr.load(imageFile))
+end
+
+function sprite:draw(sx, sy)
+  love.graphics.setColor(self.color)
+  love.graphics.draw(self.imageData, sx, sy)
 end
 
 return sprite
