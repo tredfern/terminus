@@ -7,6 +7,7 @@ describe("game.rules.aliens", function()
   local Aliens = require "game.rules.aliens"
 
   it("has actions", function()
+    assert.not_nil(Aliens.actions.addAlien)
     assert.not_nil(Aliens.actions.addSpawner)
     assert.not_nil(Aliens.actions.removeSpawner)
   end)

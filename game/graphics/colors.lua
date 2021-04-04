@@ -6,5 +6,6 @@
 local colors = require "moonpie.graphics.colors"
 
 colors.drawDefault = {1, 1, 1, 1}
+colors.lowHealth = colors.danger
 
 return colors

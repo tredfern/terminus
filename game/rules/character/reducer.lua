@@ -70,8 +70,16 @@ return createSlice {
   end,
 
   [types.SET_HEALTH] = function(state, action)
+    local colors = require "game.graphics.colors"
     local c = action.payload.character
     c.health = action.payload.health
+    if c.sprite then
+      if c.health < 10 then
+        c.sprite.color = colors.lowHealth
+      else
+        c.sprite.color = colors.drawDefault
+      end
+    end
     return state
   end,
 

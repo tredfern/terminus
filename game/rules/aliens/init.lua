@@ -5,6 +5,7 @@
 
 return {
   actions = {
+    addAlien = require "game.rules.aliens.actions.add_alien",
     addSpawner = require "game.rules.aliens.actions.add_spawner",
     removeSpawner = require "game.rules.aliens.actions.remove_spawner"
   },

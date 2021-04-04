@@ -6,7 +6,6 @@
 local components = require "moonpie.ui.components"
 local colors = require "moonpie.graphics.colors"
 local connect = require "moonpie.redux.connect"
-local character = require "game.rules.character"
 local camera = require "game.ui.camera"
 local store = require "moonpie.redux.store"
 local Settings = require "game.settings"
@@ -117,17 +116,6 @@ local function drawGrid(tilesWide, tilesHigh)
   end
 end
 
-local function draw_enemy(x, y, health)
-  if health < 10 then
-    love.graphics.setColor(colors.danger)
-  else
-    love.graphics.setColor(colors.white)
-  end
-
-  local alien = Image.load("assets/graphics/alien_1.png")
-  love.graphics.draw(alien, x * tile_width, y * tile_height)
-end
-
 local function drawItem(item, x, y)
   if item.image then
     love.graphics.setColor(colors.white)
@@ -141,7 +129,6 @@ end
 local combat_map = components("combat_map", function(props)
   return {
     camera = props.camera,
-    characters = props.characters,
     drawableEntities = props.drawableEntities,
     map = props.map,
     items = props.items,
@@ -178,12 +165,6 @@ local combat_map = components("combat_map", function(props)
         drawItem(v, v.x - self.camera.x, v.y - self.camera.y)
       end
 
-      for _, v in ipairs(self.characters) do
-        if v.isEnemy then
-          draw_enemy(v.x - self.camera.x, v.y - self.camera.y, v.health)
-        end
-      end
-
       for _, v in ipairs(self.drawableEntities) do
         local sx, sy = getScreenCoordinate(self.camera, v.x, v.y)
         v.sprite:draw(sx, sy)
@@ -200,7 +181,6 @@ return connect(combat_map,
   function(state)
     return {
       camera = camera.selectors.get(state),
-      characters = character.selectors.getAll(state),
       drawableEntities = World.selectors.getAllWithComponents(state, "x", "y", "sprite"),
       map = state.map,
       items = Items.selectors.getAll(state),
