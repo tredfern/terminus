@@ -90,6 +90,12 @@ describe("game.rules.items", function()
       assert.equals(19, c.x)
       assert.equals(18, c.y)
     end)
+
+    it("creates a sprite based on the image", function()
+      Items.describe { key = "withImage", name = "Image", image = {} }
+      local c = Items.list.withImage:clone()
+      assert.equals(c.image, c.sprite.imageData)
+    end)
   end)
 
   it("has actions to manage items", function()

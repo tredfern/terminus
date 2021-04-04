@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local tables = require "moonpie.tables"
+local sprite = require "game.graphics.sprite"
 
 local Items = {
   actions = {
@@ -21,6 +22,9 @@ Items.list = {}
 local function clone(item, props)
   props = props or {}
   tables.copyKeys(item, props, false)
+  if item.image then
+    props.sprite = sprite.fromImage(item.image)
+  end
 
   return props
 end

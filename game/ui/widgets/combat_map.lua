@@ -116,22 +116,11 @@ local function drawGrid(tilesWide, tilesHigh)
   end
 end
 
-local function drawItem(item, x, y)
-  if item.image then
-    love.graphics.setColor(colors.white)
-    love.graphics.draw(item.image, x * tile_width, y * tile_height)
-  else
-    love.graphics.setColor(colors(colors.main))
-    love.graphics.rectangle("fill", x * tile_width + 3, y * tile_height + 3, 26, 26)
-  end
-end
-
 local combat_map = components("combat_map", function(props)
   return {
     camera = props.camera,
     drawableEntities = props.drawableEntities,
     map = props.map,
-    items = props.items,
     showGrid = props.showGrid,
 
     afterLayout = function(self)
@@ -159,10 +148,6 @@ local combat_map = components("combat_map", function(props)
             end
           end
         end
-      end
-
-      for _, v in ipairs(self.items) do
-        drawItem(v, v.x - self.camera.x, v.y - self.camera.y)
       end
 
       for _, v in ipairs(self.drawableEntities) do
