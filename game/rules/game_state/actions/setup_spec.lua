@@ -12,7 +12,9 @@ describe("game.rules.game_state.actions.setup", function()
 
   local captured_actions
   local dispatch_spy = spy.new(function(action)
-    captured_actions[#captured_actions + 1] = action
+    if type(action) == "table" then
+      captured_actions[#captured_actions + 1] = action
+    end
   end)
 
   local getState = function()
@@ -55,7 +57,7 @@ describe("game.rules.game_state.actions.setup", function()
     assert.is_true(tables.any(
       captured_actions,
       function(c) return
-        c.type == map.actions.types.SET
+        c.type == map.actions.types.CREATE
       end)
     )
   end)

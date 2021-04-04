@@ -15,6 +15,7 @@ describe("game.rules.map", function()
   it("defines actions available", function()
     assert.not_nil(Map.actions.types)
     assert.not_nil(Map.actions.set)
+    assert.not_nil(Map.actions.create)
   end)
 
   it("defines the selectors available", function()

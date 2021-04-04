@@ -12,9 +12,7 @@ local Aliens = require "game.rules.aliens"
 
 return function()
   return function(dispatch, getState)
-    dispatch(map.actions.set(
-      map.generators.dungeon.generate(50, 50)
-    ))
+    dispatch(map.actions.create(50, 50, map.generators.dungeon))
     local rooms = map.selectors.getRooms(getState())
 
     local playerStartRoom = tables.pickRandom(rooms)

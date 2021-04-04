@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local tables = require "moonpie.tables"
+local isCallable = require "moonpie.utility.is_callable"
 
 local mockDispatch = setmetatable({
 
@@ -21,14 +22,16 @@ local mockDispatch = setmetatable({
   end
 }, {
   __call = function(self, action)
-    if type(action) == "function" then
+    if isCallable(action) then
       if self.processComplex then
         local store = require "moonpie.redux.store"
         action(self, store.getState)
       end
-      return
     end
-    self.dispatched[#self.dispatched + 1] = action
+
+    if type(action) == "table" then
+      self.dispatched[#self.dispatched + 1] = action
+    end
   end
 })
 

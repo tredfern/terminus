@@ -165,4 +165,9 @@ function generator.fillWalls(map)
   end
 end
 
-return generator
+return setmetatable(generator,
+  {
+    __call = function(self, width, height)
+      return self.generate(width, height)
+    end
+  })
