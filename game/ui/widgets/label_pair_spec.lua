@@ -12,15 +12,15 @@ describe("game.ui.widgets.label_pair", function()
       value = "123"
     }
 
-    assert.equals("Testing:", component:findByID("label").text)
-    assert.equals("123", component:findByID("value").text)
+    assert.equals("Testing:", component:findByID("Label").text)
+    assert.equals("123", component:findByID("Value").text)
   end)
 
   it("combines id into child components", function()
     local component = labelPair {
       id = "somePair", label = "somePair", value = "Food"
     }
-    assert.not_nil(component:findByID("somePairlabel"))
-    assert.not_nil(component:findByID("somePairvalue"))
+    assert.not_nil(component:findByID("somePairLabel"))
+    assert.not_nil(component:findByID("somePairValue"))
   end)
 end)

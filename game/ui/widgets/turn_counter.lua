@@ -5,14 +5,16 @@
 
 local components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
+local LabelPair = require "game.ui.widgets.label_pair"
 
 local turn_counter = components("turn_counter", function(props)
   return {
     turn_counter = props.turn_counter,
     render = function(self)
-      return {
-        components.text { text = "Turn Counter:" },
-        components.text({ id = "turn_counter", text = self.turn_counter })
+      return LabelPair {
+        id = "turnCounter",
+        label = "Turn Counter",
+        value = self.turn_counter
       }
     end
   }

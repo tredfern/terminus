@@ -19,12 +19,12 @@ describe("game.ui.widgets.character_attributes", function()
   it("display the character stats", function()
     local widget = moonpie.test_render(characterAttributes { attributes = sampleAttributes })
 
-    assert.equals("15", widget:findByID("StrengthStat").text)
-    assert.equals("12", widget:findByID("AgilityStat").text)
-    assert.equals("18", widget:findByID("EnduranceStat").text)
-    assert.equals("21", widget:findByID("WitStat").text)
-    assert.equals("13", widget:findByID("EducationStat").text)
-    assert.equals("19", widget:findByID("SocialStat").text)
+    assert.equals("15", widget:findByID("StrengthValue").text)
+    assert.equals("12", widget:findByID("AgilityValue").text)
+    assert.equals("18", widget:findByID("EnduranceValue").text)
+    assert.equals("21", widget:findByID("WitValue").text)
+    assert.equals("13", widget:findByID("EducationValue").text)
+    assert.equals("19", widget:findByID("SocialValue").text)
 
     -- Adjustment buttons are not rendered in non-edit mode
     assert.is_nil(widget:findByID("StrengthIncrease"))

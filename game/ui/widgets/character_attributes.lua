@@ -8,8 +8,9 @@ local Character = require "game.rules.character"
 local store = require "game.store"
 local connect = require "moonpie.redux.connect"
 local attributes = require "game.rules.character.attributes"
+local labelPair = require "game.ui.widgets.label_pair"
 
-local labelPair = Components("characterAttributeLabelPair", function(props)
+local attrLabelPair = Components("characterAttributeLabelPair", function(props)
   return {
     character = props.character,
     attribute = props.attribute,
@@ -40,15 +41,14 @@ local labelPair = Components("characterAttributeLabelPair", function(props)
       end
       return {
         buttons,
-        Components.text { text = self.label },
-        Components.text { id = self.label .. "Stat", text = self.value, style ="align-right" },
+        labelPair { id = self.label, label = self.label, value = self.value }
       }
     end
   }
 end)
 
-labelPair = connect(
-  labelPair,
+attrLabelPair = connect(
+  attrLabelPair,
   function(state, component)
     if component == nil then return {} end
     return {
@@ -62,42 +62,42 @@ return Components("character_attributes", function(props)
 
   return {
     width = "15%",
-    labelPair {
+    attrLabelPair {
       label = "Strength",
       attribute = attributes.strength,
       character = props.character,
       value = characterAttributes[attributes.strength],
       editable = props.editable
     },
-    labelPair {
+    attrLabelPair {
       label = "Agility",
       attribute = attributes.agility,
       character = props.character,
       value = characterAttributes[attributes.agility],
       editable = props.editable
     },
-    labelPair {
+    attrLabelPair {
       label = "Endurance",
       attribute = attributes.endurance,
       character = props.character,
       value = characterAttributes[attributes.endurance],
       editable = props.editable
     },
-    labelPair {
+    attrLabelPair {
       label = "Education",
       attribute = attributes.education,
       character = props.character,
       value = characterAttributes[attributes.education],
       editable = props.editable
     },
-    labelPair {
+    attrLabelPair {
       label = "Wit",
       attribute = attributes.wit,
       character = props.character,
       value = characterAttributes[attributes.wit],
       editable = props.editable
     },
-    labelPair {
+    attrLabelPair {
       label = "Social",
       attribute = attributes.social,
       character = props.character,

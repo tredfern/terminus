@@ -16,6 +16,6 @@ describe("game.ui.widgets.turn_counter", function()
     })
 
     local render = moonpie.test_render(turn_counter())
-    assert.equals("85", render:findByID("turn_counter").text)
+    assert.equals("85", render:findByID("turnCounterValue").text)
   end)
 end)

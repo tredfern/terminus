@@ -14,7 +14,7 @@ describe("game.ui.widgets.character_equipment", function()
 
     local widget = CharacterEquipment { equipSlots = equipSlots }
 
-    assert.equals("Baton", widget:findByID("meleeItem").text)
+    assert.equals("Baton", widget:findByID("meleeItemValue").text)
 
   end)
 end)

@@ -18,7 +18,7 @@ describe("game.ui.widgets.scoreboard", function()
 
     local rendered = moonpie.test_render(scoreboard())
 
-    assert.equals("4", rendered:findByID("labelEnemyCount").text)
+    assert.equals("4", rendered:findByID("enemyCountValue").text)
   end)
 
   it("displays the total number of spawners", function()
@@ -32,6 +32,6 @@ describe("game.ui.widgets.scoreboard", function()
 
     local rendered = moonpie.test_render(scoreboard())
 
-    assert.equals("3", rendered:findByID("labelSpawnerCount").text)
+    assert.equals("3", rendered:findByID("spawnerCountValue").text)
   end)
 end)

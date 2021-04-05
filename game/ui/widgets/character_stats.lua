@@ -6,6 +6,7 @@
 local components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
 local player = require "game.rules.player"
+local LabelPair = require "game.ui.widgets.label_pair"
 
 local character_stats = components("character_stats", function(props)
   return {
@@ -13,14 +14,8 @@ local character_stats = components("character_stats", function(props)
     character_health = props.character_health,
     render = function(self)
       return {
-        {
-          components.text { text = "Name: " },
-          components.text { id = "character_name", text = self.character_name }
-        },
-        {
-          components.text { text = "Health:    " },
-          components.text { id = "character_health", text = self.character_health }
-        }
+        LabelPair { id = "characterName", label = "Name", value = self.character_name },
+        LabelPair { id = "characterHealth", label = "Health", value = self.character_health }
       }
     end
   }

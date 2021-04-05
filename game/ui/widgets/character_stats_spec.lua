@@ -24,12 +24,12 @@ describe("game.ui.widgets.character_stats", function()
 
   it("displays the character name", function()
     local test_render = moonpie.test_render(character_stats())
-    assert.equals("Foo", test_render:findByID("character_name").text)
+    assert.equals("Foo", test_render:findByID("characterNameValue").text)
   end)
 
   it("displays the character health", function()
     local test_render = moonpie.test_render(character_stats())
-    assert.equals("15", test_render:findByID("character_health").text)
+    assert.equals("15", test_render:findByID("characterHealthValue").text)
   end)
 
 end)

@@ -6,6 +6,7 @@
 local Components = require "moonpie.ui.components"
 local tables = require "moonpie.tables"
 local Skills = require "game.rules.skills"
+local LabelPair = require "game.ui.widgets.label_pair"
 
 return Components("character_skills", function(props)
   local skillData = {}
@@ -19,9 +20,10 @@ return Components("character_skills", function(props)
     width = "15%",
     {
       tables.map(skillData, function(s)
-        return {
-          Components.text { text = s.skill.name },
-          Components.text { id = s.skill.key .. "Skill", text = s.score, style = "align-right" }
+        return LabelPair {
+          id = s.skill.key,
+          label = s.skill.name,
+          value = s.score
         }
       end)
 

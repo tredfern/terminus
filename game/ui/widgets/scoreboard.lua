@@ -7,6 +7,7 @@ local Components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
 local npcs = require "game.rules.npcs"
 local Aliens = require "game.rules.aliens"
+local LabelPair = require "game.ui.widgets.label_pair"
 
 local scoreboard = Components("scoreboard", function(props)
   return {
@@ -14,14 +15,8 @@ local scoreboard = Components("scoreboard", function(props)
     spawnerCount = props.spawnerCount,
     render = function(self)
       return {
-        {
-          Components.text { text = "Enemies:"},
-          Components.text { id = "labelEnemyCount", text = self.enemyCount, style = "align-right" }
-        },
-        {
-          Components.text { text = "Spawners:"},
-          Components.text { id = "labelSpawnerCount", text = self.spawnerCount, style = "align-right" }
-        }
+        LabelPair { id = "enemyCount", label = "Enemies", value = self.enemyCount },
+        LabelPair { id = "spawnerCount", label = "Spawners", value = self.spawnerCount }
       }
     end
   }

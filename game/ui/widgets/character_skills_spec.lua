@@ -29,8 +29,8 @@ describe("game.ui.widgets.character_skills", function()
       character = character
     }
 
-    assert.equals("17", widget:findByID("computersSkill").text)
-    assert.equals("19", widget:findByID("mechanicsSkill").text)
-    assert.equals("12", widget:findByID("lockPickingSkill").text)
+    assert.equals("17", widget:findByID("computersValue").text)
+    assert.equals("19", widget:findByID("mechanicsValue").text)
+    assert.equals("12", widget:findByID("lockPickingValue").text)
   end)
 end)

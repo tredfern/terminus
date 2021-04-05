@@ -8,7 +8,7 @@ local Components = require "moonpie.ui.components"
 return Components("labelPair", function(props)
   props.id = props.id or ""
   return {
-    Components.text { id = props.id .. "label", text = props.label },
-    Components.text { id = props.id .. "value", text = props.value, style ="align-right" }
+    Components.text { id = props.id .. "Label", text = props.label },
+    Components.text { id = props.id .. "Value", text = props.value, style ="align-right" }
   }
 end)
