@@ -4,8 +4,9 @@
 -- https://opensource.org/licenses/MIT
 
 local terrain = require "game.rules.map.terrain"
-local path = require "game.rules.map.generators.path"
+local Path = require "game.rules.map.generators.path"
 local math_ext = require "moonpie.math"
+local Outline = require "game.rules.map.outline"
 local generator = {}
 
 local MIN_SIZE_TO_DIVIDE = 8
@@ -63,10 +64,10 @@ function generator.divide(node, current_level, max_levels)
   return node
 end
 
-function generator.create_rooms(node)
+function generator.create_rooms(node, outline)
   if node.left or node.right then
-    generator.create_rooms(node.left)
-    generator.create_rooms(node.right)
+    generator.create_rooms(node.left, outline)
+    generator.create_rooms(node.right, outline)
     return
   end
 
@@ -79,45 +80,38 @@ function generator.create_rooms(node)
   node.room = {
     x = x, y = y, width = width, height = height
   }
+  outline:addRoom(node.room)
 end
 
 function generator.generate(width, height)
-  local mapHelper = require "game.rules.map.helper"
-  local new_map = mapHelper:new { width = width, height = height }
-
-  local root = generator.create_node(1, 1, new_map.width, new_map.height)
+  local outline = Outline:new(width, height)
+  local root = generator.create_node(1, 1, width, height)
   generator.divide(root, 1, DEPTH)
-  generator.create_rooms(root)
+  generator.create_rooms(root, outline)
+  generator.create_corridors(root, outline)
 
-  generator.add_rooms(new_map, root)
-  generator.add_corridors(new_map, root)
+
+  -- Fill in map stuff
+  local map = require "game.rules.map.helper"
+  local new_map = map:new { width = width, height = height }
+  for _, room in ipairs(outline.rooms) do
+    generator.build_room(new_map, room)
+  end
+
+  for _, path in ipairs(outline.corridors) do
+    generator.build_corridor(new_map, path)
+  end
 
   generator.fillWalls(new_map)
 
   return new_map
 end
 
-function generator.add_rooms(map, node)
+
+function generator.create_corridors(node, outline)
   if node.left or node.right then
-    generator.add_rooms(map, node.left)
-    generator.add_rooms(map, node.right)
-    return
-  end
-
-
-  map.rooms[#map.rooms + 1] = node.room
-
-  for x = 0, node.room.width - 1 do
-    for y = 0, node.room.height - 1 do
-      map:setTerrain(node.room.x + x, node.room.y + y, terrain.list.room)
-    end
-  end
-end
-
-function generator.add_corridors(map, node)
-  if node.left or node.right then
-    generator.add_corridors(map, node.left)
-    generator.add_corridors(map, node.right)
+    generator.create_corridors(node.left, outline)
+    generator.create_corridors(node.right, outline)
   end
 
   --Connect the left and right nodes together...
@@ -131,14 +125,17 @@ function generator.add_corridors(map, node)
     local end_x = love.math.random(end_room.x, end_room.x + end_room.width - 1)
     local end_y = love.math.random(end_room.y, end_room.y + end_room.height - 1)
 
-    generator.build_corridor(map, start_x, start_y, end_x, end_y)
+    local p = Path.straight(start_x, start_y, end_x, end_y)
+    outline:addCorridor(p)
   end
 end
 
-function generator.build_corridor(map, start_x, start_y, end_x, end_y)
-  local p = path.straight(start_x, start_y, end_x, end_y)
+---
+-- Moving soon
+---
 
-  for _, v in ipairs(p) do
+function generator.build_corridor(map, path)
+  for _, v in ipairs(path) do
     if map:getTerrain(v.x, v.y) == terrain.list.blank then
       map:setTerrain(v.x, v.y, terrain.list.corridor)
     end
@@ -161,6 +158,16 @@ function generator.fillWalls(map)
               map:setTerrain(x, y, terrain.list.wall)
         end
       end
+    end
+  end
+end
+
+function generator.build_room(map, room)
+  map.rooms[#map.rooms + 1] = room
+
+  for x = 0, room.width - 1 do
+    for y = 0, room.height - 1 do
+      map:setTerrain(room.x + x, room.y + y, terrain.list.room)
     end
   end
 end
