@@ -7,8 +7,8 @@ local mapHelper = require "game.rules.map.helper"
 
 return {
   actions = {
+    add = require "game.rules.map.actions.add",
     create = require "game.rules.map.actions.create",
-    set = require "game.rules.map.actions.set",
     types = require "game.rules.map.actions.types"
   },
   create = function(w, h)

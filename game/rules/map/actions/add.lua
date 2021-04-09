@@ -7,7 +7,7 @@ local types = require "game.rules.map.actions.types"
 
 return function(map)
   return {
-    type = types.SET,
+    type = types.ADD,
     payload = map
   }
 end

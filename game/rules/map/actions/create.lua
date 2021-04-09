@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 local thunk = require "moonpie.redux.thunk"
-local setMap = require "game.rules.map.actions.set"
+local addMap = require "game.rules.map.actions.add"
 local actionTypes = require "game.rules.map.actions.types"
 
 return function(width, height, generator)
@@ -11,7 +11,7 @@ return function(width, height, generator)
     actionTypes.CREATE,
     function(dispatch)
       local newMap = generator(width, height)
-      dispatch(setMap(newMap))
+      dispatch(addMap(newMap))
     end
   )
 end
