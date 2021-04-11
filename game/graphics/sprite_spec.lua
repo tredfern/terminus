@@ -37,10 +37,4 @@ describe("game.graphics.sprite", function()
     assert.spy(love.graphics.draw).was.called_with(test.imageData, 10, 20)
 
   end)
-
-  it("can have a color specified on construction", function()
-    local img = {}
-    local test = sprite.fromImage(img)
-  end)
-
 end)

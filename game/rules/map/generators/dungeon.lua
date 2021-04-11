@@ -149,9 +149,12 @@ end
 function generator.fillWalls(map)
   for x = 1, map.width do
     for y = 1, map.height do
-      local tile = map:getTile(x, y)
-      if tile == nil then
-        map:updateTile(x, y, { terrain = terrain.list.wall })
+      if map:getTile(x, y) == nil then
+        local neighbors = map:getNeighbors(x, y)
+        local list = tables.keysToList(neighbors)
+        if tables.any(list, function(tile) return not tile.isWall end) then
+          map:updateTile(x, y, { terrain = terrain.list.wall, isWall = true })
+        end
       end
     end
   end

@@ -11,8 +11,10 @@ Terrain.describe { key = "corridor", color = colors(colors.light_accent), images
   imageMgr.load("assets/graphics/floor-1.png"),
   imageMgr.load("assets/graphics/floor-2.png")
 } }
-Terrain.describe { key = "room", color = colors.white, images = { 
+Terrain.describe { key = "room", color = colors.white, images = {
   imageMgr.load("assets/graphics/floor-1.png"),
   imageMgr.load("assets/graphics/floor-2.png")
 } }
-Terrain.describe { key = "wall", color = colors.white, blocksMovement = true, type = "wall" }
+Terrain.describe { key = "wall", color = colors.white, blocksMovement = true, type = "wall", images = {
+  imageMgr.load("assets/graphics/wall-solid.png")
+} }
