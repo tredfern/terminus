@@ -103,10 +103,8 @@ local combat_map = components("combat_map", function(props)
               if terrain.type == "wall" then
                 drawWall(x - self.camera.x, y - self.camera.y)
               else
-                draw_tile(
-                  x - self.camera.x,
-                  y - self.camera.y,
-                  terrain.color)
+                local sx, sy = getScreenCoordinate(self.camera, x, y)
+                tile.sprite:draw(sx, sy)
               end
             end
           end

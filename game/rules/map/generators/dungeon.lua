@@ -3,8 +3,9 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local terrain = require "game.rules.map.terrain"
 local math_ext = require "moonpie.math"
+local tables = require "moonpie.tables"
+local terrain = require "game.rules.map.terrain"
 local createCorridor = require "game.rules.map.generators.corridor"
 local createRoom = require "game.rules.map.generators.room"
 local Outline = require "game.rules.map.outline"
@@ -131,6 +132,8 @@ function generator.buildTileMap(outline)
   end
 
   generator.fillWalls(map)
+  generator.calculateSprites(map)
+
   return map
 end
 
@@ -158,6 +161,20 @@ function generator.buildRoom(map, room)
   for x = 0, room.width - 1 do
     for y = 0, room.height - 1 do
       map:updateTile(room.x + x, room.y + y, { terrain = terrain.list.room })
+    end
+  end
+end
+
+function generator.calculateSprites(map)
+  local sprite = require "game.graphics.sprite"
+  for x = 1, map.width do
+    for y=1,map.height do
+      local tile = map:getTile(x, y)
+      if tile and tile.terrain and tile.terrain.images then
+        local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
+        tileImage.color = tile.terrain.color
+        map:updateTile(x, y, { sprite = tileImage })
+      end
     end
   end
 end
