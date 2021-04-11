@@ -3,27 +3,20 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local mapHelper = require "game.rules.map.helper"
-
 return {
   actions = {
     add = require "game.rules.map.actions.add",
     create = require "game.rules.map.actions.create",
     types = require "game.rules.map.actions.types"
   },
-  create = function(w, h)
-    return mapHelper:new {
-      width = w,
-      height = h
-    }
-  end,
   generators = {
     dungeon = require "game.rules.map.generators.dungeon"
   },
   selectors = {
     getDimensions = require "game.rules.map.selectors.get_dimensions",
-    getNeighborTerrain = require "game.rules.map.selectors.get_neighbor_terrain",
     getRooms = require "game.rules.map.selectors.get_rooms",
     getTerrain = require "game.rules.map.selectors.get_terrain"
-  }
+  },
+  tileMap = require "game.rules.map.tile_map",
+  outline = require "game.rules.map.outline"
 }

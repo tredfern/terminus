@@ -11,7 +11,9 @@ describe("game.rules.map.selectors.get_rooms", function()
     local rooms = {}
     local state = {
       map = {
-        rooms = rooms
+        outline = {
+          rooms = rooms
+        }
       }
     }
 

@@ -7,10 +7,11 @@ describe("game.rules.map.actions.add", function()
   local add = require "game.rules.map.actions.add"
 
   it("takes a map to be added", function()
-    local map = {}
-    local action = add(map)
+    local outline, tileMap = {}, {}
+    local action = add(outline, tileMap)
 
-    assert.equals(map, action.payload)
+    assert.equals(outline, action.payload.outline)
+    assert.equals(tileMap, action.payload.tileMap)
     assert.not_nil(action.type)
     assert.equals("MAP_ADD", action.type)
   end)

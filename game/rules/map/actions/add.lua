@@ -5,9 +5,12 @@
 
 local types = require "game.rules.map.actions.types"
 
-return function(map)
+return function(outline, tileMap)
   return {
     type = types.ADD,
-    payload = map
+    payload = {
+      outline = outline,
+      tileMap = tileMap
+    }
   }
 end

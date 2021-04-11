@@ -9,7 +9,7 @@ return function(state)
   end
 
   return {
-    width = state.map.width,
-    height = state.map.height
+    width = state.map.outline.width,
+    height = state.map.outline.height
   }
 end

@@ -8,8 +8,10 @@ describe("game.rules.map.selectors.get_dimensions", function()
 
   local state = {
     map = {
-      width = 200,
-      height = 328
+      outline = {
+        width = 200,
+        height = 328
+      }
     }
   }
 

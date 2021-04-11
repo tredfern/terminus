@@ -27,7 +27,11 @@ describe("game.rules.character.actions.set_position", function()
 
   it("is valid if terrain allows movement", function()
     local sp = set_position({}, 5, 3)
-    local map = { getTerrain = function() return { } end }
+    local map = {
+      tileMap = {
+        getTile = function() return { terrain = {} } end
+      }
+    }
     assert.is_true(sp:validate({ map = map }))
   end)
 

@@ -38,11 +38,14 @@ describe("game.serializer", function()
         character.create(),
         character.create()
       },
-      map = map.create { width = 100, 200 }
+      map = {
+        tileMap = map.tileMap:new(),
+        outline = map.outline:new()
+      }
     }
 
     local s = serializer.serialize(state)
     local out = serializer.deserialize(s)[1]
-    assert.has_no_errors(function() out.map:getTerrain(30, 29) end)
+    assert.has_no_errors(function() out.map.tileMap:getTile(30, 29) end)
   end)
 end)

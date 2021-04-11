@@ -49,59 +49,19 @@ local wallQuads = {
   northandeast = love.graphics.newQuad(48, 32, 16, 16, wallImage),
   southandwest = love.graphics.newQuad(32, 48, 16, 16, wallImage),
   southandeast = love.graphics.newQuad(48, 48, 16, 16, wallImage),
+  solid = love.graphics.newQuad(16, 32, 16, 16, wallImage)
 }
 
-local function drawWall(map, x, y, dx, dy)
+local function drawWall(dx, dy)
   -- get neighbors that are corridor or rooms
-  local neighbors = map:getNeighbors(x, y)
   local sx = dx * tile_width
   local sy = dy * tile_height
 
   love.graphics.setColor(colors.white)
-  -- depending on that orientation, figure out the 4 quadrants of the wall to render
-  -- Northwest corner
-  if not neighbors.n.blocksMovement and not neighbors.w.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.northandwest, sx, sy)
-  elseif not neighbors.n.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.north, sx, sy)
-  elseif not neighbors.w.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.west, sx, sy)
-  elseif not neighbors.nw.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.northwest, sx, sy)
-  end
-
-  -- Northeast corner
-  if not neighbors.n.blocksMovement and not neighbors.e.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.northandeast, sx + 16, sy)
-  elseif not neighbors.n.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.north, sx + 16, sy)
-  elseif not neighbors.e.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.east, sx + 16, sy)
-  elseif not neighbors.ne.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.northeast, sx + 16, sy)
-  end
-
-  -- South west corner
-  if not neighbors.s.blocksMovement and not neighbors.w.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.southandwest, sx, sy + 16)
-  elseif not neighbors.s.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.south, sx, sy + 16)
-  elseif not neighbors.w.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.west, sx, sy + 16)
-  elseif not neighbors.sw.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.southwest, sx, sy + 16)
-  end
-
-  -- southeast corner
-  if not neighbors.s.blocksMovement and not neighbors.e.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.southandeast, sx + 16, sy + 16)
-  elseif not neighbors.s.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.south, sx + 16, sy + 16)
-  elseif not neighbors.e.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.east, sx + 16, sy + 16)
-  elseif not neighbors.se.blocksMovement then
-    love.graphics.draw(wallImage, wallQuads.southeast, sx + 16, sy + 16)
-  end
+  love.graphics.draw(wallImage, wallQuads.solid, sx, sy)
+  love.graphics.draw(wallImage, wallQuads.solid, sx + 16, sy)
+  love.graphics.draw(wallImage, wallQuads.solid, sx, sy + 16)
+  love.graphics.draw(wallImage, wallQuads.solid, sx + 16, sy + 16)
 end
 
 local function drawGrid(tilesWide, tilesHigh)
@@ -134,17 +94,20 @@ local combat_map = components("combat_map", function(props)
     end,
 
     drawComponent = function(self)
-      for x = 1, self.map.width do
-        for y = 1, self.map.height do
-          local terrain = self.map:getTerrain(x, y)
-          if not terrain.noImage then
-            if terrain.type == "wall" then
-              drawWall(self.map, x, y, x - self.camera.x, y - self.camera.y)
-            else
-              draw_tile(
-                x - self.camera.x,
-                y - self.camera.y,
-                terrain.color)
+      for x = 1, self.map.outline.width do
+        for y = 1, self.map.outline.height do
+          local tile = self.map.tileMap:getTile(x, y)
+          if tile then
+            local terrain = tile.terrain
+            if not terrain.noImage then
+              if terrain.type == "wall" then
+                drawWall(x - self.camera.x, y - self.camera.y)
+              else
+                draw_tile(
+                  x - self.camera.x,
+                  y - self.camera.y,
+                  terrain.color)
+              end
             end
           end
         end

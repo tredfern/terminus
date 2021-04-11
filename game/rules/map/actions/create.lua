@@ -10,8 +10,8 @@ return function(width, height, generator)
   return thunk(
     actionTypes.CREATE,
     function(dispatch)
-      local newMap = generator(width, height)
-      dispatch(addMap(newMap))
+      local outline, tileMap = generator(width, height)
+      dispatch(addMap(outline, tileMap))
     end
   )
 end
