@@ -15,7 +15,7 @@ describe("game.rules.map.actions.create", function()
 
   it("adds the map to the state", function()
     mockDispatch(create(100, 100, generator))
-    assert.is_true(mockDispatch:received_action("MAP_SET"))
+    assert.is_true(mockDispatch:received_action("MAP_ADD"))
   end)
 
   it("uses a generator to create the map", function()

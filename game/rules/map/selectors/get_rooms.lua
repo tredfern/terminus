@@ -4,5 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return function(state)
-  return state.map.rooms
+  return state.map.outline.rooms
 end

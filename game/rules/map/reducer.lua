@@ -7,7 +7,9 @@ local create_slice = require "moonpie.redux.create_slice"
 local types = require "game.rules.map.actions.types"
 
 return create_slice {
-  [types.SET] = function(_, action)
-    return action.payload
-  end
+  [types.ADD] = function(state, action)
+    state.outline = action.payload.outline
+    state.tileMap = action.payload.tileMap
+    return state
+  end,
 }

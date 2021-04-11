@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return {
+  ADD = "MAP_ADD",
   CREATE = "MAP_CREATE",
-  SET = "MAP_SET",
+  SET_TERRAIN = "MAP_SET_TERRAIN",
 }

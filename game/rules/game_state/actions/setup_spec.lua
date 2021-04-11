@@ -20,8 +20,10 @@ describe("game.rules.game_state.actions.setup", function()
   local getState = function()
     return {
       map = {
-        rooms = {
-          { x = 1, y = 1, width = 10, height = 10 }
+        outline = {
+          rooms = {
+            { x = 1, y = 1, width = 10, height = 10 }
+          }
         }
       }
     }

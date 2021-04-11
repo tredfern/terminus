@@ -5,6 +5,7 @@
 
 describe("game.rules.map.generators.dungeon", function()
   local dungeon = require "game.rules.map.generators.dungeon"
+  local Outline = require "game.rules.map.outline"
 
   it("can create a node for the tree", function()
     local node = dungeon.create_node(1, 1, 100, 100)
@@ -60,7 +61,8 @@ describe("game.rules.map.generators.dungeon", function()
 
   it("builds a room within the boundaries of the node", function()
     local node = dungeon.create_node(15, 18, 23, 27)
-    dungeon.create_rooms(node)
+    local outline = Outline:new(100, 100)
+    dungeon.create_rooms(node, outline)
 
     assert.not_nil(node.room)
     assert.is_true(node.room.x >= node.x)
@@ -72,10 +74,14 @@ describe("game.rules.map.generators.dungeon", function()
     assert.is_true(node.room.y + node.room.height <= node.y + node.height)
   end)
 
-  it("generates the map", function()
-    local m = dungeon.generate(50, 50)
-    assert.equals(50, m.width)
-    assert.equals(50, m.height)
-    assert.is_true(#m.rooms > 0)
+  it("generates an outline and tilemap for the dungeon", function()
+    local outline, tileMap = dungeon.generate(50, 50)
+    assert.not_nil(outline)
+    assert.not_nil(tileMap)
+
+    assert.greater_than(0, #outline.rooms)
+    assert.greater_than(0, #outline.corridors)
+    assert.greater_than(0, tileMap.width)
+    assert.greater_than(0, tileMap.height)
   end)
 end)

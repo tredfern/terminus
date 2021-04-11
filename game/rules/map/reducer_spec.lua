@@ -8,12 +8,16 @@ describe("game.rules.map.reducer", function()
   local types = require "game.rules.map.actions.types"
 
   it("sets the state to the value of the map on the set action", function()
-    local map = {}
+    local outline, tileMap = {}, {}
     local state = reducer({}, {
-      type = types.SET,
-      payload = map
+      type = types.ADD,
+      payload = {
+        outline = outline,
+        tileMap = tileMap
+      }
     })
 
-    assert.equals(map, state)
+    assert.equals(outline, state.outline)
+    assert.equals(tileMap, state.tileMap)
   end)
 end)
