@@ -173,10 +173,16 @@ function generator.calculateSprites(map)
   for x = 1, map.width do
     for y=1,map.height do
       local tile = map:getTile(x, y)
-      if tile and tile.terrain and tile.terrain.images then
-        local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
-        tileImage.color = tile.terrain.color
-        map:updateTile(x, y, { sprite = tileImage })
+
+      if tile and tile.terrain then
+        if tile.terrain.images then
+          local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
+          tileImage.color = tile.terrain.color
+          map:updateTile(x, y, { sprite = tileImage })
+        end
+        if tile.terrain.sprite then
+          map:updateTile(x, y, { sprite = tile.terrain.sprite })
+        end
       end
     end
   end

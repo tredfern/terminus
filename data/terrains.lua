@@ -15,6 +15,6 @@ Terrain.describe { key = "room", color = colors.white, images = {
   imageMgr.load("assets/graphics/floor-1.png"),
   imageMgr.load("assets/graphics/floor-2.png")
 } }
-Terrain.describe { key = "wall", color = colors.white, blocksMovement = true, type = "wall", images = {
-  imageMgr.load("assets/graphics/wall-solid.png")
-} }
+Terrain.describe { key = "wall", color = colors.white, blocksMovement = true, type = "wall",
+  sprite = require "assets.graphics.walls"
+}
