@@ -36,4 +36,16 @@ describe("game.graphics.sprite", function()
     assert.spy(love.graphics.setColor).was.called_with(test.color)
     assert.spy(love.graphics.draw).was.called_with(test.imageData, 10, 20)
   end)
+
+  it("can create a sprite from a slice of an image", function()
+    local mockLove = require "moonpie.test_helpers.mock_love"
+    local image = {}
+    local test = sprite.fromAtlas(image, 0, 0, 32, 32)
+    mockLove.mock(love.graphics, "setColor", spy.new(function() end))
+    mockLove.mock(love.graphics, "draw", spy.new(function() end))
+    test:draw(13, 20)
+    assert.spy(love.graphics.setColor).was.called_with(test.color)
+    assert.spy(love.graphics.draw).was.called_with(test.imageData, test.quad, 13, 20)
+
+  end)
 end)

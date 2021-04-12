@@ -26,9 +26,23 @@ function sprite.fromFile(imageFile)
   return sprite:new(imageMgr.load(imageFile))
 end
 
+function sprite.fromAtlas(imageData, x, y, width, height)
+  local s = sprite:new(imageData)
+  s:setQuad(x, y, width, height)
+  return s
+end
+
 function sprite:draw(sx, sy)
   love.graphics.setColor(self.color)
-  love.graphics.draw(self.imageData, sx, sy)
+  if self.quad then
+    love.graphics.draw(self.imageData, self.quad, sx, sy)
+  else
+    love.graphics.draw(self.imageData, sx, sy)
+  end
+end
+
+function sprite:setQuad(x, y, width, height)
+  self.quad = love.graphics.newQuad(x, y, width, height, self.imageData)
 end
 
 return sprite

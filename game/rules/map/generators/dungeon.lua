@@ -10,6 +10,7 @@ local createCorridor = require "game.rules.map.generators.corridor"
 local createRoom = require "game.rules.map.generators.room"
 local Outline = require "game.rules.map.outline"
 local TileMap = require "game.rules.map.tile_map"
+local Walls = require "assets.graphics.walls"
 local generator = {}
 
 local MIN_SIZE_TO_DIVIDE = 8
@@ -173,6 +174,7 @@ function generator.calculateSprites(map)
   for x = 1, map.width do
     for y=1,map.height do
       local tile = map:getTile(x, y)
+      local neighbors = map:getNeighbors(x, y)
 
       if tile and tile.terrain then
         if tile.terrain.images then
@@ -180,8 +182,17 @@ function generator.calculateSprites(map)
           tileImage.color = tile.terrain.color
           map:updateTile(x, y, { sprite = tileImage })
         end
-        if tile.terrain.sprite then
-          map:updateTile(x, y, { sprite = tile.terrain.sprite })
+        if tile.isWall then
+          local sequence = { "n", "s", "e", "w" }
+          local index = ""
+
+          for _, v in ipairs(sequence) do
+            if neighbors[v] and neighbors[v].isWall then
+              index = index .. v
+            end
+          end
+
+          map:updateTile(x, y, { sprite = Walls[index] })
         end
       end
     end
