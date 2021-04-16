@@ -65,6 +65,10 @@ local combat_map = components("combat_map", function(props)
 
       -- Draw entities
       for _, v in ipairs(self.drawableEntities) do
+        if v.animator then
+          v.animator:update(love.timer.getDelta())
+          v.sprite = v.animator:getCurrentFrame()
+        end
         local sx, sy = getScreenCoordinate(self.camera, v.x, v.y)
         v.sprite:draw(sx, sy)
       end
