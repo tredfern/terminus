@@ -5,7 +5,6 @@
 
 describe("game.rules.player.actions.add", function()
   local add = require "game.rules.player.actions.add"
-  local imageMgr = require "moonpie.graphics.image"
 
   it("creates a character with the player image", function()
     local action = add(3, 4)
@@ -13,6 +12,5 @@ describe("game.rules.player.actions.add", function()
     assert.equals(3, player.x)
     assert.equals(4, player.y)
     assert.is_true(player.isPlayerControlled)
-    assert.equals(imageMgr.load("data/characters/character_idle.png"), player.sprite.imageData)
   end)
 end)

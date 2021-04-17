@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.graphics.sprite", function()
-  local sprite = require "game.graphics.sprite"
+describe("game.rules.graphics.sprite", function()
+  local sprite = require "game.rules.graphics.sprite"
   local testFile = "assets/graphics/alien_1.png"
 
   it("defaults to a solid white color", function()

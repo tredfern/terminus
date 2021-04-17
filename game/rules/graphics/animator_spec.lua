@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.graphics.animator", function()
-  local Animator = require "game.graphics.animator"
+describe("game.rules.graphics.animator", function()
+  local Animator = require "game.rules.graphics.animator"
   local testSubject
 
   before_each(function()

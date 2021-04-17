@@ -14,6 +14,11 @@ function app.load()
   keyboard:hotkey("f10", store.dumpState)
   store.dispatch(game_state.actions.loadCoreData())
   app.title()
+  moonpie.events.afterUpdate:add(app.update)
+end
+
+function app.update()
+  store.dispatch(game_state.actions.updateFrame(love.timer.getDelta()))
 end
 
 function app.render(scene)

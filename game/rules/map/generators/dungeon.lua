@@ -170,7 +170,7 @@ function generator.buildRoom(map, room)
 end
 
 function generator.calculateSprites(map)
-  local sprite = require "game.graphics.sprite"
+  local sprite = require "game.rules.graphics.sprite"
   for x = 1, map.width do
     for y=1,map.height do
       local tile = map:getTile(x, y)

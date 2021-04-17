@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.graphics.animation", function()
-  local Animation = require "game.graphics.animation"
+describe("game.rules.graphics.animation", function()
+  local Animation = require "game.rules.graphics.animation"
 
   it("can add frames to the animation", function()
     local image = {}

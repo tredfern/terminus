@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local tables = require "moonpie.tables"
-local sprite = require "game.graphics.sprite"
+local sprite = require "game.rules.graphics.sprite"
 
 local Items = {
   actions = {

@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local addEntity = require "game.rules.world.actions.add_entity"
-local sprite = require "game.graphics.sprite"
+local sprite = require "game.rules.graphics.sprite"
 
 return function(x, y)
   return addEntity {

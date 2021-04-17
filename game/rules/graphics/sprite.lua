@@ -6,7 +6,7 @@
 local imageMgr = require "moonpie.graphics.image"
 local class = require "moonpie.class"
 local sprite = class({})
-local colors = require "game.graphics.colors"
+local colors = require "game.rules.graphics.colors"
 
 function sprite:constructor(imageData)
   self.imageData = imageData

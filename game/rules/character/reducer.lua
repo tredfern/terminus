@@ -70,7 +70,7 @@ return createSlice {
   end,
 
   [types.SET_HEALTH] = function(state, action)
-    local colors = require "game.graphics.colors"
+    local colors = require "game.rules.graphics.colors"
     local c = action.payload.character
     c.health = action.payload.health
     if c.sprite then

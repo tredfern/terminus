@@ -5,7 +5,7 @@
 
 local tables = require "moonpie.tables"
 local Characters = require "game.rules.character"
-local sprite = require "game.graphics.sprite"
+local sprite = require "game.rules.graphics.sprite"
 local aiRoutines = {
   require "game.rules.npcs.ai.move_towards_player",
   require "game.rules.npcs.ai.random_movement"

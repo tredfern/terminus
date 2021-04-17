@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local imageMgr = require "moonpie.graphics.image"
-local Sprite = require "game.graphics.sprite"
+local Sprite = require "game.rules.graphics.sprite"
 
 local wallAtlas = imageMgr.load("assets/graphics/placeholder-walls.png")
 

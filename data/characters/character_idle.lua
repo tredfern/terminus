@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local animation = require "game.graphics.animation"
-local sprite = require "game.graphics.sprite"
+local animation = require "game.rules.graphics.animation"
+local sprite = require "game.rules.graphics.sprite"
 local imageMgr = require "moonpie.graphics.image"
 
 local imageData = imageMgr.load("data/characters/character_idle.png")
