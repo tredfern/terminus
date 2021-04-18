@@ -134,6 +134,7 @@ function generator.buildTileMap(outline)
 
   generator.fillWalls(map)
   generator.calculateSprites(map)
+  generator.addFeatures(outline)
 
   return map
 end
@@ -196,6 +197,22 @@ function generator.calculateSprites(map)
         end
       end
     end
+  end
+end
+
+function generator.getRandomLocation(outline)
+  local r = tables.pickRandom(outline.rooms)
+  local x = math.random(r.x, r.x + r.width)
+  local y = math.random(r.y, r.y + r.height)
+  return x, y
+end
+
+function generator.addFeatures(outline)
+  for x = 1, 3 do
+    local store = require "game.store"
+    local addLadder = require "game.rules.map.actions.add_ladder"
+    local x, y = generator.getRandomLocation(outline) 
+    store.dispatch(addLadder(x, y)) 
   end
 end
 
