@@ -208,11 +208,11 @@ function generator.getRandomLocation(outline)
 end
 
 function generator.addFeatures(outline)
-  for x = 1, 3 do
+  for _ = 1, 3 do
     local store = require "game.store"
     local addLadder = require "game.rules.map.actions.add_ladder"
-    local x, y = generator.getRandomLocation(outline) 
-    store.dispatch(addLadder(x, y)) 
+    local x, y = generator.getRandomLocation(outline)
+    store.dispatch(addLadder(x, y))
   end
 end
 
