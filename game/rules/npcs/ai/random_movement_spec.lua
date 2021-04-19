@@ -9,7 +9,7 @@ describe("game.rules.npcs.ai.random_movement", function()
 
   it("dispatches a move action", function()
     local characterActionTypes = require "game.rules.character.actions.types"
-    local character = { x = 4, y = 8 }
+    local character = { position = { x = 4, y = 8 } }
     randomMovement(character, mockDispatch)
 
     assert.is_true(mockDispatch:received_action(characterActionTypes.MOVE))
@@ -22,7 +22,7 @@ describe("game.rules.npcs.ai.random_movement", function()
     spy.on(character.actions, "move")
     mockRandom.setreturnvalues { 1, -1 }
 
-    local c = { x = 10, y = 25 }
+    local c = { position = { x = 10, y = 25 } }
     randomMovement(c, mockDispatch)
 
     assert.spy(character.actions.move).was_called_with(c, 11, 24)

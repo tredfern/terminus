@@ -5,9 +5,10 @@
 
 describe("game.rules.aliens.selectors.get_spawner_at", function()
   local getSpawnerAt = require "game.rules.aliens.selectors.get_spawner_at"
+  local position = require "game.rules.world.position"
 
   it("returns a spawner if at the specific location", function()
-    local spawner = { x = 12, y = 23, spawner = true }
+    local spawner = { position = position.new(12, 23), spawner = true }
     local state = {
       world = {
         spawner

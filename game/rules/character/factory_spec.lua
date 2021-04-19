@@ -9,8 +9,8 @@ describe("game.rules.character.character", function()
 
   it("instantiates a new character", function()
     local c = characterFactory.newCharacter()
-    assert.equals(0, c.x)
-    assert.equals(0, c.y)
+    assert.equals(0, c.position.x)
+    assert.equals(0, c.position.y)
   end)
 
   it("can be player controlled", function()
@@ -25,8 +25,8 @@ describe("game.rules.character.character", function()
 
   it("can initialize it's position", function()
     local c = characterFactory.newCharacter { x = 142, y = 192 }
-    assert.equals(142, c.x)
-    assert.equals(192, c.y)
+    assert.equals(142, c.position.x)
+    assert.equals(192, c.position.y)
   end)
 
   it("has a health of 10 + endurance to start", function()

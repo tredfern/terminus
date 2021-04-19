@@ -12,7 +12,7 @@ describe("game.rules.player.actions.move", function()
 
   local playerCharacter
   before_each(function()
-    playerCharacter = { x = 10, y = 10, isPlayerControlled = true }
+    playerCharacter = { position = { x = 10, y = 10 }, isPlayerControlled = true }
     mockStore({
       characters = {
         playerCharacter

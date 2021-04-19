@@ -13,7 +13,7 @@ describe("game.rules.npcs.actions.check_spawn_enemy", function()
   end)
 
   it("takes an enemy spawner and spawns enemy if passes check", function()
-    local action = checkSpawnEnemy({ x = 18, y = 38 })
+    local action = checkSpawnEnemy({ position = { x = 18, y = 38 } })
     mockRandom.setreturnvalues({ 1 })
     action(mockDispatch)
 
@@ -21,7 +21,7 @@ describe("game.rules.npcs.actions.check_spawn_enemy", function()
   end)
 
   it("does nothing if does not meet skill check", function()
-    local action = checkSpawnEnemy({ x = 12, y = 19 })
+    local action = checkSpawnEnemy({ position = { x = 12, y = 19 } })
     mockRandom.setreturnvalues({ 18 })
     action(mockDispatch)
 
@@ -29,7 +29,7 @@ describe("game.rules.npcs.actions.check_spawn_enemy", function()
   end)
 
   it("attaches an ai to the newly created character", function()
-    local action = checkSpawnEnemy({ x = 12, y = 19 })
+    local action = checkSpawnEnemy({ position = { x = 12, y = 19 } })
     mockRandom.setreturnvalues({ 1 })
     action(mockDispatch)
 

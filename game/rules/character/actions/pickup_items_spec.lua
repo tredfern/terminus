@@ -7,8 +7,9 @@ describe("game.rules.character.actions.pickup_items", function()
   local pickupItems = require "game.rules.character.actions.pickup_items"
   local mockDispatch = require "test_helpers.mock_dispatch"
   local character = require "game.rules.character"
+  local Position = require "game.rules.world.position"
 
-  local pickup = { x = 17, y = 19}
+  local pickup = { position = Position.new(17, 19) }
   local getState = function()
     return {
       items = { pickup }
@@ -16,7 +17,7 @@ describe("game.rules.character.actions.pickup_items", function()
   end
 
   it("gets the items in the current character position", function()
-    local c = { x = 17, y = 19 }
+    local c = { position = Position.new(17, 19) }
 
     local action = pickupItems(c)
     action(mockDispatch, getState)
@@ -27,7 +28,7 @@ describe("game.rules.character.actions.pickup_items", function()
 
   it("removes the item that it picked up", function()
     local itemActionTypes = require "game.rules.items.actions.types"
-    local c = { x = 17, y = 19 }
+    local c = { position = Position.new(17, 19) }
 
     local action = pickupItems(c)
     action(mockDispatch, getState)

@@ -9,7 +9,7 @@ describe("game.rules.turn.actions.process", function()
   local mockDispatch = require "test_helpers.mock_dispatch"
   local mockStore = require "test_helpers.mock_store"
 
-  local player = { x = 5, y = 3, isPlayerControlled = true, health = 3 }
+  local player = { position = { x = 5, y = 3 }, isPlayerControlled = true, health = 3 }
   local enemy1 = { isPlayerControlled = false, health = 2 }
   local enemy2 = { isPlayerControlled = false, health = 1 }
   local enemy3 = { isPlayerControlled = false, health = 0 }

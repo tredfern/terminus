@@ -4,13 +4,14 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.character.selectors.get_by_position", function()
+  local Position = require "game.rules.world.position"
   local get_by_position = require "game.rules.character.selectors.get_by_position"
 
   it("returns any characters from the state that match the coordinates", function()
-    local find1 = { x = 38, y = 20 }
-    local find2 = { x = 38, y = 20 }
-    local skip1 = { x = 12, y = 22 }
-    local skip2 = { x = 12, y = 22 }
+    local find1 = { position = Position.new(38, 20) }
+    local find2 = { position = Position.new(38, 20) }
+    local skip1 = { position = Position.new(12, 22) }
+    local skip2 = { position = Position.new(48, 11) }
 
     local state = {
       characters = {

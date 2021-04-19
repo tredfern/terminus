@@ -9,7 +9,7 @@ local Items = require "game.rules.items"
 return function(character)
   return function(dispatch, getState)
 
-    local itemsInPosition = Items.selectors.getByPosition(getState(), character.x, character.y)
+    local itemsInPosition = Items.selectors.getByPosition(getState(), character.position.x, character.position.y)
     for _, v in ipairs(itemsInPosition) do
       dispatch(addItemToInventory(character, v))
       dispatch(Items.actions.remove(v))

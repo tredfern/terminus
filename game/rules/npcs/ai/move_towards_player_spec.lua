@@ -10,8 +10,8 @@ describe("game.rules.npcs.ai.move_towards_player", function()
   it("dispatches a move action in the direction of the player", function()
     local character = require "game.rules.character"
     spy.on(character.actions, "move")
-    local enemy = { x = 13, y = 18 }
-    local player = { x = 29, y = 11, isPlayerControlled = true }
+    local enemy = { position = { x = 13, y = 18 } }
+    local player = { position = { x = 29, y = 11 }, isPlayerControlled = true }
 
     local getState = function()
       return {

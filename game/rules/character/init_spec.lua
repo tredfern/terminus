@@ -14,7 +14,7 @@ describe("game.rules.character", function()
     }
 
     assert.not_nil(c)
-    assert.equals(3, c.x)
+    assert.equals(3, c.position.x)
   end)
 
   it("has selectors to retrieve information about characters", function()

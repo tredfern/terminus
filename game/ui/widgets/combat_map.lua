@@ -10,7 +10,7 @@ local camera = require "game.ui.camera"
 local store = require "moonpie.redux.store"
 local Settings = require "game.settings"
 local Items = require "game.rules.items"
-local World = require "game.rules.world"
+local Graphics = require "game.rules.graphics"
 
 local tile_width = 32
 local tile_height = 32
@@ -65,7 +65,7 @@ local combat_map = components("combat_map", function(props)
 
       -- Draw entities
       for _, v in ipairs(self.drawableEntities) do
-        local sx, sy = getScreenCoordinate(self.camera, v.x, v.y)
+        local sx, sy = getScreenCoordinate(self.camera, v.position.x, v.position.y)
         v.sprite:draw(sx, sy)
       end
 
@@ -80,7 +80,7 @@ return connect(combat_map,
   function(state)
     return {
       camera = camera.selectors.get(state),
-      drawableEntities = World.selectors.getAllWithComponents(state, "x", "y", "sprite"),
+      drawableEntities = Graphics.selectors.getDrawable(state),
       map = state.map,
       items = Items.selectors.getAll(state),
       showGrid = Settings.selectors.getOption(state, "show_grid_lines")

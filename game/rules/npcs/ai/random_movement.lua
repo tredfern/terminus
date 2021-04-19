@@ -10,5 +10,5 @@ return function(char, dispatch)
   local x = love.math.random(-1, 1)
   local y = love.math.random(-1, 1)
 
-  dispatch(character.actions.move(char, char.x + x, char.y + y))
+  dispatch(character.actions.move(char, char.position.x + x, char.position.y + y))
 end

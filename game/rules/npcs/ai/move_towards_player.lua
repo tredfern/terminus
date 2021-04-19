@@ -11,13 +11,13 @@ return function(npc, dispatch, getState)
   local pc = player.selectors.getPlayer(getState())
 
   local x = 0
-  if npc.x < pc.x then x = 1 end
-  if npc.x > pc.x then x = -1 end
+  if npc.position.x < pc.position.x then x = 1 end
+  if npc.position.x > pc.position.x then x = -1 end
 
   local y = 0
-  if npc.y < pc.y then y = 1 end
-  if npc.y > pc.y then y = -1 end
+  if npc.position.y < pc.position.y then y = 1 end
+  if npc.position.y > pc.position.y then y = -1 end
 
-  dispatch(character.actions.move(npc, npc.x + x, npc.y + y))
+  dispatch(character.actions.move(npc, npc.position.x + x, npc.position.y + y))
 
 end

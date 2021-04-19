@@ -37,7 +37,7 @@ describe("game.rules.character.reducer", function()
   end)
 
   it("can set the character to the specified position", function()
-    local character = { x = 3, y = 8 }
+    local character = { position = { x = 3, y = 8 } }
     local state = { character }
     local action = { type = types.SET_POSITION,
       payload = {
@@ -50,8 +50,8 @@ describe("game.rules.character.reducer", function()
     local new_state = characters_reducer(state, action)
     local c = new_state[1]
     assert.equals(character, c)
-    assert.equals(4, c.x)
-    assert.equals(9, c.y)
+    assert.equals(4, c.position.x)
+    assert.equals(9, c.position.y)
   end)
 
   it("can set the character name", function()

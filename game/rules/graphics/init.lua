@@ -8,6 +8,7 @@ return {
     updateFrame = require "game.rules.graphics.actions.update_frame"
   },
   selectors = {
-    getAnimatedEntities = require "game.rules.graphics.selectors.get_animated_entities"
+    getAnimatedEntities = require "game.rules.graphics.selectors.get_animated_entities",
+    getDrawable = require "game.rules.graphics.selectors.get_drawable"
   }
 }

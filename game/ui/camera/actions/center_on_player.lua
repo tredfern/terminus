@@ -13,8 +13,8 @@ return function(width, height)
   local c = player.selectors.getPlayer(store.getState())
   if c then
     return setPosition(
-      math.ceil(-width / 2) + c.x,
-      math.ceil(-height / 2) + c.y
+      math.ceil(-width / 2) + c.position.x,
+      math.ceil(-height / 2) + c.position.y
     )
   end
 end

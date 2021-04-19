@@ -9,6 +9,7 @@ local tables = require "moonpie.tables"
 local MessageLog = require "game.rules.message_log"
 local Player = require "game.rules.player"
 local Aliens = require "game.rules.aliens"
+local Position = require "game.rules.world.position"
 
 return function()
   return function(dispatch, getState)
@@ -35,8 +36,9 @@ return function()
       local r = tables.pickRandom(rooms)
       dispatch(Items.actions.add(
         Items.list.healthPack, {
-          x = r.x + love.math.random(r.width) - 1,
-          y = r.y + love.math.random(r.height) - 1
+          position = Position.new(
+            r.x + love.math.random(r.width) - 1,
+            r.y + love.math.random(r.height) - 1)
         }
       ))
     end
@@ -44,8 +46,10 @@ return function()
     local r = tables.pickRandom(rooms)
     dispatch(Items.actions.add(
       Items.list.sprayBottle, {
-        x = r.x + love.math.random(r.width) - 1,
-        y = r.y + love.math.random(r.height) - 1
+        position = Position.new(
+          r.x + love.math.random(r.width) - 1,
+          r.y + love.math.random(r.height) - 1
+        )
       }
     ))
 

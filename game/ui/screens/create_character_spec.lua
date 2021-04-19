@@ -9,7 +9,7 @@ describe("game.ui.screens.create_character", function()
   local mockStore = require "test_helpers.mock_store"
   local player = {
     name = "Papageno",
-    isPlayerControlled = true, x = 19, y = 28,
+    isPlayerControlled = true, position = { x = 19, y = 28 },
     attributes = {},
     skills = {}
   }

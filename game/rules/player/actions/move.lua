@@ -10,7 +10,7 @@ return function(direction)
     local findPlayer = require "game.rules.player.selectors.get_player"
     local player = findPlayer(getState())
 
-    local x, y = direction(player.x, player.y)
+    local x, y = direction(player.position.x, player.position.y)
     dispatch(characters.actions.move(player, x, y))
   end
 end

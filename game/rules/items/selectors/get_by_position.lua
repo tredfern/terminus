@@ -7,6 +7,6 @@ local tables = require "moonpie.tables"
 
 return function(state, x, y)
   return tables.select(state.items, function(item)
-    return item.x == x and item.y == y
+    return item.position == { x, y }
   end)
 end

@@ -10,8 +10,8 @@ describe("game.rules.aliens.actions.add_spawner", function()
     local action = addSpawner(38, 32)
 
     local spawner = action.payload.entity
-    assert.equals(38, spawner.x)
-    assert.equals(32, spawner.y)
+    assert.equals(38, spawner.position.x)
+    assert.equals(32, spawner.position.y)
     assert.not_nil(spawner.sprite)
     assert.is_true(spawner.spawner)
   end)

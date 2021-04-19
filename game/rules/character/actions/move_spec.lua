@@ -10,6 +10,7 @@ describe("game.rules.character.actions.move", function()
   local wrap_in_function = require "wrap_in_function"
   local Skills = require "game.rules.skills"
   local Attributes = require "game.rules.character.attributes"
+  local Position = require "game.rules.world.position"
 
   before_each(function()
     Skills.describe { name = "Unarmed", key = "unarmed", attribute = Attributes.strength }
@@ -30,7 +31,7 @@ describe("game.rules.character.actions.move", function()
     local Combat = require "game.rules.combat"
     spy.on(Combat.actions, "meleeAttack")
     local player = { }
-    local enemy = { x = 20, y = 11 }
+    local enemy = { position = Position.new(20, 11) }
     local state = {
       characters = {
         player, enemy

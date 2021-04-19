@@ -8,7 +8,7 @@ describe("game.rules.player.actions.pickup_items", function()
   local characters = require "game.rules.character"
   local mockStore = require "test_helpers.mock_store"
   local mockDispatch = require "test_helpers.mock_dispatch"
-  local playerCharacter = { isPlayerControlled = true, x = 10, y = 10 }
+  local playerCharacter = { isPlayerControlled = true, position = { x = 10, y = 10 } }
 
   before_each(function()
     mockDispatch.processComplex = true

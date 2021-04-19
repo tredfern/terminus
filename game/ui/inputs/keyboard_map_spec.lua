@@ -44,8 +44,7 @@ describe("game.ui.inputs.keyboard", function()
       before_each(function()
         player_character = {
           isPlayerControlled = true,
-          x = 20,
-          y = 32,
+          position = { x = 20, y = 32 },
           health = 1
         }
 
