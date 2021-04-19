@@ -17,7 +17,7 @@ describe("game.rules.character.actions.move", function()
   end)
 
   it("dispatches a set_position message to move the character to the correct coordinates", function()
-    local c = {}
+    local c = { position = Position.new(18, 9) }
     local state = {
       characters = { c }
     }
@@ -30,7 +30,7 @@ describe("game.rules.character.actions.move", function()
   it("creates a melee attack action if there is another character in the square attempting to move to", function()
     local Combat = require "game.rules.combat"
     spy.on(Combat.actions, "meleeAttack")
-    local player = { }
+    local player = { position = Position.new(19, 11) }
     local enemy = { position = Position.new(20, 11) }
     local state = {
       characters = {

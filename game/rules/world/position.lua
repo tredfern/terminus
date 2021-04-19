@@ -3,29 +3,27 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local meta = {
-  __eq = function(self, compare)
-    if compare.x then
-      return self.x == compare.x and
-        self.y == compare.y and
-        self.z == compare.z
-    else
-      return self.x == compare[1] and
-        self.y == compare[2] and
-        self.z == compare[3]
-    end
+local function compare(start, dest)
+  if dest.x then
+    return start.x == dest.x and
+      start.y == dest.y and
+      start.z == dest.z
+  else
+    return start.x == dest[1] and
+      start.y == dest[2] and
+      start.z == dest[3]
   end
-}
+end
 
 local function new(x, y, z)
-  return setmetatable({
+  return {
     x = x,
     y = y,
     z = z
-  }, meta)
+  }
 end
 
-
 return {
-  new = new
+  new = new,
+  equal = compare
 }

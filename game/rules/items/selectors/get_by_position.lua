@@ -4,9 +4,10 @@
 -- https://opensource.org/licenses/MIT
 
 local tables = require "moonpie.tables"
+local Position = require "game.rules.world.position"
 
 return function(state, x, y)
   return tables.select(state.items, function(item)
-    return item.position == { x, y }
+    return Position.equal(item.position, { x, y })
   end)
 end
