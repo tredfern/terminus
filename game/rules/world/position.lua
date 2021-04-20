@@ -17,53 +17,66 @@ end
 
 local function new(x, y, z)
   return {
-    x = x,
-    y = y,
-    z = z
+    x = x or 0,
+    y = y or 0,
+    z = z or 0
   }
 end
 
+local function add(position, delta)
+  local x = delta[1] or 0
+  local y = delta[2] or 0
+  local z = delta[3] or 0
+
+  return new(
+    position.x + x,
+    position.y + y,
+    position.z + z
+  )
+end
+
 local function northwest(position)
-  return new(position.x - 1, position.y - 1, position.z)
+  return add(position, { -1, -1, 0 })
 end
 
 local function north(position)
-  return new(position.x, position.y - 1, position.z)
+  return add(position, { 0, -1, 0 })
 end
 
 local function northeast(position)
-  return new(position.x + 1, position.y - 1, position.z)
+  return add(position, { 1, -1, 0 })
 end
 
 local function west(position)
-  return new(position.x - 1, position.y, position.z)
+  return add(position, { -1, 0, 0 })
 end
 
 local function east(position)
-  return new(position.x + 1, position.y, position.z)
+  return add(position, { 1, 0, 0 })
 end
 
 local function southwest(position)
-  return new(position.x - 1, position.y + 1, position.z)
+  return add(position, { -1, 1, 0 })
 end
 
 local function south(position)
-  return new(position.x, position.y + 1, position.z)
+  return add(position, { 0, 1, 0 })
 end
 
 local function southeast(position)
-  return new(position.x + 1, position.y + 1, position.z)
+  return add(position, { 1, 1, 0 })
 end
 
 local function up(position)
-  return new(position.x, position.y, position.z + 1)
+  return add(position, { 0, 0, 1 })
 end
 
 local function down(position)
-  return new(position.x, position.y, position.z - 1)
+  return add(position, { 0, 0, -1 })
 end
 
 return setmetatable({
+  add = add,
   new = new,
   equal = compare,
   northwest = northwest,

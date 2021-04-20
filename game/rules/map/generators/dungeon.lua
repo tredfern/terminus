@@ -215,7 +215,7 @@ function generator.addFeatures(outline)
     local store = require "game.store"
     local addLadder = require "game.rules.map.actions.add_ladder"
     local x, y = generator.getRandomLocation(outline)
-    store.dispatch(addLadder(x, y))
+    store.dispatch(addLadder(Position(x, y)))
   end
 end
 

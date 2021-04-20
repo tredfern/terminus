@@ -5,11 +5,10 @@
 
 local ladders = require "data.features.ladders"
 local World = require "game.rules.world"
-local Position = require "game.rules.world.position"
 
-return function(x, y)
+return function(position)
   local ladder = {
-    position = Position.new(x, y),
+    position = position,
     sprite = ladders.up
   }
   return World.actions.addEntity(ladder)

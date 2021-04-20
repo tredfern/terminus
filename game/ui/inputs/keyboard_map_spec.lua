@@ -9,6 +9,7 @@ describe("game.ui.inputs.keyboard", function()
   local mockStore = require "test_helpers.mock_store"
   local character = require "game.rules.character"
   local turn = require "game.rules.turn"
+  local Position = require "game.rules.world.position"
 
   describe("combat_map settings", function()
     before_each(function()
@@ -44,7 +45,7 @@ describe("game.ui.inputs.keyboard", function()
       before_each(function()
         player_character = {
           isPlayerControlled = true,
-          position = { x = 20, y = 32 },
+          position = Position(20, 32),
           health = 1
         }
 
