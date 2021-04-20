@@ -25,7 +25,7 @@ Items.describe {
   useHandler = function(_, dispatch, user)
     local Aliens = require "game.rules.aliens"
     local store = require "game.store"
-    local spawner = Aliens.selectors.getSpawnerAt(store.getState(), user.x, user.y)
+    local spawner = Aliens.selectors.getSpawnerAt(store.getState(), user.position)
     if spawner then
       dispatch(Aliens.actions.removeSpawner(spawner))
     end

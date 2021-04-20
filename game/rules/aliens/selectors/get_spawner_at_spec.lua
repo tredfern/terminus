@@ -15,8 +15,8 @@ describe("game.rules.aliens.selectors.get_spawner_at", function()
       }
     }
 
-    assert.equals(spawner, getSpawnerAt(state, 12, 23))
-    assert.is_nil(getSpawnerAt(state, 12, 28))
+    assert.equals(spawner, getSpawnerAt(state, position(12, 23)))
+    assert.is_nil(getSpawnerAt(state, position(12, 28)))
 
   end)
 end)

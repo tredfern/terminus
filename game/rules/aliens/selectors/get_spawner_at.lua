@@ -6,10 +6,10 @@
 local getSpawners = require "game.rules.aliens.selectors.get_spawners"
 local Position = require "game.rules.world.position"
 
-return function(state, x, y)
+return function(state, position)
   local spawners = getSpawners(state)
   for _, v in ipairs(spawners) do
-    if Position.equal(v.position, { x, y }) then
+    if Position.equal(v.position, position) then
       return v
     end
   end
