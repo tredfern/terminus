@@ -9,11 +9,11 @@ local set_position = require "game.rules.character.actions.set_position"
 local sounds = require "assets.sounds"
 local Thunk = require "moonpie.redux.thunk"
 
-return function(character, x, y)
+return function(character, position)
   local combat = require "game.rules.combat"
 
   return Thunk(types.MOVE, function(dispatch, getState)
-    local targets = get_by_position(getState(), x, y)
+    local targets = get_by_position(getState(), position)
     if #targets > 0 then
       dispatch(combat.actions.meleeAttack(character, targets[1]))
     else
@@ -21,7 +21,7 @@ return function(character, x, y)
         sounds.walk:play()
       end
 
-      dispatch(set_position(character, x, y))
+      dispatch(set_position(character, position))
     end
   end)
 end

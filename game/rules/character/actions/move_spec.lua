@@ -21,7 +21,7 @@ describe("game.rules.character.actions.move", function()
     local state = {
       characters = { c }
     }
-    local action = MOVE(c, 19, 10)
+    local action = MOVE(c, Position(19, 10))
 
     action(mockDispatch, wrap_in_function(state))
     assert.is_true(mockDispatch:received_action(types.SET_POSITION))
@@ -38,7 +38,7 @@ describe("game.rules.character.actions.move", function()
       }
     }
 
-    local action = MOVE(player, 20, 11)
+    local action = MOVE(player, Position(20, 11))
     action(mockDispatch, wrap_in_function(state))
 
     assert.spy(Combat.actions.meleeAttack).was.called_with(player, enemy)

@@ -18,12 +18,13 @@ local function straightPath(startX, startY, endX, endY)
 
 end
 
-local function createCorridor(startX, startY, endX, endY)
+local function createCorridor(startX, startY, endX, endY, level)
   return {
     startX = startX,
     startY = startY,
     endX = endX,
     endY = endY,
+    level = level,
     path = straightPath(startX, startY, endX, endY)
   }
 end

@@ -6,8 +6,8 @@
 local tables = require "moonpie.tables"
 local Position = require "game.rules.world.position"
 
-return function(state, x, y)
+return function(state, position)
   return tables.select(state.items, function(item)
-    return Position.equal(item.position, { x, y })
+    return Position.equal(item.position, position)
   end)
 end

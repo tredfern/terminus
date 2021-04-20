@@ -3,12 +3,13 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local function createRoom(x, y, width, height)
+local function createRoom(x, y, width, height, level)
   return {
     x = x,
     y = y,
     width = width,
-    height = height
+    height = height,
+    level = level
   }
 end
 

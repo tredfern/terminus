@@ -91,8 +91,7 @@ return createSlice {
 
   [types.SET_POSITION] = function(state, action)
     local c = action.payload.character
-    c.position.x = action.payload.x
-    c.position.y = action.payload.y
+    c.position = action.payload.position
     return state
   end,
 }

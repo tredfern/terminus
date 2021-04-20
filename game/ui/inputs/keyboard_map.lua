@@ -7,7 +7,7 @@ local keyboard = require "moonpie.keyboard"
 local store = require "moonpie.redux.store"
 local player = require "game.rules.player"
 local turn = require "game.rules.turn"
-local moveDirections = require "game.rules.movement_directions"
+local Position = require "game.rules.world.position"
 
 local keySettings = {}
 
@@ -17,16 +17,16 @@ end
 
 keySettings.combatMap = {
   ["down"] = function()
-    process_turn(player.actions.move(moveDirections.south))
+    process_turn(player.actions.move(Position.south))
   end,
   ["left"] = function()
-    process_turn(player.actions.move(moveDirections.west))
+    process_turn(player.actions.move(Position.west))
   end,
   ["right"]= function()
-    process_turn(player.actions.move(moveDirections.east))
+    process_turn(player.actions.move(Position.east))
   end,
   ["up"] = function()
-    process_turn(player.actions.move(moveDirections.north))
+    process_turn(player.actions.move(Position.north))
   end,
   ["g"] = function()
     process_turn(player.actions.pickupItems())

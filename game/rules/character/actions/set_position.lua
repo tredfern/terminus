@@ -6,16 +6,15 @@
 local types = require "game.rules.character.actions.types"
 local map = require "game.rules.map"
 
-return function(character, x, y)
+return function(character, position)
   return {
     type = types.SET_POSITION,
     payload = {
       character = character,
-      x = x,
-      y = y
+      position = position
     },
-    validate = function(self, state)
-      local terrain = map.selectors.getTerrain(state, self.payload.x, self.payload.y)
+    validate = function(_, state)
+      local terrain = map.selectors.getTerrain(state, position)
       return not terrain.blocksMovement
     end
   }

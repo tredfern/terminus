@@ -11,6 +11,7 @@ local store = require "moonpie.redux.store"
 local Settings = require "game.settings"
 local Items = require "game.rules.items"
 local Graphics = require "game.rules.graphics"
+local Position = require "game.rules.world.position"
 
 local tile_width = 32
 local tile_height = 32
@@ -55,7 +56,7 @@ local combat_map = components("combat_map", function(props)
       -- Draw Map Tiles
       for x = 1, self.map.outline.width do
         for y = 1, self.map.outline.height do
-          local tile = self.map.tileMap:getTile(x, y)
+          local tile = self.map.tileMap:getTile(Position(x, y))
           if tile and tile.sprite then
             local sx, sy = getScreenCoordinate(self.camera, x, y)
             tile.sprite:draw(sx, sy)

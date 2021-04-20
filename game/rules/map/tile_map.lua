@@ -6,6 +6,7 @@
 
 local tables = require "moonpie.tables"
 local class = require "moonpie.class"
+local Position = require "game.rules.world.position"
 local tileMap = {}
 
 function tileMap:constructor()
@@ -13,7 +14,8 @@ function tileMap:constructor()
   self.height = 0
 end
 
-function tileMap:createTile(x, y)
+function tileMap:createTile(position)
+  local x, y = position.x, position.y
   if self[x] == nil then
     self[x] = {}
   end
@@ -31,26 +33,26 @@ function tileMap:createTile(x, y)
   return self[x][y]
 end
 
-function tileMap:updateTile(x, y, values)
-  local t = self:getTile(x, y) or self:createTile(x, y)
+function tileMap:updateTile(position, values)
+  local t = self:getTile(position) or self:createTile(position)
   tables.copyKeys(values, t, true)
 end
 
-function tileMap:getTile(x, y)
-  if self[x] == nil then return nil end
-  return self[x][y]
+function tileMap:getTile(position)
+  if self[position.x] == nil then return nil end
+  return self[position.x][position.y]
 end
 
-function tileMap:getNeighbors(x, y)
+function tileMap:getNeighbors(position)
   local out = {
-    nw = self:getTile(x-1, y-1),
-    n = self:getTile(x, y-1),
-    ne = self:getTile(x+1, y-1),
-    w = self:getTile(x-1, y),
-    e = self:getTile(x+1, y),
-    sw = self:getTile(x-1, y+1),
-    s = self:getTile(x, y+1),
-    se = self:getTile(x+1, y+1)
+    nw = self:getTile(Position.northwest(position)),
+    n = self:getTile(Position.north(position)),
+    ne = self:getTile(Position.northeast(position)),
+    w = self:getTile(Position.west(position)),
+    e = self:getTile(Position.east(position)),
+    sw = self:getTile(Position.southwest(position)),
+    s = self:getTile(Position.south(position)),
+    se = self:getTile(Position.southeast(position))
   }
 
   return out

@@ -6,6 +6,7 @@
 
 
 return function(npc, dispatch, getState)
+  local Position = require "game.rules.world.position"
   local player = require "game.rules.player"
   local character = require "game.rules.character"
   local pc = player.selectors.getPlayer(getState())
@@ -18,6 +19,6 @@ return function(npc, dispatch, getState)
   if npc.position.y < pc.position.y then y = 1 end
   if npc.position.y > pc.position.y then y = -1 end
 
-  dispatch(character.actions.move(npc, npc.position.x + x, npc.position.y + y))
+  dispatch(character.actions.move(npc, Position(npc.position.x + x, npc.position.y + y)))
 
 end

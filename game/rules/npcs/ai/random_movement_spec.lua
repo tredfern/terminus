@@ -25,7 +25,6 @@ describe("game.rules.npcs.ai.random_movement", function()
     local c = { position = { x = 10, y = 25 } }
     randomMovement(c, mockDispatch)
 
-    assert.spy(character.actions.move).was_called_with(c, 11, 24)
-
+    assert.spy(character.actions.move).was_called_with(c, match.is_position(11, 24))
   end)
 end)

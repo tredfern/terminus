@@ -23,7 +23,61 @@ local function new(x, y, z)
   }
 end
 
-return {
+local function northwest(position)
+  return new(position.x - 1, position.y - 1, position.z)
+end
+
+local function north(position)
+  return new(position.x, position.y - 1, position.z)
+end
+
+local function northeast(position)
+  return new(position.x + 1, position.y - 1, position.z)
+end
+
+local function west(position)
+  return new(position.x - 1, position.y, position.z)
+end
+
+local function east(position)
+  return new(position.x + 1, position.y, position.z)
+end
+
+local function southwest(position)
+  return new(position.x - 1, position.y + 1, position.z)
+end
+
+local function south(position)
+  return new(position.x, position.y + 1, position.z)
+end
+
+local function southeast(position)
+  return new(position.x + 1, position.y + 1, position.z)
+end
+
+local function up(position)
+  return new(position.x, position.y, position.z + 1)
+end
+
+local function down(position)
+  return new(position.x, position.y, position.z - 1)
+end
+
+return setmetatable({
   new = new,
-  equal = compare
-}
+  equal = compare,
+  northwest = northwest,
+  north = north,
+  northeast = northeast,
+  west = west,
+  east = east,
+  southwest = southwest,
+  south = south,
+  southeast = southeast,
+  up = up,
+  down = down
+}, {
+  __call = function(_, x, y, z)
+    return new(x, y, z)
+  end
+})

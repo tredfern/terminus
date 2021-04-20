@@ -5,9 +5,9 @@
 
 local terrain = require "game.rules.map.terrain"
 
-return function(state, x, y)
+return function(state, position)
   if state.map and state.map.tileMap then
-    local tile = state.map.tileMap:getTile(x, y)
+    local tile = state.map.tileMap:getTile(position)
     if tile then return tile.terrain end
   end
   return terrain.list.blank

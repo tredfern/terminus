@@ -6,6 +6,7 @@
 describe("game.rules.character.reducer", function()
   local characters_reducer = require "game.rules.character.reducer"
   local types = require "game.rules.character.actions.types"
+  local Position = require "game.rules.world.position"
 
   it("returns the same state if the action is not handled", function()
     local state = {}
@@ -42,8 +43,7 @@ describe("game.rules.character.reducer", function()
     local action = { type = types.SET_POSITION,
       payload = {
         character = character,
-        x = 4,
-        y = 9
+        position = Position(4, 9)
       }
     }
 

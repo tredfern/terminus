@@ -18,7 +18,7 @@ describe("game.rules.character.selectors.get_by_position", function()
         find1, skip2, skip1, find2
       }
     }
-    local results = get_by_position(state, 38, 20)
+    local results = get_by_position(state, Position(38, 20))
 
     assert.array_includes(find1, results)
     assert.array_includes(find2, results)

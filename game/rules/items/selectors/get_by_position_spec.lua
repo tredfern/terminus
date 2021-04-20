@@ -15,7 +15,7 @@ describe("game.rules.items.selectors.get_by_position", function()
     local state = {
       items = { find1, find2, skip }
     }
-    local found = getByPosition(state, 12, 17)
+    local found = getByPosition(state, Position(12, 17))
 
     assert.array_includes(find1, found)
     assert.array_includes(find2, found)

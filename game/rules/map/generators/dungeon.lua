@@ -11,6 +11,7 @@ local createRoom = require "game.rules.map.generators.room"
 local Outline = require "game.rules.map.outline"
 local TileMap = require "game.rules.map.tile_map"
 local Walls = require "assets.graphics.walls"
+local Position = require "game.rules.world.position"
 local generator = {}
 
 local MIN_SIZE_TO_DIVIDE = 8
@@ -141,9 +142,10 @@ end
 
 function generator.buildCorridor(map, corridor)
   for _, square in ipairs(corridor.path) do
-    local tile = map:getTile(square.x, square.y)
+    local p = Position(square.x, square.y)
+    local tile = map:getTile(p)
     if tile == nil or tile.terrain == nil then
-      map:updateTile(square.x, square.y, { terrain = terrain.list.corridor })
+      map:updateTile(p, { terrain = terrain.list.corridor })
     end
   end
 end
@@ -151,11 +153,12 @@ end
 function generator.fillWalls(map)
   for x = 1, map.width do
     for y = 1, map.height do
-      if map:getTile(x, y) == nil then
-        local neighbors = map:getNeighbors(x, y)
+      local pos = Position(x, y)
+      if map:getTile(pos) == nil then
+        local neighbors = map:getNeighbors(pos)
         local list = tables.keysToList(neighbors)
         if tables.any(list, function(tile) return not tile.isWall end) then
-          map:updateTile(x, y, { terrain = terrain.list.wall, isWall = true })
+          map:updateTile(pos, { terrain = terrain.list.wall, isWall = true })
         end
       end
     end
@@ -165,7 +168,7 @@ end
 function generator.buildRoom(map, room)
   for x = 0, room.width - 1 do
     for y = 0, room.height - 1 do
-      map:updateTile(room.x + x, room.y + y, { terrain = terrain.list.room })
+      map:updateTile(Position(room.x + x, room.y + y), { terrain = terrain.list.room })
     end
   end
 end
@@ -174,14 +177,14 @@ function generator.calculateSprites(map)
   local sprite = require "game.rules.graphics.sprite"
   for x = 1, map.width do
     for y=1,map.height do
-      local tile = map:getTile(x, y)
-      local neighbors = map:getNeighbors(x, y)
+      local tile = map:getTile(Position(x, y))
+      local neighbors = map:getNeighbors(Position(x, y))
 
       if tile and tile.terrain then
         if tile.terrain.images then
           local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
           tileImage.color = tile.terrain.color
-          map:updateTile(x, y, { sprite = tileImage })
+          map:updateTile(Position(x, y), { sprite = tileImage })
         end
         if tile.isWall then
           local sequence = { "n", "s", "e", "w" }
@@ -193,7 +196,7 @@ function generator.calculateSprites(map)
             end
           end
 
-          map:updateTile(x, y, { sprite = Walls[index] })
+          map:updateTile(Position(x, y), { sprite = Walls[index] })
         end
       end
     end

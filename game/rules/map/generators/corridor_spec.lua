@@ -7,11 +7,12 @@ describe("game.rules.map.generators.corridor", function()
   local corridor = require "game.rules.map.generators.corridor"
 
   it("create a corridor with a start and end point", function()
-    local c = corridor(17, 29, 19, 22)
+    local c = corridor(17, 29, 19, 22, 4)
     assert.equals(17, c.startX)
     assert.equals(29, c.startY)
     assert.equals(19, c.endX)
     assert.equals(22, c.endY)
+    assert.equals(4, c.level)
   end)
 
   it("maps a sequence of tiles that represent the path between two points", function()
