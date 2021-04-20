@@ -12,25 +12,30 @@ local tileMap = {}
 function tileMap:constructor()
   self.width = 0
   self.height = 0
+  self.levels = 0
 end
 
 function tileMap:createTile(position)
-  local x, y = position.x, position.y
+  local x, y, z = position.x, position.y, position.z
   if self[x] == nil then
     self[x] = {}
   end
   if self[x][y] == nil then
     self[x][y] = {}
   end
+  if self[x][y][z] == nil then
+    self[x][y][z] = {}
+  end
 
-  self[x][y] = {
-    x = x, y = y
+  self[x][y][z] = {
+    position = position
   }
 
   self.width = math.max(x, self.width)
   self.height = math.max(y, self.height)
+  self.levels = math.max(z, self.levels)
 
-  return self[x][y]
+  return self[x][y][z]
 end
 
 function tileMap:updateTile(position, values)
@@ -40,7 +45,8 @@ end
 
 function tileMap:getTile(position)
   if self[position.x] == nil then return nil end
-  return self[position.x][position.y]
+  if self[position.x][position.y] == nil then return nil end
+  return self[position.x][position.y][position.z]
 end
 
 function tileMap:getNeighbors(position)
@@ -52,7 +58,9 @@ function tileMap:getNeighbors(position)
     e = self:getTile(Position.east(position)),
     sw = self:getTile(Position.southwest(position)),
     s = self:getTile(Position.south(position)),
-    se = self:getTile(Position.southeast(position))
+    se = self:getTile(Position.southeast(position)),
+    up = self:getTile(Position.up(position)),
+    down = self:getTile(Position.down(position))
   }
 
   return out
