@@ -52,11 +52,12 @@ local combat_map = components("combat_map", function(props)
     end,
 
     drawComponent = function(self)
+      local zLevel = self.camera.z
 
       -- Draw Map Tiles
       for x = 1, self.map.outline.width do
         for y = 1, self.map.outline.height do
-          local tile = self.map.tileMap:getTile(Position(x, y))
+          local tile = self.map.tileMap:getTile(Position(x, y, zLevel))
           if tile and tile.sprite then
             local sx, sy = getScreenCoordinate(self.camera, x, y)
             tile.sprite:draw(sx, sy)
@@ -66,8 +67,10 @@ local combat_map = components("combat_map", function(props)
 
       -- Draw entities
       for _, v in ipairs(self.drawableEntities) do
-        local sx, sy = getScreenCoordinate(self.camera, v.position.x, v.position.y)
-        v.sprite:draw(sx, sy)
+        if v.position.z == zLevel then
+          local sx, sy = getScreenCoordinate(self.camera, v.position.x, v.position.y)
+          v.sprite:draw(sx, sy)
+        end
       end
 
       if self.showGrid then

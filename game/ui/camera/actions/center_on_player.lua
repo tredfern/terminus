@@ -14,7 +14,8 @@ return function(width, height)
   if c then
     return setPosition(
       math.ceil(-width / 2) + c.position.x,
-      math.ceil(-height / 2) + c.position.y
+      math.ceil(-height / 2) + c.position.y,
+      c.position.z
     )
   end
 end

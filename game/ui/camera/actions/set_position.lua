@@ -5,12 +5,13 @@
 
 local types = require "game.ui.camera.actions.types"
 
-return function(x, y)
+return function(x, y, z)
   return {
     type = types.camera_set_position,
     payload = {
       x = x,
-      y = y
+      y = y,
+      z = z
     }
   }
 end

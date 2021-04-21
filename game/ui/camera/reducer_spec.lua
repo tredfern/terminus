@@ -12,6 +12,7 @@ describe("game.ui.camera.reducer", function()
     assert.not_nil(s)
     assert.equals(1, s.x)
     assert.equals(1, s.y)
+    assert.equals(1, s.z)
   end)
 
   it("sets the position of the camera", function()
@@ -19,12 +20,14 @@ describe("game.ui.camera.reducer", function()
       type = types.camera_set_position,
       payload = {
         x = 75,
-        y = 118
+        y = 118,
+        z = 39
       }
     })
 
     assert.equals(75, s.x)
     assert.equals(118, s.y)
+    assert.equals(39, s.z)
   end)
 
   it("sets the dimensions of the camera", function()
