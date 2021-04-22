@@ -5,11 +5,10 @@
 
 local addEntity = require "game.rules.world.actions.add_entity"
 local sprite = require "game.rules.graphics.sprite"
-local position = require "game.rules.world.position"
 
-return function(x, y)
+return function(position)
   return addEntity {
-    position = position.new(x, y),
+    position = position,
     spawner = true,
     sprite = sprite.fromFile("assets/graphics/spawner.png")
   }

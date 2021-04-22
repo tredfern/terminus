@@ -20,15 +20,17 @@ return function()
 
     local x = playerStartRoom.x + math.floor(playerStartRoom.width / 2)
     local y = playerStartRoom.y + math.floor(playerStartRoom.height / 2)
-    dispatch(Player.actions.add(x, y))
+    dispatch(Player.actions.add(Position(x, y, playerStartRoom.level)))
     dispatch(Player.actions.equipItem(Items.list.sword:clone()))
 
     for _ = 1,2 do
       local r = tables.pickRandom(rooms)
       dispatch(Aliens.actions.addSpawner(
-        r.x + love.math.random(r.width) - 1,
-        r.y + love.math.random(r.height) - 1
-      ))
+        Position(
+          r.x + love.math.random(r.width) - 1,
+          r.y + love.math.random(r.height) - 1,
+          r.level
+    )))
     end
 
     -- Add some random items to some random rooms
@@ -38,7 +40,8 @@ return function()
         Items.list.healthPack, {
           position = Position.new(
             r.x + love.math.random(r.width) - 1,
-            r.y + love.math.random(r.height) - 1)
+            r.y + love.math.random(r.height) - 1),
+            r.level
         }
       ))
     end
@@ -48,7 +51,8 @@ return function()
       Items.list.sprayBottle, {
         position = Position.new(
           r.x + love.math.random(r.width) - 1,
-          r.y + love.math.random(r.height) - 1
+          r.y + love.math.random(r.height) - 1,
+          r.level
         )
       }
     ))

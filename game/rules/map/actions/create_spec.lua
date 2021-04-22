@@ -20,7 +20,7 @@ describe("game.rules.map.actions.create", function()
 
   it("uses a generator to create the map", function()
     mockDispatch(create(100, 100, generator))
-    assert.spy(generator).was.called_with(100, 100)
+    assert.spy(generator).was.called_with(100, 100, 10)
   end)
 
   it("is defined as the MAP_CREATE thunk", function()

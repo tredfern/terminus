@@ -7,9 +7,10 @@ describe("game.rules.map.outline", function()
   local outline = require "game.rules.map.outline"
 
   it("knows the total size of the map", function()
-    local o = outline:new(173, 182)
+    local o = outline:new(173, 182, 10)
     assert.equals(173, o.width)
     assert.equals(182, o.height)
+    assert.equals(10, o.levels)
   end)
 
   it("can track rooms", function()

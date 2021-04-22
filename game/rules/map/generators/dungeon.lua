@@ -69,10 +69,10 @@ function generator.divide(node, current_level, max_levels)
   return node
 end
 
-function generator.create_rooms(node, outline)
+function generator.create_rooms(node, outline, level)
   if node.left or node.right then
-    generator.create_rooms(node.left, outline)
-    generator.create_rooms(node.right, outline)
+    generator.create_rooms(node.left, outline, level)
+    generator.create_rooms(node.right, outline, level)
     return
   end
 
@@ -82,25 +82,28 @@ function generator.create_rooms(node, outline)
   local x = node.x + love.math.random(node.width - width)
   local y = node.y + love.math.random(node.height - height)
 
-  node.room = createRoom(x, y, width, height)
+  node.room = createRoom(x, y, width, height, level)
   outline:addRoom(node.room)
 end
 
-function generator.generate(width, height)
-  local outline = Outline:new(width, height)
-  local root = generator.create_node(1, 1, width, height)
-  generator.divide(root, 1, DEPTH)
-  generator.create_rooms(root, outline)
-  generator.create_corridors(root, outline)
+function generator.generate(width, height, levels)
+  local outline = Outline:new(width, height, levels)
+
+  for level = 1, levels do
+    local root = generator.create_node(1, 1, width, height)
+    generator.divide(root, 1, DEPTH)
+    generator.create_rooms(root, outline, level)
+    generator.create_corridors(root, outline, level)
+  end
   local tileMap = generator.buildTileMap(outline)
   return outline, tileMap
 end
 
 
-function generator.create_corridors(node, outline)
+function generator.create_corridors(node, outline, level)
   if node.left or node.right then
-    generator.create_corridors(node.left, outline)
-    generator.create_corridors(node.right, outline)
+    generator.create_corridors(node.left, outline, level)
+    generator.create_corridors(node.right, outline, level)
   end
 
   --Connect the left and right nodes together...
@@ -114,7 +117,7 @@ function generator.create_corridors(node, outline)
     local end_x = love.math.random(end_room.x, end_room.x + end_room.width - 1)
     local end_y = love.math.random(end_room.y, end_room.y + end_room.height - 1)
 
-    outline:addCorridor(createCorridor(start_x, start_y, end_x, end_y))
+    outline:addCorridor(createCorridor(start_x, start_y, end_x, end_y, level))
   end
 end
 
@@ -142,7 +145,7 @@ end
 
 function generator.buildCorridor(map, corridor)
   for _, square in ipairs(corridor.path) do
-    local p = Position(square.x, square.y)
+    local p = Position(square.x, square.y, corridor.level)
     local tile = map:getTile(p)
     if tile == nil or tile.terrain == nil then
       map:updateTile(p, { terrain = terrain.list.corridor })
@@ -153,12 +156,14 @@ end
 function generator.fillWalls(map)
   for x = 1, map.width do
     for y = 1, map.height do
-      local pos = Position(x, y)
-      if map:getTile(pos) == nil then
-        local neighbors = map:getNeighbors(pos)
-        local list = tables.keysToList(neighbors)
-        if tables.any(list, function(tile) return not tile.isWall end) then
-          map:updateTile(pos, { terrain = terrain.list.wall, isWall = true })
+      for z = 1, map.levels do
+        local pos = Position(x, y, z)
+        if map:getTile(pos) == nil then
+          local neighbors = map:getNeighbors(pos)
+          local list = tables.keysToList(neighbors)
+          if tables.any(list, function(tile) return not tile.isWall end) then
+            map:updateTile(pos, { terrain = terrain.list.wall, isWall = true })
+          end
         end
       end
     end
@@ -168,7 +173,7 @@ end
 function generator.buildRoom(map, room)
   for x = 0, room.width - 1 do
     for y = 0, room.height - 1 do
-      map:updateTile(Position(room.x + x, room.y + y), { terrain = terrain.list.room })
+      map:updateTile(Position(room.x + x, room.y + y, room.level), { terrain = terrain.list.room })
     end
   end
 end
@@ -177,26 +182,28 @@ function generator.calculateSprites(map)
   local sprite = require "game.rules.graphics.sprite"
   for x = 1, map.width do
     for y=1,map.height do
-      local tile = map:getTile(Position(x, y))
-      local neighbors = map:getNeighbors(Position(x, y))
+      for z = 1,map.levels do
+        local tile = map:getTile(Position(x, y, z))
+        local neighbors = map:getNeighbors(Position(x, y, z))
 
-      if tile and tile.terrain then
-        if tile.terrain.images then
-          local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
-          tileImage.color = tile.terrain.color
-          map:updateTile(Position(x, y), { sprite = tileImage })
-        end
-        if tile.isWall then
-          local sequence = { "n", "s", "e", "w" }
-          local index = ""
-
-          for _, v in ipairs(sequence) do
-            if neighbors[v] and neighbors[v].isWall then
-              index = index .. v
-            end
+        if tile and tile.terrain then
+          if tile.terrain.images then
+            local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
+            tileImage.color = tile.terrain.color
+            map:updateTile(Position(x, y, z), { sprite = tileImage })
           end
+          if tile.isWall then
+            local sequence = { "n", "s", "e", "w" }
+            local index = ""
 
-          map:updateTile(Position(x, y), { sprite = Walls[index] })
+            for _, v in ipairs(sequence) do
+              if neighbors[v] and neighbors[v].isWall then
+                index = index .. v
+              end
+            end
+
+            map:updateTile(Position(x, y, z), { sprite = Walls[index] })
+          end
         end
       end
     end
@@ -207,21 +214,21 @@ function generator.getRandomLocation(outline)
   local r = tables.pickRandom(outline.rooms)
   local x = math.random(r.x, r.x + r.width)
   local y = math.random(r.y, r.y + r.height)
-  return x, y
+  return x, y, r.level
 end
 
 function generator.addFeatures(outline)
   for _ = 1, 3 do
     local store = require "game.store"
     local addLadder = require "game.rules.map.actions.add_ladder"
-    local x, y = generator.getRandomLocation(outline)
-    store.dispatch(addLadder(Position(x, y)))
+    local x, y, z = generator.getRandomLocation(outline)
+    store.dispatch(addLadder(Position(x, y, z)))
   end
 end
 
 return setmetatable(generator,
   {
-    __call = function(self, width, height)
-      return self.generate(width, height)
+    __call = function(self, width, height, levels)
+      return self.generate(width, height, levels)
     end
   })

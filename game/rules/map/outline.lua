@@ -6,11 +6,12 @@
 local class = require "moonpie.class"
 local outline = {}
 
-function outline:constructor(width, height)
+function outline:constructor(width, height, levels)
   self.width = width
   self.height = height
   self.rooms = {}
   self.corridors = {}
+  self.levels = levels
 end
 
 function outline:addRoom(room)

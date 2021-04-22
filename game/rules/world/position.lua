@@ -23,6 +23,14 @@ local function new(x, y, z)
   }
 end
 
+local function copy(position)
+  return new(
+    position.x,
+    position.y,
+    position.z
+  )
+end
+
 local function add(position, delta)
   local x = delta[1] or 0
   local y = delta[2] or 0
@@ -77,6 +85,7 @@ end
 
 return setmetatable({
   add = add,
+  copy = copy,
   new = new,
   equal = compare,
   northwest = northwest,

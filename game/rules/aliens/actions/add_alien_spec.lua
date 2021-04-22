@@ -6,9 +6,10 @@
 describe("game.rules.aliens.actions.add_alien", function()
   local addAlien = require "game.rules.aliens.actions.add_alien"
   local imageMgr = require "moonpie.graphics.image"
+  local Position = require "game.rules.world.position"
 
   it("sets up a character with the alien properties", function()
-    local action = addAlien(20, 39)
+    local action = addAlien(Position(20, 39))
     local alien = action.payload.character
     assert.equals(20, alien.position.x)
     assert.equals(39, alien.position.y)

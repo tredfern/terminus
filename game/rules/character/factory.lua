@@ -6,7 +6,7 @@
 local characterFactory = {}
 local dice = require "moonpie.math.dice"
 local attributes = require "game.rules.character.attributes"
-local position = require "game.rules.world.position"
+local Position = require "game.rules.world.position"
 
 function characterFactory.createDefaultAttributes()
   local cup = dice.parse("3d6")
@@ -46,7 +46,7 @@ end
 function characterFactory.newCharacter(props)
   props = props or {}
   local c = {
-    position = position.new(props.x or 0, props.y or 0),
+    position = props.position or Position(0, 0, 0),
     isPlayerControlled = props.isPlayerControlled,
     isEnemy = props.isEnemy,
     attributes = characterFactory.createDefaultAttributes(),

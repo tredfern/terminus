@@ -5,9 +5,10 @@
 
 describe("game.rules.aliens.actions.add_spawner", function()
   local addSpawner = require "game.rules.aliens.actions.add_spawner"
+  local Position = require "game.rules.world.position"
 
   it("adds a spawner with a position", function()
-    local action = addSpawner(38, 32)
+    local action = addSpawner(Position(38, 32))
 
     local spawner = action.payload.entity
     assert.equals(38, spawner.position.x)

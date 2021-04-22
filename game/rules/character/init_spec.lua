@@ -5,12 +5,12 @@
 
 describe("game.rules.character", function()
   local character = require "game.rules.character"
+  local Position = require "game.rules.world.position"
 
   it("has an entity that can be instantiated", function()
     local c = character.create {
       isPlayerControlled = true,
-      x = 3,
-      y = 4
+      position = Position(3, 4, 1)
     }
 
     assert.not_nil(c)

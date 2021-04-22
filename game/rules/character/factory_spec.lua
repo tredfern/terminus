@@ -24,7 +24,7 @@ describe("game.rules.character.character", function()
   end)
 
   it("can initialize it's position", function()
-    local c = characterFactory.newCharacter { x = 142, y = 192 }
+    local c = characterFactory.newCharacter { position = { x = 142, y = 192 } }
     assert.equals(142, c.position.x)
     assert.equals(192, c.position.y)
   end)

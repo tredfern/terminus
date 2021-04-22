@@ -7,8 +7,8 @@ local characters = require "game.rules.character"
 local Animator = require "game.rules.graphics.animator"
 local characterIdle = require "data.characters.character_idle"
 
-return function(x, y)
-  local c = characters.create { x = x, y = y, isPlayerControlled = true }
+return function(position)
+  local c = characters.create { position = position, isPlayerControlled = true }
   c.animator = Animator:new()
   c.animator:addAnimation("idle", characterIdle)
   c.animator:play("idle")
