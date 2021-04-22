@@ -9,7 +9,8 @@ local World = require "game.rules.world"
 return function(position)
   local ladder = {
     position = position,
-    sprite = ladders.up
+    sprite = ladders.down,
+    ladder_down = true
   }
   return World.actions.addEntity(ladder)
 end

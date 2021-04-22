@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local math_ext = require "moonpie.math"
+local maths = require "moonpie.math"
 local tables = require "moonpie.tables"
 local terrain = require "game.rules.map.terrain"
 local createCorridor = require "game.rules.map.generators.corridor"
@@ -27,7 +27,7 @@ function generator.create_node(x, y, width, height)
       if self.room then return self.room end
 
       if self.left and self.right then
-        if math_ext.coinFlip() then
+        if maths.coinFlip() then
           return self.left:pick_room()
         else
           return self.right:pick_room()
@@ -94,6 +94,9 @@ function generator.generate(width, height, levels)
     generator.divide(root, 1, DEPTH)
     generator.create_rooms(root, outline, level)
     generator.create_corridors(root, outline, level)
+
+    -- Connect to lower floor
+    generator.connectLevels(outline, level, level - 1)
   end
   local tileMap = generator.buildTileMap(outline)
   return outline, tileMap
@@ -161,7 +164,7 @@ function generator.fillWalls(map)
         if map:getTile(pos) == nil then
           local neighbors = map:getNeighbors(pos)
           local list = tables.keysToList(neighbors)
-          if tables.any(list, function(tile) return not tile.isWall end) then
+          if tables.any(list, function(tile) return tile.position.z == z and not tile.isWall end) then
             map:updateTile(pos, { terrain = terrain.list.wall, isWall = true })
           end
         end
@@ -218,12 +221,53 @@ function generator.getRandomLocation(outline)
 end
 
 function generator.addFeatures(outline)
-  for _ = 1, 3 do
-    local store = require "game.store"
-    local addLadder = require "game.rules.map.actions.add_ladder"
-    local x, y, z = generator.getRandomLocation(outline)
-    store.dispatch(addLadder(Position(x, y, z)))
+  local ladderUp = require "game.rules.map.actions.add_ladder_up"
+  local ladderDown = require "game.rules.map.actions.add_ladder_down"
+  local store = require "game.store"
+  for _, r in ipairs(outline.rooms) do
+    if not tables.isEmpty(r.features) then
+      for _, f in ipairs(r.features) do
+        if f.type == "LADDER_UP" then
+          store.dispatch(ladderUp(f.position))
+        elseif f.type == "LADDER_DOWN" then
+          store.dispatch(ladderDown(f.position))
+        end
+      end
+    end
   end
+end
+
+function generator.connectLevels(outline, start, dest)
+  local roomsOnSourceLevel = tables.select(outline.rooms, function(r) return r.level == start end)
+  local roomsOnDestLevel = tables.select(outline.rooms, function(r) return r.level == dest end)
+
+  -- find an overlapping room
+  local startRoom, destRoom, startRect
+  while #roomsOnSourceLevel > 0 and destRoom == nil do
+    startRoom = tables.pickRandom(roomsOnSourceLevel)
+    startRect = maths.rectangle.new(startRoom.x, startRoom.y, startRoom.width, startRoom.height)
+    local overlap = tables.select(roomsOnDestLevel, function(r)
+      local destRect = maths.rectangle.new(r.x, r.y, r.width, r.height)
+      return startRect:intersects(destRect)
+    end)
+    if not tables.isEmpty(overlap) then
+      destRoom = overlap[1]
+    end
+    tables.removeItem(roomsOnSourceLevel, start)
+  end
+
+  if destRoom == nil or startRoom == nil then return end
+
+  local destRect = maths.rectangle.new(destRoom.x, destRoom.y, destRoom.width, destRoom.height)
+  local overlap = startRect:overlap(destRect)
+
+  local x = math.random(overlap:left(), overlap:right())
+  local y = math.random(overlap:top(), overlap:bottom())
+
+  -- add ladders to feature list
+  -- These should be fully scoped out entities that can be added later
+  table.insert(destRoom.features, { type = "LADDER_UP", position = Position(x, y, destRoom.level) })
+  table.insert(startRoom.features, { type = "LADDER_DOWN", position = Position(x, y, startRoom.level) })
 end
 
 return setmetatable(generator,

@@ -9,7 +9,8 @@ local function createRoom(x, y, width, height, level)
     y = y,
     width = width,
     height = height,
-    level = level
+    level = level,
+    features = {}
   }
 end
 
