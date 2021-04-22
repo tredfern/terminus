@@ -7,13 +7,13 @@ describe("game.ui.inputs.keyboard", function()
   local keyboard_map = require "game.ui.inputs.keyboard_map"
   local key_simulator = require "moonpie.keyboard"
   local mockStore = require "test_helpers.mock_store"
-  local character = require "game.rules.character"
+  local player = require "game.rules.player"
   local turn = require "game.rules.turn"
   local Position = require "game.rules.world.position"
 
   describe("combat_map settings", function()
     before_each(function()
-      spy.on(character.actions, "move")
+      spy.on(player.actions, "move")
       spy.on(turn.actions, "process")
       keyboard_map.enableCombatMap()
     end)
@@ -21,7 +21,7 @@ describe("game.ui.inputs.keyboard", function()
     it("can disable keyboard mapping", function()
       keyboard_map.disableCombatMap()
       key_simulator:keyPressed("up")
-      assert.spy(character.actions.move).was_not.called()
+      assert.spy(player.actions.move).was_not.called()
     end)
 
     it("can show/hide grid lines", function()
@@ -62,32 +62,32 @@ describe("game.ui.inputs.keyboard", function()
 
       it("can move up", function()
         key_simulator:keyPressed("up")
-        assert.spy(character.actions.move).was.called_with(player_character, match.is_position(20, 31))
+        assert.spy(player.actions.move).was.called_with(Position.north)
         assert.spy(turn.actions.process).was.called()
       end)
 
       it("can move down", function()
         key_simulator:keyPressed("down")
-        assert.spy(character.actions.move).was.called_with(player_character, match.is_position(20, 33))
+        assert.spy(player.actions.move).was.called_with(Position.south)
         assert.spy(turn.actions.process).was.called()
       end)
 
       it("can move right", function()
         key_simulator:keyPressed("right")
-        assert.spy(character.actions.move).was.called_with(player_character, match.is_position(21, 32))
+        assert.spy(player.actions.move).was.called_with(Position.east)
         assert.spy(turn.actions.process).was.called()
       end)
 
       it("can move right", function()
         key_simulator:keyPressed("left")
-        assert.spy(character.actions.move).was.called_with(player_character, match.is_position(19, 32))
+        assert.spy(player.actions.move).was.called_with(Position.west)
         assert.spy(turn.actions.process).was.called()
       end)
 
       it("can pickup items", function()
-        spy.on(character.actions, "pickupItems")
+        spy.on(player.actions, "pickupItems")
         key_simulator:keyPressed("g")
-        assert.spy(character.actions.pickupItems).was.called_with(player_character)
+        assert.spy(player.actions.pickupItems).was.called()
         assert.spy(turn.actions.process).was.called()
       end)
     end)
