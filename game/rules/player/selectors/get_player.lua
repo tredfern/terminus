@@ -3,13 +3,9 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local tables = require "moonpie.tables"
+local getEntities = require "game.rules.world.selectors.get_all_with_components"
 
 return function(state)
-  assert(state.characters)
-  return tables.findFirst(state.characters,
-    function(c)
-      return c.isPlayerControlled
-    end
-  )
+  local result = getEntities(state, "isPlayerControlled")
+  return result[1]
 end

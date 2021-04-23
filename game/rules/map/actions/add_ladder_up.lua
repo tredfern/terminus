@@ -10,7 +10,7 @@ return function(position)
   local ladder = {
     position = position,
     sprite = ladders.up,
-    ladder_up = true
+    ladderUp = true
   }
   return World.actions.addEntity(ladder)
 end

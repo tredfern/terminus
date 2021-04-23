@@ -28,6 +28,12 @@ keySettings.combatMap = {
   ["up"] = function()
     process_turn(player.actions.move(Position.north))
   end,
+  ["."] = function()
+    process_turn(player.actions.ladderUp())
+  end,
+  [","] = function()
+    process_turn(player.actions.ladderDown())
+  end,
   ["g"] = function()
     process_turn(player.actions.pickupItems())
   end,

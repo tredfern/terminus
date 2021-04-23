@@ -23,7 +23,7 @@ return function()
     dispatch(Player.actions.add(Position(x, y, playerStartRoom.level)))
     dispatch(Player.actions.equipItem(Items.list.sword:clone()))
 
-    for _ = 1,2 do
+    for _ = 1,10 do
       local r = tables.pickRandom(rooms)
       dispatch(Aliens.actions.addSpawner(
         Position(
@@ -34,14 +34,14 @@ return function()
     end
 
     -- Add some random items to some random rooms
-    for _ = 1, 10 do
+    for _ = 1, 40 do
       local r = tables.pickRandom(rooms)
       dispatch(Items.actions.add(
         Items.list.healthPack, {
           position = Position.new(
             r.x + love.math.random(r.width) - 1,
-            r.y + love.math.random(r.height) - 1),
-            r.level
+            r.y + love.math.random(r.height) - 1,
+            r.level)
         }
       ))
     end
@@ -52,8 +52,7 @@ return function()
         position = Position.new(
           r.x + love.math.random(r.width) - 1,
           r.y + love.math.random(r.height) - 1,
-          r.level
-        )
+          r.level)
       }
     ))
 
