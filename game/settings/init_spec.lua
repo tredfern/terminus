@@ -14,4 +14,8 @@ describe("game.settings", function()
   it("has selectors to get values available", function()
     assert.not_nil(Settings.selectors.getOption)
   end)
+
+  it("can return path to assets", function()
+    assert.equals("assets/characters/character_idle.png", Settings.assetPath("characters/character_idle.png"))
+  end)
 end)

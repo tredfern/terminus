@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local ladders = require "data.features.ladders"
+local ladders = require "assets.maps.features.ladders"
 local World = require "game.rules.world"
 
 return function(position)

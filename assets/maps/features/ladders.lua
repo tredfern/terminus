@@ -5,8 +5,9 @@
 
 local Sprite = require "game.rules.graphics.sprite"
 local ImageMgr = require "moonpie.graphics.image"
+local Settings = require "game.settings"
 
-local ladderAtlas = ImageMgr.load("data/features/ladders.png")
+local ladderAtlas = ImageMgr.load(Settings.assetPath("maps/features/ladders.png"))
 return {
   down = Sprite.fromAtlas(ladderAtlas, 0, 0, 32, 32),
   up = Sprite.fromAtlas(ladderAtlas, 32, 0, 32, 32)

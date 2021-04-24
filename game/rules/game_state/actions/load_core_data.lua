@@ -5,9 +5,9 @@
 
 return function()
   return function()
-    require "data.skills"
-    require "data.items"
-    require "data.character_names"
-    require "data.terrains"
+    require "assets.characters.skills"
+    require "assets.characters.names"
+    require "assets.items"
+    require "assets.maps.terrains"
   end
 end

@@ -6,8 +6,9 @@
 local animation = require "game.rules.graphics.animation"
 local sprite = require "game.rules.graphics.sprite"
 local imageMgr = require "moonpie.graphics.image"
+local Settings = require "game.settings"
 
-local imageData = imageMgr.load("data/characters/character_idle.png")
+local imageData = imageMgr.load(Settings.assetPath("characters/character_idle.png"))
 local frame1 = sprite.fromAtlas(imageData, 0, 0, 32, 32)
 local frame2 = sprite.fromAtlas(imageData, 32, 0, 32, 32)
 local frame3 = sprite.fromAtlas(imageData, 64, 0, 32, 32)

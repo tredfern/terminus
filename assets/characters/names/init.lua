@@ -5,6 +5,7 @@
 
 local csv = require "moonpie.ext.csv"
 local Names = require "game.rules.character.names"
+local Settings = require "game.settings"
 
 local function parseCSV(fileName)
   local file = love.filesystem.read(fileName)
@@ -22,9 +23,9 @@ local function parseCSV(fileName)
   return out
 end
 
-local femaleFirstNames = parseCSV("data/names/female_first_names.csv")
-local maleFirstNames = parseCSV("data/names/male_first_names.csv")
-local lastNames = parseCSV("data/names/last_names.csv")
+local femaleFirstNames = parseCSV(Settings.assetPath("characters/names/female_first_names.csv"))
+local maleFirstNames = parseCSV(Settings.assetPath("characters/names/male_first_names.csv"))
+local lastNames = parseCSV(Settings.assetPath("characters/names/last_names.csv"))
 
 for _, v in ipairs(femaleFirstNames) do
   Names.registerFirstNames(v)
