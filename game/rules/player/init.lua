@@ -10,6 +10,7 @@ return {
     ladderDown = require "game.rules.player.actions.ladder_down",
     ladderUp = require "game.rules.player.actions.ladder_up",
     move = require "game.rules.player.actions.move",
+    openDoor = require "game.rules.player.actions.open_door",
     pickupItems = require "game.rules.player.actions.pickup_items",
   },
   selectors = {

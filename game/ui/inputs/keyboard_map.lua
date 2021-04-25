@@ -7,26 +7,42 @@ local keyboard = require "moonpie.keyboard"
 local store = require "moonpie.redux.store"
 local player = require "game.rules.player"
 local turn = require "game.rules.turn"
+local Orientation = require "game.rules.world.orientation"
 local Position = require "game.rules.world.position"
 
 local keySettings = {}
+local directionAction
 
 local function process_turn(player_action)
   store.dispatch(turn.actions.process(player_action))
 end
 
+local function handleDirection(orientation)
+  if directionAction then
+    process_turn(directionAction(orientation))
+    directionAction = nil
+  else
+    process_turn(player.actions.move(Position[orientation]))
+  end
+end
+
+local function setDirectionHandler(action)
+  directionAction = action
+end
+
+
 keySettings.combatMap = {
   ["down"] = function()
-    process_turn(player.actions.move(Position.south))
+    handleDirection(Orientation.south)
   end,
   ["left"] = function()
-    process_turn(player.actions.move(Position.west))
+    handleDirection(Orientation.west)
   end,
   ["right"]= function()
-    process_turn(player.actions.move(Position.east))
+    handleDirection(Orientation.east)
   end,
   ["up"] = function()
-    process_turn(player.actions.move(Position.north))
+    handleDirection(Orientation.north)
   end,
   ["."] = function()
     process_turn(player.actions.ladderUp())
@@ -36,6 +52,9 @@ keySettings.combatMap = {
   end,
   ["g"] = function()
     process_turn(player.actions.pickupItems())
+  end,
+  ["o"] = function()
+    setDirectionHandler(player.actions.openDoor)
   end,
   ["shift+g"] = function()
     local Settings = require "game.settings"

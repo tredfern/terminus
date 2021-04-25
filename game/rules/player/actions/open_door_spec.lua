@@ -5,10 +5,34 @@
 
 describe("game.rules.player.actions.open_door", function()
   local openDoor = require "game.rules.player.actions.open_door"
+  local Orientation = require "game.rules.world.orientation"
+  local Position = require "game.rules.world.position"
   local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockStore = require "test_helpers.mock_store"
+
+  local northDoor, eastDoor
 
   before_each(function()
+    northDoor = {
+      door = true, closed = true,
+      position = Position(1, 3, 3),
+      animator = { play = spy.new(function() end )}
+    }
+
+    eastDoor = {
+      door = true, closed = false,
+      position = Position(2, 4, 3),
+      animator = { play = spy.new(function() end) }
+    }
     mockDispatch.processComplex = true
+    mockStore {
+      characters = {},
+      world = {
+        { isPlayerControlled = true, position = Position(1, 4, 3)},
+        northDoor,
+        eastDoor
+      }
+    }
   end)
 
   after_each(function()
@@ -16,14 +40,15 @@ describe("game.rules.player.actions.open_door", function()
   end)
 
   it("starts playing the open door animation on the door", function()
-    local door = {
-      animator = { play = spy.new(function() end) }
-    }
-
-    local action = openDoor(door)
+    local action = openDoor(Orientation.north)
     mockDispatch(action)
 
+    assert.spy(northDoor.animator.play).was.called_with(northDoor.animator, "opening")
+  end)
 
-    assert.spy(door.animator.play).was.called_with(door.animator, "opening")
+  it("does not open a door if it is already open", function()
+    local action = openDoor(Orientation.east)
+    mockDispatch(action)
+    assert.spy(eastDoor.animator.play).was.not_called()
   end)
 end)

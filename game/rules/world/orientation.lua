@@ -4,10 +4,10 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  north = "NORTH",
-  south = "SOUTH",
-  east = "EAST",
-  west = "WEST",
-  northSouth = "NORTHSOUTH",
-  eastWest = "EASTWEST"
+  north = "north",
+  south = "south",
+  east = "east",
+  west = "west",
+  northSouth = "north_south",
+  eastWest = "east_west"
 }

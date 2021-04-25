@@ -12,6 +12,7 @@ describe("game.rules.player", function()
     assert.not_nil(player.actions.ladderDown)
     assert.not_nil(player.actions.ladderUp)
     assert.not_nil(player.actions.move)
+    assert.not_nil(player.actions.openDoor)
     assert.not_nil(player.actions.pickupItems)
   end)
 

@@ -28,7 +28,7 @@ local openedEW = Sprite.fromAtlas(doorAtlas, 96, 32, 32, 32)
 local openingEW = Animation:new()
 openingEW:addFrame(openingEW1, 0.2)
 openingEW:addFrame(openingEW2, 0.2)
-openingEW:addFrame(opened, 0.2)
+openingEW:addFrame(openedEW, 0.2)
 
 return {
   [Orientation.northSouth] = {

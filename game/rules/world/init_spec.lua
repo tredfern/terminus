@@ -13,5 +13,13 @@ describe("game.rules.world", function()
 
   it("has selectors to find entities", function()
     assert.not_nil(World.selectors.getAllWithComponents)
+    assert.not_nil(World.selectors.getByPosition)
+  end)
+
+  it("provides access to it's useful pieces", function()
+    local Position = require "game.rules.world.position"
+    assert.equals(Position, World.position)
+    local Orientation = require "game.rules.world.orientation"
+    assert.equals(Orientation, World.orientation)
   end)
 end)

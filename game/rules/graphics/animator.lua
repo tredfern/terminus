@@ -37,7 +37,7 @@ end
 
 function Animator:getCurrentFrame()
   if not self.isLooping then
-    self.playTime = math.min(self.current.length, self.playTime)
+    self.playTime = math.min(self.current.length - 0.01, self.playTime)
   end
   return self.current:getFrameImage(self.playTime)
 end

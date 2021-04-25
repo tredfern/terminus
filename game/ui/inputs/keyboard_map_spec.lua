@@ -106,4 +106,16 @@ describe("game.ui.inputs.keyboard", function()
       end)
     end)
   end)
+
+  describe("multistep commands", function()
+    it("open doors triggers a mode where it waits for a directional command before dispatching command", function()
+      local Orientation = require "game.rules.world.orientation"
+      spy.on(player.actions, "openDoor")
+
+      key_simulator:keyPressed("o")
+      assert.spy(player.actions.openDoor).was.not_called()
+      key_simulator:keyPressed("left")
+      assert.spy(player.actions.openDoor).was.called_with(Orientation.west)
+    end)
+  end)
 end)
