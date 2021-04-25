@@ -10,6 +10,7 @@ local Animator = {}
 function Animator:constructor()
   self.animations = {}
   self.playTime = 0
+  self.isPlaying = false
 end
 
 function Animator:addAnimation(name, animation)
@@ -20,6 +21,7 @@ function Animator:play(name, playOnce)
   self.current = self.animations[name]
   self.playTime = 0
   self.isLooping = not playOnce
+  self.isPlaying = true
 end
 
 function Animator:playOnce(name)
@@ -28,6 +30,9 @@ end
 
 function Animator:update(delta)
   self.playTime = self.playTime + delta
+  if not self.isLooping and self.playTime > self.current.length then
+    self.isPlaying = false
+  end
 end
 
 function Animator:getCurrentFrame()

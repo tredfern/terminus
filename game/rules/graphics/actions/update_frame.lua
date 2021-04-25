@@ -12,8 +12,10 @@ return function(deltaTime)
     local animators = getAnimated(state, "animator")
 
     for _, v in ipairs(animators) do
-      v.animator:update(deltaTime)
-      v.sprite = v.animator:getCurrentFrame()
+      if v.animator.isPlaying then
+        v.animator:update(deltaTime)
+        v.sprite = v.animator:getCurrentFrame()
+      end
     end
   end)
 end

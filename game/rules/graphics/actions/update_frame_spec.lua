@@ -12,8 +12,14 @@ describe("game.graphics.actions.update_frame", function()
   before_each(function()
     state = {
       world = {
-        { animator = { update = spy.new(function() end), getCurrentFrame = function() return {} end } },
-        { animator = { update = spy.new(function() end), getCurrentFrame = function() return {} end }}
+        { animator = {
+          isPlaying = true, update = spy.new(function() end),
+          getCurrentFrame = function() return {} end }
+        },
+        { animator = {
+          isPlaying = true, update = spy.new(function() end),
+          getCurrentFrame = function() return {} end }
+        },
       }
     }
     mockStore(state)
@@ -36,5 +42,15 @@ describe("game.graphics.actions.update_frame", function()
     mockDispatch(updateFrame(29.3))
     assert.not_nil(state.world[1].sprite)
     assert.not_nil(state.world[2].sprite)
+  end)
+
+  it("does not update animators that have no animations playing", function()
+    local noPlay = { animator = {
+      isPlaying = false, update = spy.new(function() end),
+      getCurrentFrame = function() return {} end }
+    }
+    table.insert(state.world, noPlay)
+    mockDispatch(updateFrame(29.3))
+    assert.spy(noPlay.animator.update).was.not_called()
   end)
 end)
