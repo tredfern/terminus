@@ -4,5 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  LADDER_UP = "PLAYER_LADDER_UP"
+  LADDER_DOWN = "PLAYER_LADDER_DOWN",
+  LADDER_UP = "PLAYER_LADDER_UP",
+  OPEN_DOOR = "PLAYER_OPEN_DOOR"
 }
