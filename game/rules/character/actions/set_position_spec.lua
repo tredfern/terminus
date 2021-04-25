@@ -36,4 +36,19 @@ describe("game.rules.character.actions.set_position", function()
     assert.is_true(sp:validate({ map = map }))
   end)
 
+  it("is invalid if an entity blocks movement", function()
+    local sp = set_position({}, Position(5, 4))
+    local state = {
+      map = {
+        tileMap = {
+          getTile = function() return { terrain = {} } end
+        }
+      },
+      world = {
+        { blocksMovement = true, position = Position(5, 4) }
+      }
+    }
+    assert.is_false(sp:validate(state))
+  end)
+
 end)

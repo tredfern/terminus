@@ -16,13 +16,14 @@ describe("game.rules.player.actions.open_door", function()
     northDoor = {
       door = true, closed = true,
       position = Position(1, 3, 3),
-      animator = { play = spy.new(function() end )}
+      blocksMovement = true,
+      animator = { playOnce = spy.new(function() end )}
     }
 
     eastDoor = {
       door = true, closed = false,
       position = Position(2, 4, 3),
-      animator = { play = spy.new(function() end) }
+      animator = { playOnce = spy.new(function() end) }
     }
     mockDispatch.processComplex = true
     mockStore {
@@ -43,12 +44,13 @@ describe("game.rules.player.actions.open_door", function()
     local action = openDoor(Orientation.north)
     mockDispatch(action)
 
-    assert.spy(northDoor.animator.play).was.called_with(northDoor.animator, "opening")
+    assert.spy(northDoor.animator.playOnce).was.called_with(northDoor.animator, "opening")
+    assert.is_false(northDoor.blocksMovement)
   end)
 
   it("does not open a door if it is already open", function()
     local action = openDoor(Orientation.east)
     mockDispatch(action)
-    assert.spy(eastDoor.animator.play).was.not_called()
+    assert.spy(eastDoor.animator.playOnce).was.not_called()
   end)
 end)

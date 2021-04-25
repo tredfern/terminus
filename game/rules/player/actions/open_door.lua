@@ -23,6 +23,7 @@ return function(orientation)
       if door and door.closed then
         door.animator:playOnce("opening")
         door.closed = false
+        door.blocksMovement = false
       end
     end
   )

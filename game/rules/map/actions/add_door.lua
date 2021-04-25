@@ -15,6 +15,7 @@ return function(position, orientation)
     position = position,
     door = true,
     closed = true,
+    blocksMovement = true,
     orientation = orientation,
     animator = a
   }
