@@ -12,6 +12,7 @@ local Outline = require "game.rules.map.outline"
 local TileMap = require "game.rules.map.tile_map"
 local Walls = require "assets.graphics.walls"
 local Position = require "game.rules.world.position"
+local Orientation = require "game.rules.world.orientation"
 local generator = {}
 
 local MIN_SIZE_TO_DIVIDE = 8
@@ -141,7 +142,7 @@ function generator.buildTileMap(outline)
 
   generator.fillWalls(map)
   generator.calculateSprites(map)
-  generator.addFeatures(outline)
+  generator.addFeatures(outline, map)
 
   return map
 end
@@ -220,10 +221,11 @@ function generator.getRandomLocation(outline)
   return x, y, r.level
 end
 
-function generator.addFeatures(outline)
+function generator.addFeatures(outline, map)
   local ladderUp = require "game.rules.map.actions.add_ladder_up"
   local ladderDown = require "game.rules.map.actions.add_ladder_down"
   local store = require "game.store"
+
   for _, r in ipairs(outline.rooms) do
     if not tables.isEmpty(r.features) then
       for _, f in ipairs(r.features) do
@@ -234,6 +236,37 @@ function generator.addFeatures(outline)
         end
       end
     end
+
+    -- search parameter to find where corridor joins room and add a door
+
+    for x = r.x, r.x + r.width do
+      local top, bottom = r.y - 1, r.y + r.height
+      local t = map:getTile(Position(x, top, r.level))
+      local b = map:getTile(Position(x, bottom, r.level))
+
+      generator.addDoorMaybe(t, Orientation.northSouth)
+      generator.addDoorMaybe(b, Orientation.northSouth)
+    end
+
+    for y = r.y, r.y + r.height do
+      local left, right = r.x - 1, r.x + r.width
+
+      local ld = map:getTile(Position(left, y, r.level))
+      local rd = map:getTile(Position(right, y, r.level))
+
+      generator.addDoorMaybe(ld, Orientation.eastWest)
+      generator.addDoorMaybe(rd, Orientation.eastWest)
+    end
+
+  end
+end
+
+function generator.addDoorMaybe(tile, orientation)
+  local addDoor = require "game.rules.map.actions.add_door"
+  local store = require "game.store"
+
+  if tile and tile.terrain == terrain.list.corridor then
+    store.dispatch(addDoor(tile.position, orientation))
   end
 end
 
@@ -261,8 +294,8 @@ function generator.connectLevels(outline, start, dest)
   local destRect = maths.rectangle.new(destRoom.x, destRoom.y, destRoom.width, destRoom.height)
   local overlap = startRect:overlap(destRect)
 
-  local x = math.random(overlap:left(), overlap:right())
-  local y = math.random(overlap:top(), overlap:bottom())
+  local x = math.random(overlap:left(), overlap:right() - 1)
+  local y = math.random(overlap:top(), overlap:bottom() - 1)
 
   -- add ladders to feature list
   -- These should be fully scoped out entities that can be added later

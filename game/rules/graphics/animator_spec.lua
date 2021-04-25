@@ -43,4 +43,17 @@ describe("game.rules.graphics.animator", function()
     assert.equals(frame, testSubject:getCurrentFrame())
     assert.spy(testSubject.animations.idle.getFrameImage).was.called_with(testSubject.animations.idle, 0.4)
   end)
+
+  it("can play an animation once", function()
+    local frame = {}
+    testSubject.animations.walk.length = 0.4
+    testSubject.animations.walk.getFrameImage = spy.new(function() return frame end)
+    testSubject:playOnce("walk")
+    testSubject:update(0.2)
+    testSubject:update(0.2)
+    testSubject:update(0.2)
+    testSubject:getCurrentFrame()
+    assert.spy(testSubject.animations.walk.getFrameImage)
+      .was.called_with( testSubject.animations.walk, 0.4 )
+  end)
 end)
