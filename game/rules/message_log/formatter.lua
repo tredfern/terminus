@@ -27,7 +27,7 @@ return function(text, props)
 
       if i == nil and lastIndex < string.len(text) then
         table.insert(fields, string.sub(text, lastIndex))
-      else
+      elseif i then
         table.insert(fields, string.sub(text, lastIndex, i - 1))
       end
     end

@@ -11,7 +11,7 @@ local Formatter = require "game.rules.message_log.formatter"
 return create_slice {
   [types.ADD] = function(state, action)
     state = state or {}
-    local formatted = Formatter(action.payload.message)
+    local formatted = Formatter(action.payload.message, action.payload.formatData)
     state[#state + 1] = {
       message = formatted
     }

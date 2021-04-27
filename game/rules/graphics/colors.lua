@@ -10,8 +10,9 @@ colors.lowHealth = colors.danger
 
 
 -- Message colors
-colors.messageText = colors.text
-colors.messageDamage = colors.danger
-colors.messageHighlight = colors.main
+colors.msgText = colors.text
+colors.msgAlert = colors.danger
+colors.msgDamage = colors.danger
+colors.msgHighlight = colors.main
 
 return colors

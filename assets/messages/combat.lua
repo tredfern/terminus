@@ -3,14 +3,30 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local function highlight(text)
+  return string.format("{color:msgHighlight}%s{color:msgText}", text)
+end
+
+local function alert(text)
+  return string.format("{color:msgAlert}%s{color:msgText}", text)
+end
+
 return {
   attacks = {
     melee = {
       hit = {
-        "{{attacker}} swings the {{weapon}} crunches into {{defender}} for {color:damage}{{damage}}!"
+        string.format("%s swings the %s. It crunches into %s",
+          highlight("{{attacker}}"),
+          alert("{{weapon}}"),
+          highlight("{{defender}}")
+        )
       },
       miss = {
-        "{{attacker}} misses with their {{weapon}}!"
+        string.format("%s swings the %s. It misses %s",
+          highlight("{{attacker}}"),
+          alert("{{weapon}}"),
+          highlight("{{defender}}")
+        )
       }
     },
   }

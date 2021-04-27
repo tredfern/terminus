@@ -95,7 +95,7 @@ styles.message_log = {
   fontSize = 15,
   height = 100,
   verticalAlign = "bottom",
-  backgroundColor = colors(colors.dark_shade, 0.5),
+  backgroundColor = colors(colors.dark_shade, 0.7),
   borderColor = colors(colors.light_shade, 0.5),
   border = 1
 }

@@ -23,7 +23,7 @@ return function()
     dispatch(Player.actions.add(Position(x, y, playerStartRoom.level)))
     dispatch(Player.actions.equipItem(Items.list.sword:clone()))
 
-    for _ = 1,10 do
+    for _ = 1,20 do
       local r = tables.pickRandom(rooms)
       dispatch(Aliens.actions.addSpawner(
         Position(

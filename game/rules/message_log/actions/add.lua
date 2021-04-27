@@ -5,11 +5,12 @@
 
 local types = require "game.rules.message_log.actions.types"
 
-return function(message)
+return function(message, formatData)
   return {
     type = types.ADD,
     payload = {
-      message = message
+      message = message,
+      formatData = formatData
     }
   }
 end

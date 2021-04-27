@@ -4,5 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  welcome = "{color:messageHighlight}Welcome!{color:messageText} Time to play!"
+  welcome = "{color:msgHighlight}Welcome!{color:msgText} Time to play!"
 }

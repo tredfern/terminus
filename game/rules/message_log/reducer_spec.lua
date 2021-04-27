@@ -20,6 +20,18 @@ describe("game.rules.message_log.reducer", function()
     assert.equals("Hello Message Log", state[1].message[2])
   end)
 
+  it("formats the data with additional props to build the final message", function()
+    local state = {}
+    state = reducer(state, {
+      type = types.ADD,
+      payload = {
+        message = "Hello {{characterName}}!",
+        formatData = { characterName = "Foo!" }
+      }
+    })
+    assert.equals("Hello Foo!!", state[1].message[2])
+  end)
+
   it("creates a new state if nil", function()
     local state = reducer(nil, {
       type = types.ADD,

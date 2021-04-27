@@ -8,18 +8,24 @@ local EquipSlots = require "game.rules.character.equip_slots"
 local MessageLog = require "game.rules.message_log"
 local Sounds = require "assets.sounds"
 
-local hitMessage = "%s hits %s!"
-local missMessage = "%s misses %s."
+local function standardFormat(attacker, defender, weapon)
+  return {
+    attacker = attacker.name,
+    defender = defender.name,
+    weapon = weapon.name
+  }
+end
 
 local function createAttackResult(dispatch, attacker, defender, weapon)
   local Combat = require "game.rules.combat"
+  local msgData = standardFormat(attacker, defender, weapon)
 
   return function(winner)
     if winner == defender then
-      dispatch(MessageLog.actions.add(string.format(missMessage, attacker.name, defender.name)))
+      dispatch(MessageLog.actions.add(MessageLog.messages.combat.attacks.melee.miss[1], msgData))
     else
       Sounds.hit:play()
-      dispatch(MessageLog.actions.add(string.format(hitMessage, attacker.name, defender.name)))
+      dispatch(MessageLog.actions.add(MessageLog.messages.combat.attacks.melee.hit[1], msgData))
       dispatch(Combat.actions.dealDamage(defender, weapon.damage))
     end
   end
