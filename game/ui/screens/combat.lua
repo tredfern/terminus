@@ -17,6 +17,7 @@ local combat_screen = components("combat_screen", function()
     {
       style = "main_screen",
       map_component(),
+      message_log(),
     }, {
       style = "stats",
       components.h3 { text = "Stats" },
@@ -26,10 +27,6 @@ local combat_screen = components("combat_screen", function()
         character_stats(),
         scoreboard()
       },
-      {
-        components.h3 { text = "Messages" },
-        message_log()
-      }
     },
 
     mounted = function()

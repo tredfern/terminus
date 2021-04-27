@@ -23,6 +23,9 @@ styles.button = moonpie.tables.merge(
 )
 
 styles.combat_map = {
+  position = "absolute",
+  x = 0,
+  y = 0,
   height = "100%"
 }
 
@@ -55,7 +58,8 @@ styles.full_screen_panel_contents = {
 }
 
 styles["main_screen"] = {
-  width = "75%"
+  width = "75%",
+  height = "100%"
 }
 
 styles["stats"] = {
@@ -88,7 +92,12 @@ styles.main_menu_button = {
 
 styles.message_log = {
   padding = 10,
-  fontSize = 15
+  fontSize = 15,
+  height = 100,
+  verticalAlign = "bottom",
+  backgroundColor = colors(colors.dark_shade, 0.5),
+  borderColor = colors(colors.light_shade, 0.5),
+  border = 1
 }
 
 styles.panel = {
