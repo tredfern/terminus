@@ -7,6 +7,7 @@ return {
   actions = {
     add = require "game.rules.message_log.actions.add"
   },
+  messages = require "assets.messages",
   selectors = {
     getLast = require "game.rules.message_log.selectors.get_last"
   }

@@ -13,4 +13,8 @@ describe("game.rules.message_log", function()
   it("has a selector to get the most recent actions", function()
     assert.not_nil(message_log.selectors.getLast)
   end)
+
+  it("provides access to standard messages formats", function()
+    assert.not_nil(message_log.messages)
+  end)
 end)

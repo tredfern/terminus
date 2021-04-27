@@ -5,12 +5,16 @@
 
 local create_slice = require "moonpie.redux.create_slice"
 local types = require "game.rules.message_log.actions.types"
+local Formatter = require "game.rules.message_log.formatter"
 
 
 return create_slice {
   [types.ADD] = function(state, action)
     state = state or {}
-    state[#state + 1] = action.payload
+    local formatted = Formatter(action.payload.message)
+    state[#state + 1] = {
+      message = formatted
+    }
     return state
   end
 }

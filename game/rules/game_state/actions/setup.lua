@@ -57,7 +57,7 @@ return function()
     ))
 
     dispatch(MessageLog.actions.add(
-      "Welcome to the jungle!"
+      MessageLog.messages.tutorial.welcome
     ))
   end
 end
