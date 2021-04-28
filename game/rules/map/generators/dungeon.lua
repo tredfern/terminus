@@ -244,8 +244,8 @@ function generator.addFeatures(outline, map)
       local t = map:getTile(Position(x, top, r.level))
       local b = map:getTile(Position(x, bottom, r.level))
 
-      generator.addDoorMaybe(t, Orientation.northSouth)
-      generator.addDoorMaybe(b, Orientation.northSouth)
+      generator.addDoorMaybe(t, Orientation.northSouth, map:getNeighbors(Position(x, top, r.level)))
+      generator.addDoorMaybe(b, Orientation.northSouth, map:getNeighbors(Position(x, bottom, r.level)))
     end
 
     for y = r.y, r.y + r.height do
@@ -254,19 +254,30 @@ function generator.addFeatures(outline, map)
       local ld = map:getTile(Position(left, y, r.level))
       local rd = map:getTile(Position(right, y, r.level))
 
-      generator.addDoorMaybe(ld, Orientation.eastWest)
-      generator.addDoorMaybe(rd, Orientation.eastWest)
+      generator.addDoorMaybe(ld, Orientation.eastWest, map:getNeighbors(Position(left, y, r.level)))
+      generator.addDoorMaybe(rd, Orientation.eastWest, map:getNeighbors(Position(right, y, r.level)))
     end
 
   end
 end
 
-function generator.addDoorMaybe(tile, orientation)
+function generator.addDoorMaybe(tile, orientation, neighbors)
   local addDoor = require "game.rules.map.actions.add_door"
   local store = require "game.store"
+  local asWalls = function(n1, n2)
+    return n1 and n2 and n1.terrain == terrain.list.wall and n2.terrain == terrain.list.wall
+  end
 
   if tile and tile.terrain == terrain.list.corridor then
-    store.dispatch(addDoor(tile.position, orientation))
+    if orientation == Orientation.eastWest then
+      if asWalls(neighbors.n, neighbors.s) then
+        store.dispatch(addDoor(tile.position, orientation))
+      end
+    elseif orientation == Orientation.northSouth then
+      if asWalls(neighbors.e, neighbors.w) then
+        store.dispatch(addDoor(tile.position, orientation))
+      end
+    end
   end
 end
 
