@@ -19,6 +19,6 @@ return function(npc, dispatch, getState)
   if npc.position.y < pc.position.y then y = 1 end
   if npc.position.y > pc.position.y then y = -1 end
 
-  dispatch(character.actions.move(npc, Position(npc.position.x + x, npc.position.y + y)))
+  dispatch(character.actions.move(npc, Position(npc.position.x + x, npc.position.y + y, npc.position.z)))
 
 end

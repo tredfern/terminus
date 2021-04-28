@@ -5,7 +5,9 @@
 
 local tables = require "moonpie.tables"
 local Characters = require "game.rules.character"
-local sprite = require "game.rules.graphics.sprite"
+local Animator = require "game.rules.graphics.animator"
+local alienIdle = require "assets.bestiary.alien"
+
 local aiRoutines = {
   require "game.rules.npcs.ai.move_towards_player",
   require "game.rules.npcs.ai.random_movement"
@@ -14,6 +16,8 @@ local aiRoutines = {
 return function(position)
   local alien = Characters.create { position = position, isEnemy = true, ai = tables.pickRandom(aiRoutines) }
   alien.alien = true
-  alien.sprite = sprite.fromFile("assets/graphics/alien_1.png")
+  alien.animator = Animator:new()
+  alien.animator:addAnimation("idle", alienIdle)
+  alien.animator:play("idle")
   return Characters.actions.add(alien)
 end

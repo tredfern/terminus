@@ -5,7 +5,6 @@
 
 describe("game.rules.aliens.actions.add_alien", function()
   local addAlien = require "game.rules.aliens.actions.add_alien"
-  local imageMgr = require "moonpie.graphics.image"
   local Position = require "game.rules.world.position"
 
   it("sets up a character with the alien properties", function()
@@ -15,6 +14,6 @@ describe("game.rules.aliens.actions.add_alien", function()
     assert.equals(39, alien.position.y)
     assert.not_nil(alien.ai)
     assert.is_true(alien.alien)
-    assert.equals(imageMgr.load("assets/graphics/alien_1.png"), alien.sprite.imageData)
+    assert.not_nil(alien.animator)
   end)
 end)
