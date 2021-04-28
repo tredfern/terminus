@@ -6,14 +6,18 @@
 local Character = require "game.rules.character"
 local Dice = require "moonpie.math.dice"
 local MessageLog = require "game.rules.message_log"
-
-local msgFormat = "%s took %d points of damage."
+local Messages = require "assets.messages"
 
 return function(character, damageDice)
   return function(dispatch)
     local cup = Dice.parse(damageDice)
     local damage = cup()
     dispatch(Character.actions.setHealth(character, character.health - damage))
-    dispatch(MessageLog.actions.add(string.format(msgFormat, character.name, damage)))
+    dispatch(MessageLog.actions.add(
+      Messages.combat.damage[1], {
+        character = character.name,
+        damage = damage
+      })
+    )
   end
 end

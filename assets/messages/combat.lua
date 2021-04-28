@@ -2,14 +2,9 @@
 --
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
-
-local function highlight(text)
-  return string.format("{color:msgHighlight}%s{color:msgText}", text)
-end
-
-local function alert(text)
-  return string.format("{color:msgAlert}%s{color:msgText}", text)
-end
+local Helper = require "game.rules.message_log.helper"
+local highlight = Helper.highlight
+local alert = Helper.alert
 
 return {
   attacks = {
@@ -29,5 +24,10 @@ return {
         )
       }
     },
+  },
+  damage = {
+    string.format("%s took %s of damage!",
+      highlight("{{character}}"),
+      alert("{{damage}} points"))
   }
 }

@@ -5,5 +5,6 @@
 
 return {
   combat = require "assets.messages.combat",
+  skills = require "assets.messages.skills",
   tutorial = require "assets.messages.tutorial"
 }
