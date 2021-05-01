@@ -83,4 +83,33 @@ describe("game.rules.world.position", function()
     assert.equals(p.y, p2.y)
     assert.equals(p.z, p2.z)
   end)
+
+  it("can calculate the distance between two points on the same level", function()
+    local p = Position(1, 5, 3)
+    local p2 = Position(4, 4, 3)
+
+    assert.near(3.16228, Position.distance(p, p2), 2)
+  end)
+
+  describe("hashing", function()
+    it("creates the same hash each time", function()
+      local p = Position(32, 12, 3)
+      local p2 = Position(32, 12, 3)
+      assert.equals(p.hashKey, p2.hashKey)
+    end)
+
+    it("doesn't collide for the first 200x200x50", function()
+      pending("Ignore this test, just use it for testing for hash-collisions manually")
+      local p = {}
+      for x = 1,200 do
+        for y = 1,200 do
+          for z= 1,50 do
+            local l = Position(x, y, z)
+            assert.is_nil(p[l.hashKey])
+            p[l.hashKey] = l
+          end
+        end
+      end
+    end)
+  end)
 end)

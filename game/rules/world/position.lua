@@ -3,6 +3,27 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local function createHashKey(x, y, z)
+  -- Credit for algorithm: https://dmauro.com/post/77011214305/a-hashing-function-for-x-y-z-coordinates
+  x, y, z = x or 0, y or 0, z or 0
+  if x >= 0 then x = 2 * x else x = -2 * x - 1 end
+  if y >= 0 then y = 2 * y else y = -2 * y - 1 end
+  if z >= 0 then z = 2 * z else z = -2 * z - 1 end
+
+  local m = math.max(x, y, z)
+  local hash = math.pow(m, 3) + (2 * m * z) + z
+  if m == z then
+    hash = hash + math.pow(math.max(x, y), 2)
+  end
+
+  if y >= x then
+    hash = hash + x + y
+  else
+    hash = hash + y
+  end
+  return hash
+end
+
 local function compare(start, dest)
   if dest.x then
     return start.x == dest.x and
@@ -15,11 +36,20 @@ local function compare(start, dest)
   end
 end
 
+local function distance(start, dest)
+  return math.sqrt(
+    math.pow(dest.x - start.x, 2) +
+    math.pow(dest.y - start.y, 2) +
+    math.pow(dest.z - start.z, 2)
+  )
+end
+
 local function new(x, y, z)
   return {
     x = x or 0,
     y = y or 0,
-    z = z or 0
+    z = z or 0,
+    hashKey = createHashKey(x, y, z)
   }
 end
 
@@ -86,6 +116,7 @@ end
 return setmetatable({
   add = add,
   copy = copy,
+  distance = distance,
   new = new,
   equal = compare,
   northwest = northwest,
