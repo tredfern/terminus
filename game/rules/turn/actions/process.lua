@@ -9,6 +9,7 @@ local NPCs = require "game.rules.npcs"
 local Camera = require "game.ui.camera"
 local GameState = require "game.rules.game_state"
 local Aliens = require "game.rules.aliens"
+local FieldOfView = require "game.rules.field_of_view"
 
 return function(player_action)
   return function(dispatch, getState)
@@ -42,6 +43,10 @@ return function(player_action)
     if cam then
       dispatch(Camera.actions.centerOnPlayer(cam.width, cam.height))
     end
+
+
+    -- Update FoV for characters
+    dispatch(FieldOfView.actions.calculateAll())
 
     dispatch(GameState.actions.checkGameOver())
   end

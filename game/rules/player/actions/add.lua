@@ -12,5 +12,6 @@ return function(position)
   c.animator = Animator:new()
   c.animator:addAnimation("idle", characterIdle)
   c.animator:play("idle")
+  c.sightRadius = 8
   return characters.actions.add(c)
 end

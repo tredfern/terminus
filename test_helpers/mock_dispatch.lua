@@ -10,11 +10,16 @@ local mockDispatch = setmetatable({
 
   dispatched = {},
   processComplex = false,
-  received_action = function(self, action)
+  received_action = function(self, action, count)
     if action == nil then
       print("searching for nil action in mock dispatch")
     end
-    return tables.any(self.dispatched, function(d) return d.type == action end)
+    if count then
+      local list = tables.select(self.dispatched, function(d) return d.type == action end)
+      return list and count == #list
+    else
+      return tables.any(self.dispatched, function(d) return d.type == action end)
+    end
   end,
   reset = function(self)
     self.dispatched = {}

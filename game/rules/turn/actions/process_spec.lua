@@ -80,6 +80,12 @@ describe("game.rules.turn.actions.process", function()
     action(mockDispatch, store.getState)
 
     assert.spy(game_state.actions.checkGameOver).was.called()
+  end)
 
+  it("updates the FoV for all sight enabled creatures", function()
+    local action = process({})
+    action(mockDispatch, store.getState)
+
+    assert.is_true(mockDispatch:received_action("FIELD_OF_VIEW_CALCULATE_ALL"))
   end)
 end)
