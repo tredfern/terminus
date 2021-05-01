@@ -17,6 +17,7 @@ describe("game.rules.player.actions.open_door", function()
       door = true, closed = true,
       position = Position(1, 3, 3),
       blocksMovement = true,
+      blocksSight = true,
       animator = { playOnce = spy.new(function() end )}
     }
 
@@ -46,6 +47,7 @@ describe("game.rules.player.actions.open_door", function()
 
     assert.spy(northDoor.animator.playOnce).was.called_with(northDoor.animator, "opening")
     assert.is_false(northDoor.blocksMovement)
+    assert.is_false(northDoor.blocksSight)
   end)
 
   it("does not open a door if it is already open", function()

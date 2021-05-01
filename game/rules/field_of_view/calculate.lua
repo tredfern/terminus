@@ -3,9 +3,10 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local VisibilityMap = require "game.rules.field_of_view.visibility_map"
-local Position = require "game.rules.world.position"
 local Maths = require "moonpie.math"
+local Position = require "game.rules.world.position"
+local VisibilityMap = require "game.rules.field_of_view.visibility_map"
+local Helper = require "game.rules.field_of_view.helper"
 
 local function createTestList(origin, radius)
   -- Set up list of points to test
@@ -57,11 +58,7 @@ local function getLineList(origin, destination)
   return pointList
 end
 
-local function isVisible()
-  return true
-end
-
-return function(_, origin, radius)
+return function(state, origin, radius)
   local vm = VisibilityMap:new()
   vm:setVisible(origin)
 
@@ -75,8 +72,9 @@ return function(_, origin, radius)
         break
       end
 
-      if isVisible(v) then
-        vm:setVisible(v)
+      vm:setVisible(v)
+      if Helper.blocksSight(state, v) then
+        break
       end
     end
   end

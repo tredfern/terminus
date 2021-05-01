@@ -24,6 +24,7 @@ return function(orientation)
         door.animator:playOnce("opening")
         door.closed = false
         door.blocksMovement = false
+        door.blocksSight = false
       end
     end
   )
