@@ -17,6 +17,7 @@ describe("game.rules.player", function()
   end)
 
   it("has selectors to retrieve player values", function()
+    assert.not_nil(player.selectors.getFieldOfView)
     assert.not_nil(player.selectors.getPlayer)
   end)
 end)

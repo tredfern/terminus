@@ -20,7 +20,8 @@ describe("game.ui.screens.create_character", function()
       characters = {
         player
       },
-      turn = { }
+      turn = { },
+      fieldOfView = {}
     })
   end)
 

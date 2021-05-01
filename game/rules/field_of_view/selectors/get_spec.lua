@@ -16,4 +16,8 @@ describe("game.rules.field_of_view.selectors.get", function()
 
     assert.equals(fov, get(state, entity))
   end)
+
+  it("return nil if no field of view state is available", function()
+    assert.is_nil(get({}, {}))
+  end)
 end)

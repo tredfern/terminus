@@ -11,4 +11,8 @@ describe("game.rules.field_of_view", function()
     assert.not_nil(fieldOfView.actions.calculate)
     assert.not_nil(fieldOfView.actions.update)
   end)
+
+  it("has selectors", function()
+    assert.not_nil(fieldOfView.selectors.get)
+  end)
 end)

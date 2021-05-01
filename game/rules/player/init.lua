@@ -14,6 +14,7 @@ return {
     pickupItems = require "game.rules.player.actions.pickup_items",
   },
   selectors = {
+    getFieldOfView = require "game.rules.player.selectors.get_field_of_view",
     getPlayer = require "game.rules.player.selectors.get_player"
   }
 }

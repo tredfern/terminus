@@ -15,7 +15,8 @@ describe("game.ui.widgets.combat_map", function()
     local map_state = {}
     mockStore({
       character = {},
-      map = map_state
+      map = map_state,
+      fieldOfView = {}
     })
 
     local cm = combat_map()
@@ -25,7 +26,8 @@ describe("game.ui.widgets.combat_map", function()
   it("connects the camera state to the component", function()
     local camera = {}
     mockStore({
-      camera = camera
+      camera = camera,
+      fieldOfView = {}
     })
 
     local cm = combat_map()

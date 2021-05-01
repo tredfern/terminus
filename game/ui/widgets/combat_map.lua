@@ -12,6 +12,7 @@ local Settings = require "game.settings"
 local Items = require "game.rules.items"
 local Graphics = require "game.rules.graphics"
 local Position = require "game.rules.world.position"
+local Player = require "game.rules.player"
 
 local tile_width = 32
 local tile_height = 32
@@ -40,6 +41,7 @@ local combat_map = components("combat_map", function(props)
     drawableEntities = props.drawableEntities,
     map = props.map,
     showGrid = props.showGrid,
+    fieldOfView = props.fieldOfView,
 
     afterLayout = function(self)
       -- Set Camera Dimensions
@@ -57,17 +59,20 @@ local combat_map = components("combat_map", function(props)
       -- Draw Map Tiles
       for x = 1, self.map.outline.width do
         for y = 1, self.map.outline.height do
-          local tile = self.map.tileMap:getTile(Position(x, y, zLevel))
-          if tile and tile.sprite then
-            local sx, sy = getScreenCoordinate(self.camera, x, y)
-            tile.sprite:draw(sx, sy)
+          local p = Position(x, y, zLevel)
+          if self.fieldOfView:isVisible(p) then
+            local tile = self.map.tileMap:getTile(p)
+            if tile and tile.sprite then
+              local sx, sy = getScreenCoordinate(self.camera, x, y)
+              tile.sprite:draw(sx, sy)
+            end
           end
         end
       end
 
       -- Draw entities
       for _, v in ipairs(self.drawableEntities) do
-        if v.position.z == zLevel then
+        if self.fieldOfView:isVisible(v.position) then
           local sx, sy = getScreenCoordinate(self.camera, v.position.x, v.position.y)
           v.sprite:draw(sx, sy)
         end
@@ -87,7 +92,8 @@ return connect(combat_map,
       drawableEntities = Graphics.selectors.getDrawable(state),
       map = state.map,
       items = Items.selectors.getAll(state),
-      showGrid = Settings.selectors.getOption(state, "show_grid_lines")
+      showGrid = Settings.selectors.getOption(state, "show_grid_lines"),
+      fieldOfView = Player.selectors.getFieldOfView(state)
   }
   end
 )

@@ -10,6 +10,7 @@ local MessageLog = require "game.rules.message_log"
 local Player = require "game.rules.player"
 local Aliens = require "game.rules.aliens"
 local Position = require "game.rules.world.position"
+local FieldOfView = require "game.rules.field_of_view"
 
 return function()
   return function(dispatch, getState)
@@ -55,6 +56,8 @@ return function()
           r.level)
       }
     ))
+
+    dispatch(FieldOfView.actions.calculateAll())
 
     dispatch(MessageLog.actions.add(
       MessageLog.messages.tutorial.welcome
