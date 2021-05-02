@@ -14,7 +14,7 @@ local FieldOfView = require "game.rules.field_of_view"
 
 return function()
   return function(dispatch, getState)
-    dispatch(map.actions.create(50, 50, map.generators.dungeon))
+    dispatch(map.actions.create(100, 100, map.generators.dungeon))
     local rooms = map.selectors.getRooms(getState())
 
     local playerStartRoom = tables.pickRandom(rooms)

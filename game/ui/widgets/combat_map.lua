@@ -56,12 +56,14 @@ local combat_map = components("combat_map", function(props)
     end,
 
     drawComponent = function(self)
+      local tilesWide = self.box.width / tile_width
+      local tilesHigh = self.box.height / tile_height
       local state = store.getState()
       local zLevel = self.camera.z
 
       -- Draw Map Tiles
-      for x = 1, self.map.outline.width do
-        for y = 1, self.map.outline.height do
+      for x = self.camera.x, self.camera.x + tilesWide do
+        for y = self.camera.y, self.camera.y + tilesHigh do
           local p = Position(x, y, zLevel)
           if self.fieldOfView:isVisible(p) then
             local tile = self.map.tileMap:getTile(p)
