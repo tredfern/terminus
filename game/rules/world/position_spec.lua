@@ -117,5 +117,12 @@ describe("game.rules.world.position", function()
         end
       end
     end)
+
+    it("can reverse lookup hashkeys", function()
+      local p = Position(3, 2, 4)
+
+      local p2 = Position.fromKey(p.hashKey)
+      assert.equals(p, p2)
+    end)
   end)
 end)

@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local readOnly = require "moonpie.utility.read_only_table"
+local hashDB = {}
 
 local function createHashKey(x, y, z)
   -- Credit for algorithm: https://dmauro.com/post/77011214305/a-hashing-function-for-x-y-z-coordinates
@@ -47,12 +48,15 @@ local function distance(start, dest)
 end
 
 local function new(x, y, z)
-  return readOnly {
+  local p = readOnly {
     x = x or 0,
     y = y or 0,
     z = z or 0,
     hashKey = createHashKey(x, y, z)
   }
+
+  hashDB[p.hashKey] = p
+  return p
 end
 
 local function copy(position)
@@ -73,6 +77,10 @@ local function add(position, delta)
     position.y + y,
     position.z + z
   )
+end
+
+local function fromKey(key)
+  return hashDB[key]
 end
 
 local function northwest(position)
@@ -119,8 +127,11 @@ return setmetatable({
   add = add,
   copy = copy,
   distance = distance,
-  new = new,
   equal = compare,
+  fromKey = fromKey,
+  new = new,
+
+  -- Directions
   northwest = northwest,
   north = north,
   northeast = northeast,
