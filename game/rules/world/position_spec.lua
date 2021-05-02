@@ -91,6 +91,12 @@ describe("game.rules.world.position", function()
     assert.near(3.16228, Position.distance(p, p2), 2)
   end)
 
+  it("is a readonly table", function()
+    local p = Position(3, 2, 4)
+
+    assert.has_errors(function() p.x = p.x + 3 end)
+  end)
+
   describe("hashing", function()
     it("creates the same hash each time", function()
       local p = Position(32, 12, 3)

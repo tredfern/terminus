@@ -3,6 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local readOnly = require "moonpie.utility.read_only_table"
+
 local function createHashKey(x, y, z)
   -- Credit for algorithm: https://dmauro.com/post/77011214305/a-hashing-function-for-x-y-z-coordinates
   x, y, z = x or 0, y or 0, z or 0
@@ -45,7 +47,7 @@ local function distance(start, dest)
 end
 
 local function new(x, y, z)
-  return {
+  return readOnly {
     x = x or 0,
     y = y or 0,
     z = z or 0,
