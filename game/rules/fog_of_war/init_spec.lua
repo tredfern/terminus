@@ -7,6 +7,11 @@ describe("game.rules.fog_of_war", function()
   local FogOfWar = require "game.rules.fog_of_war"
 
   it("has actions", function()
+    assert.not_nil(FogOfWar.actions.updatePerspective)
     assert.not_nil(FogOfWar.actions.updatePosition)
+  end)
+
+  it("has selectors", function()
+    assert.not_nil(FogOfWar.selectors.get)
   end)
 end)

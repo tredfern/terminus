@@ -10,6 +10,7 @@ return {
     update = require "game.rules.field_of_view.actions.update"
   },
   selectors = {
-    get = require "game.rules.field_of_view.selectors.get"
+    get = require "game.rules.field_of_view.selectors.get",
+    getVisiblePositions = require "game.rules.field_of_view.selectors.get_visible_positions",
   }
 }

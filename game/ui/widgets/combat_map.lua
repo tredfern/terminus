@@ -13,6 +13,7 @@ local Items = require "game.rules.items"
 local Graphics = require "game.rules.graphics"
 local Position = require "game.rules.world.position"
 local Player = require "game.rules.player"
+local FogOfWar = require "game.rules.fog_of_war"
 
 local tile_width = 32
 local tile_height = 32
@@ -42,6 +43,7 @@ local combat_map = components("combat_map", function(props)
     map = props.map,
     showGrid = props.showGrid,
     fieldOfView = props.fieldOfView,
+    player = props.player,
 
     afterLayout = function(self)
       -- Set Camera Dimensions
@@ -54,6 +56,7 @@ local combat_map = components("combat_map", function(props)
     end,
 
     drawComponent = function(self)
+      local state = store.getState()
       local zLevel = self.camera.z
 
       -- Draw Map Tiles
@@ -65,6 +68,14 @@ local combat_map = components("combat_map", function(props)
             if tile and tile.sprite then
               local sx, sy = getScreenCoordinate(self.camera, x, y)
               tile.sprite:draw(sx, sy)
+            end
+          else
+            local fow = FogOfWar.selectors.get(state, self.player, p)
+            if fow and fow.tile then
+              local sx, sy = getScreenCoordinate(self.camera, x, y)
+              fow.tile.sprite:draw(sx, sy)
+              love.graphics.setColor(colors.fow)
+              love.graphics.rectangle("fill", sx, sy, tile_width, tile_height)
             end
           end
         end
@@ -93,7 +104,8 @@ return connect(combat_map,
       map = state.map,
       items = Items.selectors.getAll(state),
       showGrid = Settings.selectors.getOption(state, "show_grid_lines"),
-      fieldOfView = Player.selectors.getFieldOfView(state)
+      fieldOfView = Player.selectors.getFieldOfView(state),
+      player = Player.selectors.getPlayer(state)
   }
   end
 )

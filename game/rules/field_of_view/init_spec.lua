@@ -14,5 +14,6 @@ describe("game.rules.field_of_view", function()
 
   it("has selectors", function()
     assert.not_nil(fieldOfView.selectors.get)
+    assert.not_nil(fieldOfView.selectors.getVisiblePositions)
   end)
 end)

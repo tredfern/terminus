@@ -16,6 +16,7 @@ describe("game.rules.map", function()
     assert.not_nil(Map.selectors.getDimensions)
     assert.not_nil(Map.selectors.getRooms)
     assert.not_nil(Map.selectors.getTerrain)
+    assert.not_nil(Map.selectors.getTile)
   end)
 
   it("defines map generators", function()

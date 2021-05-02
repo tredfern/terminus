@@ -10,6 +10,8 @@ local Camera = require "game.ui.camera"
 local GameState = require "game.rules.game_state"
 local Aliens = require "game.rules.aliens"
 local FieldOfView = require "game.rules.field_of_view"
+local FogOfWar = require "game.rules.fog_of_war"
+local Player = require "game.rules.player"
 
 return function(player_action)
   return function(dispatch, getState)
@@ -47,6 +49,10 @@ return function(player_action)
 
     -- Update FoV for characters
     dispatch(FieldOfView.actions.calculateAll())
+
+    -- Player Fog of War
+    local player = Player.selectors.getPlayer(getState())
+    dispatch(FogOfWar.actions.updatePerspective(player))
 
     dispatch(GameState.actions.checkGameOver())
   end

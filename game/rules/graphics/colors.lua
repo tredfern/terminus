@@ -15,4 +15,6 @@ colors.msgAlert = colors.danger
 colors.msgDamage = colors.danger
 colors.msgHighlight = colors.main
 
+colors.fow = colors(colors.black, 0.4)
+
 return colors
