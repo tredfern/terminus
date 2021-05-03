@@ -35,5 +35,6 @@ store.dumpState = function()
 end
 
 store.reset()
+store.logFilterFor("NOTHING")
 
 return store
