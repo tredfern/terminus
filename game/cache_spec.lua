@@ -15,23 +15,20 @@ describe("game.cache", function()
 
   it("calls the routine to resolve the cache state if new", function()
     local cb = spy.new(function() return {} end)
-    local state, param1, param2 = {}, {}, {}
     Cache {
+      name = "CACHE_1",
       source = cb,
-      state = state,
-      parameters = { param1, param2 }
-
     }
 
-    assert.spy(cb).was.called_with(state, param1, param2)
+    assert.spy(cb).was.called()
   end)
 
   it("returns previous results if called a second time", function()
     local results = {}
     local cb = spy.new(function() return results end)
-    local out1 = Cache { source = cb }
-    local out2 = Cache { source = cb }
-    local out3 = Cache { source = cb }
+    local out1 = Cache { name = "CACHE_ME", source = cb }
+    local out2 = Cache { name = "CACHE_ME", source = cb }
+    local out3 = Cache { name = "CACHE_ME", source = cb }
 
     assert.equals(results, out1)
     assert.equals(results, out2)
@@ -43,6 +40,7 @@ describe("game.cache", function()
     local results = {}
     local cb = spy.new(function() return results end)
     local request = {
+      name = "FLUSH_ME",
       source = cb,
       flushOn = { "ACTION_A", "ACTION_B", "ACTION_C" }
     }

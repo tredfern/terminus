@@ -4,54 +4,41 @@
 -- https://opensource.org/licenses/MIT
 
 local store = require "moonpie.redux.store"
-local tables = require "moonpie.tables"
-local unpack = require "moonpie.utility.unpack"
 local Cache = {}
 
-local cacheIds = {}
+local flushCallbacks = {}
 local results = {}
 
-function Cache.getCacheID(cacheDef)
-  local _, id = tables.findFirst(
-    cacheIds,
-    function(cd)
-      return cd.source == cacheDef.source and
-        tables.same(cd.parameters, cacheDef.parameters)
-    end
-  )
-
-  if id == nil then
-    cacheIds[#cacheIds + 1] = {
-      source = cacheDef.source,
-      parameters = cacheDef.parameters
-    }
-    id = #cacheIds
-    Cache.addFlushCallbacks(id, cacheDef.flushOn)
-  end
-
-  return id
-end
-
 function Cache.lookup(cacheDef)
-  local id = Cache.getCacheID(cacheDef)
+  local name = cacheDef.name
 
-  if results[id] == nil then
-    local parameters = cacheDef.parameters or {}
-    results[id] = cacheDef.source(cacheDef.state, unpack(parameters))
+  if flushCallbacks[name] == nil then
+    Cache.addFlushCallbacks(cacheDef)
   end
-  return results[id]
+
+  if results[name] == nil then
+    results[name] = cacheDef.source()
+  end
+  return results[name]
 end
 
 function Cache.clear()
-  cacheIds = {}
+  flushCallbacks = {}
   results = {}
 end
 
-function Cache.addFlushCallbacks(id, actions)
-  if actions == nil then return end
-  for _, v in ipairs(actions) do
-    store.subscribeTo(v, function() results[id] = nil end)
+function Cache.addFlushCallbacks(cacheDef)
+  if cacheDef.flushOn == nil then return end
+
+  local flushes = {}
+
+  for _, v in ipairs(cacheDef.flushOn) do
+    local cb = function() results[cacheDef.name] = nil end
+    table.insert(flushes, cb)
+    store.subscribeTo(v, cb)
   end
+
+  flushCallbacks[cacheDef.name] = flushes
 end
 
 return setmetatable(Cache, {

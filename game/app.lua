@@ -6,6 +6,7 @@
 require "assets.stylesheet"
 local store = require "game.store"
 local game_state = require "game.rules.game_state"
+local Cache = require "game.cache"
 local app = {}
 local saveGameName = "game.dat"
 
@@ -22,6 +23,7 @@ function app.update()
 end
 
 function app.render(scene)
+  Cache.clear()
   moonpie.render(
     "ui",
     moonpie.ui.components.body(scene)
