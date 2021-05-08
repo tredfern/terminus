@@ -24,10 +24,7 @@ end
 
 function app.render(scene)
   Cache.clear()
-  moonpie.render(
-    "ui",
-    moonpie.ui.components.body(scene)
-  )
+  moonpie.render(moonpie.ui.components.body(scene))
   app.currentScreen = scene.name
 end
 
@@ -43,7 +40,7 @@ end
 
 function app.gameMenu()
   local t = require("game.ui.widgets.game_menu")
-  moonpie.render("modal", t())
+  moonpie.render(t(), "modal")
 end
 
 function app.newGame()
