@@ -1,6 +1,6 @@
 return {
   _all = {
-    lpath = "./?/init.lua;./ext/?.lua;./ext/?/init.lua;./ext/moonpie/?.lua;./ext/moonpie/?/init.lua;",
+    lpath = "?/init.lua;ext/?.lua;ext/?/init.lua;ext/moonpie/?.lua;ext/moonpie/?/init.lua;",
     ROOT = {"game", "assets"},
     helper = "test_helpers/init.lua"
   },
