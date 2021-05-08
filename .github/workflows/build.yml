@@ -31,4 +31,4 @@ jobs:
       run: |
         luacheck main.lua ./game
         busted --run=travis
-        luacov-coveralls --exclude ./ext --exclude /home
+        luacov-coveralls --exclude ext/* --exclude /home
