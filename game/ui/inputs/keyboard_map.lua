@@ -53,6 +53,10 @@ keySettings.combatMap = {
   ["g"] = function()
     process_turn(player.actions.pickupItems())
   end,
+  ["m"] = function()
+    local App = require "game.app"
+    App.worldMap()
+  end,
   ["o"] = function()
     setDirectionHandler(player.actions.openDoor)
   end,

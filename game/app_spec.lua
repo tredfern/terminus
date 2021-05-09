@@ -100,4 +100,11 @@ describe("game.app", function()
     end)
   end)
 
+  describe("world map", function()
+    it("shows the world map", function()
+      app.worldMap()
+      assert.not_nil(moonpie.ui.current.findByID("world_map"))
+    end)
+  end)
+
 end)

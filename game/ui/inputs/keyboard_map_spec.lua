@@ -41,6 +41,13 @@ describe("game.ui.inputs.keyboard", function()
       assert.spy(app.characterDetails).was.called()
     end)
 
+    it("can show the map screen", function()
+      local app = require "game.app"
+      stub(app, "worldMap")
+      key_simulator:keyPressed("m")
+      assert.spy(app.worldMap).was.called()
+    end)
+
     describe("character movement", function()
       local player_character
 

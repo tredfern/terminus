@@ -69,6 +69,11 @@ function app.characterDetails()
   app.render(CharacterDetails())
 end
 
+function app.worldMap()
+  local WorldMap = require "game.ui.screens.world_map"
+  app.render(WorldMap())
+end
+
 function app.continue()
   local serializer = require "game.serializer"
   local loadSave = serializer.load(saveGameName)

@@ -25,6 +25,15 @@ describe("game.ui.screens.splash", function()
     local Keyboard = require "moonpie.keyboard"
     Keyboard:keyPressed("g")
 
+    assert.spy(App.title).was.called()
+  end)
+
+  it("advances to title screen on click", function()
+    local App = require "game.app"
+    spy.on(App, "title")
+
+    local splash = Splash()
+    splash:click()
 
     assert.spy(App.title).was.called()
   end)

@@ -17,6 +17,11 @@ local Splash = Components("splash", function()
       style = "align-middle"
     },
 
+    click = function()
+      local App = require "game.app"
+      App.title()
+    end,
+
     mounted = function()
       Keyboard:hotkey("any", function()
         local App = require "game.app"
