@@ -28,7 +28,7 @@ The game should have a feeling that a story is occurring and the player is contr
 
 ## Development
 
-[**Weekly Blog Posts**](https://wheretheredfern.code) giving a brief overview of the code changes implemented and screenshots of progress.
+[**Weekly Blog Posts**](https://wheretheredfern.codes) giving a brief overview of the code changes implemented and screenshots of progress.
 
 [**Live Coding on Twitch**](https://twitch.tv/wheretheredferncodes)
 Saturdays & Sundays 13:00-15:00 EST.

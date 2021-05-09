@@ -21,6 +21,13 @@ describe("game.app", function()
     assert.not_nil(moonpie.ui.current.findByID("foo"))
   end)
 
+  describe("splash", function()
+    it("can display the splash screen", function()
+      app.splash()
+      assert.not_nil(moonpie.ui.current.findByID("splash_screen"))
+    end)
+  end)
+
   describe("starting a new game", function()
     it("can start a new game", function()
       assert.has_no_errors(function() app.newGame() end)

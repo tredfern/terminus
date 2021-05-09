@@ -14,7 +14,7 @@ function app.load()
   local keyboard = require "moonpie.keyboard"
   keyboard:hotkey("f10", store.dumpState)
   store.dispatch(game_state.actions.loadCoreData())
-  app.title()
+  app.splash()
   moonpie.events.afterUpdate:add(app.update)
 end
 
@@ -26,6 +26,11 @@ function app.render(scene)
   Cache.clear()
   moonpie.render(moonpie.ui.components.body(scene))
   app.currentScreen = scene.name
+end
+
+function app.splash()
+  local s = require "game.ui.screens.splash"
+  app.render(s())
 end
 
 function app.title()

@@ -57,28 +57,15 @@ styles.full_screen_panel_contents = {
   height = "95%"
 }
 
+styles.logo_text = {
+  color = colors.purple
+}
+
 styles["main_screen"] = {
   width = "75%",
   height = "100%"
 }
 
-styles["stats"] = {
-  width = "25%",
-  height = "100%",
-  border = 2,
-  borderColor = "dark_accent",
-  backgroundColor = colors.lighten(colors:getColor("dark_shade"), 1.5)
-}
-
-styles["stats_content"] = {
-  padding = 8
-}
-
-styles.textbox_text = {
-  fontSize = 18,
-}
-
---layouts
 styles.main_menu = {
   width = 250,
   height = "40%"
@@ -140,6 +127,22 @@ styles.primary = {
   height = "90%"
 }
 
+styles.splash = {
+  backgroundColor = colors.light_shade
+}
+
+styles.stats = {
+  width = "25%",
+  height = "100%",
+  border = 2,
+  borderColor = "dark_accent",
+  backgroundColor = colors.lighten(colors:getColor("dark_shade"), 1.5)
+}
+
+styles.stats_content = {
+  padding = 8
+}
+
 styles.textbox = moonpie.tables.merge({
     width = 250,
     height = 25,
@@ -147,3 +150,7 @@ styles.textbox = moonpie.tables.merge({
     fontName = "default"
   },
   styles.textbox)
+
+styles.textbox_text = {
+  fontSize = 18,
+}
