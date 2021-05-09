@@ -6,7 +6,7 @@
 describe("game.ui.inputs.keyboard", function()
   local keyboard_map = require "game.ui.inputs.keyboard_map"
   local key_simulator = require "moonpie.keyboard"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local player = require "game.rules.player"
   local turn = require "game.rules.turn"
   local Position = require "game.rules.world.position"

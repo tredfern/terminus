@@ -6,8 +6,8 @@
 describe("game.rules.player.actions.pickup_items", function()
   local pickupItems = require "game.rules.player.actions.pickup_items"
   local characters = require "game.rules.character"
-  local mockStore = require "test_helpers.mock_store"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local playerCharacter = { isPlayerControlled = true, position = { x = 10, y = 10 } }
 
   before_each(function()

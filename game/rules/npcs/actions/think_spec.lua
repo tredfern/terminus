@@ -5,7 +5,7 @@
 
 describe("game.rules.npcs.actions.think", function()
   local think = require "game.rules.npcs.actions.think"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
 
 
   it("calls the ai routine for the enemy", function()

@@ -7,8 +7,8 @@ describe("game.rules.player.actions.open_door", function()
   local openDoor = require "game.rules.player.actions.open_door"
   local Orientation = require "game.rules.world.orientation"
   local Position = require "game.rules.world.position"
-  local mockDispatch = require "test_helpers.mock_dispatch"
-  local mockStore = require "test_helpers.mock_store"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   local northDoor, eastDoor
 

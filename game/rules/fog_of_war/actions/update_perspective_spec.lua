@@ -7,8 +7,8 @@ describe("game.rules.fog_of_war.actions.update_perspective", function()
   local updatePerspective = require "game.rules.fog_of_war.actions.update_perspective"
   local visibilityMap = require "game.rules.field_of_view.visibility_map"
   local Position = require "game.rules.world.position"
-  local mockDispatch = require "test_helpers.mock_dispatch"
-  local mockStore = require "test_helpers.mock_store"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   before_each(function()
     mockDispatch.processComplex = true

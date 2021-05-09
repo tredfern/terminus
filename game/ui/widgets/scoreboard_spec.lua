@@ -5,7 +5,7 @@
 
 describe("game.ui.widgets.scoreboard", function()
   local scoreboard = require "game.ui.widgets.scoreboard"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   it("displays the total number of enemies", function()
     local state = {
@@ -16,7 +16,7 @@ describe("game.ui.widgets.scoreboard", function()
     }
     mockStore(state)
 
-    local rendered = moonpie.test_render(scoreboard())
+    local rendered = moonpie.testRender(scoreboard())
 
     assert.equals("4", rendered:findByID("enemyCountValue").text)
   end)
@@ -30,7 +30,7 @@ describe("game.ui.widgets.scoreboard", function()
     }
     mockStore(state)
 
-    local rendered = moonpie.test_render(scoreboard())
+    local rendered = moonpie.testRender(scoreboard())
 
     assert.equals("3", rendered:findByID("spawnerCountValue").text)
   end)

@@ -6,7 +6,7 @@
 describe("game.ui.screens.combat", function()
   local combat_screen = require "game.ui.screens.combat"
   local moonpie = require "moonpie"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   mockStore({
     characters = {},
     turn = {
@@ -28,9 +28,9 @@ describe("game.ui.screens.combat", function()
     spy.on(keyboard_map, "disableCombatMap")
 
     it("assigns and removes it's hotkeys on mounting and unmounting", function()
-      moonpie.test_render(combat_screen())
+      moonpie.testRender(combat_screen())
       assert.spy(keyboard_map.enableCombatMap).was.called()
-      moonpie.test_render(nil)
+      moonpie.testRender(nil)
       assert.spy(keyboard_map.disableCombatMap).was.called()
     end)
 

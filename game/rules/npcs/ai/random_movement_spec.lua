@@ -5,7 +5,7 @@
 
 describe("game.rules.npcs.ai.random_movement", function()
   local randomMovement = require "game.rules.npcs.ai.random_movement"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
 
   it("dispatches a move action", function()
     local characterActionTypes = require "game.rules.character.actions.types"

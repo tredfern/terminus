@@ -5,12 +5,12 @@
 
 describe("game.ui.screens.game_over", function()
   local gameOver = require "game.ui.screens.game_over"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   it("can switch back to the title screen", function()
     local app = require "game.app"
     spy.on(app, "title")
-    local screen = moonpie.test_render(gameOver())
+    local screen = moonpie.testRender(gameOver())
 
     local btnTitleScreen = screen:findByID("btnTitleScreen")
     btnTitleScreen:click()
@@ -24,7 +24,7 @@ describe("game.ui.screens.game_over", function()
       },
       characters = {}
     }
-    local screen = moonpie.test_render(gameOver())
+    local screen = moonpie.testRender(gameOver())
     assert.not_nil(screen:findByID("lblVictoryMessage"))
 
   end)

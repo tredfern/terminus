@@ -6,7 +6,7 @@
 describe("game.rules.field_of_view.actions.calculate", function()
   local calculate = require "game.rules.field_of_view.actions.calculate"
   local Position = require "game.rules.world.position"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
 
   before_each(function()
     mockDispatch.processComplex = true

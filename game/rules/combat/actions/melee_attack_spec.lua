@@ -7,7 +7,7 @@ describe("game.rules.combat.actions.melee_attack", function()
   local MeleeAttack = require "game.rules.combat.actions.melee_attack"
   local attacker, defender, weapon, missWeapon
   local Skills = require "game.rules.skills"
-  local MockDispatch = require "test_helpers.mock_dispatch"
+  local MockDispatch = require "moonpie.test_helpers.mock_dispatch"
 
   before_each(function()
     MockDispatch:reset()

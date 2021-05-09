@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.skills.actions.opposed_check.lua", function()
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local opposedCheck = require "game.rules.skills.actions.opposed_check"
   local Skills = require "game.rules.skills"
   Skills.describe { key = "diplomacy", attribute = "social" }

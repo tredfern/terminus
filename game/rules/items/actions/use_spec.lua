@@ -5,7 +5,7 @@
 
 describe("game.rules.items.actions.use", function()
   local use = require "game.rules.items.actions.use"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
 
   before_each(function()
     mockDispatch:reset()

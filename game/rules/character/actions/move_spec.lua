@@ -6,7 +6,7 @@
 describe("game.rules.character.actions.move", function()
   local MOVE = require "game.rules.character.actions.move"
   local types = require "game.rules.character.actions.types"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local wrap_in_function = require "wrap_in_function"
   local Skills = require "game.rules.skills"
   local Attributes = require "game.rules.character.attributes"

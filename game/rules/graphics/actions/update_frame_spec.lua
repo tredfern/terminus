@@ -5,8 +5,8 @@
 
 describe("game.graphics.actions.update_frame", function()
   local updateFrame = require "game.rules.graphics.actions.update_frame"
-  local mockDispatch = require "test_helpers.mock_dispatch"
-  local mockStore = require "test_helpers.mock_store"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local state
 
   before_each(function()

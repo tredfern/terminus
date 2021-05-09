@@ -5,7 +5,7 @@
 
 describe("game.rules.game_state.actions.update_frame", function()
   local updateFrame = require "game.rules.game_state.actions.update_frame"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
 
   before_each(function()
     mockDispatch.processComplex = true

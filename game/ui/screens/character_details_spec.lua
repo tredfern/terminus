@@ -5,7 +5,7 @@
 
 describe("game.ui.screens.character_details", function()
   local CharacterDetails = require "game.ui.screens.character_details"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   before_each(function()
     mockStore {

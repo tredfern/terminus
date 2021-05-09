@@ -5,7 +5,7 @@
 
 describe("game.cache", function()
   local Cache = require "game.cache"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local store
 
   before_each(function()

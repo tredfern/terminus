@@ -6,7 +6,7 @@
 describe("game.ui.screens.create_character", function()
   local create_character = require "game.ui.screens.create_character"
   local character = require "game.rules.character"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local player = {
     name = "Papageno",
     isPlayerControlled = true, position = { x = 19, y = 28 },
@@ -31,13 +31,13 @@ describe("game.ui.screens.create_character", function()
     local app = require "game.app"
     spy.on(app, "combat")
 
-    local c = moonpie.test_render(create_character())
+    local c = moonpie.testRender(create_character())
     c:findByID("button_done"):click()
     assert.spy(app.combat).was.called()
   end)
 
   it("dispatch set character name action on done", function()
-    local c = moonpie.test_render(create_character())
+    local c = moonpie.testRender(create_character())
     local textbox = c:findByID("character_name")
     textbox:set_text("Foo")
 
@@ -50,12 +50,12 @@ describe("game.ui.screens.create_character", function()
   end)
 
   it("displays the character abilities section", function()
-    local c = moonpie.test_render(create_character())
+    local c = moonpie.testRender(create_character())
     assert.not_nil(c:findByID("characterAttributes"))
   end)
 
   it("displays the character skills section", function()
-    local c = moonpie.test_render(create_character())
+    local c = moonpie.testRender(create_character())
     assert.not_nil(c:findByID("characterSkills"))
   end)
 

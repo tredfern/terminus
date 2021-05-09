@@ -5,7 +5,7 @@
 
 describe("game.ui.widgets.message_log", function()
   local message_log = require "game.ui.widgets.message_log"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   before_each(function()
     mockStore {

@@ -5,7 +5,7 @@
 
 describe("game.ui.widgets.combat_map", function()
   local combat_map = require "game.ui.widgets.combat_map"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   it("renders a component", function()
     assert.is_table(combat_map())

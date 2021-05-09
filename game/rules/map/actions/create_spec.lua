@@ -5,7 +5,7 @@
 
 describe("game.rules.map.actions.create", function()
   local create = require "game.rules.map.actions.create"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local generator = spy.new(function() return {} end)
 
   before_each(function()

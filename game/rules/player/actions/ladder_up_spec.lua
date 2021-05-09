@@ -5,8 +5,8 @@
 
 describe("game.rules.player.actions.ladder_up", function()
   local ladderUp = require "game.rules.player.actions.ladder_up"
-  local mockDispatch = require "test_helpers.mock_dispatch"
-  local mockStore = require "test_helpers.mock_store"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local Position = require "game.rules.world.position"
 
   before_each(function()

@@ -5,8 +5,8 @@
 
 describe("game.rules.field_of_view.actions.calculate_all", function()
   local calculateAll = require "game.rules.field_of_view.actions.calculate_all"
-  local mockDispatch = require "test_helpers.mock_dispatch"
-  local mockStore = require "test_helpers.mock_store"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local Position = require "game.rules.world.position"
 
   before_each(function()

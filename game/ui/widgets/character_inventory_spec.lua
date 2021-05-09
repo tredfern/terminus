@@ -5,14 +5,14 @@
 
 describe("game.ui.widgets.character_inventory", function()
   local characterInventory = require "game.ui.widgets.character_inventory"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   setup(function()
     mockStore({})
   end)
 
   it("shows the items from the character inventory", function()
-    local widget = moonpie.test_render(characterInventory({
+    local widget = moonpie.testRender(characterInventory({
       inventory = {
         { item = { name = "Sword" }, quantity = 1 },
         { item = { name = "Health Pack" }, quantity = 3 }
@@ -27,7 +27,7 @@ describe("game.ui.widgets.character_inventory", function()
   end)
 
   it("adds a button to use an item if usable", function()
-    local widget = moonpie.test_render(characterInventory {
+    local widget = moonpie.testRender(characterInventory {
       inventory = {
         { item = { name = "Health Kit", useHandler = function() end } }
       }
@@ -41,7 +41,7 @@ describe("game.ui.widgets.character_inventory", function()
     local Items = require "game.rules.items"
     spy.on(Items.actions, "use")
 
-    local widget = moonpie.test_render(characterInventory {
+    local widget = moonpie.testRender(characterInventory {
       inventory = {
         { item = { name = "Health Kit", useHandler = function() end }, quantity = 1 }
       },

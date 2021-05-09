@@ -7,7 +7,7 @@ describe("game.rules.map.actions.add_door", function()
   local addDoor = require "game.rules.map.actions.add_door"
   local Position = require "game.rules.world.position"
   local Orientation = require "game.rules.world.orientation"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   it("specifies a door entity to add", function()
     local action = addDoor(Position(2, 2, 3), Orientation.northSouth)

@@ -6,7 +6,7 @@
 
 describe("game.ui.widgets.character_stats", function()
   local character_stats = require "game.ui.widgets.character_stats"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   before_each(function()
     local character = {
@@ -23,13 +23,13 @@ describe("game.ui.widgets.character_stats", function()
   end)
 
   it("displays the character name", function()
-    local test_render = moonpie.test_render(character_stats())
-    assert.equals("Foo", test_render:findByID("characterNameValue").text)
+    local testRender = moonpie.testRender(character_stats())
+    assert.equals("Foo", testRender:findByID("characterNameValue").text)
   end)
 
   it("displays the character health", function()
-    local test_render = moonpie.test_render(character_stats())
-    assert.equals("15", test_render:findByID("characterHealthValue").text)
+    local testRender = moonpie.testRender(character_stats())
+    assert.equals("15", testRender:findByID("characterHealthValue").text)
   end)
 
 end)

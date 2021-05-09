@@ -5,7 +5,7 @@
 
 describe("game.rules.player.actions.equip_item", function()
   local equipItem = require "game.rules.player.actions.equip_item"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   it("finds the player and creates the equip item action", function()
     local player = { isPlayerControlled = true }

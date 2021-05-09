@@ -5,7 +5,7 @@
 
 describe("game.ui.widgets.turn_counter", function()
   local turn_counter = require "game.ui.widgets.turn_counter"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local moonpie = require "moonpie"
 
   it("displays the turn number", function()
@@ -15,7 +15,7 @@ describe("game.ui.widgets.turn_counter", function()
       }
     })
 
-    local render = moonpie.test_render(turn_counter())
+    local render = moonpie.testRender(turn_counter())
     assert.equals("85", render:findByID("turnCounterValue").text)
   end)
 end)

@@ -5,7 +5,7 @@
 
 describe("game.rules.character.actions.heal", function()
   local heal = require "game.rules.character.actions.heal"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local types = require "game.rules.character.actions.types"
 
   it("dispatches an update to set the character health to a higher value", function()

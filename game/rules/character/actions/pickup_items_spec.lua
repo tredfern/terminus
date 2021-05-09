@@ -5,7 +5,7 @@
 
 describe("game.rules.character.actions.pickup_items", function()
   local pickupItems = require "game.rules.character.actions.pickup_items"
-  local mockDispatch = require "test_helpers.mock_dispatch"
+  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local character = require "game.rules.character"
   local Position = require "game.rules.world.position"
 

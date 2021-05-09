@@ -6,7 +6,7 @@
 describe("game.ui.camera.actions.center_on_player", function()
   local centerOnPlayer = require "game.ui.camera.actions.center_on_player"
   local types = require "game.ui.camera.actions.types"
-  local mockStore = require "test_helpers.mock_store"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local Position = require "game.rules.world.position"
 
   it("centers on the player location", function()
