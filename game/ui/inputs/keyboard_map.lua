@@ -53,6 +53,10 @@ keySettings.combatMap = {
   ["g"] = function()
     process_turn(player.actions.pickupItems())
   end,
+  ["i"] = function()
+    local App = require "game.app"
+    App.inventory()
+  end,
   ["m"] = function()
     local App = require "game.app"
     App.worldMap()

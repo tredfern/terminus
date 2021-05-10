@@ -18,29 +18,40 @@ function app.load()
   moonpie.events.afterUpdate:add(app.update)
 end
 
-function app.update()
-  store.dispatch(game_state.actions.updateFrame(love.timer.getDelta()))
-end
-
 function app.render(scene)
   Cache.clear()
   moonpie.render(moonpie.ui.components.body(scene))
   app.currentScreen = scene.name
 end
 
-function app.splash()
-  local s = require "game.ui.screens.splash"
-  app.render(s())
-end
+-- Global Actions
 
-function app.title()
-  store.reset()
-  local t = require("game.ui.screens.title")
-  app.render(t())
+function app.update()
+  store.dispatch(game_state.actions.updateFrame(love.timer.getDelta()))
 end
 
 function app.quit()
   love.event.quit()
+end
+
+function app.saveGame()
+  local serializer = require "game.serializer"
+  serializer.save(saveGameName, store.getState())
+end
+
+-- Main Screens
+
+function app.achievements()
+  local achievements = require "game.ui.screens.achievements"
+  app.render(achievements())
+end
+
+function app.continue()
+  local serializer = require "game.serializer"
+  local loadSave = serializer.load(saveGameName)
+
+  store.reset(loadSave)
+  app.combat()
 end
 
 function app.gameMenu()
@@ -59,32 +70,21 @@ function app.options(returnScreen)
   app.render(options({ returnScreen = returnScreen }))
 end
 
-function app.combat()
-  local combat = require "game.ui.screens.combat"
-  app.render(combat())
+function app.splash()
+  local s = require "game.ui.screens.splash"
+  app.render(s())
 end
 
-function app.characterDetails()
-  local CharacterDetails = require "game.ui.screens.character_details"
-  app.render(CharacterDetails())
+function app.title()
+  store.reset()
+  local t = require("game.ui.screens.title")
+  app.render(t())
 end
 
-function app.worldMap()
-  local WorldMap = require "game.ui.screens.world_map"
-  app.render(WorldMap())
-end
-
-function app.continue()
-  local serializer = require "game.serializer"
-  local loadSave = serializer.load(saveGameName)
-
-  store.reset(loadSave)
-  app.combat()
-end
-
-function app.saveGame()
-  local serializer = require "game.serializer"
-  serializer.save(saveGameName, store.getState())
+-- Game Screens
+function app.gameStart()
+  local gameStart = require "game.ui.screens.game_start"
+  app.render(gameStart())
 end
 
 function app.gameOver()
@@ -92,14 +92,26 @@ function app.gameOver()
   app.render(gameOver())
 end
 
-function app.achievements()
-  local achievements = require "game.ui.screens.achievements"
-  app.render(achievements())
+function app.combat()
+  local combat = require "game.ui.screens.combat"
+  app.render(combat())
 end
 
-function app.gameStart()
-  local gameStart = require "game.ui.screens.game_start"
-  app.render(gameStart())
+-- Character Screens
+
+function app.characterDetails()
+  local CharacterDetails = require "game.ui.screens.character_details"
+  app.render(CharacterDetails())
+end
+
+function app.inventory()
+  local Inventory = require "game.ui.screens.inventory"
+  app.render(Inventory())
+end
+
+function app.worldMap()
+  local WorldMap = require "game.ui.screens.world_map"
+  app.render(WorldMap())
 end
 
 moonpie.keyboard:hotkey("escape", app.gameMenu)

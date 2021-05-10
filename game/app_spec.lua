@@ -123,4 +123,12 @@ describe("game.app", function()
     end)
   end)
 
+  describe("characterInventory", function()
+    it("shows the inventory screen", function()
+      testStates.basicGameState()
+      app.inventory()
+      assert.not_nil(moonpie.ui.current.findByID("inventory_screen"))
+    end)
+  end)
+
 end)

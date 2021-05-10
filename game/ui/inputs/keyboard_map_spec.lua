@@ -48,6 +48,14 @@ describe("game.ui.inputs.keyboard", function()
       assert.spy(app.worldMap).was.called()
     end)
 
+    it("can show the inventory screen", function()
+      local app = require "game.app"
+      stub(app, "inventory")
+      key_simulator:keyPressed("i")
+      assert.spy(app.inventory).was.called()
+      app.inventory:revert()
+    end)
+
     describe("character movement", function()
       local player_character
 
