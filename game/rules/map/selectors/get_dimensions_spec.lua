@@ -10,7 +10,8 @@ describe("game.rules.map.selectors.get_dimensions", function()
     map = {
       outline = {
         width = 200,
-        height = 328
+        height = 328,
+        levels = 10
       }
     }
   }
@@ -25,5 +26,10 @@ describe("game.rules.map.selectors.get_dimensions", function()
     local dims = get_dimensions({})
     assert.equals(0, dims.width)
     assert.equals(0, dims.height)
+  end)
+
+  it("returns the number of levels in the map", function()
+    local dims = get_dimensions(state)
+    assert.equals(10, dims.levels)
   end)
 end)

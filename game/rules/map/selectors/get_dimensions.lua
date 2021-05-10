@@ -4,12 +4,13 @@
 -- https://opensource.org/licenses/MIT
 
 return function(state)
-  if not state.map then
-    return { width = 0, height = 0 }
+  if not state or not state.map or not state.map.outline then
+    return { width = 0, height = 0, levels = 0 }
   end
 
   return {
     width = state.map.outline.width,
-    height = state.map.outline.height
+    height = state.map.outline.height,
+    levels = state.map.outline.levels
   }
 end

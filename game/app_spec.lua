@@ -6,6 +6,7 @@
 describe("game.app", function()
   -- App is the central glue module that loads up the modules and links things together
   local app = require "game.app"
+  local testStates = require "test_helpers.test_states"
 
 
   it("loads the core data", function()
@@ -90,7 +91,7 @@ describe("game.app", function()
       serializer.load = function() return state end
 
       local store = require "game.store"
-      mock(store, "reset")
+      spy.on(store, "reset")
 
       stub(app, "combat")
       app.continue()
@@ -102,6 +103,7 @@ describe("game.app", function()
 
   describe("world map", function()
     it("shows the world map", function()
+      testStates.basicGameState()
       app.worldMap()
       assert.not_nil(moonpie.ui.current.findByID("world_map"))
     end)
