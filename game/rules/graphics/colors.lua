@@ -16,5 +16,6 @@ colors.msgDamage = colors.danger
 colors.msgHighlight = colors.main
 
 colors.fow = colors(colors.black, 0.4)
+colors.playerBlip = colors(colors.aquamarine)
 
 return colors

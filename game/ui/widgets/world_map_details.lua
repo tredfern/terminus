@@ -44,6 +44,12 @@ local WorldMapDetails = Components("world_map_details", function(props)
           end
         end
       end
+
+      if self.player.position.z == self.currentLevel then
+        local x, y = self.player.position.x -1, self.player.position.y - 1
+        love.graphics.setColor(Colors(Colors.playerBlip))
+        love.graphics.rectangle("fill", x * tileWidth, y * tileHeight, tileWidth, tileHeight)
+      end
     end,
 
     mounted = function(self)

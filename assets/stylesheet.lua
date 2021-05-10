@@ -58,7 +58,7 @@ styles.full_screen_panel_contents = {
 }
 
 styles.logo_text = {
-  color = colors.purple
+  color = colors.light_shade
 }
 
 styles["main_screen"] = {
@@ -128,7 +128,7 @@ styles.primary = {
 }
 
 styles.splash = {
-  backgroundColor = colors.light_shade
+  backgroundColor = colors.light_accent
 }
 
 styles.stats = {
