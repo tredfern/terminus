@@ -27,13 +27,13 @@ describe("game.ui.screens.create_character", function()
 
 
 
-  it("has a button that continues to the combat screen", function()
+  it("has a button that continues to the game start screen", function()
     local app = require "game.app"
-    spy.on(app, "combat")
+    spy.on(app, "gameStart")
 
     local c = moonpie.testRender(create_character())
     c:findByID("button_done"):click()
-    assert.spy(app.combat).was.called()
+    assert.spy(app.gameStart).was.called()
   end)
 
   it("dispatch set character name action on done", function()

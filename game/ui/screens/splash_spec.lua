@@ -23,7 +23,7 @@ describe("game.ui.screens.splash", function()
     Moonpie.testRender(Splash())
 
     local Keyboard = require "moonpie.keyboard"
-    Keyboard:keyPressed("g")
+    Keyboard:keyPressed("t")
 
     assert.spy(App.title).was.called()
   end)

@@ -62,7 +62,7 @@ local create_character = components("create_character", function(props)
                 editCharacter,
                 character_name:get_text()
               ))
-              app.combat()
+              app.gameStart()
             end
           },
         },

@@ -109,4 +109,18 @@ describe("game.app", function()
     end)
   end)
 
+  describe("achievements", function()
+    it("shows the achievements", function()
+      app.achievements()
+      assert.not_nil(moonpie.ui.current.findByID("achievements_screen"))
+    end)
+  end)
+
+  describe("gameStart", function()
+    it("shows the game start screen", function()
+      app.gameStart()
+      assert.not_nil(moonpie.ui.current.findByID("game_start_screen"))
+    end)
+  end)
+
 end)

@@ -25,7 +25,8 @@ describe("game.ui.screens.character_details", function()
 
     local cd = CharacterDetails()
     cd:findByID("btnClose"):click()
-    assert.spy(app.combat).was.called()
+    assert.stub(app.combat).was.called()
+    app.combat:revert()
   end)
 
   it("displays the character name as the title", function()
@@ -54,5 +55,6 @@ describe("game.ui.screens.character_details", function()
     Keyboard:keyPressed("tab")
 
     assert.stub(app.combat).was.called()
+    app.combat:revert()
   end)
 end)

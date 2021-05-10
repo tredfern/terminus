@@ -45,6 +45,12 @@ local main_menu = components("main_menu", function()
         click = app.newGame
       },
       components.button {
+        id = "btnAchievements",
+        style = "main_menu_button",
+        caption = "Achievements",
+        click = app.achievements
+      },
+      components.button {
         id = "options_button",
         style = "main_menu_button",
         caption = "Options",
@@ -56,12 +62,6 @@ local main_menu = components("main_menu", function()
       },
     },
 
-    mounted = function()
-      audio.titleTrack:play()
-    end,
-    unmounted = function()
-      audio.titleTrack:stop()
-    end
 
   }
 end)
@@ -69,9 +69,20 @@ end)
 return components("title_screen", function()
   return {
     main_menu(),
+    components.text {
+      text = "Copyright 2021 Trevor Redfern | Devlog: wheretheredfern.codes | Source: github.com/tredfern/terminus",
+      style = "align-bottom align-right",
+      padding = 5
+    },
     drawComponent = function(self)
       love.graphics.setColor({ 1, 1, 1, 1})
       love.graphics.draw(starField, self.box.width/ 2, self.box.height / 2)
+    end,
+    mounted = function()
+      audio.titleTrack:play()
+    end,
+    unmounted = function()
+      audio.titleTrack:stop()
     end
   }
 end)

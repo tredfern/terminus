@@ -92,5 +92,15 @@ function app.gameOver()
   app.render(gameOver())
 end
 
+function app.achievements()
+  local achievements = require "game.ui.screens.achievements"
+  app.render(achievements())
+end
+
+function app.gameStart()
+  local gameStart = require "game.ui.screens.game_start"
+  app.render(gameStart())
+end
+
 moonpie.keyboard:hotkey("escape", app.gameMenu)
 return app
