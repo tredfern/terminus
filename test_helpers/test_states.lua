@@ -13,7 +13,7 @@ function testStates.basicGameState()
       outline = { width = 100, height = 100, levels = 10 }
     },
     characters = {
-      { isPlayerControlled = true, position = Position(1, 1, 1) }
+      { isPlayerControlled = true, position = Position(1, 1, 1), inventory = {} }
     },
     turn = {
       counter = 12

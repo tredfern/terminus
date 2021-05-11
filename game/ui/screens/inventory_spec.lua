@@ -5,6 +5,11 @@
 
 describe("game.ui.screens.inventory", function()
   local Inventory = require "game.ui.screens.inventory"
+  local TestStates = require "test_helpers.test_states"
+
+  before_each(function()
+    TestStates.basicGameState()
+  end)
 
   it("renders a valid component", function()
     local inv = Inventory()
