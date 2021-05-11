@@ -56,6 +56,14 @@ describe("game.ui.inputs.keyboard", function()
       app.inventory:revert()
     end)
 
+    it("can show the journal screen", function()
+      local app = require "game.app"
+      stub(app, "journal")
+      key_simulator:keyPressed("j")
+      assert.spy(app.journal).was.called()
+      app.journal:revert()
+    end)
+
     describe("character movement", function()
       local player_character
 

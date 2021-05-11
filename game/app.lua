@@ -109,6 +109,11 @@ function app.inventory()
   app.render(Inventory())
 end
 
+function app.journal()
+  local Journal = require "game.ui.screens.journal"
+  app.render(Journal())
+end
+
 function app.worldMap()
   local WorldMap = require "game.ui.screens.world_map"
   app.render(WorldMap())

@@ -131,4 +131,11 @@ describe("game.app", function()
     end)
   end)
 
+  describe("characterJournal", function()
+    it("shows the journal screen", function()
+      app.journal()
+      assert.not_nil(moonpie.ui.current.findByID("journal_screen"))
+    end)
+  end)
+
 end)

@@ -57,6 +57,10 @@ keySettings.combatMap = {
     local App = require "game.app"
     App.inventory()
   end,
+  ["j"] = function()
+    local App = require "game.app"
+    App.journal()
+  end,
   ["m"] = function()
     local App = require "game.app"
     App.worldMap()
