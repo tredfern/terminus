@@ -20,7 +20,7 @@ end
 
 function app.render(scene)
   Cache.clear()
-  moonpie.render(moonpie.ui.components.body(scene))
+  moonpie.render(moonpie.ui.components.body { scene })
   app.currentScreen = scene.name
 end
 

@@ -9,7 +9,6 @@ local Keyboard = require "moonpie.keyboard"
 local Splash = Components("splash", function()
   return {
     id = "splash_screen",
-    style = "splash",
     {
       Components.image { source = "assets/long-logo.png", style = "align-center" },
       Components.h1 { text = "Short Leg Studio", style = "align-center logo_text" },

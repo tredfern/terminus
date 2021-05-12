@@ -57,6 +57,10 @@ styles.full_screen_panel_contents = {
   height = "95%"
 }
 
+styles.game_start_screen = {
+  height = "100%"
+}
+
 styles.logo_text = {
   color = colors.light_shade
 }
@@ -128,6 +132,7 @@ styles.primary = {
 }
 
 styles.splash = {
+  height = "100%",
   backgroundColor = colors.light_accent
 }
 
@@ -153,4 +158,8 @@ styles.textbox = moonpie.tables.merge({
 
 styles.textbox_text = {
   fontSize = 18,
+}
+
+styles.title_screen = {
+  height = "100%"
 }

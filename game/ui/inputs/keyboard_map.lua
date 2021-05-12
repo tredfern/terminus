@@ -79,24 +79,24 @@ keySettings.combatMap = {
 
 }
 
-local function setMapping(mapping)
+function keySettings.setMapping(mapping)
   for k, v in pairs(mapping) do
     keyboard:hotkey(k, v)
   end
 end
 
-local function removeMapping(mapping)
+function keySettings.removeMapping(mapping)
   for k in pairs(mapping) do
     keyboard:hotkey(k, nil)
   end
 end
 
 function keySettings.enableCombatMap()
-  setMapping(keySettings.combatMap)
+  keySettings.setMapping(keySettings.combatMap)
 end
 
 function keySettings.disableCombatMap()
-  removeMapping(keySettings.combatMap)
+  keySettings.removeMapping(keySettings.combatMap)
 end
 
 return keySettings
