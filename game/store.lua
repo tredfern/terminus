@@ -35,6 +35,6 @@ store.dumpState = function()
 end
 
 store.reset()
-store.logFilterFor("CHARACTER_ADD", "CHARACTER_REMOVE", "ITEMS_REMOVE", "ITEMS_ADD")
+store.logFilterFor("CHARACTER_ADD", "CHARACTER_REMOVE", "ITEMS_REMOVE", "ITEMS_ADD", "CHARACTER_SET_ATTRIBUTE")
 
 return store

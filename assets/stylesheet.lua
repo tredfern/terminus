@@ -9,18 +9,27 @@ local styles = moonpie.ui.styles
 local colors = require "moonpie.graphics.colors"
 local sounds = require "assets.sounds"
 
-styles.button = moonpie.tables.merge(
-  {
-    cornerRadiusX = 15,
-    cornerRadiusY = 15,
-    fontName = "headline",
-    padding = { left = 15, right = 15, top = 8, bottom = 8 },
+styles.body.fontSize = 18
+styles.button = moonpie.tables.merge({
+    fontSize = 18,
+    fontName = "default-bold",
     vertical_align = "middle",
     clickSound = sounds.click,
     hoverSound = sounds.hover
   },
   styles.button
 )
+
+styles.button_increment = {
+  padding = 3,
+  cornerRadiusX = 0,
+  cornerRadiusY = 0
+}
+
+styles.characterAttributeLabelPair = {
+  padding = 4,
+  margin = 6
+}
 
 styles.combat_map = {
   position = "absolute",
@@ -53,7 +62,7 @@ styles.full_screen_panel_contents = {
   cornerRadiusY = 16,
   backgroundColor = "background",
   fontName = "default",
-  fontSize = 14,
+  fontSize = 16,
   height = "95%"
 }
 
@@ -78,7 +87,11 @@ styles.main_menu = {
 styles.main_menu_button = {
   display = "block",
   clickSound = sounds.click,
-  hoverSound = sounds.hover
+  hoverSound = sounds.hover,
+  cornerRadiusX = 15,
+  cornerRadiusY = 15,
+  padding = { left = 15, right = 15, top = 8, bottom = 8 },
+  vertical_align = "middle",
 }
 
 styles.message_log = {
@@ -110,7 +123,6 @@ styles.panel_secondary = {
 styles.panel_title = {
   backgroundColor = "background",
   fontName = "headline",
-  fontSize = 16,
   margin = { left = 25 },
   padding = { left = 6, right = 6, top = 2, bottom = 2 }
 }
@@ -122,13 +134,29 @@ styles.panel_contents = {
   cornerRadiusX = 16,
   cornerRadiusY = 16,
   backgroundColor = "background",
-  fontName = "default",
-  fontSize = 14
+  fontName = "default"
 }
 
 styles.primary = {
   width = "80%",
   height = "90%"
+}
+
+styles.spinner = {
+  display = "inline"
+}
+
+styles["spinner-button"] = {
+  margin = { left = 4, right = 4 },
+  padding = { left = 4, right = 4 },
+  fontSize = 18
+}
+
+styles["spinner-text"] = {
+  border = 1,
+  borderColor = colors.light_accent,
+  padding = { left = 4, right = 4 },
+  fontName = "monospace"
 }
 
 styles.splash = {
@@ -151,8 +179,6 @@ styles.stats_content = {
 styles.textbox = moonpie.tables.merge({
     width = 250,
     height = 25,
-    fontSize = 14,
-    fontName = "default"
   },
   styles.textbox)
 

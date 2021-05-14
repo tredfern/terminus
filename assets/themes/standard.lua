@@ -8,10 +8,11 @@
 local font = moonpie.graphics.font
 moonpie.graphics.font:register("assets/fonts/square.ttf", "terminal")
 
-font:register("assets/fonts/coolvetica-rg.ttf", "default")
-font:register("assets/fonts/coolvetica-rg.ttf", "default-bold")
+font:register("assets/fonts/RedRose-Regular.ttf", "default")
+font:register("assets/fonts/RedRose-Bold.ttf", "default-bold")
 font:register("assets/fonts/atmospheric.ttf", "headline")
 font:register("assets/fonts/atmospheric.ttf", "headline-bold")
+font:register("assets/fonts/ShareTechMono-Regular.ttf", "monospace")
 
 -- Colors
 local colors = moonpie.graphics.colors

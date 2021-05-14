@@ -6,11 +6,21 @@
 local Components = require "moonpie.ui.components"
 local Character = require "game.rules.character"
 local store = require "game.store"
-local connect = require "moonpie.redux.connect"
 local attributes = require "game.rules.character.attributes"
-local labelPair = require "game.ui.widgets.label_pair"
+local Spinner = require "game.ui.widgets.spinner"
 
 local attrLabelPair = Components("characterAttributeLabelPair", function(props)
+  local attrValue = Components.text { id = props.attribute .. "Value", text = props.value, style ="align-right" }
+  if props.editable then
+    attrValue = Spinner {
+      style = "align-right",
+      id = props.attribute .. "Value",
+      value = props.value,
+      eventUpdated = function(component)
+        store.dispatch(Character.actions.setAttribute(props.character, props.attribute, component.value))
+      end,
+    }
+  end
   return {
     character = props.character,
     attribute = props.attribute,
@@ -18,50 +28,16 @@ local attrLabelPair = Components("characterAttributeLabelPair", function(props)
     editable = props.editable,
     label = props.label,
 
-    render = function(self)
-      local buttons = {
-        display = "inline", padding = { right = 3 },
-      }
-      if props.editable then
-        buttons[1] = Components.button {
-          id = props.label .. "Increase",
-          caption = "+", style = "button-small",
-          click = function()
-            store.dispatch(Character.actions.setAttribute(self.character, self.attribute, self.value + 1))
-          end
-        }
-        buttons[2] = Components.button {
-          id = props.label .. "Decrease",
-          caption = "-",
-          style = "button-small",
-          click = function()
-            store.dispatch(Character.actions.setAttribute(self.character, self.attribute, self.value - 1))
-          end
-        }
-      end
-      return {
-        buttons,
-        labelPair { id = self.label, label = self.label, value = self.value }
-      }
-    end
+    Components.text { id = props.attribute .. "Label", text = props.label },
+    attrValue
   }
 end)
-
-attrLabelPair = connect(
-  attrLabelPair,
-  function(state, component)
-    if component == nil then return {} end
-    return {
-      value = Character.selectors.getAttribute(state, component.character, component.attribute)
-    }
-  end
-)
 
 return Components("character_attributes", function(props)
   local characterAttributes = props.attributes or {}
 
   return {
-    width = "15%",
+    width = "25%",
     attrLabelPair {
       label = "Strength",
       attribute = attributes.strength,
