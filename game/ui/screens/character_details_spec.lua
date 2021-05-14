@@ -31,7 +31,7 @@ describe("game.ui.screens.character_details", function()
 
   it("displays the character name as the title", function()
     local cd = CharacterDetails()
-    assert.equals("My Name", cd:findByID("full_screen_panel_title").text)
+    assert.equals("My Name", cd:findByID("full_screen_panel_title_text").text)
   end)
 
   it("displays the character inventory", function()

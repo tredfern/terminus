@@ -10,7 +10,7 @@ describe("game.ui.widgets.full_screen_panel", function()
     local panel = fullScreenPanel {
       title = "Hello"
     }
-    assert.equals("Hello", panel:findByID("full_screen_panel_title").text)
+    assert.equals("Hello", panel:findByID("full_screen_panel_title_text").text)
   end)
 
   it("renders any contents out into the panel", function()

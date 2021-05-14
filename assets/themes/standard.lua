@@ -13,6 +13,8 @@ font:register("assets/fonts/RedRose-Bold.ttf", "default-bold")
 font:register("assets/fonts/atmospheric.ttf", "headline")
 font:register("assets/fonts/atmospheric.ttf", "headline-bold")
 font:register("assets/fonts/ShareTechMono-Regular.ttf", "monospace")
+--font:register("assets/fonts/ShareTechMono-Regular.ttf", "default")
+--font:register("assets/fonts/ShareTechMono-Regular.ttf", "default-bold")
 
 -- Colors
 local colors = moonpie.graphics.colors

@@ -26,6 +26,17 @@ styles.button_increment = {
   cornerRadiusY = 0
 }
 
+styles["character-details-panel"] = {
+  border = 1,
+  borderColor = "light_accent",
+  width = "25%"
+}
+
+styles["character-details-panel-title"] = {
+  border = 1,
+  borderColor = "light_accent",
+}
+
 styles.characterAttributeLabelPair = {
   padding = 4,
   margin = 6
@@ -39,19 +50,24 @@ styles.combat_map = {
 }
 
 styles.full_screen_panel = {
-  color = "light_shade",
-  borderColor = "light_accent",
   margin = 5,
   width = "100%",
   height = "100%"
 }
 
 styles.full_screen_panel_title = {
-  backgroundColor = "background",
+  backgroundColor = "main",
+  cornerRadiusX = 16,
+  cornerRadiusY = 16,
+}
+
+styles.full_screen_panel_title_text = {
   fontName = "headline",
   fontSize = 24,
+  color = "light_shade",
   margin = { left = 25 },
-  padding = { left = 6, right = 6, top = 2, bottom = 2 }
+  padding = { left = 6, right = 6, top = 4, bottom = 2 },
+  backgroundColor = "background"
 }
 
 styles.full_screen_panel_contents = {
@@ -123,6 +139,7 @@ styles.panel_secondary = {
 styles.panel_title = {
   backgroundColor = "background",
   fontName = "headline",
+  fontSize = 18,
   margin = { left = 25 },
   padding = { left = 6, right = 6, top = 2, bottom = 2 }
 }

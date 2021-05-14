@@ -37,7 +37,6 @@ return Components("character_attributes", function(props)
   local characterAttributes = props.attributes or {}
 
   return {
-    width = "25%",
     attrLabelPair {
       label = "Strength",
       attribute = attributes.strength,
