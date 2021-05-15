@@ -15,6 +15,11 @@ return createSlice {
   end,
   [actionTypes.ENTITY_REMOVE] = function(state, action)
     return tables.removeItem(state, action.payload.entity)
-  end
+  end,
+  [actionTypes.ENTITY_UPDATE] = function(state, action)
+    local entity = action.payload.entity
+    tables.copyKeys(action.payload.values, entity, true)
+    return state
+  end,
 
 }

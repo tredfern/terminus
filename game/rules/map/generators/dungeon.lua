@@ -262,7 +262,7 @@ function generator.addFeatures(outline, map)
 end
 
 function generator.addDoorMaybe(tile, orientation, neighbors)
-  local addDoor = require "game.rules.map.actions.add_door"
+  local Door = require "game.rules.furniture.door"
   local store = require "game.store"
   local asWalls = function(n1, n2)
     return n1 and n2 and n1.terrain == terrain.list.wall and n2.terrain == terrain.list.wall
@@ -271,11 +271,11 @@ function generator.addDoorMaybe(tile, orientation, neighbors)
   if tile and tile.terrain == terrain.list.corridor then
     if orientation == Orientation.eastWest then
       if asWalls(neighbors.n, neighbors.s) then
-        store.dispatch(addDoor(tile.position, orientation))
+        store.dispatch(Door.actions.add(tile.position, orientation))
       end
     elseif orientation == Orientation.northSouth then
       if asWalls(neighbors.e, neighbors.w) then
-        store.dispatch(addDoor(tile.position, orientation))
+        store.dispatch(Door.actions.add(tile.position, orientation))
       end
     end
   end
