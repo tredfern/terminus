@@ -9,6 +9,17 @@ describe("game.rules.furniture.door", function()
   local Orientation = require "game.rules.world.orientation"
   local mockStore = require "moonpie.test_helpers.mock_store"
 
+  local createTestDoor = function(position, closed, locked)
+    return {
+      door = true, closed = closed,
+      position = position,
+      blocksMovement = closed,
+      blocksSight = closed,
+      animator = { playOnce = spy.new(function() end )},
+      locked = locked
+    }
+  end
+
   describe("actions", function()
     describe("adding", function()
       it("specifies a door entity to add", function()
@@ -30,6 +41,53 @@ describe("game.rules.furniture.door", function()
         }
         local action = Door.actions.add(Position(2, 2, 3), Orientation.northSouth)
         assert.is_nil(action)
+      end)
+    end)
+
+    describe("opening", function()
+      local closedDoor, openDoor, lockedDoor
+
+      before_each(function()
+        closedDoor = createTestDoor(Position(1, 3, 3), true)
+        openDoor = createTestDoor(Position(2, 4, 3), false)
+        lockedDoor = createTestDoor(Position(3, 4, 8), true, true)
+      end)
+
+      it("updates the door properties to be open", function()
+        local action = Door.actions.open(closedDoor)
+
+        assert.thunk_dispatches(action, {
+          type = "WORLD_ENTITY_UPDATE",
+          payload = {
+            entity = closedDoor,
+            values = {
+              blocksMovement = false,
+              blocksSight = false,
+              closed = false
+            }
+          }
+        })
+      end)
+
+      it("plays a single shot of the opening animation", function()
+        local action = Door.actions.open(closedDoor)
+        assert.thunk_dispatches(action, {
+          type = "ANIMATION_PLAY_ONCE",
+          payload = {
+            animator = closedDoor.animator,
+            animation = "opening"
+          }
+        })
+      end)
+
+      it("does not open a door if it is already open", function()
+        local action = Door.actions.open(openDoor)
+        assert.is_false(action:validate())
+      end)
+
+      it("does not open a locked door", function()
+        local action = Door.actions.open(lockedDoor)
+        assert.is_false(action:validate())
       end)
     end)
   end)

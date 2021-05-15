@@ -7,52 +7,29 @@ describe("game.rules.player.actions.open_door", function()
   local openDoor = require "game.rules.player.actions.open_door"
   local Orientation = require "game.rules.world.orientation"
   local Position = require "game.rules.world.position"
-  local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local mockStore = require "moonpie.test_helpers.mock_store"
-
-  local northDoor, eastDoor
+  local northDoor
 
   before_each(function()
-    northDoor = {
-      door = true, closed = true,
-      position = Position(1, 3, 3),
-      blocksMovement = true,
-      blocksSight = true,
-      animator = { playOnce = spy.new(function() end )}
+    northDoor = { door = true, position = Position(1, 3, 3),
     }
 
-    eastDoor = {
-      door = true, closed = false,
-      position = Position(2, 4, 3),
-      animator = { playOnce = spy.new(function() end) }
-    }
-    mockDispatch.processComplex = true
     mockStore {
       characters = {},
       world = {
         { isPlayerControlled = true, position = Position(1, 4, 3)},
         northDoor,
-        eastDoor
       }
     }
   end)
 
-  after_each(function()
-    mockDispatch:reset()
-  end)
-
-  it("starts playing the open door animation on the door", function()
+  it("dispatches an open door action if there is a door available", function()
     local action = openDoor(Orientation.north)
-    mockDispatch(action)
-
-    assert.spy(northDoor.animator.playOnce).was.called_with(northDoor.animator, "opening")
-    assert.is_false(northDoor.blocksMovement)
-    assert.is_false(northDoor.blocksSight)
+    assert.thunk_dispatches_type(action, "DOOR_OPEN")
   end)
 
-  it("does not open a door if it is already open", function()
-    local action = openDoor(Orientation.east)
-    mockDispatch(action)
-    assert.spy(eastDoor.animator.playOnce).was.not_called()
+  it("does not dispatch an action if the door is missing", function()
+    local action = openDoor(Orientation.north)
+    assert.not_thunk_dispatches(action, "DOOR_OPEN")
   end)
 end)

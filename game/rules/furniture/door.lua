@@ -3,11 +3,12 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local addEntity = require "game.rules.world.actions.add_entity"
+local tables = require "moonpie.tables"
 local Animator = require "game.rules.graphics.animator"
 local store = require "game.store"
 local World = require "game.rules.world"
-local tables = require "moonpie.tables"
+local Thunk = require "moonpie.redux.thunk"
+local Graphics = require "game.rules.graphics"
 
 local Door = {
   actions = {},
@@ -20,14 +21,16 @@ local function validateAdd(position)
   return not tables.any(entities, function(e) return e.door end)
 end
 
+local function createAnimation(orientation)
+  local a = Animator:new()
+  a:addAnimation("opening", Door.images[orientation].opening)
+  return a
+end
+
 function Door.actions.add(position, orientation)
   if not validateAdd(position) then
     return nil
   end
-
-  -- setup Animation
-  local a = Animator:new()
-  a:addAnimation("opening", Door.images[orientation].opening)
 
   local entity = {
     sprite = Door.images[orientation].closed,
@@ -37,10 +40,29 @@ function Door.actions.add(position, orientation)
     blocksMovement = true,
     blocksSight = true,
     orientation = orientation,
-    animator = a
+    animator = createAnimation(orientation)
   }
 
-  return addEntity(entity)
+  return World.actions.addEntity(entity)
+end
+
+function Door.actions.open(door)
+  return Thunk(
+    "DOOR_OPEN",
+    function(dispatch)
+      local updateChanges = {
+        closed = false,
+        blocksMovement = false,
+        blocksSight = false
+      }
+
+      dispatch(World.actions.updateEntity(door, updateChanges))
+      dispatch(Graphics.actions.animationPlayOnce(door.animator, "opening"))
+    end,
+    function()
+      return door.closed and not door.locked
+    end
+  )
 end
 
 return Door

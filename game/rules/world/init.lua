@@ -7,7 +7,8 @@ return {
   actions = {
     addEntity = require "game.rules.world.actions.add_entity",
     removeEntity = require "game.rules.world.actions.remove_entity",
-    types = require "game.rules.world.actions.types"
+    types = require "game.rules.world.actions.types",
+    updateEntity = require "game.rules.world.actions.update_entity"
   },
   orientation = require "game.rules.world.orientation",
   position = require "game.rules.world.position",

@@ -9,6 +9,7 @@ describe("game.rules.world", function()
   it("has actions to updated entities", function()
     assert.not_nil(World.actions.addEntity)
     assert.not_nil(World.actions.removeEntity)
+    assert.not_nil(World.actions.updateEntity)
   end)
 
   it("has selectors to find entities", function()

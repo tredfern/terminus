@@ -12,6 +12,7 @@ local function getReducers()
     characters = require "game.rules.character.reducer",
     fieldOfView = require "game.rules.field_of_view.reducer",
     fogOfWar = require "game.rules.fog_of_war.reducer",
+    graphics = require "game.rules.graphics.reducer",
     items = require "game.rules.items.reducer",
     map = require "game.rules.map.reducer",
     message_log = require "game.rules.message_log.reducer",
