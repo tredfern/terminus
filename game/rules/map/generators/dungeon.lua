@@ -8,6 +8,7 @@ local tables = require "moonpie.tables"
 local terrain = require "game.rules.map.terrain"
 local createCorridor = require "game.rules.map.generators.corridor"
 local createRoom = require "game.rules.map.generators.room"
+local placeItems = require "game.rules.map.generators.place_items"
 local Outline = require "game.rules.map.outline"
 local TileMap = require "game.rules.map.tile_map"
 local Walls = require "assets.graphics.walls"
@@ -100,6 +101,7 @@ function generator.generate(width, height, levels)
     generator.connectLevels(outline, level, level - 1)
   end
   local tileMap = generator.buildTileMap(outline)
+  placeItems(outline, tileMap)
   return outline, tileMap
 end
 

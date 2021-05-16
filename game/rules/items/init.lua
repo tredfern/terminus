@@ -10,7 +10,6 @@ local Items = {
   actions = {
     add = require "game.rules.items.actions.add",
     remove = require "game.rules.items.actions.remove",
-    types = require "game.rules.items.actions.types",
     use = require "game.rules.items.actions.use",
   },
   selectors = {

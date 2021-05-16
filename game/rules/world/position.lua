@@ -134,6 +134,14 @@ function Position.down(position)
   return Position.add(position, { 0, 0, -1 })
 end
 
+function Position.randomInRoom(room)
+  return Position(
+    math.random(room.x, room.x + room.width - 1),
+    math.random(room.y, room.y + room.height - 1),
+    room.level
+  )
+end
+
 return setmetatable(Position, {
   __call = function(self, x, y, z)
     return self.new(x, y, z)

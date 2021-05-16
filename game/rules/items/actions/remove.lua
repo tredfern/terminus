@@ -3,11 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local actionTypes = require "game.rules.items.actions.types"
+local World = require "game.rules.world"
 
 return function(item)
-  return {
-    type = actionTypes.REMOVE,
-    payload = { item = item }
-  }
+  return World.actions.removeEntity(item)
 end

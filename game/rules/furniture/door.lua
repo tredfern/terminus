@@ -4,10 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 local tables = require "moonpie.tables"
+local Thunk = require "moonpie.redux.thunk"
+local addActionValidator = require "moonpie.redux.add_action_validator"
 local Animator = require "game.rules.graphics.animator"
 local store = require "game.store"
 local World = require "game.rules.world"
-local Thunk = require "moonpie.redux.thunk"
 local Graphics = require "game.rules.graphics"
 
 local Door = {
@@ -63,6 +64,14 @@ function Door.actions.open(door)
       return door.closed and not door.locked
     end
   )
+end
+
+function Door.actions.lock(door)
+  local action = World.actions.updateEntity(door, { locked = true })
+  addActionValidator(action, function()
+    return door.closed and not door.locked
+  end)
+  return action
 end
 
 return Door

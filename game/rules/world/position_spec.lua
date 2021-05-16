@@ -117,4 +117,15 @@ describe("game.rules.world.position", function()
       assert.equals(p, p2)
     end)
   end)
+
+  it("can pick a random position in a room", function()
+    local room = {
+      x = 10, y = 23, width = 14, height = 8, level = 3
+    }
+
+    local p = Position.randomInRoom(room)
+    assert.is_true(p.x >= 10 and p.x < 24)
+    assert.is_true(p.y >= 23 and p.x < 31)
+    assert.equals(3, p.z)
+  end)
 end)

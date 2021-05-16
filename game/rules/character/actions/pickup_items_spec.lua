@@ -6,15 +6,22 @@
 describe("game.rules.character.actions.pickup_items", function()
   local pickupItems = require "game.rules.character.actions.pickup_items"
   local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local character = require "game.rules.character"
   local Position = require "game.rules.world.position"
 
-  local pickup = { position = Position.new(17, 19) }
+  local pickup = { position = Position.new(17, 19), item = true }
   local getState = function()
     return {
       items = { pickup }
     }
   end
+
+  before_each(function()
+    mockStore {
+      world = { pickup }
+    }
+  end)
 
   it("gets the items in the current character position", function()
     local c = { position = Position.new(17, 19) }
@@ -27,12 +34,9 @@ describe("game.rules.character.actions.pickup_items", function()
   end)
 
   it("removes the item that it picked up", function()
-    local itemActionTypes = require "game.rules.items.actions.types"
     local c = { position = Position.new(17, 19) }
 
     local action = pickupItems(c)
-    action(mockDispatch, getState)
-
-    assert.is_true(mockDispatch:received_action(itemActionTypes.REMOVE))
+    assert.thunk_dispatches_type(action, "ENTITY_REMOVE")
   end)
 end)

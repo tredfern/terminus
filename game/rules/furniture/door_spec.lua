@@ -90,5 +90,30 @@ describe("game.rules.furniture.door", function()
         assert.is_false(action:validate())
       end)
     end)
+
+    describe("locking doors", function()
+      it("is valid if the door is closed and unlocked", function()
+        local unlockedDoor = createTestDoor(Position(1,1,1), true)
+        local openDoor = createTestDoor(Position(1,1,1), false)
+        local lockedDoor = createTestDoor(Position(1,1,1), true, true)
+
+        local a1 = Door.actions.lock(unlockedDoor)
+        local a2 = Door.actions.lock(openDoor)
+        local a3 = Door.actions.lock(lockedDoor)
+
+        assert.is_true(a1:validate())
+        assert.is_false(a2:validate())
+        assert.is_false(a3:validate())
+      end)
+
+      it("sets the door to locked", function()
+        local unlockedDoor = createTestDoor(Position(1,1,1), true)
+        local action = Door.actions.lock(unlockedDoor)
+        assert.same({
+          entity = unlockedDoor,
+          values = { locked = true }
+        }, action.payload)
+      end)
+    end)
   end)
 end)

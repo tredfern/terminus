@@ -3,13 +3,10 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.items.actions.types"
+local World = require "game.rules.world"
 
 return function(item, props)
-  return {
-    type = types.ADD,
-    payload = {
-      item = item:clone(props)
-    }
-  }
+  return World.actions.addEntity(
+    item:clone(props)
+  )
 end

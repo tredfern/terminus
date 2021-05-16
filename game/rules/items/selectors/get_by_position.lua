@@ -3,11 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local tables = require "moonpie.tables"
-local Position = require "game.rules.world.position"
+local World = require "game.rules.world"
 
 return function(state, position)
-  return tables.select(state.items, function(item)
-    return Position.equal(item.position, position)
-  end)
+  return World.selectors.getByPosition(state, position, "item")
 end

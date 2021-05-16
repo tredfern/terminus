@@ -3,6 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local World = require "game.rules.world"
+
 return function(state)
-  return state.items
+  return World.selectors.getAllWithComponents(state, "item")
 end

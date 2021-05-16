@@ -10,8 +10,8 @@ describe("game.rules.items.actions.remove", function()
     local item = {}
     local action = remove(item)
 
-    assert.equals(item, action.payload.item)
-    assert.equals("ITEMS_REMOVE", action.type)
+    assert.equals(item, action.payload.entity)
+    assert.equals("ENTITY_REMOVE", action.type)
   end)
 
 end)
