@@ -280,6 +280,14 @@ function generator.addDoorMaybe(tile, orientation, neighbors)
         store.dispatch(Door.actions.add(tile.position, orientation))
       end
     end
+
+    -- potentially lock a door
+    if math.random(100) > 85 then
+      local d = Door.selectors.getByPosition(store.getState(), tile.position)
+      if d then
+        store.dispatch(Door.actions.lock(d))
+      end
+    end
   end
 end
 

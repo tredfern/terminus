@@ -74,4 +74,16 @@ function Door.actions.lock(door)
   return action
 end
 
+function Door.actions.unlock(door)
+  local action = World.actions.updateEntity(door, { locked = false })
+  addActionValidator(action, function()
+    return door.locked
+  end)
+  return action
+end
+
+function Door.selectors.getByPosition(state, position)
+  return World.selectors.getByPosition(state, position, "door")[1]
+end
+
 return Door

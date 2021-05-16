@@ -114,6 +114,35 @@ describe("game.rules.furniture.door", function()
           values = { locked = true }
         }, action.payload)
       end)
+
+      it("locked doors can be unlocked", function()
+        local unlockedDoor = createTestDoor(Position(1,1,1), true)
+        local lockedDoor = createTestDoor(Position(1,1,1), true, true)
+
+        local a1 = Door.actions.unlock(unlockedDoor)
+        local a2 = Door.actions.unlock(lockedDoor)
+
+        assert.is_falsy(a1:validate()) -- unlocked doors can't be unlocked
+        assert.is_truthy(a2:validate()) -- locked doors can
+
+        assert.same({
+          entity = lockedDoor,
+          values = { locked = false }
+        }, a2.payload)
+      end)
     end)
+  end)
+
+  it("can get the door at a specific location", function()
+    local d = createTestDoor(Position(3, 4, 2))
+    local d2 = createTestDoor(Position(3, 4, 5))
+    local state = {
+      world = {
+        d, d2
+      }
+    }
+
+    assert.equals(d, Door.selectors.getByPosition(state, Position(3, 4, 2)))
+    assert.equals(d2, Door.selectors.getByPosition(state, Position(3, 4, 5)))
   end)
 end)

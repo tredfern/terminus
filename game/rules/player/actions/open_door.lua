@@ -6,10 +6,10 @@
 local Thunk = require "moonpie.redux.thunk"
 local actionTypes = require "game.rules.player.actions.types"
 local Position = require "game.rules.world.position"
-local World = require "game.rules.world"
 local getPlayer = require "game.rules.player.selectors.get_player"
-local tables = require "moonpie.tables"
 local Door = require "game.rules.furniture.door"
+local MessageLog = require "game.rules.message_log"
+local Messages = require "assets.messages"
 
 
 return function(orientation)
@@ -18,11 +18,14 @@ return function(orientation)
     function(dispatch, getState)
       local player = getPlayer(getState())
       local checkDoor = Position[orientation](player.position)
-      local entities = World.selectors.getByPosition(getState(), checkDoor)
+      local door = Door.selectors.getByPosition(getState(), checkDoor)
 
-      local door = tables.findFirst(entities, function(e) return e.door end)
       if door then
-        dispatch(Door.actions.open(door))
+        if door.locked then
+          dispatch(MessageLog.actions.add(Messages.movement.door.locked))
+        else
+          dispatch(Door.actions.open(door))
+        end
       end
     end
   )
