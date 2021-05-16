@@ -13,6 +13,8 @@ local Messages = require "assets.messages"
 
 
 return function(orientation)
+  local Player = require "game.rules.player"
+
   return Thunk(
     actionTypes.openDoor,
     function(dispatch, getState)
@@ -22,7 +24,12 @@ return function(orientation)
 
       if door then
         if door.locked then
-          dispatch(MessageLog.actions.add(Messages.movement.door.locked))
+          if Player.selectors.hasItemOfKind(getState(), "keycard") then
+            dispatch(Door.actions.unlock(door))
+            dispatch(MessageLog.actions.add(Messages.movement.door.unlocked))
+          else
+            dispatch(MessageLog.actions.add(Messages.movement.door.locked))
+          end
         else
           dispatch(Door.actions.open(door))
         end

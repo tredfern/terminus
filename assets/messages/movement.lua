@@ -8,6 +8,7 @@ local alert = Helper.alert
 
 return {
   door = {
-    locked = string.format("The door is %s!", alert("locked"))
+    locked = string.format("The door is %s!", alert("locked")),
+    unlocked = string.format("You %s the door with your keycard.", alert("unlocked"))
   }
 }

@@ -8,8 +8,21 @@ local Cache = {}
 
 local flushCallbacks = {}
 local results = {}
+local enabled = true
+
+function Cache.enabled()
+  enabled = true
+end
+
+function Cache.disabled()
+  enabled = false
+end
 
 function Cache.lookup(cacheDef)
+  if not enabled then
+    return cacheDef.source()
+  end
+
   local name = cacheDef.name
 
   if flushCallbacks[name] == nil then

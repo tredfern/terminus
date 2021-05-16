@@ -10,7 +10,12 @@ describe("game.cache", function()
 
   before_each(function()
     Cache.clear()
+    Cache.enabled()
     store = mockStore { }
+  end)
+
+  after_each(function()
+    Cache.disabled()
   end)
 
   it("calls the routine to resolve the cache state if new", function()
@@ -57,6 +62,15 @@ describe("game.cache", function()
     Cache(request)
     Cache(request)
     Cache(request)
+    assert.spy(cb).was.called(3)
+  end)
+
+  it("can be disabled for testing purposes", function()
+    Cache.disabled()
+    local cb = spy.new(function() end)
+    Cache { name = "CACHE_ME", source = cb }
+    Cache { name = "CACHE_ME", source = cb }
+    Cache { name = "CACHE_ME", source = cb }
     assert.spy(cb).was.called(3)
   end)
 end)

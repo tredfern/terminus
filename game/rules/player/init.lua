@@ -15,6 +15,7 @@ return {
   },
   selectors = {
     getFieldOfView = require "game.rules.player.selectors.get_field_of_view",
-    getPlayer = require "game.rules.player.selectors.get_player"
+    getPlayer = require "game.rules.player.selectors.get_player",
+    hasItemOfKind = require "game.rules.player.selectors.has_item_of_kind"
   }
 }
