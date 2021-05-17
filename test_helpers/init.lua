@@ -10,3 +10,9 @@ require "test_helpers.thunk_assertions"
 
 local Cache = require "game.cache"
 Cache.disabled()
+
+moonpie.testing = {}
+moonpie.testing.simpleSpy = function()
+  local spy = require "luassert.spy"
+  return spy.new(function() end)
+end
