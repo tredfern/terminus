@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.rules.furniture.door", function()
-  local Door = require "game.rules.furniture.door"
+describe("game.rules.map.furniture.door", function()
+  local Door = require "game.rules.map.furniture.door"
   local Position = require "game.rules.world.position"
   local Orientation = require "game.rules.world.orientation"
   local mockStore = require "moonpie.test_helpers.mock_store"

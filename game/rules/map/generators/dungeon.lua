@@ -264,7 +264,7 @@ function generator.addFeatures(outline, map)
 end
 
 function generator.addDoorMaybe(tile, orientation, neighbors)
-  local Door = require "game.rules.furniture.door"
+  local Door = require "game.rules.map.furniture.door"
   local store = require "game.store"
   local asWalls = function(n1, n2)
     return n1 and n2 and n1.terrain == terrain.list.wall and n2.terrain == terrain.list.wall
