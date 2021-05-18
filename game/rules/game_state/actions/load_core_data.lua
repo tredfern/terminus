@@ -7,7 +7,6 @@ return function()
   return function()
     require "assets.characters.skills"
     require "assets.characters.names"
-    require "assets.items"
     require "assets.maps.terrains"
   end
 end

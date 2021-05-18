@@ -5,96 +5,107 @@
 
 describe("game.rules.items", function()
   local Items = require "game.rules.items"
-
-  it("can describe a new item", function()
-    Items.describe {
-      name = "Short sword",
-      key = "shortsword"
-    }
-
-    assert.equals("Short sword", Items.list.shortsword.name)
-  end)
-
-  it("can specify what skill is necessary to use item", function()
-    Items.describe {
-      name = "Medkit",
-      key = "medkit",
-      skill = "firstaid"
-    }
-
-    assert.equals("firstaid", Items.list.medkit.skill)
-  end)
-
-  it("describes the slot an item can be equipped", function()
-    Items.describe {
-      name = "Crossbow",
-      key = "crossbow",
-      equipSlot = "ranged"
-    }
-
-    assert.equals("ranged", Items.list.crossbow.equipSlot)
-  end)
+  local Position = require "game.rules.world.position"
 
   describe("checking character proficiency", function()
-    before_each(function()
-      Items.describe {
-        name = "Easy to Use",
-        key = "easy_to_use",
-        usable = true
-      }
-      Items.describe {
-        name = "Bandage",
-        key = "bandage",
-        skill = "firstaid",
-        usable = true
-      }
-      Items.describe {
-        name = "Unusable",
-        key = "unusable"
-      }
-    end)
-
     it("allows anyone to use item if no skill specified", function()
+      local easyToUse = { usable = true }
       local c = { skills = {} }
-      assert.is_true(Items.canUseItem(Items.list.easy_to_use, c))
+      assert.is_true(Items.canUseItem(easyToUse, c))
     end)
 
     it("allows character to use item if has skill specified", function()
+      local bandage = {
+        skill = "firstaid",
+        usable = true
+      }
       local c = { skills = { firstaid = 0 } }
-      assert.is_true(Items.canUseItem(Items.list.bandage, c))
+      assert.is_true(Items.canUseItem(bandage, c))
     end)
 
     it("returns false if character does not have skill", function()
+      local bandage = {
+        skill = "firstaid",
+        usable = true
+      }
       local c = { skills = { } }
-      assert.is_false(Items.canUseItem(Items.list.bandage, c))
+      assert.is_false(Items.canUseItem(bandage, c))
     end)
 
     it("is not allowed to use unusable items", function()
+      local unusable = { }
       local c = { skills = { } }
-      assert.is_false(Items.canUseItem(Items.list.unusable, c))
+      assert.is_false(Items.canUseItem(unusable, c))
     end)
   end)
 
-  describe("cloning items", function()
-    Items.describe { key = "cloneMe", name = "Clone me", propA = true, propB = false }
-    it("can clone an item", function()
-      local c = Items.list.cloneMe:clone()
-      assert.equals("cloneMe", c.key)
-      assert.equals("Clone me", c.name)
-      assert.equals(true, c.propA)
-      assert.equals(false, c.propB)
+  it("ACTION: add", function()
+    local item = { }
+    local position = {}
+    local action = Items.actions.add(item, position)
+    assert.equals("ENTITY_ADD", action.type)
+    assert.equals(item, action.payload.entity)
+    assert.equals(position, action.payload.entity.position)
+  end)
+
+  it("ACTION: remove", function()
+    local item = {}
+    local action = Items.actions.remove(item)
+
+    assert.equals(item, action.payload.entity)
+    assert.equals("ENTITY_REMOVE", action.type)
+  end)
+
+  describe("game.rules.items.actions.use", function()
+    local use = Items.actions.use
+    local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+
+    before_each(function()
+      mockDispatch:reset()
     end)
 
-    it("can take additional values to cloning to overwrite values of the item", function()
-      local c = Items.list.cloneMe:clone { x = 19, y = 18 }
-      assert.equals(19, c.x)
-      assert.equals(18, c.y)
+    it("calls the item use handler with dispatch", function()
+      local item = {
+        useHandler = spy.new(function() end)
+      }
+
+      local action = use(item)
+      action(mockDispatch.asFunction)
+
+      assert.spy(item.useHandler).was.called_with(item, mockDispatch.asFunction, nil)
     end)
 
-    it("creates a sprite based on the image", function()
-      Items.describe { key = "withImage", name = "Image", image = {} }
-      local c = Items.list.withImage:clone()
-      assert.equals(c.image, c.sprite.imageData)
+    it("passes the user of the item to the handler", function()
+      local item = { useHandler = spy.new(function() end)}
+      local user = {}
+
+      local action = use(item, user)
+      action(mockDispatch.asFunction)
+
+      assert.spy(item.useHandler).was.called_with(item, mockDispatch.asFunction, user)
+    end)
+
+    it("removes the item from the characters inventory", function()
+      local Character = require "game.rules.character"
+      local item = { useHandler = function() end, consumeOnUse = true }
+      local user = { inventory = { item } }
+
+      local action = use(item, user)
+      action(mockDispatch)
+
+      assert.is_true(mockDispatch:received_action(Character.actions.types.REMOVE_ITEM_FROM_INVENTORY))
+      assert.equals(item, mockDispatch.dispatched[1].payload.item)
+      assert.equals(user, mockDispatch.dispatched[1].payload.character)
+    end)
+
+    it("if item is marked as not consumable than do not remove item", function()
+      local Character = require "game.rules.character"
+      local item = { useHandler = function() end, consumeOnUse = false }
+      local user = { inventory = { item } }
+
+      local action = use(item, user)
+      action(mockDispatch)
+      assert.is_false(mockDispatch:received_action(Character.actions.types.REMOVE_ITEM_FROM_INVENTORY))
     end)
   end)
 
@@ -115,5 +126,31 @@ describe("game.rules.items", function()
 
     assert.is_true(Items.isUsable(usable))
     assert.is_false(Items.isUsable(unusable))
+  end)
+
+  it("SELECTOR: getAll", function()
+    local i1 = { item = true }
+    local i2 = { item = true }
+    local i3 = { item = true }
+    local state = { items = { i1, i2 }, world = { i3 } }
+
+    assert.array_includes(i1, Items.selectors.getAll(state))
+    assert.array_includes(i2, Items.selectors.getAll(state))
+    assert.array_includes(i3, Items.selectors.getAll(state))
+  end)
+
+  it("SELECTOR: getByPosition", function()
+    local find1 = { position = Position.new(12, 17), item = true }
+    local find2 = { position = Position.new(12, 17), item = true }
+    local skip = { position = Position.new(2, 7), item = true }
+
+    local state = {
+      items = { find1, find2, skip }
+    }
+    local found = Items.selectors.getByPosition(state, Position(12, 17))
+
+    assert.array_includes(find1, found)
+    assert.array_includes(find2, found)
+    assert.not_array_includes(skip, found)
   end)
 end)

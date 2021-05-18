@@ -75,9 +75,11 @@ local combat_map = components("combat_map", function(props)
             local fow = FogOfWar.selectors.get(state, self.player, p)
             if fow and fow.tile then
               local sx, sy = getScreenCoordinate(self.camera, x, y)
-              fow.tile.sprite:draw(sx, sy)
-              love.graphics.setColor(colors.fow)
-              love.graphics.rectangle("fill", sx, sy, tile_width, tile_height)
+              if fow.tile.sprite then
+                fow.tile.sprite:draw(sx, sy)
+                love.graphics.setColor(colors.fow)
+                love.graphics.rectangle("fill", sx, sy, tile_width, tile_height)
+              end
             end
           end
         end

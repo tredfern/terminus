@@ -24,6 +24,7 @@ return {
   },
   attributes = require "game.rules.character.attributes",
   create = factory.newCharacter,
+  equipSlots = require "game.rules.character.equip_slots",
   reducer = require "game.rules.character.reducer",
   selectors = {
     getAll = require "game.rules.character.selectors.get_all",

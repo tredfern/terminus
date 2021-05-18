@@ -5,16 +5,27 @@
 
 local tables = require "moonpie.tables"
 local Store = require "game.store"
-local Keycard = require "game.rules.items.keycard"
+local Items = require "game.rules.items"
 local Position = require "game.rules.world.position"
 
 
 return function(outline)
+  local rooms = outline.rooms
+
   for _=1,40 do
-    local r = tables.pickRandom(outline.rooms)
+    local r = tables.pickRandom(rooms)
     local p = Position.randomInRoom(r)
 
-    Store.dispatch(Keycard.actions.add(p))
+    Store.dispatch(Items.actions.add(Items.Gear.keycard(), p))
   end
 
+  for _ = 1, 40 do
+    local r = tables.pickRandom(rooms)
+    local p = Position.randomInRoom(r)
+    Store.dispatch(Items.actions.add(Items.Gear.healthPack(), p))
+  end
+
+  local r = tables.pickRandom(rooms)
+  local p = Position.randomInRoom(r)
+  Store.dispatch(Items.actions.add(Items.Gear.sprayBottle(), p))
 end

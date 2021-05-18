@@ -4,7 +4,6 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.game_state.actions.setup", function()
-  require "assets.items"
   local setup = require "game.rules.game_state.actions.setup"
   local tables = require "moonpie.tables"
   local character = require "game.rules.character"

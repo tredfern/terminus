@@ -3,35 +3,40 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local tables = require "moonpie.tables"
-local sprite = require "game.rules.graphics.sprite"
-
 local Items = {
-  actions = {
-    add = require "game.rules.items.actions.add",
-    remove = require "game.rules.items.actions.remove",
-    use = require "game.rules.items.actions.use",
-  },
-  selectors = {
-    getAll = require "game.rules.items.selectors.get_all",
-    getByPosition = require "game.rules.items.selectors.get_by_position"
-  },
+  actions = {},
+  selectors = {},
 }
-Items.list = {}
 
-local function clone(item, props)
-  props = props or {}
-  tables.copyKeys(item, props, false)
-  if item.image then
-    props.sprite = sprite.fromImage(item.image)
-  end
-
-  return props
+function Items.actions.add(item, position)
+  local World = require "game.rules.world"
+  item.position = position
+  return World.actions.addEntity(item)
 end
 
-function Items.describe(props)
-  props.clone = clone
-  Items.list[props.key] = props
+function Items.actions.remove(item)
+  local World = require "game.rules.world"
+  return World.actions.removeEntity(item)
+end
+
+function Items.actions.use(item, user)
+  return function(dispatch)
+    local Character = require "game.rules.character"
+    item:useHandler(dispatch, user)
+    if item.consumeOnUse then
+      dispatch(Character.actions.removeItemFromInventory(user, item))
+    end
+  end
+end
+
+function Items.selectors.getAll(state)
+  local World = require "game.rules.world"
+  return World.selectors.getAllWithComponents(state, "item")
+end
+
+function Items.selectors.getByPosition(state, position)
+  local World = require "game.rules.world"
+  return World.selectors.getByPosition(state, position, "item")
 end
 
 function Items.canUseItem(item, character)
@@ -42,5 +47,8 @@ end
 function Items.isUsable(item)
   return item.useHandler ~= nil
 end
+
+Items.Gear = require "game.rules.items.gear"
+Items.Weapons = require "game.rules.items.weapons"
 
 return Items
