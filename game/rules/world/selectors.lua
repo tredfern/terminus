@@ -5,8 +5,27 @@
 
 local tables = require "moonpie.tables"
 local Position = require "game.rules.world.position"
+local Selectors = {}
 
-return function(state, position, ...)
+function Selectors.getAllWithComponents(state, ...)
+  local characters = state.characters or {}
+  local items = state.items or {}
+  local world = state.world or {}
+
+  local components = tables.pack(...)
+
+  local comparison = function(entity)
+    return tables.all(components, function(c) return entity[c] end)
+  end
+
+  return tables.join(
+    tables.select(characters, comparison),
+    tables.select(items, comparison),
+    tables.select(world, comparison)
+  )
+end
+
+function Selectors.getByPosition(state, position, ...)
   local characters = state.characters or {}
   local items = state.items or {}
   local entities = state.world or {}
@@ -23,3 +42,5 @@ return function(state, position, ...)
     tables.select(entities, comparison)
   )
 end
+
+return Selectors

@@ -6,6 +6,7 @@
 local assert = require("luassert")
 local say = require("say")
 local tables = require "moonpie.tables"
+local isCallable = require "moonpie.utility.is_callable"
 -- local store = require "moonpie.redux.store"
 
 local function createDispatcher()
@@ -27,7 +28,11 @@ local function thunk_dispatches(_, arguments)
   thunk(dispatcher, store.getState)
 
   return tables.any(dispatcher.dispatched, function(d)
-    return tables.deepCompare(d, expectedAction)
+    if isCallable(expectedAction) then
+      return expectedAction(d)
+    else
+      return tables.deepCompare(d, expectedAction)
+    end
   end)
 end
 

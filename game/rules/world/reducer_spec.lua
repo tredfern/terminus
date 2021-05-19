@@ -5,12 +5,12 @@
 
 describe("game.rules.world.reducer", function()
   local reducer = require "game.rules.world.reducer"
-  local actionTypes = require "game.rules.world.actions.types"
+  local Actions = require "game.rules.world.actions"
 
   it("can add entities", function()
     local e1 = {}
     local action = {
-      type = actionTypes.ENTITY_ADD,
+      type = Actions.types.ENTITY_ADD,
       payload = {
         entity = e1
       }
@@ -23,7 +23,7 @@ describe("game.rules.world.reducer", function()
   it("can remove entities", function()
     local e1 = {}
     local action = {
-      type = actionTypes.ENTITY_REMOVE,
+      type = Actions.types.ENTITY_REMOVE,
       payload = {
         entity = e1
       }
@@ -36,7 +36,7 @@ describe("game.rules.world.reducer", function()
   it("can update entities", function()
     local e1 = { b = 5 }
     local action = {
-      type = actionTypes.ENTITY_UPDATE,
+      type = Actions.types.ENTITY_UPDATE,
       payload = {
         entity = e1,
         values = {
