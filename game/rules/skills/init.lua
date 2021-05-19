@@ -17,9 +17,7 @@ function Skills.calculate(skill, character)
   return (character.attributes[skill.attribute] or 0) + (character.skills[skill.key] or untrained)
 end
 
-Skills.actions = {
-  opposedCheck = require "game.rules.skills.actions.opposed_check",
-  perform = require "game.rules.skills.actions.perform",
-}
+Skills.actions = require "game.rules.skills.actions"
 Skills.chooseSkill = require "game.rules.skills.choose_skill"
+
 return Skills

@@ -4,12 +4,19 @@
 -- https://opensource.org/licenses/MIT
 
 local Dice = require "moonpie.math.dice"
+local Thunk = require "moonpie.redux.thunk"
 local skillCheck = Dice.cup(Dice.d6, Dice.d6, Dice.d6)
 local MessageLog = require "game.rules.message_log"
 local Messages = require "assets.messages"
 
-return function(aggressor, aggSkill, defender, defSkill, callback)
-  return function(dispatch)
+local Actions = {}
+Actions.types = {
+  OPPOSED_CHECK = "SKILLS_OPPOSED_CHECK",
+  PERFORM_CHECK = "SKILLS_PERFORM_CHECK"
+}
+
+function Actions.opposedCheck(aggressor, aggSkill, defender, defSkill, callback)
+  return Thunk(Actions.types.OPPOSED_CHECK, function(dispatch)
     local aggTarget = aggSkill(aggressor)
     local defTarget = defSkill(defender)
 
@@ -37,5 +44,19 @@ return function(aggressor, aggSkill, defender, defSkill, callback)
     else
       callback(defender, aggressor)
     end
-  end
+  end)
 end
+
+function Actions.perform(skill, character, successCallback, failCallback)
+  return Thunk(Actions.types.PERFORM_CHECK, function()
+    local target = skill(character)
+    local roll = skillCheck()
+    if roll <= target then
+      successCallback(target, roll)
+    else
+      failCallback(target, roll)
+    end
+  end)
+end
+
+return Actions
