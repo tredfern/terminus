@@ -3,14 +3,19 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.message_log.actions.types"
+local Actions = {}
 
-return function(message, formatData)
+Actions.types = require "game.rules.message_log.types"
+
+function Actions.add(message, formatData)
   return {
-    type = types.ADD,
+    type = Actions.types.ADD,
     payload = {
       message = message,
       formatData = formatData
     }
   }
 end
+
+
+return Actions

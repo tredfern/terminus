@@ -3,7 +3,9 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-return function(state, count)
+local Selectors = {}
+
+function Selectors.getLast(state, count)
   if not state.message_log then return {} end
 
   local out = {}
@@ -12,3 +14,5 @@ return function(state, count)
   end
   return out
 end
+
+return Selectors

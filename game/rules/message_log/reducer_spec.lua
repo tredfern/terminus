@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.rules.message_log.reducer", function()
-  local types = require "game.rules.message_log.actions.types"
+  local types = require "game.rules.message_log.types"
   local reducer = require "game.rules.message_log.reducer"
 
   it("stores a formatted message from the add action", function()

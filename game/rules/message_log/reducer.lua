@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local create_slice = require "moonpie.redux.create_slice"
-local types = require "game.rules.message_log.actions.types"
+local types = require "game.rules.message_log.types"
 local Formatter = require "game.rules.message_log.formatter"
 
 

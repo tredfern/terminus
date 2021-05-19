@@ -4,11 +4,8 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  actions = {
-    add = require "game.rules.message_log.actions.add"
-  },
+  actions = require "game.rules.message_log.actions",
   messages = require "assets.messages",
-  selectors = {
-    getLast = require "game.rules.message_log.selectors.get_last"
-  }
+  reducer = require "game.rules.message_log.reducer",
+  selectors = require "game.rules.message_log.selectors"
 }
