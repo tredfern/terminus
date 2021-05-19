@@ -3,19 +3,28 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local increment = require "game.rules.turn.actions.increment"
-local Character = require "game.rules.character"
-local NPCs = require "game.rules.npcs"
-local Camera = require "game.ui.camera"
-local GameState = require "game.rules.game_state"
+local Thunk = require "moonpie.redux.thunk"
 local Aliens = require "game.rules.aliens"
+local Camera = require "game.ui.camera"
+local Character = require "game.rules.character"
 local FieldOfView = require "game.rules.field_of_view"
 local FogOfWar = require "game.rules.fog_of_war"
+local GameState = require "game.rules.game_state"
+local NPCs = require "game.rules.npcs"
 local Player = require "game.rules.player"
 
-return function(player_action)
-  return function(dispatch, getState)
-    dispatch(increment())
+local Actions = {}
+Actions.types =  require "game.rules.turn.types"
+
+function Actions.increment()
+  return {
+    type = Actions.types.INCREMENT
+  }
+end
+
+function Actions.process(player_action)
+  return Thunk(Actions.types.PROCESS, function(dispatch, getState)
+    dispatch(Actions.increment())
     dispatch(player_action)
 
     local enemies = NPCs.selectors.getEnemies(getState())
@@ -55,5 +64,6 @@ return function(player_action)
     dispatch(FogOfWar.actions.updatePerspective(player))
 
     dispatch(GameState.actions.checkGameOver())
-  end
+  end)
 end
+return Actions

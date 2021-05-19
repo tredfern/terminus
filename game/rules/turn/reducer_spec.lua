@@ -5,21 +5,21 @@
 
 describe("game.rules.turn.reducer", function()
   local reducer = require "game.rules.turn.reducer"
-  local increment = require "game.rules.turn.actions.increment"
+  local Actions = require "game.rules.turn.actions"
 
   it("increments the turn counter when receiving the increment action", function()
     local state = {
       counter = 2
     }
 
-    local new_state = reducer(state, increment())
+    local new_state = reducer(state, Actions.increment())
     assert.equals(3, new_state.counter)
   end)
 
   it("sets counter to 1 if counter is nil", function()
     local state = {}
 
-    local new_state = reducer(state, increment())
+    local new_state = reducer(state, Actions.increment())
     assert.equals(1, new_state.counter)
   end)
 

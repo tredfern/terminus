@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local create_slice = require "moonpie.redux.create_slice"
-local types = require "game.rules.turn.actions.types"
+local types = require "game.rules.turn.types"
 
 return create_slice({
   initialState = function() return {

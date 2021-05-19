@@ -4,7 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  actions = {
-    process = require "game.rules.turn.actions.process"
-  }
+  actions = require "game.rules.turn.actions"
 }
