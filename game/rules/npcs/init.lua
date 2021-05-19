@@ -4,12 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  actions = {
-    checkSpawnEnemy = require "game.rules.npcs.actions.check_spawn_enemy",
-    think = require "game.rules.npcs.actions.think"
-  },
-  selectors = {
-    getEnemies = require "game.rules.npcs.selectors.get_enemies"
-
-  }
+  actions = require "game.rules.npcs.actions",
+  behaviors = require "game.rules.npcs.behaviors",
+  selectors = require "game.rules.npcs.selectors"
 }

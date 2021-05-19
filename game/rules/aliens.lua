@@ -13,9 +13,10 @@ local Aliens = {
   selectors = {}
 }
 
+local Behaviors = require "game.rules.npcs.behaviors"
 local aiRoutines = {
-  require "game.rules.npcs.ai.move_towards_player",
-  require "game.rules.npcs.ai.random_movement"
+  Behaviors.moveTowardsPlayer,
+  Behaviors.randomMovement
 }
 
 function Aliens.actions.addAlien(position)
