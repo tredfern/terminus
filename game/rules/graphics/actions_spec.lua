@@ -64,4 +64,4 @@ describe("game.rules.graphics.actions", function()
       assert.spy(noPlay.animator.update).was.not_called()
     end)
   end)
-end
+end)

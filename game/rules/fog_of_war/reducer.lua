@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local createSlice = require "moonpie.redux.create_slice"
-local actionTypes = require "game.rules.fog_of_war.actions.types"
+local actionTypes = require "game.rules.fog_of_war.types"
 
 return createSlice {
   [actionTypes.UPDATE_POSITION] = function(state, action)

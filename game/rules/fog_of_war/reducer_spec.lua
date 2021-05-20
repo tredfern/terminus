@@ -5,7 +5,7 @@
 
 describe("game.rules.fog_of_war.reducer", function()
   local reducer = require "game.rules.fog_of_war.reducer"
-  local actionTypes = require "game.rules.fog_of_war.actions.types"
+  local actionTypes = require "game.rules.fog_of_war.types"
   local Position = require "game.rules.world.position"
 
   it("can store updated information on a perspective", function()

@@ -4,14 +4,16 @@
 -- https://opensource.org/licenses/MIT
 
 local Thunk = require "moonpie.redux.thunk"
-local actionTypes = require "game.rules.fog_of_war.actions.types"
 local FieldOfView = require "game.rules.field_of_view"
-local updatePosition = require "game.rules.fog_of_war.actions.update_position"
 local Map = require "game.rules.map"
 
-return function(perspective)
+local Actions = {}
+
+Actions.types = require "game.rules.fog_of_war.types"
+
+function Actions.updatePerspective(perspective)
   return Thunk(
-    actionTypes.UPDATE_PERSPECTIVE,
+    Actions.types.UPDATE_PERSPECTIVE,
     function(dispatch, getState)
       local state = getState()
       local visiblePoints = FieldOfView.selectors.getVisiblePositions(state, perspective)
@@ -19,9 +21,29 @@ return function(perspective)
       if visiblePoints then
         for _, pos in ipairs(visiblePoints) do
           local tile = Map.selectors.getTile(state, pos)
-          dispatch(updatePosition(perspective, pos, tile))
+          dispatch(Actions.updatePosition(perspective, pos, tile))
         end
       end
     end
   )
 end
+
+function Actions.updatePosition(perspective, position, tile)
+  local key = nil
+  if type(position) == "number" then
+    key = position
+    position = nil
+  end
+
+  return {
+    type = Actions.types.UPDATE_POSITION,
+    payload = {
+      perspective = perspective,
+      position = position,
+      positionHashKey = key,
+      tile = tile
+    }
+  }
+end
+
+return Actions
