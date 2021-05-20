@@ -4,20 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  actions = {
-    add = require "game.rules.map.actions.add",
-    create = require "game.rules.map.actions.create",
-    types = require "game.rules.map.actions.types"
-  },
+  actions = require "game.rules.map.actions",
   generators = {
     dungeon = require "game.rules.map.generators.dungeon"
   },
-  selectors = {
-    getDimensions = require "game.rules.map.selectors.get_dimensions",
-    getRooms = require "game.rules.map.selectors.get_rooms",
-    getTerrain = require "game.rules.map.selectors.get_terrain",
-    getTile = require "game.rules.map.selectors.get_tile"
-  },
+  selectors = require "game.rules.map.selectors",
   tileMap = require "game.rules.map.tile_map",
   outline = require "game.rules.map.outline"
 }

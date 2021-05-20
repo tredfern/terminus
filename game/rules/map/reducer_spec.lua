@@ -5,7 +5,7 @@
 
 describe("game.rules.map.reducer", function()
   local reducer = require "game.rules.map.reducer"
-  local types = require "game.rules.map.actions.types"
+  local types = require "game.rules.map.types"
 
   it("sets the state to the value of the map on the set action", function()
     local outline, tileMap = {}, {}

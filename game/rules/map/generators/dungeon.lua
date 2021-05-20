@@ -224,17 +224,16 @@ function generator.getRandomLocation(outline)
 end
 
 function generator.addFeatures(outline, map)
-  local ladderUp = require "game.rules.map.actions.add_ladder_up"
-  local ladderDown = require "game.rules.map.actions.add_ladder_down"
+  local Actions = require "game.rules.map.actions"
   local store = require "game.store"
 
   for _, r in ipairs(outline.rooms) do
     if not tables.isEmpty(r.features) then
       for _, f in ipairs(r.features) do
         if f.type == "LADDER_UP" then
-          store.dispatch(ladderUp(f.position))
+          store.dispatch(Actions.addLadderUp(f.position))
         elseif f.type == "LADDER_DOWN" then
-          store.dispatch(ladderDown(f.position))
+          store.dispatch(Actions.addLadderDown(f.position))
         end
       end
     end
