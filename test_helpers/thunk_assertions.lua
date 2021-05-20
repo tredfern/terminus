@@ -39,14 +39,21 @@ end
 local function thunk_dispatches_type(_, arguments)
   local store = require "moonpie.redux.store"
   local expectedType = arguments[2]
+  local expectedCount = arguments[3]
   local thunk = arguments[1]
 
   local dispatcher = createDispatcher()
   thunk(dispatcher, store.getState)
 
-  return tables.any(dispatcher.dispatched, function(d)
+  if expectedCount == nil then
+    return tables.any(dispatcher.dispatched, function(d)
+      return d.type == expectedType
+    end)
+  end
+
+  return tables.count(dispatcher.dispatched, function(d)
     return d.type == expectedType
-  end)
+  end) == expectedCount
 end
 
 say:set("assertion.thunk_dispatches.positive", "Expected Thunk(%s) to dispatch action: %s")

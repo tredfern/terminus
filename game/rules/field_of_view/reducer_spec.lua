@@ -5,7 +5,7 @@
 
 describe("game.rules.field_of_view.reducer", function()
   local reducer = require "game.rules.field_of_view.reducer"
-  local actionTypes = require "game.rules.field_of_view.actions.types"
+  local actionTypes = require "game.rules.field_of_view.types"
 
   it("can store the field of view for an entity", function()
     local state, entity, visibilityMap = {}, {}, {}

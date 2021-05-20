@@ -4,8 +4,17 @@
 -- https://opensource.org/licenses/MIT
 
 local Position = require "game.rules.world.position"
+local Selectors = {}
 
-return function(state, view)
+
+function Selectors.get(state, entity)
+  if state.fieldOfView then
+    return state.fieldOfView[entity]
+  end
+  return nil
+end
+
+function Selectors.getVisiblePositions(state, view)
   if state.fieldOfView then
     local vm = state.fieldOfView[view]
     local out = {}
@@ -19,3 +28,5 @@ return function(state, view)
     return out
   end
 end
+
+return Selectors

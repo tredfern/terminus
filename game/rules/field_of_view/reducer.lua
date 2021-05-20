@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local createSlice = require "moonpie.redux.create_slice"
-local actionTypes = require "game.rules.field_of_view.actions.types"
+local actionTypes = require "game.rules.field_of_view.types"
 
 return createSlice {
   [actionTypes.UPDATE] = function(state, action)
