@@ -12,7 +12,7 @@ describe("game.rules.graphics", function()
   end)
 
   it("has selectors to get all the entities that can be drawn", function()
-    assert.not_nil(Graphics.selectors.getAnimatedEntities)
+    assert.not_nil(Graphics.selectors.getAnimated)
     assert.not_nil(Graphics.selectors.getDrawable)
   end)
 

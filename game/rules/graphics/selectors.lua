@@ -7,7 +7,13 @@ local World = require "game.rules.world"
 local Character = require "game.rules.character"
 local Cache = require "game.cache"
 
-return function(state)
+local Selectors = {}
+
+function Selectors.getAnimated(state)
+  return World.selectors.getAllWithComponents(state, "animator")
+end
+
+function Selectors.getDrawable(state)
   return Cache {
     name = "GET_DRAWABLE_ENTITIES",
     flushOn = {
@@ -21,3 +27,5 @@ return function(state)
     end
   }
 end
+
+return Selectors
