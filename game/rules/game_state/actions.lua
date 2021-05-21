@@ -7,12 +7,12 @@ local tables = require "moonpie.tables"
 local Thunk = require "moonpie.redux.thunk"
 local Aliens = require "game.rules.aliens"
 local FieldOfView = require "game.rules.field_of_view"
-local Graphics = require "game.rules.graphics"
 local Items = require "game.rules.items"
 local Map = require "game.rules.map"
 local MessageLog = require "game.rules.message_log"
 local Player = require "game.rules.player"
 local Position = require "game.rules.world.position"
+local Selectors = require "game.rules.game_state.selectors"
 
 local Actions = {}
 Actions.types = {
@@ -28,14 +28,12 @@ function Actions.checkGameOver()
     Actions.types.CHECK_GAME_OVER,
     function(dispatch, getState)
       local state = getState()
-      local player = Player.selectors.getPlayer(state)
 
-      if player == nil or player.health <=0 then
+      if Selectors.isGameLost(state) then
         dispatch(Actions.gameOver())
       end
 
-      local spawners = Aliens.selectors.getSpawners(state)
-      if spawners == nil or #spawners == 0 then
+      if Selectors.isGameWon(state) then
         dispatch(Actions.gameOver())
       end
     end
@@ -97,6 +95,8 @@ function Actions.setup()
 end
 
 function Actions.updateFrame(deltaTime)
+  local Graphics = require "game.rules.graphics"
+
   return Thunk(Actions.types.UPDATE_FRAME, function(dispatch)
     dispatch(Graphics.actions.updateFrame(deltaTime))
   end)
