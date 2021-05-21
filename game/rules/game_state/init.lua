@@ -4,5 +4,6 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  actions = require "game.rules.game_state.actions"
+  actions = require "game.rules.game_state.actions",
+  selectors = require "game.rules.game_state.selectors"
 }
