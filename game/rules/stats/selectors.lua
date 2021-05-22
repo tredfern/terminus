@@ -5,4 +5,10 @@
 
 local Selectors = {}
 
+function Selectors.getValue(state, stat)
+  if state.stats == nil or state.stats[stat] == nil then return 0 end
+
+  return state.stats[stat].value
+end
+
 return Selectors
