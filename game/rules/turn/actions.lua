@@ -12,19 +12,14 @@ local FogOfWar = require "game.rules.fog_of_war"
 local GameState = require "game.rules.game_state"
 local NPCs = require "game.rules.npcs"
 local Player = require "game.rules.player"
+local Stats = require "game.rules.stats"
 
 local Actions = {}
 Actions.types =  require "game.rules.turn.types"
 
-function Actions.increment()
-  return {
-    type = Actions.types.INCREMENT
-  }
-end
-
 function Actions.process(player_action)
   return Thunk(Actions.types.PROCESS, function(dispatch, getState)
-    dispatch(Actions.increment())
+    dispatch(Stats.actions.count(1, "turnCounter"))
     dispatch(player_action)
 
     local enemies = NPCs.selectors.getEnemies(getState())

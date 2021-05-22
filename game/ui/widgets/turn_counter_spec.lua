@@ -10,8 +10,10 @@ describe("game.ui.widgets.turn_counter", function()
 
   it("displays the turn number", function()
     mockStore({
-      turn = {
-        counter = 85
+      stats = {
+        turnCounter = {
+          value = 85
+        }
       }
     })
 

@@ -6,14 +6,6 @@
 describe("game.rules.turn.actions", function()
   local Actions = require "game.rules.turn.actions"
 
-  describe("ACTION: increment", function()
-    it("has a type to increment the counter", function()
-      local action = Actions.increment()
-      assert.not_nil(action.type)
-      assert.equals(Actions.types.INCREMENT, action.type)
-    end)
-  end)
-
   describe("ACTION: process", function()
     local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
     local mockStore = require "moonpie.test_helpers.mock_store"
@@ -41,15 +33,6 @@ describe("game.rules.turn.actions", function()
       action(mockDispatch, store.getState)
 
       assert.is_true(mockDispatch:received_action("player_action"))
-    end)
-
-    it("increments the turn when processed", function()
-      local player_action = {}
-      local action = Actions.process(player_action)
-
-      action(mockDispatch, store.getState)
-
-      assert.is_true(mockDispatch:received_action(Actions.types.INCREMENT))
     end)
 
     it("triggers thinking for all non-player characters", function()
