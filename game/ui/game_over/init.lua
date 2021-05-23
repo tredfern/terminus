@@ -8,6 +8,7 @@ local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
 local connect = require "moonpie.redux.connect"
 local app = require "game.app"
 local Aliens = require "game.rules.aliens"
+local Statistics = require "game.ui.game_over.statistics"
 
 local function result(isVictory)
   if isVictory then
@@ -25,7 +26,8 @@ local gameOver = Components("gameOverScreen", function(props)
       title = "Game Over",
       contents = {
         result(props.victory),
-        Components.button { id = "btnTitleScreen", caption = "Back to Title", click = app.title }
+        Statistics(),
+        Components.button { id = "btnTitleScreen", caption = "Back to Title", click = app.title },
       }
     }
   }

@@ -88,7 +88,7 @@ function app.gameStart()
 end
 
 function app.gameOver()
-  local gameOver = require "game.ui.screens.game_over"
+  local gameOver = require "game.ui.game_over"
   app.render(gameOver())
 end
 

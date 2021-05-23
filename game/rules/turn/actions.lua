@@ -19,7 +19,7 @@ Actions.types =  require "game.rules.turn.types"
 
 function Actions.process(player_action)
   return Thunk(Actions.types.PROCESS, function(dispatch, getState)
-    dispatch(Stats.actions.count(1, "turnCounter"))
+    dispatch(Stats.actions.count(1, Stats.keys.turnCounter))
     dispatch(player_action)
 
     local enemies = NPCs.selectors.getEnemies(getState())

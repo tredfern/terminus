@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.ui.screens.game_over", function()
-  local gameOver = require "game.ui.screens.game_over"
+  local gameOver = require "game.ui.game_over"
   local mockStore = require "moonpie.test_helpers.mock_store"
 
   it("can switch back to the title screen", function()

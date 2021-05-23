@@ -6,5 +6,10 @@
 return {
   actions = require "game.rules.stats.actions",
   reducer = require "game.rules.stats.reducer",
-  selectors = require "game.rules.stats.selectors"
+  selectors = require "game.rules.stats.selectors",
+
+  keys = {
+    turnCounter = "turnCounter"
+  }
+
 }

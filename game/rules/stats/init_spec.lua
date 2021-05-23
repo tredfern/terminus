@@ -11,4 +11,8 @@ describe("game.rules.stats", function()
     assert.is_table(Stats.selectors)
     assert.callable(Stats.reducer)
   end)
+
+  it("has a list of known stats", function()
+    assert.not_nil(Stats.keys.turnCounter)
+  end)
 end)
