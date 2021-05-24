@@ -7,7 +7,7 @@ local maths = require "moonpie.math"
 local tables = require "moonpie.tables"
 local terrain = require "game.rules.map.terrain"
 local createCorridor = require "game.rules.map.generators.corridor"
-local createRoom = require "game.rules.map.generators.room"
+local Rooms = require "game.rules.map.rooms"
 local placeItems = require "game.rules.map.generators.place_items"
 local Outline = require "game.rules.map.outline"
 local TileMap = require "game.rules.map.tile_map"
@@ -84,7 +84,7 @@ function generator.create_rooms(node, outline, level)
   local x = node.x + love.math.random(node.width - width)
   local y = node.y + love.math.random(node.height - height)
 
-  node.room = createRoom(x, y, width, height, level)
+  node.room = Rooms.rectangular(x, y, width, height, level)
   outline:addRoom(node.room)
 end
 

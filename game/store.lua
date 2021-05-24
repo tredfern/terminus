@@ -15,6 +15,7 @@ local function getReducers()
     graphics = require "game.rules.graphics.reducer",
     map = require "game.rules.map.reducer",
     message_log = require "game.rules.message_log.reducer",
+    player = require "game.rules.player.reducer",
     settings = require "game.settings.reducer",
     stats = require "game.rules.stats.reducer",
     world = require "game.rules.world.reducer"

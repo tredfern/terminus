@@ -3,7 +3,6 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local tables = require "moonpie.tables"
 local Thunk = require "moonpie.redux.thunk"
 local store = require "game.store"
 local Animator = require "game.rules.graphics.animator"
@@ -14,21 +13,13 @@ local characterIdle = require "assets.characters.character_idle"
 local Door = require "game.rules.map.furniture.door"
 local MessageLog = require "game.rules.message_log"
 local Messages = require "assets.messages"
-local Cache = require "game.cache"
+local Selectors = require "game.rules.player.selectors"
 
-local Player = {
-  actions = {},
-  selectors = {}
-}
+local Actions = {}
 
-Player.actions.types = {
-  LADDER_DOWN = "PLAYER_LADDER_DOWN",
-  LADDER_UP = "PLAYER_LADDER_UP",
-  MOVE = "PLAYER_MOVE",
-  OPEN_DOOR = "PLAYER_OPEN_DOOR"
-}
+Actions.types = require "game.rules.player.types"
 
-function Player.actions.add(position)
+function Actions.add(position)
   local c = Characters.create { position = position, isPlayerControlled = true }
   c.animator = Animator:new()
   c.animator:addAnimation("idle", characterIdle)
@@ -37,15 +28,15 @@ function Player.actions.add(position)
   return Characters.actions.add(c)
 end
 
-function Player.actions.equipItem(item)
-  local player = Player.selectors.getPlayer(store.getState())
+function Actions.equipItem(item)
+  local player = Selectors.getPlayer(store.getState())
   return Characters.actions.equipItem(player, item)
 end
 
-function Player.actions.ladderDown()
-  return Thunk(Player.actions.types.LADDER_DOWN, function(dispatch, getState)
+function Actions.ladderDown()
+  return Thunk(Actions.types.LADDER_DOWN, function(dispatch, getState)
     local state = getState()
-    local player = Player.selectors.getPlayer(state)
+    local player = Selectors.getPlayer(state)
     local ladder = World.selectors.getByPosition(state, player.position, "ladderDown")[1]
 
     if ladder then
@@ -54,10 +45,10 @@ function Player.actions.ladderDown()
   end)
 end
 
-function Player.actions.ladderUp()
-  return Thunk(Player.actions.types.LADDER_UP, function(dispatch, getState)
+function Actions.ladderUp()
+  return Thunk(Actions.types.LADDER_UP, function(dispatch, getState)
     local state = getState()
-    local player = Player.selectors.getPlayer(state)
+    local player = Selectors.getPlayer(state)
     local ladder = World.selectors.getByPosition(state, player.position, "ladderUp")[1]
 
     if ladder then
@@ -66,26 +57,26 @@ function Player.actions.ladderUp()
   end)
 end
 
-function Player.actions.move(direction)
-  return Thunk(Player.actions.types.MOVE, function(dispatch, getState)
-    local player = Player.selectors.getPlayer(getState())
+function Actions.move(direction)
+  return Thunk(Actions.types.MOVE, function(dispatch, getState)
+    local player = Selectors.getPlayer(getState())
 
     local newPos = direction(player.position)
     dispatch(Characters.actions.move(player, newPos))
   end)
 end
 
-function Player.actions.openDoor(orientation)
+function Actions.openDoor(orientation)
   return Thunk(
-    Player.actions.types.openDoor,
+    Actions.types.openDoor,
     function(dispatch, getState)
-      local player = Player.selectors.getPlayer(getState())
+      local player = Selectors.getPlayer(getState())
       local checkDoor = Position[orientation](player.position)
       local door = Door.selectors.getByPosition(getState(), checkDoor)
 
       if door then
         if door.locked then
-          if Player.selectors.hasItemOfKind(getState(), "keycard") then
+          if Selectors.hasItemOfKind(getState(), "keycard") then
             dispatch(Door.actions.unlock(door))
             dispatch(MessageLog.actions.add(Messages.movement.door.unlocked))
           else
@@ -99,35 +90,31 @@ function Player.actions.openDoor(orientation)
   )
 end
 
-function Player.actions.pickupItems()
+function Actions.pickupItems()
   return function(dispatch, getState)
-    local pc = Player.selectors.getPlayer(getState())
+    local pc = Selectors.getPlayer(getState())
 
     dispatch(Characters.actions.pickupItems(pc))
   end
 end
 
-function Player.selectors.getPlayer(state)
-  return Cache {
-    name = "GET_PLAYER",
-    source = function()
-      local result = World.selectors.getAllWithComponents(state, "isPlayerControlled")
-      return result[1]
+function Actions.enteredRoom(room)
+  return Thunk(
+    Actions.types.ENTERED_ROOM,
+    function(dispatch)
+      dispatch(MessageLog.actions.add(room.description))
+      dispatch(Actions.trackRoomVisit(room))
     end
+  )
+end
+
+function Actions.trackRoomVisit(room)
+  return {
+    type = Actions.types.TRACK_ROOM_VISIT,
+    payload = {
+      room = room
+    }
   }
 end
 
-function Player.selectors.hasItemOfKind(state, itemType)
-  local p = Player.selectors.getPlayer(state)
-
-  return tables.any(p.inventory, function(slot) return slot.item.key == itemType end)
-end
-
-function Player.selectors.getFieldOfView(state)
-  local FOV = require "game.rules.field_of_view"
-
-  local p = Player.selectors.getPlayer(state)
-  return FOV.selectors.get(state, p)
-end
-
-return Player
+return Actions

@@ -21,8 +21,8 @@ end
 
 local function thunk_dispatches(_, arguments)
   local store = require "moonpie.redux.store"
-  local expectedAction = arguments[2]
-  local thunk = arguments[1]
+  local expectedAction = arguments[1]
+  local thunk = arguments[2]
 
   local dispatcher = createDispatcher()
   thunk(dispatcher, store.getState)
@@ -38,9 +38,9 @@ end
 
 local function thunk_dispatches_type(_, arguments)
   local store = require "moonpie.redux.store"
-  local expectedType = arguments[2]
+  local expectedType = arguments[1]
   local expectedCount = arguments[3]
-  local thunk = arguments[1]
+  local thunk = arguments[2]
 
   local dispatcher = createDispatcher()
   thunk(dispatcher, store.getState)
@@ -56,12 +56,12 @@ local function thunk_dispatches_type(_, arguments)
   end) == expectedCount
 end
 
-say:set("assertion.thunk_dispatches.positive", "Expected Thunk(%s) to dispatch action: %s")
-say:set("assertion.thunk_dispatches.negative", "Expected Thunk(%s) to not dispatch action: %s")
+say:set("assertion.thunk_dispatches.positive", "Expected action %s to be dispatched from Thunk(%s)")
+say:set("assertion.thunk_dispatches.negative", "Expected action %s to not be dispatched from Thunk(%s)")
 assert:register("assertion", "thunk_dispatches", thunk_dispatches,
   "assertion.thunk_dispatches.positive", "assertion.thunk_dispatches.negative")
 
-say:set("assertion.thunk_dispatches_type.positive", "Expected Thunk(%s) to dispatch action: %s")
-say:set("assertion.thunk_dispatches_type.negative", "Expected Thunk(%s) to not dispatch action: %s")
+say:set("assertion.thunk_dispatches_type.positive", "Expected action type %s to be dispatched from Thunk(%s)")
+say:set("assertion.thunk_dispatches_type.negative", "Expected action type %s to not be dispatched from Thunk(%s)")
 assert:register("assertion", "thunk_dispatches_type", thunk_dispatches_type,
   "assertion.thunk_dispatches_type.positive", "assertion.thunk_dispatches_type.negative")

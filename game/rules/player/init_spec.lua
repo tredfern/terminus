@@ -46,7 +46,7 @@ describe("game.rules.player", function()
         }
       }
       local action = Player.actions.ladderDown()
-      assert.thunk_dispatches_type(action, "CHARACTER_MOVE")
+      assert.thunk_dispatches_type("CHARACTER_MOVE", action)
     end)
 
     it("moves up if there is a ladder in the current location", function()
@@ -58,7 +58,7 @@ describe("game.rules.player", function()
         }
       }
       local action = Player.actions.ladderUp()
-      assert.thunk_dispatches_type(action, "CHARACTER_MOVE")
+      assert.thunk_dispatches_type("CHARACTER_MOVE", action)
     end)
   end)
 
@@ -119,24 +119,24 @@ describe("game.rules.player", function()
 
     it("dispatches an open door action if there is a door available", function()
       local action = Player.actions.openDoor(Orientation.north)
-      assert.thunk_dispatches_type(action, "DOOR_OPEN")
+      assert.thunk_dispatches_type("DOOR_OPEN", action)
     end)
 
     it("does not dispatch an action if the door is missing", function()
       local action = Player.actions.openDoor(Orientation.north)
-      assert.not_thunk_dispatches(action, "DOOR_OPEN")
+      assert.not_thunk_dispatches("DOOR_OPEN", action)
     end)
 
     it("sends a message if the door is locked", function()
       local action = Player.actions.openDoor(Orientation.east)
-      assert.thunk_dispatches_type(action, "MESSAGE_LOG_ADD")
+      assert.thunk_dispatches_type("MESSAGE_LOG_ADD", action)
     end)
 
     it("unlocks a locked door if the player is carrying a key card", function()
       player.inventory = { { item = { key = "keycard" } } }
       local action = Player.actions.openDoor(Orientation.east)
 
-      assert.thunk_dispatches_type(action, "WORLD_ENTITY_UPDATE")
+      assert.thunk_dispatches_type("WORLD_ENTITY_UPDATE", action)
     end)
   end)
 

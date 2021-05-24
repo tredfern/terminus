@@ -24,7 +24,7 @@ describe("game.rules.fog_of_war.actions", function()
 
       local action = Actions.updatePerspective(perspective)
       assert.equals("FOG_OF_WAR_UPDATE_PERSPECTIVE", action.type)
-      assert.thunk_dispatches_type(action, "FOG_OF_WAR_UPDATE_POSITION")
+      assert.thunk_dispatches_type("FOG_OF_WAR_UPDATE_POSITION", action)
     end)
   end)
 

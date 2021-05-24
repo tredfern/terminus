@@ -108,20 +108,20 @@ describe("game.rules.game_state.actions", function()
     end)
 
     it("dispatch create character action for player character", function()
-      assert.thunk_dispatches(Actions.setup(), function(a)
+      assert.thunk_dispatches(function(a)
         return a.type == character.actions.types.ADD and
           a.payload.character.isPlayerControlled
-      end)
+      end, Actions.setup())
     end)
 
     it("adds some random enemies spawners", function()
-      assert.thunk_dispatches(Actions.setup(), function(c) return
+      assert.thunk_dispatches(function(c) return
         c.type == "ENTITY_ADD" and c.payload.entity.spawner
-      end)
+      end, Actions.setup())
     end)
 
     it("creates a map", function()
-      assert.thunk_dispatches_type(Actions.setup(), Map.actions.types.CREATE)
+      assert.thunk_dispatches_type(Map.actions.types.CREATE, Actions.setup())
     end)
   end)
 
@@ -132,7 +132,7 @@ describe("game.rules.game_state.actions", function()
     end)
 
     it("updates graphics", function()
-      assert.thunk_dispatches_type(Actions.updateFrame(), "GRAPHICS_UPDATE_FRAME")
+      assert.thunk_dispatches_type("GRAPHICS_UPDATE_FRAME", Actions.updateFrame())
     end)
   end)
 end)

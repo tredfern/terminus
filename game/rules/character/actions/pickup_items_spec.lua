@@ -37,6 +37,6 @@ describe("game.rules.character.actions.pickup_items", function()
     local c = { position = Position.new(17, 19) }
 
     local action = pickupItems(c)
-    assert.thunk_dispatches_type(action, "ENTITY_REMOVE")
+    assert.thunk_dispatches_type("ENTITY_REMOVE", action)
   end)
 end)

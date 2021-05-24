@@ -56,7 +56,7 @@ describe("game.rules.map.furniture.door", function()
       it("updates the door properties to be open", function()
         local action = Door.actions.open(closedDoor)
 
-        assert.thunk_dispatches(action, {
+        assert.thunk_dispatches({
           type = "WORLD_ENTITY_UPDATE",
           payload = {
             entity = closedDoor,
@@ -66,18 +66,18 @@ describe("game.rules.map.furniture.door", function()
               closed = false
             }
           }
-        })
+        }, action)
       end)
 
       it("plays a single shot of the opening animation", function()
         local action = Door.actions.open(closedDoor)
-        assert.thunk_dispatches(action, {
+        assert.thunk_dispatches({
           type = "ANIMATION_PLAY_ONCE",
           payload = {
             animator = closedDoor.animator,
             animation = "opening"
           }
-        })
+        }, action)
       end)
 
       it("does not open a door if it is already open", function()

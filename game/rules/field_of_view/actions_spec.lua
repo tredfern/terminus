@@ -21,7 +21,7 @@ describe("game.rules.field_of_view.actions", function()
     it("finds all entities with sight enabled and calculates their visibility maps", function()
       local action = Actions.calculateAll()
       assert.equals("FIELD_OF_VIEW_CALCULATE_ALL", action.type)
-      assert.thunk_dispatches_type(action, "FIELD_OF_VIEW_CALCULATE", 2)
+      assert.thunk_dispatches_type("FIELD_OF_VIEW_CALCULATE", action, 2)
     end)
   end)
 
@@ -32,7 +32,7 @@ describe("game.rules.field_of_view.actions", function()
 
       local action = Actions.calculate(entity, position, 3)
       assert.equals("FIELD_OF_VIEW_CALCULATE", action.type)
-      assert.thunk_dispatches_type(action, "FIELD_OF_VIEW_UPDATE")
+      assert.thunk_dispatches_type("FIELD_OF_VIEW_UPDATE", action)
     end)
   end)
 
