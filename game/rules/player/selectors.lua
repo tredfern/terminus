@@ -25,11 +25,18 @@ function Selectors.hasItemOfKind(state, itemType)
   return tables.any(p.inventory, function(slot) return slot.item.key == itemType end)
 end
 
+
 function Selectors.getFieldOfView(state)
   local FOV = require "game.rules.field_of_view"
 
   local p = Selectors.getPlayer(state)
   return FOV.selectors.get(state, p)
+end
+
+function Selectors.hasVisitedRoom(state, room)
+  if state and state.player and state.player.roomVisits then
+    return state.player.roomVisits[room]
+  end
 end
 
 return Selectors

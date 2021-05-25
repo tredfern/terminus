@@ -47,4 +47,21 @@ describe("game.rules.player.selectors", function()
       assert.is_false(Selectors.hasItemOfKind(state, "C"))
     end)
   end)
+
+  describe("SELECTOR: hasVisitedRoom", function()
+    it("returns true if the room has already been visited", function()
+      local room = {}
+      local nope = {}
+      local state = {
+        player = {
+          roomVisits = {
+            [room] = true
+          }
+        }
+      }
+
+      assert.is_true(Selectors.hasVisitedRoom(state, room))
+      assert.is_falsy(Selectors.hasVisitedRoom(state, nope))
+    end)
+  end)
 end)

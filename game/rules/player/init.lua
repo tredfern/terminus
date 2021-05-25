@@ -5,6 +5,7 @@
 
 local Player = {
   actions = require "game.rules.player.actions",
+  reducer = require "game.rules.player.reducer",
   selectors = require "game.rules.player.selectors"
 }
 

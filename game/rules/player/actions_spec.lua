@@ -46,7 +46,7 @@ describe("game.rules.player", function()
         }
       }
       local action = Actions.ladderDown()
-      assert.thunk_dispatches_type("CHARACTER_MOVE", action)
+      assert.thunk_dispatches_type("PLAYER_MOVE", action)
     end)
 
     it("moves up if there is a ladder in the current location", function()
@@ -58,7 +58,7 @@ describe("game.rules.player", function()
         }
       }
       local action = Actions.ladderUp()
-      assert.thunk_dispatches_type("CHARACTER_MOVE", action)
+      assert.thunk_dispatches_type("PLAYER_MOVE", action)
     end)
   end)
 
@@ -97,6 +97,15 @@ describe("game.rules.player", function()
     it("can move the character west", function()
       mockDispatch(Actions.move(Position.west))
       assert.spy(Characters.actions.move).was.called_with(playerCharacter, match.is_position(9, 10))
+    end)
+
+    it("dispatches entered room if room", function()
+      local Map = require "game.rules.map"
+      moonpie.utility.swapFunction(Map.selectors, "getTile", function() return { room = {} } end)
+
+      assert.thunk_dispatches_type("PLAYER_ENTERED_ROOM", Actions.move(Position.west))
+
+      Map.selectors.getTile:revert()
     end)
   end)
 
@@ -183,6 +192,13 @@ describe("game.rules.player", function()
           room = room
         }
       }, action)
+    end)
+
+    it("does nothing if room is nil", function()
+      assert.is_nil(Actions.enteredRoom(nil))
+    end)
+
+    it("does nothing if the room has already been visited", function()
     end)
   end)
 

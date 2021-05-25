@@ -40,7 +40,7 @@ function Actions.ladderDown()
     local ladder = World.selectors.getByPosition(state, player.position, "ladderDown")[1]
 
     if ladder then
-      dispatch(Characters.actions.move(player, Position.down(player.position)))
+      dispatch(Actions.move(Position.down(player.position)))
     end
   end)
 end
@@ -52,17 +52,24 @@ function Actions.ladderUp()
     local ladder = World.selectors.getByPosition(state, player.position, "ladderUp")[1]
 
     if ladder then
-      dispatch(Characters.actions.move(player, Position.up(player.position)))
+      dispatch(Actions.move(Position.up(player.position)))
     end
   end)
 end
 
 function Actions.move(direction)
+  local Map = require "game.rules.map"
   return Thunk(Actions.types.MOVE, function(dispatch, getState)
-    local player = Selectors.getPlayer(getState())
+    local state = getState()
+    local player = Selectors.getPlayer(state)
 
     local newPos = direction(player.position)
     dispatch(Characters.actions.move(player, newPos))
+
+    local newTile = Map.selectors.getTile(state, newPos)
+    if newTile then
+      dispatch(Actions.enteredRoom(newTile.room))
+    end
   end)
 end
 
@@ -99,9 +106,12 @@ function Actions.pickupItems()
 end
 
 function Actions.enteredRoom(room)
+  if room == nil then return end
+
   return Thunk(
     Actions.types.ENTERED_ROOM,
-    function(dispatch)
+    function(dispatch, getState)
+      if Selectors.hasVisitedRoom(getState(), room) then return end
       dispatch(MessageLog.actions.add(room.description))
       dispatch(Actions.trackRoomVisit(room))
     end

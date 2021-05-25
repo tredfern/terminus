@@ -179,7 +179,7 @@ end
 function generator.buildRoom(map, room)
   for x = 0, room.width - 1 do
     for y = 0, room.height - 1 do
-      map:updateTile(Position(room.x + x, room.y + y, room.level), { terrain = terrain.list.room })
+      map:updateTile(Position(room.x + x, room.y + y, room.level), { terrain = terrain.list.room, room = room })
     end
   end
 end
