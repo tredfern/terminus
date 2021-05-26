@@ -63,10 +63,21 @@ function Actions.create(width, height, generator)
     Actions.types.CREATE,
     function(dispatch)
       local levels = 10
+      dispatch(Actions.setDimensions(width, height, levels))
+
       local outline, tileMap = generator(width, height, levels)
       dispatch(Actions.add(outline, tileMap))
     end
   )
+end
+
+function Actions.setDimensions(width, height, levels)
+  return {
+    type = Actions.types.SET_DIMENSIONS,
+    payload = {
+      width = width, height = height, levels = levels
+    }
+  }
 end
 
 function Actions.setTileProperties(position, properties)

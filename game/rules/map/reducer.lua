@@ -56,6 +56,12 @@ local reducer = {
     end
 
     return state
+  end,
+  [types.SET_DIMENSIONS] = function(state, action)
+    state.width = action.payload.width
+    state.height = action.payload.height
+    state.levels = action.payload.levels
+    return state
   end
 }
 

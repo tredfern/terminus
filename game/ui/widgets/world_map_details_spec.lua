@@ -11,7 +11,7 @@ describe("game.ui.widgets.world_map_details", function()
   before_each(function()
     mockStore {
       characters = { { isPlayerControlled = true, position = Position(1, 3, 2) } },
-      map = { outline = { width = 100, height = 100, levels = 4 }}
+      map = { width = 100, height = 100, levels = 4 }
     }
   end)
 

@@ -6,14 +6,14 @@
 local Selectors = {}
 
 function Selectors.getDimensions(state)
-  if not state or not state.map or not state.map.outline then
+  if not state or not state.map then
     return { width = 0, height = 0, levels = 0 }
   end
 
   return {
-    width = state.map.outline.width,
-    height = state.map.outline.height,
-    levels = state.map.outline.levels
+    width = state.map.width,
+    height = state.map.height,
+    levels = state.map.levels
   }
 end
 

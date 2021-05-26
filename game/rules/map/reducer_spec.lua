@@ -83,4 +83,18 @@ describe("game.rules.map.reducer", function()
       assert.equals(t, state.tileMap[Position(10, 21, 2)])
     end)
   end)
+
+  describe("ACTION: setDimensions", function()
+    it("stores the expected size for the map", function()
+      local action = {
+        type = types.SET_DIMENSIONS,
+        payload = { width = 12, height = 18, levels = 8 }
+      }
+
+      local state = reducer({}, action)
+      assert.equals(12, state.width)
+      assert.equals(18, state.height)
+      assert.equals(8, state.levels)
+    end)
+  end)
 end)

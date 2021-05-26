@@ -18,10 +18,10 @@ describe("game.rules.map.selectors", function()
 
     state = {
       map = {
+        width = 200,
+        height = 328,
+        levels = 10,
         outline = {
-          width = 200,
-          height = 328,
-          levels = 10,
           rooms = {}
         },
         tileMap = map
@@ -40,6 +40,7 @@ describe("game.rules.map.selectors", function()
       local dims = Selectors.getDimensions({})
       assert.equals(0, dims.width)
       assert.equals(0, dims.height)
+      assert.equals(0, dims.levels)
     end)
 
     it("returns the number of levels in the map", function()
