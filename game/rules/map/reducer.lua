@@ -20,6 +20,12 @@ local function roomTile(room)
   }
 end
 
+local function corridorTile()
+  return {
+    terrain = Terrain.list.corridor
+  }
+end
+
 local reducer = {
   [types.ADD] = function(state, action)
     state.outline = action.payload.outline
@@ -39,6 +45,18 @@ local reducer = {
 
     return state
   end,
+  [types.ADD_CORRIDOR] = function(state, action)
+    ensureState(state)
+    local path = action.payload.corridor.path
+
+    for _, pos in ipairs(path) do
+      if state.tileMap[pos] == nil then
+        state.tileMap[pos] = corridorTile(pos)
+      end
+    end
+
+    return state
+  end
 }
 
 return createSlice(reducer)
