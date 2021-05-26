@@ -40,6 +40,24 @@ function Actions.add(outline, tileMap)
   }
 end
 
+function Actions.addCorridor(corridor)
+  return {
+    type = Actions.types.ADD_CORRIDOR,
+    payload = {
+      corridor = corridor
+    }
+  }
+end
+
+function Actions.addRoom(room)
+  return {
+    type = Actions.types.ADD_ROOM,
+    payload = {
+      room = room
+    }
+  }
+end
+
 function Actions.create(width, height, generator)
   return Thunk(
     Actions.types.CREATE,
@@ -49,6 +67,16 @@ function Actions.create(width, height, generator)
       dispatch(Actions.add(outline, tileMap))
     end
   )
+end
+
+function Actions.setTileProperties(position, properties)
+  return {
+    type = Actions.types.SET_TILE_PROPERTIES,
+    payload = {
+      position = position,
+      properties = properties
+    }
+  }
 end
 
 return Actions

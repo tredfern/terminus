@@ -56,7 +56,6 @@ function Actions.loadCoreData()
     function()
       require "assets.characters.skills"
       require "assets.characters.names"
-      require "assets.maps.terrains"
     end
   )
 end
