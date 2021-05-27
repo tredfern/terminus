@@ -14,6 +14,8 @@ local TileMap = require "game.rules.map.tile_map"
 local Walls = require "assets.graphics.walls"
 local Position = require "game.rules.world.position"
 local Orientation = require "game.rules.world.orientation"
+local Actions = require "game.rules.map.actions"
+local store = require "game.store"
 local generator = {}
 
 local MIN_SIZE_TO_DIVIDE = 8
@@ -86,6 +88,7 @@ function generator.create_rooms(node, outline, level)
 
   node.room = Rooms.rectangular(x, y, width, height, level)
   outline:addRoom(node.room)
+  store.dispatch(Actions.addRoom(node.room))
 end
 
 function generator.generate(width, height, levels)
@@ -123,7 +126,9 @@ function generator.create_corridors(node, outline, level)
     local end_x = love.math.random(end_room.x, end_room.x + end_room.width - 1)
     local end_y = love.math.random(end_room.y, end_room.y + end_room.height - 1)
 
-    outline:addCorridor(createCorridor(start_x, start_y, end_x, end_y, level))
+    local corridor = createCorridor(start_x, start_y, end_x, end_y, level)
+    outline:addCorridor(corridor)
+    store.dispatch(Actions.addCorridor(corridor))
   end
 end
 
@@ -169,6 +174,7 @@ function generator.fillWalls(map)
           local list = tables.keysToList(neighbors)
           if tables.any(list, function(tile) return tile.position.z == z and not tile.isWall end) then
             map:updateTile(pos, { terrain = terrain.list.wall, isWall = true })
+            store.dispatch(Actions.setTileProperties(pos, { terrain = terrain.list.wall, isWall = true }))
           end
         end
       end
@@ -196,7 +202,7 @@ function generator.calculateSprites(map)
           if tile.terrain.images then
             local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
             tileImage.color = tile.terrain.color
-            map:updateTile(Position(x, y, z), { sprite = tileImage })
+            store.dispatch(Actions.setTileProperties(Position(x, y, z), { sprite = tileImage }))
           end
           if tile.isWall then
             local sequence = { "n", "s", "e", "w" }
@@ -208,7 +214,7 @@ function generator.calculateSprites(map)
               end
             end
 
-            map:updateTile(Position(x, y, z), { sprite = Walls[index] })
+            store.dispatch(Actions.setTileProperties(Position(x, y, z), { sprite = Walls[index] }))
           end
         end
       end
@@ -224,9 +230,6 @@ function generator.getRandomLocation(outline)
 end
 
 function generator.addFeatures(outline, map)
-  local Actions = require "game.rules.map.actions"
-  local store = require "game.store"
-
   for _, r in ipairs(outline.rooms) do
     if not tables.isEmpty(r.features) then
       for _, f in ipairs(r.features) do
@@ -264,7 +267,7 @@ end
 
 function generator.addDoorMaybe(tile, orientation, neighbors)
   local Door = require "game.rules.map.furniture.door"
-  local store = require "game.store"
+
   local asWalls = function(n1, n2)
     return n1 and n2 and n1.terrain == terrain.list.wall and n2.terrain == terrain.list.wall
   end

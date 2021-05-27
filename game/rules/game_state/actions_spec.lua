@@ -101,10 +101,9 @@ describe("game.rules.game_state.actions", function()
     before_each(function()
       mockStore {
         map = {
-          outline = {
-            rooms = {
-              { x = 1, y = 1, width = 10, height = 10 }
-      } } } }
+          rooms = {
+            { x = 1, y = 1, width = 10, height = 10 }
+      } } }
     end)
 
     it("dispatch create character action for player character", function()

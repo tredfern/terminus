@@ -19,25 +19,31 @@ describe("game.rules.character.actions.set_position", function()
   end)
 
   it("is invalid if terrain blocks movement", function()
-    local sp = set_position({}, Position(5, 3))
+    local sp = set_position({}, Position(5, 3, 1))
     local map = {
-      getTerrain = function() return { blocksMovement = true } end
+      tiles = {
+        [Position(5, 3, 1)] = { terrain = { blocksMovement = true } }
+      }
     }
     assert.is_false(sp:validate({ map = map }))
   end)
 
   it("is valid if terrain allows movement", function()
-    local sp = set_position({}, Position(5, 3))
-    local map = {
-      tileMap = {
-        getTile = function() return { terrain = {} } end
+    local sp = set_position({}, Position(5, 3, 1))
+    local state = {
+      map = {
+        tiles = {
+          [Position(5, 3, 1)] = { terrain = {} }
+        }
       }
     }
-    assert.is_true(sp:validate({ map = map }))
+
+    assert.equals(Position(5, 3, 1), sp.payload.position)
+    assert.is_true(sp:validate(state))
   end)
 
   it("is invalid if an entity blocks movement", function()
-    local sp = set_position({}, Position(5, 4))
+    local sp = set_position({}, Position(5, 4, 1))
     local state = {
       map = {
         tileMap = {
@@ -45,7 +51,7 @@ describe("game.rules.character.actions.set_position", function()
         }
       },
       world = {
-        { blocksMovement = true, position = Position(5, 4) }
+        { blocksMovement = true, position = Position(5, 4, 1) }
       }
     }
     assert.is_false(sp:validate(state))

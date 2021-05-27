@@ -97,4 +97,19 @@ describe("game.rules.map.reducer", function()
       assert.equals(8, state.levels)
     end)
   end)
+
+  describe("ACTION: setTileProperties", function()
+    local action = {
+      type = types.SET_TILE_PROPERTIES,
+      payload = {
+        position = Position(1, 2, 3),
+        properties = { terrain = {} }
+      }
+    }
+
+    it("adds the property and tile map", function()
+      local state = reducer({}, action)
+      assert.equals(action.payload.properties.terrain, state.tiles[Position(1, 2, 3)].terrain)
+    end)
+  end)
 end)

@@ -66,7 +66,7 @@ local combat_map = components("combat_map", function(props)
         for y = self.camera.y, self.camera.y + tilesHigh do
           local p = Position(x, y, zLevel)
           if self.fieldOfView:isVisible(p) then
-            local tile = self.map.tileMap:getTile(p)
+            local tile = self.map.tiles[p]
             if tile and tile.sprite then
               local sx, sy = getScreenCoordinate(self.camera, x, y)
               tile.sprite:draw(sx, sy)

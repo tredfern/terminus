@@ -9,22 +9,18 @@ describe("game.rules.map.selectors", function()
   local state
 
   before_each(function()
-    local tileMap = require "game.rules.map.tile_map"
     local terrain = require "game.rules.map.terrain"
     terrain.describe { key = "grass" }
-
-    local map = tileMap:new()
-    map:updateTile(Position(5, 9, 2), { terrain = terrain.list.grass })
 
     state = {
       map = {
         width = 200,
         height = 328,
         levels = 10,
-        outline = {
-          rooms = {}
-        },
-        tileMap = map
+        rooms = {},
+        tiles = {
+          [Position(5, 9, 2)] = { terrain = terrain.list.grass }
+        }
       }
     }
   end)
@@ -51,7 +47,7 @@ describe("game.rules.map.selectors", function()
 
   describe("SELECTOR: getRooms", function()
     it("returns the rooms from the active map", function()
-      assert.equals(state.map.outline.rooms, Selectors.getRooms(state))
+      assert.equals(state.map.rooms, Selectors.getRooms(state))
     end)
   end)
 

@@ -18,22 +18,22 @@ function Selectors.getDimensions(state)
 end
 
 function Selectors.getRooms(state)
-  return state.map.outline.rooms
+  return state.map.rooms
 end
 
 
 function Selectors.getTerrain(state, position)
   local terrain = require "game.rules.map.terrain"
-  if state.map and state.map.tileMap then
-    local tile = state.map.tileMap:getTile(position)
+  if state.map and state.map.tiles then
+    local tile = state.map.tiles[position]
     if tile then return tile.terrain end
   end
   return terrain.list.blank
 end
 
 function Selectors.getTile(state, position)
-  if state.map and state.map.tileMap then
-    return state.map.tileMap:getTile(position)
+  if state.map and state.map.tiles then
+    return state.map.tiles[position]
   end
 end
 
