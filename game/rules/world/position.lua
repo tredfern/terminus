@@ -3,6 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local maths = require "moonpie.math"
 local readOnly = require "moonpie.utility.read_only_table"
 local Position = {}
 local hashDB = {}
@@ -72,6 +73,12 @@ function Position.new(x, y, z)
     z = z or 0,
     hashKey = Position.createHashKey(x, y, z)
   }
+
+  -- Add in a nice to string implementation
+  local mt = getmetatable(p)
+  mt.__tostring = function(self)
+    return string.format("Pos(%d, %d, %d)", self.x, self.y, self.z)
+  end
   Position.cache(p)
   hashDB[p.hashKey] = p
 
@@ -142,8 +149,35 @@ function Position.randomInRoom(room)
   )
 end
 
+function Position.box(from, to)
+  local stepX = maths.sign(to.x - from.x)
+  local stepY = maths.sign(to.y - from.y)
+  local stepZ = maths.sign(to.z - from.z)
+  local next = from
+
+  return function()
+    if next == nil then return nil end
+    local out = next
+
+    if next.x ~= to.x then
+      next = Position(next.x + stepX, next.y, next.z)
+    elseif next.y ~= to.y then
+      next = Position(from.x, next.y + stepY, next.z)
+    elseif next.z ~= to.z then
+      next = Position(from.x, from.y, next.z + stepZ)
+    else
+      next = nil
+    end
+
+    return out
+  end
+end
+
 return setmetatable(Position, {
   __call = function(self, x, y, z)
     return self.new(x, y, z)
+  end,
+  __tostring = function(self)
+    return string.format("Pos(%d, %d, %d)", self.x, self.y, self.z)
   end
 })
