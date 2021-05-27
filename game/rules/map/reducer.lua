@@ -9,8 +9,8 @@ local Position = require "game.rules.world.position"
 local Terrain = require "game.rules.map.terrain"
 
 local function ensureState(state)
-  state.outline = state.outline or { rooms = {} }
-  state.tileMap = state.tileMap or {}
+  state.rooms = state.rooms or { }
+  state.tiles = state.tiles or { }
 end
 
 local function roomTile(room)
@@ -35,11 +35,11 @@ local reducer = {
   [types.ADD_ROOM] = function(state, action)
     ensureState(state)
     local room = action.payload.room
-    table.insert(state.outline.rooms, room)
+    table.insert(state.rooms, room)
 
     for x=room.x, room.x + room.width do
       for y= room.y, room.y + room.height do
-        state.tileMap[Position(x, y, room.level)] = roomTile(room)
+        state.tiles[Position(x, y, room.level)] = roomTile(room)
       end
     end
 
@@ -50,8 +50,8 @@ local reducer = {
     local path = action.payload.corridor.path
 
     for _, pos in ipairs(path) do
-      if state.tileMap[pos] == nil then
-        state.tileMap[pos] = corridorTile(pos)
+      if state.tiles[pos] == nil then
+        state.tiles[pos] = corridorTile(pos)
       end
     end
 
