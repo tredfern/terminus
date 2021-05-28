@@ -28,6 +28,20 @@ local create_character = components("create_character", function(props)
     id = "create_character_screen",
     fullScreenPanel {
       title = "Create Character",
+      actions = {
+        components.button {
+          id = "button_done",
+          caption = "Done",
+          style = "button-primary",
+          click = function()
+            store.dispatch(character.actions.setName(
+              editCharacter,
+              character_name:get_text()
+            ))
+            app.gameStart()
+          end
+        },
+      },
       contents = {
         padding = 6,
         {
@@ -50,21 +64,6 @@ local create_character = components("create_character", function(props)
         {
           { components.h3 { text = "Skills" } },
           characterSkills { id = "characterSkills", character = editCharacter }
-        },
-        {
-          margin = 4,
-          components.button {
-            id = "button_done",
-            caption = "Done",
-            style = "align-right",
-            click = function()
-              store.dispatch(character.actions.setName(
-                editCharacter,
-                character_name:get_text()
-              ))
-              app.gameStart()
-            end
-          },
         },
       }
     },

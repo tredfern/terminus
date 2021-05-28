@@ -20,6 +20,26 @@ styles.button = moonpie.tables.merge({
   styles.button
 )
 
+styles["button-primary"] = {
+  backgroundColor = "primary",
+  color = "dark_shade",
+ _hover_ = {
+    backgroundColor = colors.lighten(colors("primary"), 1.2)
+  }
+}
+
+styles.button_bar = {
+  display = "inline",
+  align = "right",
+  margin = { right = 15 }
+}
+
+styles.button_bar_button = {
+  borderColor = "dark_accent",
+  border = 1,
+  padding = { left = 5, right = 5, top = 2, bottom = 2 },
+}
+
 styles.button_increment = {
   padding = 3,
   cornerRadiusX = 0,
@@ -66,8 +86,8 @@ styles.full_screen_panel_title_text = {
   fontSize = 24,
   color = "light_shade",
   margin = { left = 25 },
-  padding = { left = 6, right = 6, top = 4, bottom = 2 },
-  backgroundColor = "background"
+  padding = { left = 9, right = 9, top = 6, bottom = 6 },
+  backgroundColor = "background",
 }
 
 styles.full_screen_panel_contents = {

@@ -27,6 +27,8 @@ local gameOver = Components("gameOverScreen", function(props)
       contents = {
         result(props.victory),
         Statistics(),
+      },
+      actions = {
         Components.button { id = "btnTitleScreen", caption = "Back to Title", click = app.title },
       }
     }

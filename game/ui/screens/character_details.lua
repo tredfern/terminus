@@ -22,6 +22,9 @@ local CharacterDetails = Components("character_details", function(props)
     FullScreenPanel {
       id = "screenPanel",
       title = props.characterName,
+      actions = {
+        Components.button { id = "btnClose", caption = "Close", click = app.combat }
+      },
       contents = {
         {
           style = "character-details-panel",
@@ -49,7 +52,6 @@ local CharacterDetails = Components("character_details", function(props)
             },
           }
         },
-        Components.button { id = "btnClose", caption = "Close", click = app.combat }
       }
     },
 

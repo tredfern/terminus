@@ -22,4 +22,15 @@ describe("game.ui.widgets.full_screen_panel", function()
 
     assert.not_nil(panel:findByID("some-child-component"))
   end)
+
+  it("can take some actions that should be render in the title", function()
+    local Components = require "moonpie.ui.components"
+    local a1, a2 = Components.button { id = "action1" }, Components.button { id = "action2" }
+    local panel = fullScreenPanel {
+      actions = { a1, a2 }
+    }
+
+    assert.not_nil(panel:findByID("action1"))
+    assert.not_nil(panel:findByID("action2"))
+  end)
 end)
