@@ -65,4 +65,39 @@ describe("game.rules.map.selectors", function()
       assert.not_nil(t)
     end)
   end)
+
+  describe("SELECTOR: getNeighbors", function()
+    it("returns the tiles that surround a specific point", function()
+      local state2 = {
+        map = {
+          tiles = {
+            [Position(1, 1, 1)] = { id = 1 },
+            [Position(2, 1, 1)] = { id = 2 },
+            [Position(3, 1, 1)] = { id = 3 },
+            [Position(1, 2, 1)] = { id = 4 },
+            [Position(2, 2, 1)] = { id = 5 },
+            [Position(3, 2, 1)] = { id = 6 },
+            [Position(1, 3, 1)] = { id = 7 },
+            [Position(2, 3, 1)] = { id = 8 },
+            [Position(3, 3, 1)] = { id = 9 },
+            [Position(2, 2, 0)] = { id = 10 },
+            [Position(2, 2, 2)] = { id = 11 },
+          }
+        }
+      }
+
+      local neighbors = Selectors.getNeighbors(state2, Position(2, 2, 1))
+      assert.equals(1, neighbors.nw.id)
+      assert.equals(2, neighbors.n.id)
+      assert.equals(3, neighbors.ne.id)
+      assert.equals(4, neighbors.w.id)
+      assert.equals(5, neighbors.center.id)
+      assert.equals(6, neighbors.e.id)
+      assert.equals(7, neighbors.sw.id)
+      assert.equals(8, neighbors.s.id)
+      assert.equals(9, neighbors.se.id)
+      assert.equals(10, neighbors.down.id)
+      assert.equals(11, neighbors.up.id)
+    end)
+  end)
 end)

@@ -3,6 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local Position = require "game.rules.world.position"
 local Selectors = {}
 
 function Selectors.getDimensions(state)
@@ -15,6 +16,24 @@ function Selectors.getDimensions(state)
     height = state.map.height,
     levels = state.map.levels
   }
+end
+
+function Selectors.getNeighbors(state, position)
+  if state.map and state.map.tiles then
+    return {
+      nw = state.map.tiles[Position.northwest(position)],
+      n = state.map.tiles[Position.north(position)],
+      ne = state.map.tiles[Position.northeast(position)],
+      w = state.map.tiles[Position.west(position)],
+      center = state.map.tiles[position],
+      e = state.map.tiles[Position.east(position)],
+      sw = state.map.tiles[Position.southwest(position)],
+      s = state.map.tiles[Position.south(position)],
+      se = state.map.tiles[Position.southeast(position)],
+      down = state.map.tiles[Position.down(position)],
+      up = state.map.tiles[Position.up(position)]
+    }
+  end
 end
 
 function Selectors.getRooms(state)

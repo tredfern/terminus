@@ -9,6 +9,4 @@ return {
     dungeon = require "game.rules.map.generators.dungeon"
   },
   selectors = require "game.rules.map.selectors",
-  tileMap = require "game.rules.map.tile_map",
-  outline = require "game.rules.map.outline"
 }

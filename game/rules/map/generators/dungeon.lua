@@ -9,12 +9,11 @@ local terrain = require "game.rules.map.terrain"
 local createCorridor = require "game.rules.map.generators.corridor"
 local Rooms = require "game.rules.map.rooms"
 local placeItems = require "game.rules.map.generators.place_items"
-local Outline = require "game.rules.map.outline"
-local TileMap = require "game.rules.map.tile_map"
 local Walls = require "assets.graphics.walls"
 local Position = require "game.rules.world.position"
 local Orientation = require "game.rules.world.orientation"
 local Actions = require "game.rules.map.actions"
+local Selectors = require "game.rules.map.selectors"
 local store = require "game.store"
 local generator = {}
 
@@ -73,10 +72,10 @@ function generator.divide(node, current_level, max_levels)
   return node
 end
 
-function generator.create_rooms(node, outline, level)
+function generator.create_rooms(node, level)
   if node.left or node.right then
-    generator.create_rooms(node.left, outline, level)
-    generator.create_rooms(node.right, outline, level)
+    generator.create_rooms(node.left, level)
+    generator.create_rooms(node.right, level)
     return
   end
 
@@ -87,32 +86,32 @@ function generator.create_rooms(node, outline, level)
   local y = node.y + love.math.random(node.height - height)
 
   node.room = Rooms.rectangular(x, y, width, height, level)
-  outline:addRoom(node.room)
   store.dispatch(Actions.addRoom(node.room))
 end
 
 function generator.generate(width, height, levels)
-  local outline = Outline:new(width, height, levels)
-
   for level = 1, levels do
     local root = generator.create_node(1, 1, width, height)
     generator.divide(root, 1, DEPTH)
-    generator.create_rooms(root, outline, level)
-    generator.create_corridors(root, outline, level)
+    generator.create_rooms(root, level)
+    generator.create_corridors(root, level)
 
     -- Connect to lower floor
-    generator.connectLevels(outline, level, level - 1)
+    generator.connectLevels(level, level - 1)
   end
-  local tileMap = generator.buildTileMap(outline)
-  placeItems(outline, tileMap)
-  return outline, tileMap
+
+  generator.fillWalls(width, height, levels)
+  generator.calculateSprites(width, height, levels)
+  placeItems()
+  generator.addFeatures()
+
 end
 
 
-function generator.create_corridors(node, outline, level)
+function generator.create_corridors(node, level)
   if node.left or node.right then
-    generator.create_corridors(node.left, outline, level)
-    generator.create_corridors(node.right, outline, level)
+    generator.create_corridors(node.left, level)
+    generator.create_corridors(node.right, level)
   end
 
   --Connect the left and right nodes together...
@@ -127,7 +126,6 @@ function generator.create_corridors(node, outline, level)
     local end_y = love.math.random(end_room.y, end_room.y + end_room.height - 1)
 
     local corridor = createCorridor(start_x, start_y, end_x, end_y, level)
-    outline:addCorridor(corridor)
     store.dispatch(Actions.addCorridor(corridor))
   end
 end
@@ -135,102 +133,51 @@ end
 ---
 -- Moving soon
 ---
-
-function generator.buildTileMap(outline)
-  local map = TileMap:new()
-
-  for _, room in ipairs(outline.rooms) do
-    generator.buildRoom(map, room)
-  end
-
-  for _, corridor in ipairs(outline.corridors) do
-    generator.buildCorridor(map, corridor)
-  end
-
-  generator.fillWalls(map)
-  generator.calculateSprites(map)
-  generator.addFeatures(outline, map)
-
-  return map
-end
-
-function generator.buildCorridor(map, corridor)
-  for _, square in ipairs(corridor.path) do
-    local p = Position(square.x, square.y, corridor.level)
-    local tile = map:getTile(p)
-    if tile == nil or tile.terrain == nil then
-      map:updateTile(p, { terrain = terrain.list.corridor })
-    end
-  end
-end
-
-function generator.fillWalls(map)
-  for x = 1, map.width do
-    for y = 1, map.height do
-      for z = 1, map.levels do
-        local pos = Position(x, y, z)
-        if map:getTile(pos) == nil then
-          local neighbors = map:getNeighbors(pos)
-          local list = tables.keysToList(neighbors)
-          if tables.any(list, function(tile) return tile.position.z == z and not tile.isWall end) then
-            map:updateTile(pos, { terrain = terrain.list.wall, isWall = true })
-            store.dispatch(Actions.setTileProperties(pos, { terrain = terrain.list.wall, isWall = true }))
-          end
-        end
+function generator.fillWalls(width, height, levels)
+  for pos in Position.box(Position(1, 1, 1), Position(width, height, levels)) do
+    if Selectors.getTile(store.getState(), pos) == nil then
+      local neighbors = Selectors.getNeighbors(store.getState(), pos)
+      local list = tables.keysToList(neighbors)
+      if tables.any(list, function(tile) return tile.position.z == pos.z and not tile.isWall end) then
+        store.dispatch(Actions.setTileProperties(
+          pos,
+          { terrain = terrain.list.wall, isWall = true, blocksMovement = true }
+        ))
       end
     end
   end
 end
 
-function generator.buildRoom(map, room)
-  for x = 0, room.width - 1 do
-    for y = 0, room.height - 1 do
-      map:updateTile(Position(room.x + x, room.y + y, room.level), { terrain = terrain.list.room, room = room })
-    end
-  end
-end
-
-function generator.calculateSprites(map)
+function generator.calculateSprites(width, height, levels)
   local sprite = require "game.rules.graphics.sprite"
-  for x = 1, map.width do
-    for y=1,map.height do
-      for z = 1,map.levels do
-        local tile = map:getTile(Position(x, y, z))
-        local neighbors = map:getNeighbors(Position(x, y, z))
+  for pos in Position.box(Position(1, 1, 1), Position(width, height, levels)) do
+    local neighbors = Selectors.getNeighbors(store.getState(), pos)
+    local tile = neighbors.center
+    if tile and tile.terrain then
+      if tile.terrain.images then
+        local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
+        tileImage.color = tile.terrain.color
+        store.dispatch(Actions.setTileProperties(pos, { sprite = tileImage }))
+      end
+      if tile.isWall then
+        local sequence = { "n", "s", "e", "w" }
+        local index = ""
 
-        if tile and tile.terrain then
-          if tile.terrain.images then
-            local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
-            tileImage.color = tile.terrain.color
-            store.dispatch(Actions.setTileProperties(Position(x, y, z), { sprite = tileImage }))
-          end
-          if tile.isWall then
-            local sequence = { "n", "s", "e", "w" }
-            local index = ""
-
-            for _, v in ipairs(sequence) do
-              if neighbors[v] and neighbors[v].isWall then
-                index = index .. v
-              end
-            end
-
-            store.dispatch(Actions.setTileProperties(Position(x, y, z), { sprite = Walls[index] }))
+        for _, v in ipairs(sequence) do
+          if neighbors[v] and neighbors[v].isWall then
+            index = index .. v
           end
         end
+
+        store.dispatch(Actions.setTileProperties(pos, { sprite = Walls[index] }))
       end
     end
   end
 end
 
-function generator.getRandomLocation(outline)
-  local r = tables.pickRandom(outline.rooms)
-  local x = math.random(r.x, r.x + r.width)
-  local y = math.random(r.y, r.y + r.height)
-  return x, y, r.level
-end
-
-function generator.addFeatures(outline, map)
-  for _, r in ipairs(outline.rooms) do
+function generator.addFeatures()
+  local rooms = Selectors.getRooms(store.getState())
+  for _, r in ipairs(rooms) do
     if not tables.isEmpty(r.features) then
       for _, f in ipairs(r.features) do
         if f.type == "LADDER_UP" then
@@ -242,26 +189,27 @@ function generator.addFeatures(outline, map)
     end
 
     -- search parameter to find where corridor joins room and add a door
-
+    local top, bottom = r.y - 1, r.y + r.height + 1
     for x = r.x, r.x + r.width do
-      local top, bottom = r.y - 1, r.y + r.height
-      local t = map:getTile(Position(x, top, r.level))
-      local b = map:getTile(Position(x, bottom, r.level))
+      local t = Selectors.getTile(store.getState(), Position(x, top, r.level))
+      local b = Selectors.getTile(store.getState(), Position(x, bottom, r.level))
 
-      generator.addDoorMaybe(t, Orientation.northSouth, map:getNeighbors(Position(x, top, r.level)))
-      generator.addDoorMaybe(b, Orientation.northSouth, map:getNeighbors(Position(x, bottom, r.level)))
+      generator.addDoorMaybe(t, Orientation.northSouth,
+        Selectors.getNeighbors(store.getState(), Position(x, top, r.level)))
+      generator.addDoorMaybe(b, Orientation.northSouth,
+        Selectors.getNeighbors(store.getState(), Position(x, bottom, r.level)))
     end
 
+    local left, right = r.x - 1, r.x + r.width + 1
     for y = r.y, r.y + r.height do
-      local left, right = r.x - 1, r.x + r.width
+      local ld = Selectors.getTile(store.getState(), Position(left, y, r.level))
+      local rd = Selectors.getTile(store.getState(), Position(right, y, r.level))
 
-      local ld = map:getTile(Position(left, y, r.level))
-      local rd = map:getTile(Position(right, y, r.level))
-
-      generator.addDoorMaybe(ld, Orientation.eastWest, map:getNeighbors(Position(left, y, r.level)))
-      generator.addDoorMaybe(rd, Orientation.eastWest, map:getNeighbors(Position(right, y, r.level)))
+      generator.addDoorMaybe(ld, Orientation.eastWest,
+        Selectors.getNeighbors(store.getState(), Position(left, y, r.level)))
+      generator.addDoorMaybe(rd, Orientation.eastWest,
+        Selectors.getNeighbors(store.getState(), Position(right, y, r.level)))
     end
-
   end
 end
 
@@ -269,7 +217,7 @@ function generator.addDoorMaybe(tile, orientation, neighbors)
   local Door = require "game.rules.map.furniture.door"
 
   local asWalls = function(n1, n2)
-    return n1 and n2 and n1.terrain == terrain.list.wall and n2.terrain == terrain.list.wall
+    return n1 and n2 and n1.isWall and n2.isWall
   end
 
   if tile and tile.terrain == terrain.list.corridor then
@@ -293,9 +241,10 @@ function generator.addDoorMaybe(tile, orientation, neighbors)
   end
 end
 
-function generator.connectLevels(outline, start, dest)
-  local roomsOnSourceLevel = tables.select(outline.rooms, function(r) return r.level == start end)
-  local roomsOnDestLevel = tables.select(outline.rooms, function(r) return r.level == dest end)
+function generator.connectLevels(start, dest)
+  local rooms = Selectors.getRooms(store.getState())
+  local roomsOnSourceLevel = tables.select(rooms, function(r) return r.level == start end)
+  local roomsOnDestLevel = tables.select(rooms, function(r) return r.level == dest end)
 
   -- find an overlapping room
   local startRoom, destRoom, startRect

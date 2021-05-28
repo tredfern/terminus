@@ -7,10 +7,11 @@ local tables = require "moonpie.tables"
 local Store = require "game.store"
 local Items = require "game.rules.items"
 local Position = require "game.rules.world.position"
+local Selectors = require "game.rules.map.selectors"
 
 
-return function(outline)
-  local rooms = outline.rooms
+return function()
+  local rooms = Selectors.getRooms(Store.getState())
 
   for _=1,40 do
     local r = tables.pickRandom(rooms)

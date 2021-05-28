@@ -30,8 +30,6 @@ describe("game.serializer", function()
 
   it("can serialize and deserialize a realistic looking store", function()
     local character = require "game.rules.character"
-    local map = require "game.rules.map"
-    local Position = require "game.rules.world.position"
 
     local state = {
       characters = {
@@ -40,13 +38,11 @@ describe("game.serializer", function()
         character.create()
       },
       map = {
-        tileMap = map.tileMap:new(),
-        outline = map.outline:new()
       }
     }
 
     local s = serializer.serialize(state)
     local out = serializer.deserialize(s)[1]
-    assert.has_no_errors(function() out.map.tileMap:getTile(Position(30, 29)) end)
+    assert.equals(3, #out.characters)
   end)
 end)

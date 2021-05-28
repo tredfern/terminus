@@ -14,17 +14,10 @@ local function ensureState(state)
   state.tiles = state.tiles or { }
 end
 
-local function roomTile(room)
-  return {
-    terrain = Terrain.list.room,
-    room = room
-  }
-end
-
-local function corridorTile()
-  return {
-    terrain = Terrain.list.corridor
-  }
+local function setTileProps(state, pos, props)
+  local t = state.tiles[pos] or { position = pos }
+  tables.copyKeys(props, t, true)
+  state.tiles[pos] = t
 end
 
 local reducer = {
@@ -40,7 +33,8 @@ local reducer = {
 
     for x=room.x, room.x + room.width do
       for y= room.y, room.y + room.height do
-        state.tiles[Position(x, y, room.level)] = roomTile(room)
+        local pos = Position(x, y, room.level)
+        setTileProps(state, pos, { terrain = Terrain.list.room, room = room })
       end
     end
 
@@ -52,7 +46,7 @@ local reducer = {
 
     for _, pos in ipairs(path) do
       if state.tiles[pos] == nil then
-        state.tiles[pos] = corridorTile(pos)
+        setTileProps(state, pos, { terrain = Terrain.list.corridor })
       end
     end
 
@@ -67,8 +61,7 @@ local reducer = {
   [types.SET_TILE_PROPERTIES] = function(state, action)
     ensureState(state)
     local pos, props = action.payload.position, action.payload.properties
-    state.tiles[pos] = state.tiles[pos] or {}
-    tables.copyKeys(props, state.tiles[pos], true)
+    setTileProps(state, pos, props)
     return state
   end
 }
