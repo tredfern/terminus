@@ -21,7 +21,7 @@ describe("game.ui.world_map", function()
 
   it("returns to the main screen if the tab key is pushed", function()
     local App = require "game.app"
-    spy.on(App, "combat")
+    spy.on(App, "mainScreen")
 
     local Moonpie = require "moonpie"
     Moonpie.testRender(WorldMap())
@@ -29,12 +29,12 @@ describe("game.ui.world_map", function()
     local Keyboard = require "moonpie.keyboard"
     Keyboard:keyPressed("tab")
 
-    assert.spy(App.combat).was.called()
+    assert.spy(App.mainScreen).was.called()
   end)
 
   it("also closes on tab key", function()
     local App = require "game.app"
-    spy.on(App, "combat")
+    spy.on(App, "mainScreen")
 
     local Moonpie = require "moonpie"
     Moonpie.testRender(WorldMap())
@@ -42,6 +42,6 @@ describe("game.ui.world_map", function()
     local Keyboard = require "moonpie.keyboard"
     Keyboard:keyPressed("tab")
 
-    assert.spy(App.combat).was.called()
+    assert.spy(App.mainScreen).was.called()
   end)
 end)

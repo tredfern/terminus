@@ -29,7 +29,7 @@ local WorldMap = Components("world_map", function()
 
     closeScreen = function()
       local App = require "game.app"
-      App.combat()
+      App.mainScreen()
     end,
 
     mounted = function(self)

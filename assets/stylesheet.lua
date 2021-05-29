@@ -31,13 +31,16 @@ styles["button-primary"] = {
 styles.button_bar = {
   display = "inline",
   align = "right",
-  margin = { right = 15 }
+  margin = { right = 15 },
+  padding = 0
 }
 
 styles.button_bar_button = {
   borderColor = "dark_accent",
-  border = 1,
-  padding = { left = 5, right = 5, top = 2, bottom = 2 },
+  border = 5,
+  padding = { left = 5, right = 5, top = 5, bottom = 5 },
+  margin = 0,
+  cornerRadiusX = 0, cornerRadiusY = 0
 }
 
 styles.button_increment = {
@@ -86,7 +89,7 @@ styles.full_screen_panel_title_text = {
   fontSize = 24,
   color = "light_shade",
   margin = { left = 25 },
-  padding = { left = 9, right = 9, top = 6, bottom = 6 },
+  padding = { left = 9, right = 9, top = 10, bottom = 5 },
   backgroundColor = "background",
 }
 
