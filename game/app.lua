@@ -42,7 +42,7 @@ end
 -- Main Screens
 
 function app.achievements()
-  local achievements = require "game.ui.screens.achievements"
+  local achievements = require "game.ui.achievements"
   app.render(achievements())
 end
 
@@ -51,7 +51,7 @@ function app.continue()
   local loadSave = serializer.load(saveGameName)
 
   store.reset(loadSave)
-  app.combat()
+  app.mainScreen()
 end
 
 function app.gameMenu()
@@ -92,15 +92,15 @@ function app.gameOver()
   app.render(gameOver())
 end
 
-function app.combat()
-  local combat = require "game.ui.screens.combat"
-  app.render(combat())
+function app.mainScreen()
+  local mainScreen = require "game.ui.main_screen"
+  app.render(mainScreen())
 end
 
 -- Character Screens
 
 function app.characterDetails()
-  local CharacterDetails = require "game.ui.screens.character_details"
+  local CharacterDetails = require "game.ui.character_details"
   app.render(CharacterDetails())
 end
 

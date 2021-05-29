@@ -4,7 +4,17 @@
 -- https://opensource.org/licenses/MIT
 
 local Components = require "moonpie.ui.components"
-local ButtonBar = require "game.ui.widgets.button_bar"
+
+local ButtonBar = Components("button_bar", function(props)
+  local c = {}
+  if props.buttons then
+    for _, btn in ipairs(props.buttons) do
+      btn:addStyle("button_bar_button")
+      table.insert(c, btn)
+    end
+  end
+  return c
+end)
 
 local Title = Components("full_screen_panel_title", function(props)
   return {

@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.combat", function()
-  local combat_screen = require "game.ui.screens.combat"
+describe("game.ui.main_screen", function()
+  local mainScreen = require "game.ui.main_screen"
   local moonpie = require "moonpie"
   local mockStore = require "moonpie.test_helpers.mock_store"
   mockStore({
@@ -15,11 +15,11 @@ describe("game.ui.screens.combat", function()
   })
 
   it("creates a component", function()
-    assert.is_table(combat_screen())
+    assert.is_table(mainScreen())
   end)
 
   it("renders a map", function()
-    assert.contains_component("combat_map", combat_screen())
+    assert.contains_component("combat_map", mainScreen())
   end)
 
   describe("keyboard configuration", function()
@@ -28,11 +28,10 @@ describe("game.ui.screens.combat", function()
     spy.on(keyboard_map, "disableCombatMap")
 
     it("assigns and removes it's hotkeys on mounting and unmounting", function()
-      moonpie.testRender(combat_screen())
+      moonpie.testRender(mainScreen())
       assert.spy(keyboard_map.enableCombatMap).was.called()
       moonpie.testRender(nil)
       assert.spy(keyboard_map.disableCombatMap).was.called()
     end)
-
   end)
 end)

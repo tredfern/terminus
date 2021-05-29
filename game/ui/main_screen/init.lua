@@ -11,11 +11,11 @@ local character_stats = require "game.ui.widgets.character_stats"
 local message_log = require "game.ui.widgets.message_log"
 local scoreboard = require "game.ui.widgets.scoreboard"
 
-local combat_screen = components("combat_screen", function()
+local mainScreen = components("main_screen", function()
   return {
-    id = "combat_screen",
+    id = "main_screen",
     {
-      style = "main_screen",
+      style = "map_view",
       map_component(),
       message_log(),
     }, {
@@ -39,4 +39,4 @@ local combat_screen = components("combat_screen", function()
   }
 end)
 
-return combat_screen
+return mainScreen

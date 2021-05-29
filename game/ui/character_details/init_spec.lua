@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.ui.screens.character_details", function()
-  local CharacterDetails = require "game.ui.screens.character_details"
+  local CharacterDetails = require "game.ui.character_details"
   local mockStore = require "moonpie.test_helpers.mock_store"
 
   before_each(function()

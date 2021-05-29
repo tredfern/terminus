@@ -17,7 +17,9 @@ local GameStart = Components("game_start_screen", function()
       title = "The Beginning",
       contents = {
         { Components.text { style = "align-center", text = introStory.text }, margin = 10},
-        Components.button { id = "btnStart", caption = "Start", click = App.combat, style = "align-center" }
+        Components.button {
+          id = "btnStart", caption = "Start", click = App.mainScreen, style = "align-center button-primary"
+        }
       }
     }
   }

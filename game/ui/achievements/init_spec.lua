@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.ui.screens.achievements", function()
-  local Achievements = require "game.ui.screens.achievements"
+  local Achievements = require "game.ui.achievements"
 
   it("creates a component", function()
     local s = Achievements()

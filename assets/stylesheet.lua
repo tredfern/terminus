@@ -110,9 +110,9 @@ styles.logo_text = {
   color = colors.light_shade
 }
 
-styles["main_screen"] = {
+styles.map_view = {
   width = "75%",
-  height = "100%"
+  height = "100%",
 }
 
 styles.main_menu = {
