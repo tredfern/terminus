@@ -8,7 +8,7 @@ local map_component = require "game.ui.widgets.combat_map"
 local keyboard_map = require 'game.ui.inputs.keyboard_map'
 local turn_counter = require "game.ui.widgets.turn_counter"
 local character_stats = require "game.ui.widgets.character_stats"
-local message_log = require "game.ui.widgets.message_log"
+local message_log = require "game.ui.main_screen.message_log"
 local scoreboard = require "game.ui.widgets.scoreboard"
 
 local mainScreen = components("main_screen", function()

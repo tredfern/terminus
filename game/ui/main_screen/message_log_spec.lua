@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.widgets.message_log", function()
-  local message_log = require "game.ui.widgets.message_log"
+describe("game.ui.main_screen.message_log", function()
+  local message_log = require "game.ui.main_screen.message_log"
   local mockStore = require "moonpie.test_helpers.mock_store"
 
   before_each(function()
