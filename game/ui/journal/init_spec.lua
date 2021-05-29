@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.journal", function()
-  local Journal = require "game.ui.screens.journal"
+describe("game.ui.journal", function()
+  local Journal = require "game.ui.journal"
 
   it("creates a valid component", function()
     local j = Journal()

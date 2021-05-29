@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.options", function()
-  local options = require "game.ui.screens.options"
+describe("game.ui.options", function()
+  local options = require "game.ui.options"
   local MockLove = require "moonpie.test_helpers.mock_love"
 
   it("creates a component for the screen", function()

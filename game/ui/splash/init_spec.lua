@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.splash", function()
-  local Splash = require "game.ui.screens.splash"
+describe("game.ui.splash", function()
+  local Splash = require "game.ui.splash"
 
   it("renders a component", function()
     local splash = Splash()

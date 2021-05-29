@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.create_character", function()
-  local create_character = require "game.ui.screens.create_character"
+describe("game.ui.create_character", function()
+  local create_character = require "game.ui.create_character"
   local character = require "game.rules.character"
   local mockStore = require "moonpie.test_helpers.mock_store"
   local player = {

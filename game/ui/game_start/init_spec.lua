@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.game_start", function()
-  local GameStart = require "game.ui.screens.game_start"
+describe("game.ui.game_start", function()
+  local GameStart = require "game.ui.game_start"
 
   it("creates a valid component", function()
     local gs = GameStart()

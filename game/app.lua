@@ -61,29 +61,29 @@ end
 
 function app.newGame()
   store.dispatch(game_state.actions.setup())
-  local create_character = require "game.ui.screens.create_character"
+  local create_character = require "game.ui.create_character"
   app.render(create_character())
 end
 
 function app.options(returnScreen)
-  local options = require "game.ui.screens.options"
+  local options = require "game.ui.options"
   app.render(options({ returnScreen = returnScreen }))
 end
 
 function app.splash()
-  local s = require "game.ui.screens.splash"
+  local s = require "game.ui.splash"
   app.render(s())
 end
 
 function app.title()
   store.reset()
-  local t = require("game.ui.screens.title")
+  local t = require("game.ui.title")
   app.render(t())
 end
 
 -- Game Screens
 function app.gameStart()
-  local gameStart = require "game.ui.screens.game_start"
+  local gameStart = require "game.ui.game_start"
   app.render(gameStart())
 end
 
@@ -105,17 +105,17 @@ function app.characterDetails()
 end
 
 function app.inventory()
-  local Inventory = require "game.ui.screens.inventory"
+  local Inventory = require "game.ui.inventory"
   app.render(Inventory())
 end
 
 function app.journal()
-  local Journal = require "game.ui.screens.journal"
+  local Journal = require "game.ui.journal"
   app.render(Journal())
 end
 
 function app.worldMap()
-  local WorldMap = require "game.ui.screens.world_map"
+  local WorldMap = require "game.ui.world_map"
   app.render(WorldMap())
 end
 

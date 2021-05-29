@@ -3,8 +3,8 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-describe("game.ui.screens.world_map", function()
-  local WorldMap = require "game.ui.screens.world_map"
+describe("game.ui.world_map", function()
+  local WorldMap = require "game.ui.world_map"
   local testStates = require "test_helpers.test_states"
 
   before_each(function()

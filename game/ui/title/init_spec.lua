@@ -4,8 +4,8 @@
 -- https://opensource.org/licenses/MIT
 
 
-describe("game.ui.screens.title", function()
-  local title = require "game.ui.screens.title"
+describe("game.ui.title", function()
+  local title = require "game.ui.title"
   local app = require "game.app"
 
   it("instantiates a component", function()
