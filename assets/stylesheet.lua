@@ -15,7 +15,6 @@ styles.button = moonpie.tables.merge({
     fontName = "default-bold",
     vertical_align = "middle",
     clickSound = sounds.click,
-    hoverSound = sounds.hover
   },
   styles.button
 )
@@ -126,7 +125,6 @@ styles.main_menu = {
 styles.main_menu_button = {
   display = "block",
   clickSound = sounds.click,
-  hoverSound = sounds.hover,
   cornerRadiusX = 15,
   cornerRadiusY = 15,
   padding = { left = 15, right = 15, top = 8, bottom = 8 },
