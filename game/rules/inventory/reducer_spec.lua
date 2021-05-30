@@ -6,6 +6,7 @@
 describe("game.rules.inventory.reducer", function()
   local reducer = require "game.rules.inventory.reducer"
   local actions = require "game.rules.inventory.actions"
+  local equipSlots = require "game.rules.inventory.equip_slots"
 
   describe("ACTION: addItem", function()
     it("adds an item to the inventory for the entity", function()
@@ -13,9 +14,9 @@ describe("game.rules.inventory.reducer", function()
       local action = actions.addItem(entity, item)
       local state = reducer({}, action)
       assert.not_nil(state[entity])
-      assert.not_nil(state[entity].inventory)
-      assert.equals(item, state[entity].inventory[1].item)
-      assert.equals(1, state[entity].inventory[1].quantity)
+      assert.not_nil(state[entity].carried)
+      assert.equals(item, state[entity].carried[1].item)
+      assert.equals(1, state[entity].carried[1].quantity)
     end)
 
     it("increments the quantity if the item already is added", function()
@@ -26,7 +27,7 @@ describe("game.rules.inventory.reducer", function()
       state = reducer(state, action)
       state = reducer(state, action)
       state = reducer(state, action)
-      assert.equals(4, state[entity].inventory[1].quantity)
+      assert.equals(4, state[entity].carried[1].quantity)
     end)
   end)
 
@@ -36,14 +37,14 @@ describe("game.rules.inventory.reducer", function()
       local action = actions.removeItem(entity, item)
       local state = {
         [entity] = {
-          inventory = {
+          carried = {
             { item = item, quantity = 4 }
           }
         }
       }
 
       state = reducer(state, action)
-      assert.equals(3, state[entity].inventory[1].quantity)
+      assert.equals(3, state[entity].carried[1].quantity)
     end)
 
     it("removes the item slot if the quantity is zero", function()
@@ -51,16 +52,26 @@ describe("game.rules.inventory.reducer", function()
       local action = actions.removeItem(entity, item)
       local state = {
         [entity] = {
-          inventory = {
+          carried = {
             { item = item, quantity = 1 }
           }
         }
       }
 
       state = reducer(state, action)
-      assert.is_nil(state[entity].inventory[1])
+      assert.is_nil(state[entity].carried[1])
     end)
+  end)
 
-    it("keeps the state ")
+  describe("ACTION: equipItem", function()
+    it("sets the item into the slot specified by the item", function()
+      local entity = {}
+      local item = { equipSlot = equipSlots.MELEE }
+
+      local action = actions.equipItem(entity, item)
+      local state = reducer({}, action)
+
+      assert.equals(item, state[entity].equipped[equipSlots.MELEE])
+    end)
   end)
 end)

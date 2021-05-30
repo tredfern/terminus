@@ -6,7 +6,7 @@
 describe("game.rules.inventory.actions", function()
   local actions = require "game.rules.inventory.actions"
 
-  it("can add an item to the inventory", function()
+  it("ACTION: addItem", function()
     local item = {}
     local entityId = {}
 
@@ -16,7 +16,7 @@ describe("game.rules.inventory.actions", function()
     assert.equals(item, action.payload.item)
   end)
 
-  it("can remove an item from the inventory", function()
+  it("ACTION: removeItem", function()
     local item = {}
     local entityId = {}
 
@@ -24,5 +24,18 @@ describe("game.rules.inventory.actions", function()
     assert.equals("INVENTORY_REMOVE_ITEM", action.type)
     assert.equals(entityId, action.payload.entity)
     assert.equals(item, action.payload.item)
+  end)
+
+
+  describe("ACTION: equipItem", function()
+    it("defines what should be equipped", function()
+      local item = {}
+      local entityId = {}
+
+      local action = actions.equipItem(entityId, item)
+      assert.equals("INVENTORY_EQUIP_ITEM", action.type)
+      assert.equals(entityId, action.payload.entity)
+      assert.equals(item, action.payload.item)
+    end)
   end)
 end)

@@ -16,6 +16,16 @@ function actions.addItem(entity, item)
   }
 end
 
+function actions.equipItem(entity, item)
+  return {
+    type = types.EQUIP_ITEM,
+    payload = {
+      entity = entity,
+      item = item
+    }
+  }
+end
+
 function actions.removeItem(entity, item)
   return {
     type = types.REMOVE_ITEM,
