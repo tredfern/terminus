@@ -4,11 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 local Weapons = {}
+local equipSlots = require "game.rules.inventory.equip_slots"
 
 function Weapons.sword()
-  local Character = require "game.rules.character"
   return {
-    key = "sword", name = "Sword", skill = "blade", equipSlot = Character.equipSlots.melee, damage = "1d6"
+    key = "sword", name = "Sword", skill = "blade", equipSlot = equipSlots.MELEE, damage = "1d6"
   }
 end
 

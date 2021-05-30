@@ -21,10 +21,10 @@ end
 
 function Items.actions.use(item, user)
   return function(dispatch)
-    local Character = require "game.rules.character"
+    local Inventory = require "game.rules.inventory"
     item:useHandler(dispatch, user)
     if item.consumeOnUse then
-      dispatch(Character.actions.removeItemFromInventory(user, item))
+      dispatch(Inventory.actions.removeItem(user, item))
     end
   end
 end

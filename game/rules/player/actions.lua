@@ -7,6 +7,8 @@ local Thunk = require "moonpie.redux.thunk"
 local store = require "game.store"
 local Animator = require "game.rules.graphics.animator"
 local Characters = require "game.rules.character"
+local Inventory = require "game.rules.inventory"
+local Items = require "game.rules.items"
 local Position = require "game.rules.world.position"
 local World = require "game.rules.world"
 local characterIdle = require "assets.characters.character_idle"
@@ -30,7 +32,7 @@ end
 
 function Actions.equipItem(item)
   local player = Selectors.getPlayer(store.getState())
-  return Characters.actions.equipItem(player, item)
+  return Inventory.actions.equipItem(player, item)
 end
 
 function Actions.ladderDown()
@@ -99,9 +101,14 @@ end
 
 function Actions.pickupItems()
   return function(dispatch, getState)
-    local pc = Selectors.getPlayer(getState())
+    local state = getState()
+    local pc = Selectors.getPlayer(state)
 
-    dispatch(Characters.actions.pickupItems(pc))
+    local items = Items.selectors.getByPosition(state, pc.position)
+    for _, i in ipairs(items) do
+      dispatch(Inventory.actions.addItem(pc, i))
+      dispatch(Items.actions.remove(i))
+    end
   end
 end
 

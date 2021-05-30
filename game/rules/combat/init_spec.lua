@@ -6,8 +6,10 @@
 describe("game.rules.combat", function()
   local Combat = require "game.rules.combat"
   local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
   local Character = require "game.rules.character"
   local Skills = require "game.rules.skills"
+  local equipSlots = require "game.rules.inventory.equip_slots"
 
   describe("actions.deal_damage", function()
     it("adjusts the characters health by a random die roll of the damage", function()
@@ -41,8 +43,7 @@ describe("game.rules.combat", function()
           blade = 8,
           club = -1,
           unarmed = 20
-        },
-        inventory = { equipSlots = {} }
+        }
       }
       defender = { name = "defender",
         attributes = {
@@ -61,7 +62,16 @@ describe("game.rules.combat", function()
     end)
 
     it("makes a contested attack roll based on weapon and defender", function()
-      attacker.inventory.equipSlots.melee = weapon
+      mockStore {
+        inventory = {
+          [attacker] = {
+            equipped = {
+              [equipSlots.MELEE] = weapon
+            }
+          }
+        }
+      }
+
       spy.on(Skills.actions, "opposedCheck")
 
       local action = Combat.actions.meleeAttack(attacker, defender)
@@ -74,8 +84,15 @@ describe("game.rules.combat", function()
     end)
 
     it("deals damage on successful hit", function()
-      pending("test is having trouble on github actions after changing cache")
-      attacker.inventory.equipSlots.melee = weapon
+      mockStore {
+        inventory = {
+          [attacker] = {
+            equipped = {
+              [equipSlots.MELEE] = weapon
+            }
+          }
+        }
+      }
       spy.on(Combat.actions, "dealDamage")
 
       local action = Combat.actions.meleeAttack(attacker, defender)
@@ -86,17 +103,27 @@ describe("game.rules.combat", function()
     end)
 
     it("does not deal damage on a miss", function()
-      attacker.inventory.equipSlots.melee = missWeapon
-      spy.on(Character.actions, "setHealth")
-
+      mockStore {
+        inventory = {
+          [attacker] = {
+            equipped = {
+              [equipSlots.MELEE] = missWeapon
+            }
+          }
+        }
+      }
       local action = Combat.actions.meleeAttack(attacker, defender)
-      action(mockDispatch)
-
-      assert.spy(Character.actions.setHealth).was_not.called()
+      assert.not_thunk_dispatches_type("CHARACTER_SET_HEALTH", action)
     end)
 
     it("uses unarmed weapon if no weapon equipped", function()
-      attacker.inventory.equipSlots.melee = nil
+      mockStore {
+        inventory = {
+          [attacker] = {
+            equipped = { }
+          }
+        }
+      }
       spy.on(Skills.actions, "opposedCheck")
 
       local action = Combat.actions.meleeAttack(attacker, defender)
@@ -110,14 +137,19 @@ describe("game.rules.combat", function()
     end)
 
     it("the defender can dodge out of the way", function()
-      attacker.inventory.equipSlots.melee = weapon
-      spy.on(Character.actions, "setHealth")
+      mockStore {
+        inventory = {
+          [attacker] = {
+            equipped = {
+              [equipSlots.MELEE] = weapon
+            }
+          }
+        }
+      }
 
       defender.skills.dodge = 20
       local action = Combat.actions.meleeAttack(attacker, defender)
-      action(mockDispatch)
-
-      assert.spy(Character.actions.setHealth).was_not.called()
+      assert.not_thunk_dispatches_type("CHARACTER_SET_HEALTH", action)
     end)
 
     it("does not attack itself", function()

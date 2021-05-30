@@ -33,7 +33,7 @@ describe("game.rules.player", function()
     local item = {}
     local action = Actions.equipItem(item)
     assert.equals(item, action.payload.item)
-    assert.equals(player, action.payload.character)
+    assert.equals(player, action.payload.entity)
   end)
 
   describe("ACTION: ladderDown/ladderUp", function()
@@ -150,13 +150,16 @@ describe("game.rules.player", function()
   end)
 
   describe("ACTION: PickupItems", function()
-    local playerCharacter = { isPlayerControlled = true, position = { x = 10, y = 10 } }
+    local playerCharacter = { isPlayerControlled = true, position = Position(10, 10, 1) }
+    local item1, item2 = { item = true, position = Position(10, 10, 1) }, { item = true, position = Position(10, 10, 1)}
 
     before_each(function()
       mockDispatch.processComplex = true
       mockStore({
         characters = { playerCharacter },
-        items = {}
+        world = {
+          item1, item2
+        }
       })
     end)
 
@@ -164,11 +167,18 @@ describe("game.rules.player", function()
       mockDispatch:reset()
     end)
 
-    it("dispatches the pickupItems action with the player character", function()
-      spy.on(Characters.actions, "pickupItems")
+    it("adds the items to the inventory", function()
+      local Inventory = require "game.rules.inventory"
+      local action = Actions.pickupItems()
+      assert.thunk_dispatches(Inventory.actions.addItem(playerCharacter, item1), action)
+      assert.thunk_dispatches(Inventory.actions.addItem(playerCharacter, item2), action)
+    end)
 
-      mockDispatch(Actions.pickupItems())
-      assert.spy(Characters.actions.pickupItems).was.called_with(playerCharacter)
+    it("removes the items from the map", function()
+      local Items = require "game.rules.items"
+      local action = Actions.pickupItems()
+      assert.thunk_dispatches(Items.actions.remove(item1), action)
+      assert.thunk_dispatches(Items.actions.remove(item2), action)
     end)
   end)
 

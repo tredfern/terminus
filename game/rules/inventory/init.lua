@@ -5,6 +5,7 @@
 
 return {
   actions = require "game.rules.inventory.actions",
+  equipSlots = require "game.rules.inventory.equip_slots",
   reducer = require "game.rules.inventory.reducer",
   selectors = require "game.rules.inventory.selectors"
 }

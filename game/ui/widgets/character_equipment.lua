@@ -5,6 +5,7 @@
 
 local Components = require "moonpie.ui.components"
 local LabelPair = require "game.ui.widgets.label_pair"
+local equipSlots = require "game.rules.inventory.equip_slots"
 
 local function getItemName(item)
   if item == nil then return "" end
@@ -12,9 +13,9 @@ local function getItemName(item)
 end
 
 return Components("character_equipment", function(props)
-  local equipSlots = props.equipSlots or {}
+  props.equipped = props.equipped or {}
   return {
     width = "15%",
-    LabelPair { id = "meleeItem", label = "Melee", value = getItemName(equipSlots.melee) }
+    LabelPair { id = "meleeItem", label = "Melee", value = getItemName(props.equipped[equipSlots.MELEE]) }
   }
 end)

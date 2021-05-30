@@ -45,16 +45,6 @@ describe("game.rules.character.character", function()
     assert.in_range(3, 18, c.attributes[attributes.social])
   end)
 
-  it("sets up an empty inventory", function()
-    local c = characterFactory.newCharacter()
-    assert.equals(0, #c.inventory)
-  end)
-
-  it("sets up the equipment slots on the inventory", function()
-    local c = characterFactory.newCharacter()
-    assert.not_nil(c.inventory.equipSlots)
-  end)
-
   it("gives the character a name", function()
     local c = characterFactory.newCharacter()
     assert.not_nil(c.name)

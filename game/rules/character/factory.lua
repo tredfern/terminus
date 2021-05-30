@@ -27,12 +27,6 @@ function characterFactory.createDefaultSkills()
   }
 end
 
-function characterFactory.createDefaultInventory()
-  return {
-    equipSlots = {}
-  }
-end
-
 function characterFactory.getName()
   local names = require "game.rules.character.names"
   local n = names.generate()
@@ -51,7 +45,6 @@ function characterFactory.newCharacter(props)
     isEnemy = props.isEnemy,
     attributes = characterFactory.createDefaultAttributes(),
     skills = characterFactory.createDefaultSkills(),
-    inventory = characterFactory.createDefaultInventory(),
     name = characterFactory.getName(),
     ai = props.ai
   }

@@ -11,6 +11,7 @@ local CharacterSkills = require "game.ui.widgets.character_skills"
 local CharacterInventory = require "game.ui.widgets.character_inventory"
 local CharacterEquipment = require "game.ui.widgets.character_equipment"
 local Player = require "game.rules.player"
+local Inventory = require "game.rules.inventory"
 local Keyboard = require "moonpie.keyboard"
 
 local CharacterDetails = Components("character_details", function(props)
@@ -23,7 +24,7 @@ local CharacterDetails = Components("character_details", function(props)
       id = "screenPanel",
       title = props.characterName,
       actions = {
-        Components.button { id = "btnClose", caption = "Close", click = app.combat }
+        Components.button { id = "btnClose", caption = "Close", click = app.mainScreen }
       },
       contents = {
         {
@@ -39,7 +40,7 @@ local CharacterDetails = Components("character_details", function(props)
           { Components.h3 { text = "Equipped" } },
           CharacterEquipment {
             id = "characterEquipment",
-            equipSlots = props.character.inventory.equipSlots
+            equipped = props.inventory.equipped
           },
         },
         {
@@ -47,7 +48,7 @@ local CharacterDetails = Components("character_details", function(props)
           {
             CharacterInventory {
               id = "characterInventory",
-              inventory = props.character.inventory,
+              inventory = props.inventory.carried,
               character = props.character
             },
           }
@@ -56,7 +57,7 @@ local CharacterDetails = Components("character_details", function(props)
     },
 
     mounted = function()
-      Keyboard:hotkey("tab", app.combat)
+      Keyboard:hotkey("tab", app.mainScreen)
     end,
 
     unmounted = function()
@@ -72,7 +73,8 @@ return connect(
     local player = Player.selectors.getPlayer(state)
     return {
       character = player,
-      characterName = player.name
+      characterName = player.name,
+      inventory = Inventory.selectors.getInventory(state, player),
     }
   end
 )

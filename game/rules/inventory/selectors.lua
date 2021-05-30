@@ -8,6 +8,12 @@ local tables = require "moonpie.tables"
 local selectors = {}
 
 
+function selectors.getEquippedItem(state, entity, slot)
+  local inventory = selectors.getInventory(state, entity)
+
+  return inventory.equipped[slot]
+end
+
 function selectors.getInventory(state, entity)
   return state.inventory[entity]
 end

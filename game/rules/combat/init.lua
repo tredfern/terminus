@@ -5,16 +5,16 @@
 
 local Character = require "game.rules.character"
 local Dice = require "moonpie.math.dice"
-local EquipSlots = require "game.rules.character.equip_slots"
 local MessageLog = require "game.rules.message_log"
 local Messages = require "assets.messages"
 local Skills = require "game.rules.skills"
 local Sounds = require "assets.sounds"
+local store = require "game.store"
 
 -- Define Module
 local Combat = {
   actions = {},
-  selectors = {}
+  selectors = require "game.rules.combat.selectors"
 }
 
 -- For formatting messages
@@ -59,10 +59,8 @@ function Combat.actions.meleeAttack(attacker, defender)
   if attacker == defender then return end
   return function(dispatch)
     -- get the weapon
-    local weapon = attacker.inventory.equipSlots[EquipSlots.melee]
-    if weapon == nil then
-      weapon = { skill = "unarmed", damage = "1d3" }
-    end
+    local weapon = Combat.selectors.getMeleeWeapon(store.getState(), attacker)
+
     -- Figure out skill and perform check
     local skill = Skills.chooseSkill.forItem(attacker, weapon)
     local defSkill = Skills.chooseSkill.forMeleeDefense(defender)

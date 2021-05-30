@@ -86,26 +86,21 @@ describe("game.rules.items", function()
     end)
 
     it("removes the item from the characters inventory", function()
-      local Character = require "game.rules.character"
+      local Inventory = require "game.rules.inventory"
       local item = { useHandler = function() end, consumeOnUse = true }
       local user = { inventory = { item } }
 
       local action = use(item, user)
-      action(mockDispatch)
-
-      assert.is_true(mockDispatch:received_action(Character.actions.types.REMOVE_ITEM_FROM_INVENTORY))
-      assert.equals(item, mockDispatch.dispatched[1].payload.item)
-      assert.equals(user, mockDispatch.dispatched[1].payload.character)
+      assert.thunk_dispatches(Inventory.actions.removeItem(user, item), action)
     end)
 
     it("if item is marked as not consumable than do not remove item", function()
-      local Character = require "game.rules.character"
+      local Inventory = require "game.rules.inventory"
       local item = { useHandler = function() end, consumeOnUse = false }
       local user = { inventory = { item } }
 
       local action = use(item, user)
-      action(mockDispatch)
-      assert.is_false(mockDispatch:received_action(Character.actions.types.REMOVE_ITEM_FROM_INVENTORY))
+      assert.not_thunk_dispatches_type(Inventory.actions.types.REMOVE_ITEM, action)
     end)
   end)
 

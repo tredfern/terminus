@@ -5,7 +5,24 @@
 
 describe("game.rules.inventory.selectors", function()
   local selectors = require "game.rules.inventory.selectors"
+  local equipSlots = require "game.rules.inventory.equip_slots"
 
+
+  describe("SELECTOR: getEquippedItem", function()
+    local entity, item = {}, {}
+    local entityInventory = {
+      equipped = {
+        [equipSlots.MELEE] = item
+      }
+    }
+    local state = {
+      inventory = {
+        [entity] = entityInventory
+      }
+    }
+
+    assert.equals(item, selectors.getEquippedItem(state, entity, equipSlots.MELEE))
+  end)
 
   describe("SELECTOR: getInventory", function()
     local entity, entityInventory = {}, {}

@@ -4,11 +4,11 @@
 -- https://opensource.org/licenses/MIT
 
 local actions = {}
-local types = require "game.rules.inventory.types"
+actions.types = require "game.rules.inventory.types"
 
 function actions.addItem(entity, item)
   return {
-    type = types.ADD_ITEM,
+    type = actions.types.ADD_ITEM,
     payload = {
       entity = entity,
       item = item
@@ -18,7 +18,7 @@ end
 
 function actions.equipItem(entity, item)
   return {
-    type = types.EQUIP_ITEM,
+    type = actions.types.EQUIP_ITEM,
     payload = {
       entity = entity,
       item = item
@@ -28,7 +28,7 @@ end
 
 function actions.removeItem(entity, item)
   return {
-    type = types.REMOVE_ITEM,
+    type = actions.types.REMOVE_ITEM,
     payload = {
       entity = entity,
       item = item

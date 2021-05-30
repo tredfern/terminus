@@ -6,11 +6,15 @@
 describe("game.ui.screens.character_details", function()
   local CharacterDetails = require "game.ui.character_details"
   local mockStore = require "moonpie.test_helpers.mock_store"
+  local Position = require "game.rules.world.position"
 
   before_each(function()
+    local player = { isPlayerControlled = true, name = "My Name", position = Position(1, 1, 1) }
+    local inventory = {}
     mockStore {
-      characters = {
-        { isPlayerControlled = true, name = "My Name", inventory = {} }
+      characters = { player },
+      inventory = {
+        [player] = inventory
       }
     }
   end)
@@ -21,12 +25,12 @@ describe("game.ui.screens.character_details", function()
 
   it("can go back to the combat screen", function()
     local app = require "game.app"
-    stub(app, "combat")
+    stub(app, "mainScreen")
 
     local cd = CharacterDetails()
     cd:findByID("btnClose"):click()
-    assert.stub(app.combat).was.called()
-    app.combat:revert()
+    assert.stub(app.mainScreen).was.called()
+    app.mainScreen:revert()
   end)
 
   it("displays the character name as the title", function()
@@ -46,7 +50,7 @@ describe("game.ui.screens.character_details", function()
 
   it("closes the screen if tab is pressed", function()
     local app = require "game.app"
-    stub(app, "combat")
+    stub(app, "mainScreen")
 
     local cd = CharacterDetails()
     cd:mounted()
@@ -54,7 +58,7 @@ describe("game.ui.screens.character_details", function()
     local Keyboard = require "moonpie.keyboard"
     Keyboard:keyPressed("tab")
 
-    assert.stub(app.combat).was.called()
-    app.combat:revert()
+    assert.stub(app.mainScreen).was.called()
+    app.mainScreen:revert()
   end)
 end)
