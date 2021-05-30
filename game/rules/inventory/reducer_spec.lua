@@ -29,4 +29,38 @@ describe("game.rules.inventory.reducer", function()
       assert.equals(4, state[entity].inventory[1].quantity)
     end)
   end)
+
+  describe("ACTION: removeItem", function()
+    it("reduces the quantity of items from the inventory", function()
+      local entity, item = {}, {}
+      local action = actions.removeItem(entity, item)
+      local state = {
+        [entity] = {
+          inventory = {
+            { item = item, quantity = 4 }
+          }
+        }
+      }
+
+      state = reducer(state, action)
+      assert.equals(3, state[entity].inventory[1].quantity)
+    end)
+
+    it("removes the item slot if the quantity is zero", function()
+      local entity, item = {}, {}
+      local action = actions.removeItem(entity, item)
+      local state = {
+        [entity] = {
+          inventory = {
+            { item = item, quantity = 1 }
+          }
+        }
+      }
+
+      state = reducer(state, action)
+      assert.is_nil(state[entity].inventory[1])
+    end)
+
+    it("keeps the state ")
+  end)
 end)

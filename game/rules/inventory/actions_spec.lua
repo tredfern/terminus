@@ -15,4 +15,14 @@ describe("game.rules.inventory.actions", function()
     assert.equals(entityId, action.payload.entity)
     assert.equals(item, action.payload.item)
   end)
+
+  it("can remove an item from the inventory", function()
+    local item = {}
+    local entityId = {}
+
+    local action = actions.removeItem(entityId, item)
+    assert.equals("INVENTORY_REMOVE_ITEM", action.type)
+    assert.equals(entityId, action.payload.entity)
+    assert.equals(item, action.payload.item)
+  end)
 end)
