@@ -19,11 +19,11 @@ describe("game.ui.inventory", function()
 
   it("returns to the main screen if the i key is pressed", function()
     local App = require "game.app"
-    spy.on(App, "combat")
+    spy.on(App, "mainScreen")
     moonpie.testRender(Inventory())
 
     local keys = require "moonpie.keyboard"
     keys:keyPressed("i")
-    assert.spy(App.combat).was.called()
+    assert.spy(App.mainScreen).was.called()
   end)
 end)

@@ -39,8 +39,13 @@ describe("game.rules.player.selectors", function()
 
   describe("SELECTOR: hasItemOfKind", function()
     it("returns true if player inventory has an item of a matching key", function()
-      local player = { isPlayerControlled = true, inventory = { { item = { key = "A" } }, { item = { key = "B" } } } }
-      local state = { characters = { player } }
+      local player = { isPlayerControlled = true }
+      local state = {
+        characters = { player },
+        inventory = {
+          [player] = { carried = { { item = { key = "A" } }, { item = { key = "B" } } } }
+        }
+      }
 
       assert.is_true(Selectors.hasItemOfKind(state, "A"))
       assert.is_true(Selectors.hasItemOfKind(state, "B"))

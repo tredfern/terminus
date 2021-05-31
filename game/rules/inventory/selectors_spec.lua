@@ -21,7 +21,14 @@ describe("game.rules.inventory.selectors", function()
       }
     }
 
-    assert.equals(item, selectors.getEquippedItem(state, entity, equipSlots.MELEE))
+
+    it("returns the equipped item", function()
+      assert.equals(item, selectors.getEquippedItem(state, entity, equipSlots.MELEE))
+    end)
+
+    it("returns nil if no inventory for entity", function()
+      assert.is_nil(selectors.getEquippedItem(state, {}, equipSlots.MELEE))
+    end)
   end)
 
   describe("SELECTOR: getInventory", function()

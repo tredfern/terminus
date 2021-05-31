@@ -10,10 +10,7 @@ local MessageLog = require "game.rules.message_log"
 local Messages = require "assets.messages"
 
 local Actions = {}
-Actions.types = {
-  OPPOSED_CHECK = "SKILLS_OPPOSED_CHECK",
-  PERFORM_CHECK = "SKILLS_PERFORM_CHECK"
-}
+Actions.types = require "game.rules.skills.types"
 
 function Actions.opposedCheck(aggressor, aggSkill, defender, defSkill, callback)
   return Thunk(Actions.types.OPPOSED_CHECK, function(dispatch)
@@ -57,6 +54,15 @@ function Actions.perform(skill, character, successCallback, failCallback)
       failCallback(target, roll)
     end
   end)
+end
+
+function Actions.define(key, name, ability, untrained)
+  return {
+    type = Actions.types.DEFINE,
+    payload = {
+      key = key, name = name, ability = ability, untrainedPenalty = untrained
+    }
+  }
 end
 
 return Actions

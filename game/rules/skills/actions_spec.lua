@@ -94,4 +94,21 @@ describe("game.rules.skills.actions", function()
       assert.in_range(3, 18, roll)
     end)
   end)
+
+  describe("ACTION: define", function()
+    it("defines the skill to be added", function()
+      local action = Actions.define(
+        "throwing",
+        "Throwing",
+        "STRENGTH",
+        -3
+      )
+
+      assert.equals("SKILLS_DEFINE", action.type)
+      assert.equals("throwing", action.payload.key)
+      assert.equals("Throwing", action.payload.name)
+      assert.equals("STRENGTH", action.payload.ability)
+      assert.equals(-3, action.payload.untrainedPenalty)
+    end)
   end)
+end)

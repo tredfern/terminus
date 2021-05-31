@@ -19,5 +19,7 @@ end
 
 Skills.actions = require "game.rules.skills.actions"
 Skills.chooseSkill = require "game.rules.skills.choose_skill"
+Skills.selectors = require "game.rules.skills.selectors"
+Skills.reducer = require "game.rules.skills.reducer"
 
 return Skills

@@ -39,11 +39,6 @@ function Items.selectors.getByPosition(state, position)
   return World.selectors.getByPosition(state, position, "item")
 end
 
-function Items.canUseItem(item, character)
-  if not item.usable then return false end
-  return item.skill == nil or character.skills[item.skill] ~= nil
-end
-
 function Items.isUsable(item)
   return item.useHandler ~= nil
 end

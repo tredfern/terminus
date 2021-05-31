@@ -20,9 +20,12 @@ function Selectors.getPlayer(state)
 end
 
 function Selectors.hasItemOfKind(state, itemType)
+  local Inventory = require "game.rules.inventory"
   local p = Selectors.getPlayer(state)
+  local inv = Inventory.selectors.getInventory(state, p)
 
-  return tables.any(p.inventory, function(slot) return slot.item.key == itemType end)
+  return tables.any(inv.carried, function(slot) return slot.item.key == itemType end)
+  -- return Inventory.selectors.isCarryingItem(state, p, itemType)
 end
 
 

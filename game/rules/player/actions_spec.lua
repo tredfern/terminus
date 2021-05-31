@@ -110,15 +110,20 @@ describe("game.rules.player", function()
   end)
 
   describe("ACTION: openDoor", function()
-    local northDoor, lockedDoor, player
+    local northDoor, lockedDoor, player, inventory
 
     before_each(function()
       northDoor = { door = true, position = Position(1, 3, 3), }
       lockedDoor = { door = true, position = Position(2, 4, 3), locked = true }
       player = { isPlayerControlled = true, position = Position(1, 4, 3) }
+      inventory = { carried = {} }
+
 
       mockStore {
         characters = { player },
+        inventory = {
+          [player] = inventory
+        },
         world = {
           northDoor,
           lockedDoor
@@ -142,7 +147,7 @@ describe("game.rules.player", function()
     end)
 
     it("unlocks a locked door if the player is carrying a key card", function()
-      player.inventory = { { item = { key = "keycard" } } }
+      inventory.carried = { { item = { key = "keycard" } } }
       local action = Actions.openDoor(Orientation.east)
 
       assert.thunk_dispatches_type("WORLD_ENTITY_UPDATE", action)

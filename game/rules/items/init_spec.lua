@@ -7,38 +7,6 @@ describe("game.rules.items", function()
   local Items = require "game.rules.items"
   local Position = require "game.rules.world.position"
 
-  describe("checking character proficiency", function()
-    it("allows anyone to use item if no skill specified", function()
-      local easyToUse = { usable = true }
-      local c = { skills = {} }
-      assert.is_true(Items.canUseItem(easyToUse, c))
-    end)
-
-    it("allows character to use item if has skill specified", function()
-      local bandage = {
-        skill = "firstaid",
-        usable = true
-      }
-      local c = { skills = { firstaid = 0 } }
-      assert.is_true(Items.canUseItem(bandage, c))
-    end)
-
-    it("returns false if character does not have skill", function()
-      local bandage = {
-        skill = "firstaid",
-        usable = true
-      }
-      local c = { skills = { } }
-      assert.is_false(Items.canUseItem(bandage, c))
-    end)
-
-    it("is not allowed to use unusable items", function()
-      local unusable = { }
-      local c = { skills = { } }
-      assert.is_false(Items.canUseItem(unusable, c))
-    end)
-  end)
-
   it("ACTION: add", function()
     local item = { }
     local position = {}

@@ -10,8 +10,9 @@ local selectors = {}
 
 function selectors.getEquippedItem(state, entity, slot)
   local inventory = selectors.getInventory(state, entity)
-
-  return inventory.equipped[slot]
+  if inventory then
+    return inventory.equipped[slot]
+  end
 end
 
 function selectors.getInventory(state, entity)

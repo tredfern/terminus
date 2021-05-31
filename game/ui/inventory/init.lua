@@ -9,8 +9,9 @@ local FullScreenPanel = require "game.ui.widgets.full_screen_panel"
 local CharacterInventory = require "game.ui.widgets.character_inventory"
 local CharacterEquipment = require "game.ui.widgets.character_equipment"
 local Player = require "game.rules.player"
+local Inventory = require "game.rules.inventory"
 
-local Inventory = Components("inventory_screen", function(props)
+local InventoryScreen = Components("inventory_screen", function(props)
   return {
     id = "inventory_screen",
     player = props.player,
@@ -23,14 +24,14 @@ local Inventory = Components("inventory_screen", function(props)
           { Components.h3 { text = "Equipment" } },
           CharacterEquipment {
             id = "characterEquipment",
-            equipSlots = props.player.inventory.equipSlots
+            equipped = props.inventory.equipped
           },
         }, {
           width = "50%",
           { Components.h3 { text = "Inventory" } },
           CharacterInventory {
             id = "characterInventory",
-            inventory = props.player.inventory,
+            inventory = props.inventory.carried,
             character = props.player
           }
         }
@@ -40,7 +41,7 @@ local Inventory = Components("inventory_screen", function(props)
     mounted = function()
       local Keys = require "moonpie.keyboard"
       local App = require "game.app"
-      Keys:hotkey("i", App.combat)
+      Keys:hotkey("i", App.mainScreen)
     end,
 
     unmounted = function()
@@ -51,9 +52,11 @@ local Inventory = Components("inventory_screen", function(props)
 end)
 
 return connect(
-  Inventory,
+  InventoryScreen,
   function(state)
+    local player = Player.selectors.getPlayer(state)
     return {
-      player = Player.selectors.getPlayer(state)
+      player = player,
+      inventory = Inventory.selectors.getInventory(state, player)
     }
   end)
