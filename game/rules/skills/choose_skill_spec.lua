@@ -7,8 +7,8 @@ describe("game.rules.skills.choose_skill", function()
   local Skills = require "game.rules.skills"
   local chooseSkill = require "game.rules.skills.choose_skill"
 
-  Skills.describe { key = "blade", attribute = "agility" }
-  Skills.describe { key = "dodge", attribute = "agility" }
+  Skills.list.blade = { key = "blade", attribute = "agility" }
+  Skills.list.dodge = { key = "dodge", attribute = "agility" }
 
   it("can choose the best skill to use for a melee weapon", function()
     local weapon = { skill = "blade" }

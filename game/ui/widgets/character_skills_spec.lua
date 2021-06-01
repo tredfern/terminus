@@ -9,28 +9,20 @@ describe("game.ui.widgets.character_skills", function()
   local Character = require "game.rules.character"
 
   it("displays all the character skills", function()
-    Skills.describe { name = "Computers", key = "computers", attribute = Character.attributes.education }
-    Skills.describe { name = "Mechanics", key = "mechanics", attribute = Character.attributes.education }
-    Skills.describe { name = "Lock Picking", key = "lockPicking", attribute = Character.attributes.agility }
+    Skills.list.computers = { name = "Computers", key = "computers", attribute = Character.attributes.education }
+    Skills.list.mechanics = { name = "Mechanics", key = "mechanics", attribute = Character.attributes.education }
+    Skills.list.lockPicking = { name = "Lock Picking", key = "lockPicking", attribute = Character.attributes.agility }
 
-    local character = {
-      attributes = {
-        [Character.attributes.education] = 17,
-        [Character.attributes.agility] = 12
-      },
-      skills = {
-        computers = 0,
-        mechanics = 2,
-        lockPicking = 0
+    local widget = characterSkills {
+      characterSkills = {
+        computers = 17,
+        mechanics = 17,
+        lockPicking = 12
       }
     }
 
-    local widget = characterSkills {
-      character = character
-    }
-
     assert.equals("17", widget:findByID("computersValue").text)
-    assert.equals("19", widget:findByID("mechanicsValue").text)
+    assert.equals("17", widget:findByID("mechanicsValue").text)
     assert.equals("12", widget:findByID("lockPickingValue").text)
   end)
 end)

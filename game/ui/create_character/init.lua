@@ -9,24 +9,24 @@ local connect = require "moonpie.redux.connect"
 local app = require "game.app"
 local character = require "game.rules.character"
 local player = require "game.rules.player"
-local fullScreenPanel = require "game.ui.widgets.full_screen_panel"
-local characterAttributes = require "game.ui.widgets.character_attributes"
-local characterSkills = require "game.ui.widgets.character_skills"
-local labelPair = require "game.ui.widgets.label_pair"
+local Skills = require "game.rules.skills"
+local FullScreenPanel = require "game.ui.widgets.full_screen_panel"
+local CharacterAttributes = require "game.ui.widgets.character_attributes"
+local CharacterSkills = require "game.ui.widgets.character_skills"
+local LabelPair = require "game.ui.widgets.label_pair"
 
 local create_character = components("create_character", function(props)
-
   local editCharacter = props.character
   local character_name = components.textbox {
     id = "character_name",
     click = function(self) self:setFocus() end,
     width = "100%",
   }
-  character_name:set_text(props.character.name)
+  character_name:setText(props.character.name)
 
   return {
     id = "create_character_screen",
-    fullScreenPanel {
+    FullScreenPanel {
       title = "Create Character",
       actions = {
         components.button {
@@ -36,7 +36,7 @@ local create_character = components("create_character", function(props)
           click = function()
             store.dispatch(character.actions.setName(
               editCharacter,
-              character_name:get_text()
+              character_name:getText()
             ))
             app.gameStart()
           end
@@ -50,11 +50,11 @@ local create_character = components("create_character", function(props)
         },
         {
           { components.h3 { text = "Attributes"} },
-          characterAttributes {
+          CharacterAttributes {
             id = "characterAttributes", attributes = editCharacter.attributes,
             editable = true, character = editCharacter
           },
-          labelPair {
+          LabelPair {
             margin = { left = 10 },
             width = "15%",
             label = "Health:",
@@ -63,7 +63,9 @@ local create_character = components("create_character", function(props)
         },
         {
           { components.h3 { text = "Skills" } },
-          characterSkills { id = "characterSkills", character = editCharacter }
+          CharacterSkills { id = "characterSkills",
+            characterSkills = props.characterSkills
+          }
         },
       }
     },
@@ -74,7 +76,9 @@ local create_character = components("create_character", function(props)
 end)
 
 return connect(create_character, function(state)
+  local p = player.selectors.getPlayer(state)
   return {
-    character = player.selectors.getPlayer(state)
+    character = p,
+    characterSkills = Skills.selectors.getCharacterSkills(state, p)
   }
 end)

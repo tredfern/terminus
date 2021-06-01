@@ -9,8 +9,8 @@ describe("game.rules.skills.actions", function()
   local Skills = require "game.rules.skills"
 
   describe("ACTION: opposedCheck", function()
-    Skills.describe { key = "diplomacy", attribute = "social" }
-    Skills.describe { key = "insight", attribute = "wit" }
+    Skills.list.diplomacy = { key = "diplomacy", attribute = "social" }
+    Skills.list.insight =  { key = "insight", attribute = "wit" }
 
     it("the victor wins if they perform better than the defender", function()
       local aggressor = {
@@ -50,7 +50,7 @@ describe("game.rules.skills.actions", function()
   end)
 
   describe("ACTION: perform", function()
-    Skills.describe { name = "Test", key = "test", attribute = "strength" }
+    Skills.list.test = { name = "Test", key = "test", attribute = "strength" }
     local target, roll, success, fail
 
     before_each(function()
@@ -61,10 +61,7 @@ describe("game.rules.skills.actions", function()
     it("on a successful skill check, it calls the success result", function()
       local character = {
         attributes = {
-          strength = 15
-        },
-        skills = {
-          test = 3
+          strength = 18
         }
       }
 
@@ -80,9 +77,6 @@ describe("game.rules.skills.actions", function()
       local character = {
         attributes = {
           strength = 3
-        },
-        skills = {
-          test = -1
         }
       }
 
@@ -90,25 +84,7 @@ describe("game.rules.skills.actions", function()
       action()
       assert.spy(success).was_not.called()
       assert.spy(fail).was.called()
-      assert.equals(2, target)
       assert.in_range(3, 18, roll)
-    end)
-  end)
-
-  describe("ACTION: define", function()
-    it("defines the skill to be added", function()
-      local action = Actions.define(
-        "throwing",
-        "Throwing",
-        "STRENGTH",
-        -3
-      )
-
-      assert.equals("SKILLS_DEFINE", action.type)
-      assert.equals("throwing", action.payload.key)
-      assert.equals("Throwing", action.payload.name)
-      assert.equals("STRENGTH", action.payload.ability)
-      assert.equals(-3, action.payload.untrainedPenalty)
     end)
   end)
 end)

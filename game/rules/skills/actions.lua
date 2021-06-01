@@ -8,14 +8,15 @@ local Thunk = require "moonpie.redux.thunk"
 local skillCheck = Dice.cup(Dice.d6, Dice.d6, Dice.d6)
 local MessageLog = require "game.rules.message_log"
 local Messages = require "assets.messages"
+local Calculator = require "game.rules.skills.calculator"
 
 local Actions = {}
 Actions.types = require "game.rules.skills.types"
 
 function Actions.opposedCheck(aggressor, aggSkill, defender, defSkill, callback)
   return Thunk(Actions.types.OPPOSED_CHECK, function(dispatch)
-    local aggTarget = aggSkill(aggressor)
-    local defTarget = defSkill(defender)
+    local aggTarget = Calculator(aggressor, aggSkill)
+    local defTarget = Calculator(defender, defSkill)
 
     local aggRoll = skillCheck()
     local defRoll = skillCheck()
@@ -46,7 +47,7 @@ end
 
 function Actions.perform(skill, character, successCallback, failCallback)
   return Thunk(Actions.types.PERFORM_CHECK, function()
-    local target = skill(character)
+    local target = Calculator(character, skill)
     local roll = skillCheck()
     if roll <= target then
       successCallback(target, roll)
@@ -54,15 +55,6 @@ function Actions.perform(skill, character, successCallback, failCallback)
       failCallback(target, roll)
     end
   end)
-end
-
-function Actions.define(key, name, ability, untrained)
-  return {
-    type = Actions.types.DEFINE,
-    payload = {
-      key = key, name = name, ability = ability, untrainedPenalty = untrained
-    }
-  }
 end
 
 return Actions

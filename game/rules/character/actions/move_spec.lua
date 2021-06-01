@@ -13,7 +13,7 @@ describe("game.rules.character.actions.move", function()
   local Position = require "game.rules.world.position"
 
   before_each(function()
-    Skills.describe { name = "Unarmed", key = "unarmed", attribute = Attributes.strength }
+    Skills.list.unarmed = { name = "Unarmed", key = "unarmed", attribute = Attributes.strength }
   end)
 
   it("dispatches a set_position message to move the character to the correct coordinates", function()

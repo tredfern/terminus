@@ -6,26 +6,12 @@
 describe("game.ui.create_character", function()
   local create_character = require "game.ui.create_character"
   local character = require "game.rules.character"
-  local mockStore = require "moonpie.test_helpers.mock_store"
-  local player = {
-    name = "Papageno",
-    isPlayerControlled = true, position = { x = 19, y = 28 },
-    attributes = {},
-    skills = {}
-  }
-  local store
+  local testStates = require "test_helpers.test_states"
+  local player, store
 
   before_each(function()
-    store = mockStore ({
-      characters = {
-        player
-      },
-      turn = { },
-      fieldOfView = {}
-    })
+    store, player = testStates.basicGameState()
   end)
-
-
 
   it("has a button that continues to the game start screen", function()
     local app = require "game.app"
@@ -39,7 +25,7 @@ describe("game.ui.create_character", function()
   it("dispatch set character name action on done", function()
     local c = moonpie.testRender(create_character())
     local textbox = c:findByID("character_name")
-    textbox:set_text("Foo")
+    textbox:setText("Foo")
 
     c:findByID("button_done"):click()
 

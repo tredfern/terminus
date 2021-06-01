@@ -28,28 +28,22 @@ describe("game.rules.combat", function()
 
     before_each(function()
       mockDispatch:reset()
-      Skills.describe { key = "blade", attribute = "dexterity" }
-      Skills.describe { key = "club", attribute = "strength" }
-      Skills.describe { key = "dodge", attribute = "dexterity" }
-      Skills.describe { key = "unarmed", attribute = "strength" }
+      Skills.list.blade =  { key = "blade", attribute = "dexterity" }
+      Skills.list.club =  { key = "club", attribute = "strength" }
+      Skills.list.dodge =  { key = "dodge", attribute = "dexterity" }
+      Skills.list.unarmed =  { key = "unarmed", attribute = "strength" }
 
       attacker = {
         name = "attacker",
         attributes = {
           dexterity = 10,
-          strength = 3
-        },
-        skills = {
-          blade = 8,
-          club = -1,
-          unarmed = 20
+          strength = 0
         }
       }
       defender = { name = "defender",
         attributes = {
-          dexterity = 3
+          dexterity = 0
         },
-        skills = { dodge = 0 },
         health = 10
       }
       weapon = { name = "weapon", skill = "blade", damage = "1d8"  }
@@ -84,6 +78,7 @@ describe("game.rules.combat", function()
     end)
 
     it("deals damage on successful hit", function()
+      pending("Skills and combat going through a large refactor soon")
       mockStore {
         inventory = {
           [attacker] = {
@@ -147,7 +142,8 @@ describe("game.rules.combat", function()
         }
       }
 
-      defender.skills.dodge = 20
+      attacker.attributes.agility = 0
+      defender.attributes.agility = 20
       local action = Combat.actions.meleeAttack(attacker, defender)
       assert.not_thunk_dispatches_type("CHARACTER_SET_HEALTH", action)
     end)

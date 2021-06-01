@@ -84,12 +84,6 @@ describe("game.rules.game_state.actions", function()
       action()
     end)
 
-    it("loads the core skills", function()
-      local Skills = require "game.rules.skills"
-      assert.not_nil(Skills.list.handgun)
-      assert.not_nil(Skills.list.blade)
-    end)
-
     it("loads the core terrains", function()
       local Terrain = require "game.rules.map.terrain"
       assert.not_nil(Terrain.list.room)

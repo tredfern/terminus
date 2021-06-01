@@ -54,7 +54,6 @@ function Actions.loadCoreData()
   return Thunk(
     Actions.types.LOAD_CORE_DATA,
     function()
-      require "assets.characters.skills"
       require "assets.characters.names"
     end
   )
