@@ -85,6 +85,7 @@ Potential deeper themes:
 
 * [First palette idea](https://coolors.co/0a2239-132e32-21a5d0-ac9281-fbfbf2-f0e100-c42021-2c6e49) includes colors for success/warning/danger text
 
+
 **What emotions should the game invoke?**
 * _Tension_: Am I going to make it out of this room?
 * _Success_: I managed to save those people before fire devoured the room they were trapped in

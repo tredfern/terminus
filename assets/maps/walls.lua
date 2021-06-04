@@ -6,7 +6,7 @@
 local imageMgr = require "moonpie.graphics.image"
 local Sprite = require "game.rules.graphics.sprite"
 
-local wallAtlas = imageMgr.load("assets/graphics/placeholder-walls.png")
+local wallAtlas = imageMgr.load("assets/maps/spaceship-walls.png")
 
 local wallSprite = { }
 wallSprite.se = Sprite.fromAtlas(wallAtlas, 0, 0, 32, 32)

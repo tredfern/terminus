@@ -22,16 +22,16 @@ Terrain.describe {
 }
 
 Terrain.describe { key = "corridor", color = colors(colors.light_accent), images = {
-  imageMgr.load("assets/graphics/floor-1.png"),
-  imageMgr.load("assets/graphics/floor-2.png")
+  imageMgr.load("assets/maps/floor-1.png"),
+  imageMgr.load("assets/maps/floor-2.png")
 } }
 
 --
 -- ROOM
 --
 Terrain.describe { key = "room", color = colors.white, images = {
-  imageMgr.load("assets/graphics/floor-1.png"),
-  imageMgr.load("assets/graphics/floor-2.png")
+  imageMgr.load("assets/maps/floor-1.png"),
+  imageMgr.load("assets/maps/floor-2.png")
 } }
 
 --
@@ -43,7 +43,7 @@ Terrain.describe {
   blocksMovement = true,
   blocksSight = true,
   type = "wall",
-  sprite = require "assets.graphics.walls"
+  sprite = require "assets.maps.walls"
 }
 
 return Terrain

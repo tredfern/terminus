@@ -42,7 +42,7 @@ function Actions.ladderDown()
     local ladder = World.selectors.getByPosition(state, player.position, "ladderDown")[1]
 
     if ladder then
-      dispatch(Actions.move(Position.down(player.position)))
+      dispatch(Actions.move(Position.down))
     end
   end)
 end
@@ -54,7 +54,7 @@ function Actions.ladderUp()
     local ladder = World.selectors.getByPosition(state, player.position, "ladderUp")[1]
 
     if ladder then
-      dispatch(Actions.move(Position.up(player.position)))
+      dispatch(Actions.move(Position.up))
     end
   end)
 end
