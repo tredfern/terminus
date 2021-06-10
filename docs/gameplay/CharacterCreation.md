@@ -7,7 +7,7 @@
 
 ## Character Creation
 
-### Roll Ability Scores
+### Assign Ability Scores
 #### Physical
   - **Strength**: Physical force and ability
   - **Agility**: Nimbleness, coordination, motor skills
@@ -16,8 +16,26 @@
 #### Mental
   - **Knowledge**: General accumulation of information in topics. 
   - **Intelligence**: Problem solving capacity, ability to learn/absorb new information or make connections
-  - **Social**: Ability to fit in with groups, connect with people, leadership
+  - **Charisma**: Ability to fit in with groups, connect with people, leadership
 
+#### Spiritual/Universe/Horoscope
+  _Possible additional attributes_
+  - **Luck**: The fudge factor on almost every roll
+  - **Karma**: At times you put karma in the bank, and sometimes you withdraw from it
+  - **Fate**: Some randomization of the universe
+  - **Heroics**: Something to give the PC a bit extra over all the other entities in the game
+
+### Point Buy Method
+1. Characters start with attributes set to 4
+2. 4 is the lowest score an attribute can be, 12 is the highest
+3. Player has 20 points to spend increasing character attributes
+4. Cost is `1 + (abilityModifier * 2)`
+
+
+### Dice Roll Method
+1. Roll stats  Rolls with 2 results of 4 or less are automatically rejected
+2. Player selects which set they want
+3. Player assigns the 
 
 ### Skills
 

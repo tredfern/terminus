@@ -45,7 +45,7 @@ return components("gameMenu", function()
           caption = "Options",
           click = function()
             gameMenu_instance:remove()
-            app.options(app.combat)
+            app.options(app.mainScreen)
           end
         },
         components.button {
