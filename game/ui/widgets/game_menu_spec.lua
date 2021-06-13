@@ -41,7 +41,7 @@ describe("game.ui.widgets.game_menu", function()
     spy.on(app, "options")
     local menu = gameMenu()
     menu:findByID("btnOptions"):click()
-    assert.spy(app.options).was.called_with(app.combat)
+    assert.spy(app.options).was.called_with(app.mainScreen)
     assert.is_true(menu:needsRemoval())
   end)
 

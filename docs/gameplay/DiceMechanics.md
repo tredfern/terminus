@@ -35,6 +35,7 @@ Attribute modifiers are calculated by: `floor(Attribute / 3) - 2`
 
 ```
 Attribute | Formula | Result |
+----------|---------|--------|
 2         | 2/3 - 2 |   -2   |
 3         | 3/3 - 2 |   -1   |
 7         | 7/3 - 2 |    0   |
@@ -42,3 +43,17 @@ Attribute | Formula | Result |
 12        |12/3 - 2 |    2   |
 42        |42/3 - 2 |   12   |
 ```
+
+### Task Difficulty
+
+Task Level  | TN  |
+------------|-----|
+Trivial     |  2  |
+Basic       |  4  |
+Easy        |  6  |
+Average     |  8  |
+Challenging | 10  |
+Difficult   | 12  |
+Formidable  | 14  |
+Legendary   | 16  |
+Impossible  | 18  |

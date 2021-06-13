@@ -31,13 +31,18 @@
 3. Player has 20 points to spend increasing character attributes
 4. Cost is `1 + (abilityModifier * 2)`
 
-
 ### Dice Roll Method
 1. Roll stats  Rolls with 2 results of 4 or less are automatically rejected
 2. Player selects which set they want
-3. Player assigns the 
+3. Player assigns the scores to attributes of their choice
+
+## Homeworld
+Homeworlds will create the _racial_ bonus/modifiers typically seen in RPGs. Being born and living on 
+a different planet in the solar system
 
 ### Skills
+
+1. Skills are defined 
 
 Skills will have a base attribute that determines the starting point for the ability and then modified based on the abilities of the character. Untrained skills have a significant penalty
 

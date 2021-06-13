@@ -87,4 +87,19 @@ describe("game.rules.skills.actions", function()
       assert.in_range(3, 18, roll)
     end)
   end)
+
+  describe("ACTION: taskCheck", function()
+    local successAction = {}
+    local failAction = {}
+
+    it("dispatches the success action on pass", function()
+      local action = Actions.taskCheck(5, { -2, 2, 3 }, successAction, failAction)
+      assert.thunk_dispatches(successAction, action)
+    end)
+
+    it("dispatches the failure action on fail", function()
+      local action = Actions.taskCheck(10, { -2 }, successAction, failAction)
+      assert.thunk_dispatches(failAction, action)
+    end)
+  end)
 end)

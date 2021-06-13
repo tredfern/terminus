@@ -9,38 +9,22 @@
 Skills have an attribute that establishes the base ability for the skill. If the character is untrained
 in the skill, either a penalty is applied or they are incapable of attempting the skill.
 
-## Defining New Skills
+1. Skills have an attribute that defines the base modifier to the skill
+2. Skills that can be used without training have a minus modifier
+3. Ranks can be added to skills to provide a bonus
+4. Skills are rolled and compared to some difficulty target
+5. For the sake of flexibility, modifiers can be added to the roll or the target number
 
-Core skills are added to `data/skills.lua`
+### Contested Skills
 
-```lua
-  -- Defining a skill
-  local Skills = require "game.rules.skills"
+There is nothing like contested skill rolls. All rolls are handled by the actor, the defender
+gets to influence with with modifiers to the roll. 
 
-  Skills.describe {
-    name = "Pilot",  -- How the skill is displayed
-    key = "pilot",  -- The reference key for the skill
-    attribute = attributes.education, -- What attribute provides the base for the skill
-    untrained = -4 -- What modifier for being untrained in a skill. If not defined, the skill cannot be used
-  }
-```
+### Selecting the Target Number
 
-## Skill Checks
+Target numbers are selected by the difficulty of the task. 
 
-Skill checks are performed by rolling 3d6 and comparing against the skill and attributes of the character in question.
-
-### Opposing Skill Checks
-
-Opposing skill checks are made by the aggressor and defender both performing their skill checks. The scores are
-subtracted from the target. The highest value left over wins.
-
-```
-  Aggressor: Diplomacy (15)
-  Defender: Insight (8)
-
-  Aggressor rolls a 13, Defender rolls a 4. (15-13 =2, 8-4 = 4). The defender wins
-  Aggressor rolls a 16, Defender rolls a 12 (15-16 = -1, 8 - 12 = -4). The aggressor wins
-```
-
-In contested skill checks their is always a winner right now. Maybe that will change??
-
+Examples: 
+1) Using technical complex weapons might have higher difficulty for the task. Maybe a sword made of a beam of light is difficult to use, while a crossbow could be average
+2) Maybe hacking a computer system is dependent on the security of the system.
+3) Different manuevers for a pilot might have different difficulty
