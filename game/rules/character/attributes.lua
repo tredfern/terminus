@@ -5,9 +5,9 @@
 
 return {
   strength = "STRENGTH",
-  agility = "AGILITY",
+  dexterity = "DEXTERITY",
   endurance = "ENDURANCE",
-  wit = "WIT",
-  education = "EDUCATION",
-  social = "SOCIAL"
+  intelligence = "INTELLIGENCE",
+  knowledge = "KNOWLEDGE",
+  charisma = "CHARISMA"
 }

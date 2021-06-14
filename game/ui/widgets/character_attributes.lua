@@ -45,10 +45,10 @@ return Components("character_attributes", function(props)
       editable = props.editable
     },
     attrLabelPair {
-      label = "Agility",
-      attribute = attributes.agility,
+      label = "Dexterity",
+      attribute = attributes.dexterity,
       character = props.character,
-      value = characterAttributes[attributes.agility],
+      value = characterAttributes[attributes.dexterity],
       editable = props.editable
     },
     attrLabelPair {
@@ -59,24 +59,24 @@ return Components("character_attributes", function(props)
       editable = props.editable
     },
     attrLabelPair {
-      label = "Education",
-      attribute = attributes.education,
+      label = "Knowledge",
+      attribute = attributes.knowledge,
       character = props.character,
-      value = characterAttributes[attributes.education],
+      value = characterAttributes[attributes.knowledge],
       editable = props.editable
     },
     attrLabelPair {
-      label = "Wit",
-      attribute = attributes.wit,
+      label = "Intelligence",
+      attribute = attributes.intelligence,
       character = props.character,
-      value = characterAttributes[attributes.wit],
+      value = characterAttributes[attributes.intelligence],
       editable = props.editable
     },
     attrLabelPair {
-      label = "Social",
-      attribute = attributes.social,
+      label = "Charisma",
+      attribute = attributes.charisma,
       character = props.character,
-      value = characterAttributes[attributes.social],
+      value = characterAttributes[attributes.charisma],
       editable = props.editable
     },
   }

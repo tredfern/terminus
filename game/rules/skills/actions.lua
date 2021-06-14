@@ -11,6 +11,7 @@ local MessageLog = require "game.rules.message_log"
 local Messages = require "assets.messages"
 local Calculator = require "game.rules.skills.calculator"
 
+local TARGET_NUMBER = 8
 local skillCheckCup = Dice.cup(Dice.d6, Dice.d6)
 local Actions = {}
 Actions.types = require "game.rules.skills.types"
@@ -59,11 +60,11 @@ function Actions.perform(skill, character, successCallback, failCallback)
   end)
 end
 
-function Actions.taskCheck(targetNumber, modifiers, successAction, failAction)
+function Actions.taskCheck(modifiers, successAction, failAction)
   return Thunk(Actions.types.TASK_CHECK, function(dispatch)
     local roll = skillCheckCup()
     local modScore = tables.sum(modifiers)
-    if roll + modScore >= targetNumber then
+    if roll + modScore >= TARGET_NUMBER then
       dispatch(successAction)
     else
       dispatch(failAction)

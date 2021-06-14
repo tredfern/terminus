@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local types = require "game.rules.character.actions.types"
-local get_by_position = require "game.rules.character.selectors.get_by_position"
+local Selectors = require "game.rules.character.selectors"
 local set_position = require "game.rules.character.actions.set_position"
 local sounds = require "assets.sounds"
 local Thunk = require "moonpie.redux.thunk"
@@ -13,7 +13,7 @@ return function(character, position)
   local combat = require "game.rules.combat"
 
   return Thunk(types.MOVE, function(dispatch, getState)
-    local targets = get_by_position(getState(), position)
+    local targets = Selectors.getByPosition(getState(), position)
     if #targets > 0 then
       dispatch(combat.actions.meleeAttack(character, targets[1]))
     else

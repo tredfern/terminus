@@ -12,7 +12,7 @@ describe("game.rules.skills.selectors", function()
       local character = {
         attributes = {
           [Attributes.strength] = 3,
-          [Attributes.agility] = 2
+          [Attributes.dexterity] = 2
         }
       }
       local skillList = Selectors.getCharacterSkills({}, character)

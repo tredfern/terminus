@@ -7,8 +7,8 @@ local Attributes = require "game.rules.character.attributes"
 local List = {}
 
 -- COMBAT SKILLS
-List.dodge = { name = "Dodge", attribute = Attributes.agility }
-List.sword = { name = "Sword", attribute = Attributes.agility }
+List.dodge = { name = "Dodge", attribute = Attributes.dexterity }
+List.sword = { name = "Sword", attribute = Attributes.dexterity }
 List.unarmed = { name = "Unarmed", attribute = Attributes.strength }
 
 return List

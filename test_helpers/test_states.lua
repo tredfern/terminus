@@ -13,11 +13,11 @@ function testStates.basicGameState()
     isPlayerControlled = true, position = Position(1, 1, 1),
     attributes = {
       [Attributes.strength] = 3,
-      [Attributes.agility] = 2,
+      [Attributes.dexterity] = 2,
       [Attributes.endurance] = 4,
-      [Attributes.education] = 2,
-      [Attributes.wit] = 3,
-      [Attributes.social] = 2
+      [Attributes.knowledge] = 2,
+      [Attributes.intelligence] = 3,
+      [Attributes.charisma] = 2
     }
   }
   return mockStore {

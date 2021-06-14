@@ -9,11 +9,11 @@ describe("game.rules.skills.list", function()
 
   describe("combat skills", function()
     it("has a dodge skill", function()
-      assert.equals(attributes.agility, list.dodge.attribute)
+      assert.equals(attributes.dexterity, list.dodge.attribute)
     end)
 
     it("has a sword skill", function()
-      assert.equals(attributes.agility, list.sword.attribute)
+      assert.equals(attributes.dexterity, list.sword.attribute)
     end)
 
     it("has an unarmed skill", function()

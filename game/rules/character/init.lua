@@ -21,10 +21,5 @@ return {
   attributes = require "game.rules.character.attributes",
   create = factory.newCharacter,
   reducer = require "game.rules.character.reducer",
-  selectors = {
-    getAll = require "game.rules.character.selectors.get_all",
-    getAttribute = require "game.rules.character.selectors.get_attribute",
-    getByPosition = require "game.rules.character.selectors.get_by_position",
-    getDead = require "game.rules.character.selectors.get_dead",
-  }
+  selectors = require "game.rules.character.selectors"
 }

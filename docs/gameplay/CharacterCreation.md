@@ -10,7 +10,7 @@
 ### Assign Ability Scores
 #### Physical
   - **Strength**: Physical force and ability
-  - **Agility**: Nimbleness, coordination, motor skills
+  - **Dexterity**: Nimbleness, coordination, motor skills
   - **Endurance**: Stamina, Baseline for physical resistances/determination
 
 #### Mental
