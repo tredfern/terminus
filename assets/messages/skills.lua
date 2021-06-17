@@ -15,5 +15,9 @@ return {
       highlight("{{defender}}"),
       highlight("{{defRoll}}")
     )
-  }
+  },
+  taskCheck = string.format("(%s+%s >= 8)",
+    highlight("{{roll}}"),
+    highlight("{{modifiers}}")
+  )
 }

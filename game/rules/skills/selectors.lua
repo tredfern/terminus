@@ -14,8 +14,16 @@ function Selectors.getCharacterSkills(_, entity)
   return out
 end
 
+function Selectors.getSkillBaseAttribute(_, skillName)
+  return List[skillName].attribute
+end
+
 function Selectors.getSkillValue(_, entity, skill)
   return entity.attributes[List[skill].attribute]
+end
+
+function Selectors.getSkillModifier(_, character, skill)
+  return character.skills[skill] or -3
 end
 
 return Selectors

@@ -4,7 +4,5 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  DEFINE = "SKILLS_DEFINE",
-  OPPOSED_CHECK = "SKILLS_OPPOSED_CHECK",
-  PERFORM_CHECK = "SKILLS_PERFORM_CHECK",
+  TASK_CHECK = "SKILLS_TASK_CHECK"
 }

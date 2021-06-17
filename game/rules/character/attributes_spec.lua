@@ -14,4 +14,12 @@ describe("game.rules.character.attributes", function()
     assert.equals("KNOWLEDGE", attributes.knowledge)
     assert.equals("CHARISMA", attributes.charisma)
   end)
+
+  it("rolls 2d6 for the attribute score", function()
+    assert.in_range(2, 12, attributes.roll())
+  end)
+
+  it("returns a list of attributes for the point buy", function()
+    assert.same({ 4, 5, 6, 7, 8, 9 }, attributes.pointBuyStart())
+  end)
 end)

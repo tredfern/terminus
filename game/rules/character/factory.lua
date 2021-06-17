@@ -4,18 +4,21 @@
 -- https://opensource.org/licenses/MIT
 
 local characterFactory = {}
-local dice = require "moonpie.math.dice"
 local attributes = require "game.rules.character.attributes"
 local Position = require "game.rules.world.position"
+local tables = require "moonpie.tables"
 
 function characterFactory.createDefaultAttributes()
-  local cup = dice.parse("3d6")
+  local spread = attributes.pointBuyStart()
 
-  local out = {}
-  for _, v in pairs(attributes) do
-    out[v] = cup()
-  end
-  return out
+  return {
+    [attributes.strength] = tables.popRandom(spread),
+    [attributes.dexterity] = tables.popRandom(spread),
+    [attributes.endurance] = tables.popRandom(spread),
+    [attributes.intelligence] = tables.popRandom(spread),
+    [attributes.knowledge] = tables.popRandom(spread),
+    [attributes.charisma] = tables.popRandom(spread),
+  }
 end
 
 function characterFactory.createDefaultSkills()

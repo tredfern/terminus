@@ -33,4 +33,28 @@ describe("game.rules.skills.selectors", function()
       assert.equals(7, Selectors.getSkillValue({}, character, "unarmed"))
     end)
   end)
+
+  describe("SELECTOR: getSkillModifier", function()
+    it("returns skill points if the skill is in the characters list", function()
+      local c = {
+        skills = {
+          unarmed = 1
+        }
+      }
+
+      assert.equals(1, Selectors.getSkillModifier({}, c, "unarmed"))
+    end)
+
+    it("returns -3 if the character has no skill points", function()
+      local c = { skills = { } }
+      assert.equals(-3, Selectors.getSkillModifier({}, c, "unarmed"))
+    end)
+  end)
+
+  describe("SELECTOR: getSkillBaseAttribute", function()
+    it("returns the skill's Base Attribute from the skill name", function()
+      local attributes = require "game.rules.character.attributes"
+      assert.equals(attributes.strength, Selectors.getSkillBaseAttribute({}, "unarmed"))
+    end)
+  end)
 end)

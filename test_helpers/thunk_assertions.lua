@@ -47,12 +47,16 @@ local function thunk_dispatches_type(_, arguments)
 
   if expectedCount == nil then
     return tables.any(dispatcher.dispatched, function(d)
-      return d.type == expectedType
+      if type(d) == "table" then
+        return d.type == expectedType
+      end
     end)
   end
 
   return tables.count(dispatcher.dispatched, function(d)
-    return d.type == expectedType
+    if type(d) == "table" then
+      return d.type == expectedType
+    end
   end) == expectedCount
 end
 

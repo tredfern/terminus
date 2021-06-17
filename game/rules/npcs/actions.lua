@@ -11,7 +11,7 @@ Actions.types = {
   CHECK_SPAWN_ENEMY = "NPCS_CHECK_SPAWN_ENEMY",
   THINK = "NPCS_THINK"
 }
-local randomChance = 2
+local randomChance = 12
 
 function Actions.checkSpawnEnemy(spawner)
   return Thunk(Actions.types.CHECK_SPAWN_ENEMY, function(dispatch)
