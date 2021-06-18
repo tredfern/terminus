@@ -69,4 +69,23 @@ describe("game.rules.player.selectors", function()
       assert.is_falsy(Selectors.hasVisitedRoom(state, nope))
     end)
   end)
+
+  describe("SELECTOR: getHotKeys", function()
+    it("returns all the hotkeys from the player state", function()
+      local state = {
+        player = {
+          hotkeys = {
+            ["1"] = {},
+            ["2"] = {},
+            ["ctrl+5"] = {}
+          }
+        }
+      }
+
+      local hotkeys = Selectors.getHotKeys(state)
+      assert.not_nil(hotkeys["1"])
+      assert.not_nil(hotkeys["2"])
+      assert.not_nil(hotkeys["ctrl+5"])
+    end)
+  end)
 end)

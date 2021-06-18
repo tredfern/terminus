@@ -226,4 +226,18 @@ describe("game.rules.player", function()
       assert.equals(room, action.payload.room)
     end)
   end)
+
+  describe("ACTION: setHotKey", function()
+    it("takes a key, name, image, and a function to process the hotkey", function()
+      local cb = function() end
+      local img = {}
+      local action = Actions.setHotKey(1, "Callback", img, cb)
+
+      assert.equals("PLAYER_SET_HOT_KEY", action.type)
+      assert.equals(1, action.payload.hotkey)
+      assert.equals(cb, action.payload.handler)
+      assert.equals(img, action.payload.image)
+      assert.equals("Callback", action.payload.name)
+    end)
+  end)
 end)

@@ -125,6 +125,18 @@ function Actions.enteredRoom(room)
   )
 end
 
+function Actions.setHotKey(key, name, image, handler)
+  return {
+    type = Actions.types.SET_HOT_KEY,
+    payload = {
+      hotkey = key,
+      name = name,
+      image = image,
+      handler = handler
+    }
+  }
+end
+
 function Actions.trackRoomVisit(room)
   return {
     type = Actions.types.TRACK_ROOM_VISIT,

@@ -17,4 +17,24 @@ describe("game.rules.player.reducer", function()
     local state = reducer({}, action)
     assert.not_nil(state.roomVisits[room])
   end)
+
+  describe("PLAYER_SET_HOT_KEY", function()
+    it("stores the hotkey in state", function()
+      local action = {
+        type = types.SET_HOT_KEY,
+        payload = {
+          hotkey = "4",
+          name = "Hot Key Name",
+          image = {},
+          handler = function() end
+        }
+      }
+      local state = reducer({}, action)
+
+      assert.not_nil(state.hotkeys["4"])
+      assert.equals("Hot Key Name", state.hotkeys["4"].name)
+      assert.equals(action.payload.image, state.hotkeys["4"].image)
+      assert.equals(action.payload.handler, state.hotkeys["4"].handler)
+    end)
+  end)
 end)
