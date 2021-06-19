@@ -102,5 +102,26 @@ describe("game.rules.player.selectors", function()
       assert.is_nil(Selectors.getHotKey(state, "4"))
       assert.is_not_nil(Selectors.getHotKey(state, "1"))
     end)
+
+    it("does not error if there are no hotkeys", function()
+      assert.not_has_errors(function() Selectors.getHotKey({ player = {} }, "1") end)
+    end)
+  end)
+
+  describe("SELECTOR: getFreeHotKey", function()
+    it("returns the next available hotkey", function()
+      local state = {
+        player = {
+          hotkeys = {
+            ["1"] = {},
+            ["2"] = {},
+            ["3"] = {},
+            ["5"] = {},
+          }
+        }
+      }
+
+      assert.equals("4", Selectors.getFreeHotKey(state))
+    end)
   end)
 end)

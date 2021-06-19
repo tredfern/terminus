@@ -108,6 +108,13 @@ function Actions.pickupItems()
     for _, i in ipairs(items) do
       dispatch(Inventory.actions.addItem(pc, i))
       dispatch(Items.actions.remove(i))
+
+      if Items.isUsable(i) then
+        local freeHotKey = Selectors.getFreeHotKey(getState())
+        if freeHotKey then
+          dispatch(Actions.setHotKey(freeHotKey, i.name, i.image, function() dispatch(Items.actions.use(i, pc)) end))
+        end
+      end
     end
   end
 end

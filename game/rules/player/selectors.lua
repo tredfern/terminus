@@ -36,11 +36,25 @@ function Selectors.getFieldOfView(state)
   return FOV.selectors.get(state, p)
 end
 
+function Selectors.getFreeHotKey(state)
+  local HOTKEYS = require "game.rules.player.hotkeys"
+
+  for _, v in ipairs(HOTKEYS) do
+    if Selectors.getHotKey(state, v) == nil then
+      return v
+    end
+  end
+end
+
 function Selectors.getHotKeys(state)
   return state.player.hotkeys
 end
 
 function Selectors.getHotKey(state, hotkey)
+  if not state.player or not state.player.hotkeys then
+    return nil
+  end
+
   return state.player.hotkeys[hotkey]
 end
 

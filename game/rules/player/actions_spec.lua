@@ -156,7 +156,9 @@ describe("game.rules.player", function()
 
   describe("ACTION: PickupItems", function()
     local playerCharacter = { isPlayerControlled = true, position = Position(10, 10, 1) }
-    local item1, item2 = { item = true, position = Position(10, 10, 1) }, { item = true, position = Position(10, 10, 1)}
+    local item1, item2 =
+      { item = true, position = Position(10, 10, 1), useHandler = function() end },
+      { item = true, position = Position(10, 10, 1)}
 
     before_each(function()
       mockDispatch.processComplex = true
@@ -184,6 +186,11 @@ describe("game.rules.player", function()
       local action = Actions.pickupItems()
       assert.thunk_dispatches(Items.actions.remove(item1), action)
       assert.thunk_dispatches(Items.actions.remove(item2), action)
+    end)
+
+    it("adds to the hotkey slots if usable and there is a hotkey slot open", function()
+      local action = Actions.pickupItems()
+      assert.thunk_dispatches_type(Actions.types.SET_HOT_KEY, action, 1)
     end)
   end)
 

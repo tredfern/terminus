@@ -20,7 +20,7 @@ return function()
     Store.dispatch(Items.actions.add(Items.Gear.keycard(), p))
   end
 
-  for _ = 1, 40 do
+  for _ = 1, 240 do
     local r = tables.pickRandom(rooms)
     local p = Position.randomInRoom(r)
     Store.dispatch(Items.actions.add(Items.Gear.healthPack(), p))
