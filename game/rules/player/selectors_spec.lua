@@ -88,4 +88,19 @@ describe("game.rules.player.selectors", function()
       assert.not_nil(hotkeys["ctrl+5"])
     end)
   end)
+
+  describe("SELECTOR: getHotKey", function()
+    it("returns the specific hotkey requested", function()
+      local state = {
+        player = {
+          hotkeys = {
+            ["1"] = {}
+          }
+        }
+      }
+
+      assert.is_nil(Selectors.getHotKey(state, "4"))
+      assert.is_not_nil(Selectors.getHotKey(state, "1"))
+    end)
+  end)
 end)

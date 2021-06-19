@@ -11,7 +11,7 @@ describe("game.ui.inputs.keyboard", function()
   local turn = require "game.rules.turn"
   local Position = require "game.rules.world.position"
 
-  describe("combat_map settings", function()
+  describe("MainScreen settings", function()
     before_each(function()
       spy.on(player.actions, "move")
       spy.on(player.actions, "ladderUp")
@@ -127,18 +127,44 @@ describe("game.ui.inputs.keyboard", function()
         assert.spy(player.actions.pickupItems).was.called()
         assert.spy(turn.actions.process).was.called()
       end)
+
+      describe("multistep commands", function()
+        it("open doors triggers a mode where it waits for a directional command before dispatching command", function()
+          local Orientation = require "game.rules.world.orientation"
+          spy.on(player.actions, "openDoor")
+
+          key_simulator:keyPressed("o")
+          assert.spy(player.actions.openDoor).was.not_called()
+          key_simulator:keyPressed("left")
+          assert.spy(player.actions.openDoor).was.called_with(Orientation.west)
+        end)
+      end)
+    end)
+
+    describe("hotkey slots", function()
+      local hotKeyHandler
+      before_each(function()
+        hotKeyHandler = spy.new(function() end)
+        mockStore {
+          player = {
+            hotkeys = {
+              ["1"] = {
+                handler = hotKeyHandler
+              }
+            }
+          }
+        }
+      end)
+
+      it("dispatches the handler for a hot key if the hot key is encoded", function()
+        key_simulator:keyPressed("1")
+        assert.spy(hotKeyHandler).was.called()
+      end)
+
+      it("is ok if a hot key doesn't have a handler", function()
+        assert.not_has_errors(function() key_simulator:keyPressed("2") end)
+      end)
     end)
   end)
 
-  describe("multistep commands", function()
-    it("open doors triggers a mode where it waits for a directional command before dispatching command", function()
-      local Orientation = require "game.rules.world.orientation"
-      spy.on(player.actions, "openDoor")
-
-      key_simulator:keyPressed("o")
-      assert.spy(player.actions.openDoor).was.not_called()
-      key_simulator:keyPressed("left")
-      assert.spy(player.actions.openDoor).was.called_with(Orientation.west)
-    end)
-  end)
 end)

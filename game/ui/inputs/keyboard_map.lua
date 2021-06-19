@@ -30,6 +30,15 @@ local function setDirectionHandler(action)
   directionAction = action
 end
 
+local function hotkeySlotHandler(slot)
+  return function()
+    local hotkey = player.selectors.getHotKey(store.getState(), slot)
+    if hotkey then
+      hotkey.handler()
+    end
+  end
+end
+
 
 keySettings.combatMap = {
   ["down"] = function()
@@ -75,7 +84,16 @@ keySettings.combatMap = {
   ["tab"] = function()
     local app = require "game.app"
     app.characterDetails()
-  end
+  end,
+  ["1"] = hotkeySlotHandler("1"),
+  ["2"] = hotkeySlotHandler("2"),
+  ["3"] = hotkeySlotHandler("3"),
+  ["4"] = hotkeySlotHandler("4"),
+  ["5"] = hotkeySlotHandler("5"),
+  ["6"] = hotkeySlotHandler("6"),
+  ["7"] = hotkeySlotHandler("7"),
+  ["8"] = hotkeySlotHandler("8"),
+  ["9"] = hotkeySlotHandler("9"),
 
 }
 

@@ -40,6 +40,10 @@ function Selectors.getHotKeys(state)
   return state.player.hotkeys
 end
 
+function Selectors.getHotKey(state, hotkey)
+  return state.player.hotkeys[hotkey]
+end
+
 function Selectors.hasVisitedRoom(state, room)
   if state and state.player and state.player.roomVisits then
     return state.player.roomVisits[room]
