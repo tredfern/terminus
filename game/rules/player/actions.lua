@@ -30,6 +30,15 @@ function Actions.add(position)
   return Characters.actions.add(c)
 end
 
+function Actions.clearHotKey(hotkey)
+  return {
+    type = Actions.types.CLEAR_HOT_KEY,
+    payload = {
+      hotkey = hotkey
+    }
+  }
+end
+
 function Actions.equipItem(item)
   local player = Selectors.getPlayer(store.getState())
   return Inventory.actions.equipItem(player, item)
@@ -112,7 +121,11 @@ function Actions.pickupItems()
       if Items.isUsable(i) then
         local freeHotKey = Selectors.getFreeHotKey(getState())
         if freeHotKey then
-          dispatch(Actions.setHotKey(freeHotKey, i.name, i.image, function() dispatch(Items.actions.use(i, pc)) end))
+          dispatch(Actions.setHotKey(freeHotKey, i.name, i.image, function()
+            -- This should be a custom Thunk
+            store.dispatch(Items.actions.use(i, pc))
+            store.dispatch(Actions.clearHotKey(freeHotKey))
+          end))
         end
       end
     end

@@ -37,4 +37,22 @@ describe("game.rules.player.reducer", function()
       assert.equals(action.payload.handler, state.hotkeys["4"].handler)
     end)
   end)
+
+  describe("PLAYER_CLEAR_HOT_KEY", function()
+    it("removes the hotkey", function()
+      local state = {
+        hotkeys = {
+          ["1"] = {}
+        }
+      }
+
+      local action = {
+        type = types.CLEAR_HOT_KEY,
+        payload = { hotkey = "1" }
+      }
+
+      state = reducer(state, action)
+      assert.is_nil(state.hotkeys["1"])
+    end)
+  end)
 end)

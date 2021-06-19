@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 return {
+  CLEAR_HOT_KEY = "PLAYER_CLEAR_HOT_KEY",
   ENTERED_ROOM = "PLAYER_ENTERED_ROOM",
   LADDER_DOWN = "PLAYER_LADDER_DOWN",
   LADDER_UP = "PLAYER_LADDER_UP",
