@@ -23,24 +23,6 @@ return createSlice {
     return tables.concatArray(state, { action.payload.character })
   end,
 
-  [types.ADD_ITEM_TO_INVENTORY] = function(state, action)
-    local character = action.payload.character
-    local slot = findItemInInventory(character.inventory, action.payload.item)
-    if slot then
-      slot.quantity = slot.quantity + 1
-    else
-      character.inventory[#character.inventory + 1] = createInventorySlot(action.payload.item)
-    end
-    return state
-  end,
-
-  [types.EQUIP_ITEM] = function(state, action)
-    local character = action.payload.character
-    local item = action.payload.item
-    character.inventory.equipSlots[item.equipSlot] = item
-    return state
-  end,
-
   [types.REMOVE] = function(state, action)
     return tables.select(state,
     function(character)
@@ -48,19 +30,6 @@ return createSlice {
         return character
       end
     end)
-  end,
-
-  [types.REMOVE_ITEM_FROM_INVENTORY] = function(state, action)
-    local character = action.payload.character
-    local item = action.payload.item
-    local slot, index = findItemInInventory(character.inventory, item)
-    if slot.quantity > 1 then
-      slot.quantity = slot.quantity - 1
-    else
-      table.remove(character.inventory, index)
-    end
-
-    return state
   end,
 
   [types.SET_ATTRIBUTE] = function(state, action)
