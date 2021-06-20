@@ -180,6 +180,20 @@ styles.primary = {
   height = "90%"
 }
 
+styles.quick_slots = {
+  vertical_align = "top",
+  height = 50,
+}
+
+styles.quick_slots_slot = {
+  display = "inline",
+  width = "10%",
+  height = "90%",
+  border = 1,
+  borderColor = "light_accent",
+  padding = 4
+}
+
 styles.spinner = {
   display = "inline"
 }

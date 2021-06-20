@@ -45,4 +45,22 @@ function sprite:setQuad(x, y, width, height)
   self.quad = love.graphics.newQuad(x, y, width, height, self.imageData)
 end
 
+function sprite:getWidth()
+  if self.quad then
+    local _, _, w = self.quad:getViewport()
+    return w
+  end
+
+  return self.imageData:getWidth()
+end
+
+function sprite:getHeight()
+  if self.quad then
+    local _, _, _, h = self.quad:getViewport()
+    return h
+  end
+
+  return self.imageData:getHeight()
+end
+
 return sprite

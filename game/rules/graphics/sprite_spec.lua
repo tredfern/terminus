@@ -48,4 +48,15 @@ describe("game.rules.graphics.sprite", function()
     assert.spy(love.graphics.draw).was.called_with(test.imageData, test.quad, 13, 20)
 
   end)
+
+  it("can return the dimensions of either the quad or the image", function()
+    local image = {}
+    local test = sprite.fromAtlas(image, 0, 0, 32, 48)
+    assert.equals(32, test:getWidth())
+    assert.equals(48, test:getHeight())
+
+    test = sprite.fromFile(testFile)
+    assert.equals(test.imageData.width, test:getWidth())
+    assert.equals(test.imageData.height, test:getHeight())
+  end)
 end)

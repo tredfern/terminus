@@ -10,6 +10,7 @@ local turn_counter = require "game.ui.widgets.turn_counter"
 local character_stats = require "game.ui.widgets.character_stats"
 local message_log = require "game.ui.main_screen.message_log"
 local scoreboard = require "game.ui.widgets.scoreboard"
+local QuickSlots = require "game.ui.main_screen.quick_slots"
 
 local mainScreen = components("main_screen", function()
   return {
@@ -17,6 +18,7 @@ local mainScreen = components("main_screen", function()
     {
       style = "map_view",
       map_component(),
+      QuickSlots(),
       message_log(),
     }, {
       style = "stats",

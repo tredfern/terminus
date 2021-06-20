@@ -31,8 +31,9 @@ function love.draw()
   -- of any drawing since usually interface is on top of everything else, but
   -- if that is not the case the debug stats on the panel could be off.
   moonpie.paint()
-  love.graphics.setColor({1, 1, 1, 1 })
-  love.graphics.print(love.timer.getFPS(), 10, 10)
+  local w, h = love.graphics.getDimensions()
+  love.graphics.setColor({1, 0, 1, 1 })
+  love.graphics.print(love.timer.getFPS(), w - 25, h - 15)
 end
 
 function love.keypressed(key, scancode, isrepeat)

@@ -121,7 +121,7 @@ function Actions.pickupItems()
       if Items.isUsable(i) then
         local freeHotKey = Selectors.getFreeHotKey(getState())
         if freeHotKey then
-          dispatch(Actions.setHotKey(freeHotKey, i.name, i.image, function()
+          dispatch(Actions.setHotKey(freeHotKey, i.name, i.sprite, function()
             -- This should be a custom Thunk
             store.dispatch(Items.actions.use(i, pc))
             store.dispatch(Actions.clearHotKey(freeHotKey))

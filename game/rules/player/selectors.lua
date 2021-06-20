@@ -47,7 +47,9 @@ function Selectors.getFreeHotKey(state)
 end
 
 function Selectors.getHotKeys(state)
-  return state.player.hotkeys
+  if state.player and state.player.hotkeys then
+    return state.player.hotkeys
+  end
 end
 
 function Selectors.getHotKey(state, hotkey)
