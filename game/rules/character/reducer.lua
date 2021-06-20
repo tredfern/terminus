@@ -3,20 +3,9 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local types = require "game.rules.character.actions.types"
+local types = require "game.rules.character.types"
 local createSlice = require "moonpie.redux.create_slice"
 local tables = require "moonpie.tables"
-
-local function createInventorySlot(item)
-  return {
-    item = item,
-    quantity = 1
-  }
-end
-
-local function findItemInInventory(inventory, item)
-  return tables.findFirst(inventory, function(i) return i.item.key == item.key end)
-end
 
 return createSlice {
   [types.ADD] = function(state, action)

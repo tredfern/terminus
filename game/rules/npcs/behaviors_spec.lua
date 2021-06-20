@@ -29,7 +29,7 @@ describe("game.rules.npcs.behaviors", function()
 
   describe("BEHAVIOR: randomMovement", function()
     it("dispatches a move action", function()
-      local characterActionTypes = require "game.rules.character.actions.types"
+      local characterActionTypes = require "game.rules.character.types"
       local character = { position = { x = 4, y = 8 } }
       Behaviors.randomMovement(character, mockDispatch)
 

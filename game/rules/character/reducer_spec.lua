@@ -5,7 +5,7 @@
 
 describe("game.rules.character.reducer", function()
   local characters_reducer = require "game.rules.character.reducer"
-  local types = require "game.rules.character.actions.types"
+  local types = require "game.rules.character.types"
   local Position = require "game.rules.world.position"
 
   it("returns the same state if the action is not handled", function()
