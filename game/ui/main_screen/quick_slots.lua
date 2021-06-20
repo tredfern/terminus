@@ -10,7 +10,6 @@ local tables = require "moonpie.tables"
 local SpriteImage = require "game.ui.widgets.sprite_image"
 
 local Slot = Components("quick_slots_slot", function(props)
-  print("slot")
   return {
     id = "hotkey_" .. props.hotkey,
     SpriteImage { id = "HotKeyImage", sprite = props.action.image },
