@@ -5,7 +5,7 @@
 
 
 local tables = require "moonpie.tables"
-local sprite = require "game.rules.graphics.sprite"
+local ImageManager = require "game.rules.graphics.image_manager"
 local Animator = require "game.rules.graphics.animator"
 local World = require "game.rules.world"
 local Behaviors = require "game.rules.npcs.behaviors"
@@ -33,7 +33,7 @@ function Actions.addSpawner(position)
   return World.actions.addEntity {
     position = position,
     spawner = true,
-    sprite = sprite.fromFile("assets/graphics/spawner.png")
+    sprite = ImageManager.load("ALIEN_SPAWNER", "assets/graphics/spawner.png")
   }
 end
 

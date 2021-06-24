@@ -4,7 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local colors = require "moonpie.graphics.colors"
-local imageMgr = require "moonpie.graphics.image"
+local ImageManager = require "game.rules.graphics.image_manager"
 
 local Terrain = {
   list = {}
@@ -22,16 +22,16 @@ Terrain.describe {
 }
 
 Terrain.describe { key = "corridor", color = colors(colors.light_accent), images = {
-  imageMgr.load("assets/maps/floor-1.png"),
-  imageMgr.load("assets/maps/floor-2.png")
+  ImageManager.load("CORRIDOR_1", "assets/maps/floor-1.png"),
+  ImageManager.load("CORRIDOR_2", "assets/maps/floor-2.png")
 } }
 
 --
 -- ROOM
 --
 Terrain.describe { key = "room", color = colors.white, images = {
-  imageMgr.load("assets/maps/floor-1.png"),
-  imageMgr.load("assets/maps/floor-2.png")
+  ImageManager.load("FLOOR_1", "assets/maps/floor-1.png"),
+  ImageManager.load("FLOOR_2", "assets/maps/floor-2.png")
 } }
 
 --

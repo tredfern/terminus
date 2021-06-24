@@ -3,12 +3,12 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Sprite = require "game.rules.graphics.sprite"
-local ImageMgr = require "moonpie.graphics.image"
+local ImageManager = require "game.rules.graphics.image_manager"
 local Settings = require "game.settings"
 
-local ladderAtlas = ImageMgr.load(Settings.assetPath("maps/features/ladders.png"))
+local filename = Settings.assetPath("maps/features/ladders.png")
+
 return {
-  down = Sprite.fromAtlas(ladderAtlas, 0, 0, 32, 32),
-  up = Sprite.fromAtlas(ladderAtlas, 32, 0, 32, 32)
+  down = ImageManager.load("LADDER_DOWN", filename, { 0, 0, 32, 32 }),
+  up = ImageManager.load("LADDER_UP", filename, { 32, 0, 32, 32 })
 }

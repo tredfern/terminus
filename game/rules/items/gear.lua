@@ -3,7 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local Sprite = require "game.rules.graphics.sprite"
+local ImageManager = require "game.rules.graphics.image_manager"
 local Gear = {}
 
 function Gear.healthPack()
@@ -15,7 +15,7 @@ function Gear.healthPack()
       local Character = require "game.rules.character"
       dispatch(Character.actions.heal(user))
     end,
-    sprite = Sprite.fromFile("assets/graphics/healthkit.png"),
+    sprite = ImageManager.load("HEALTH_PACK", "assets/graphics/healthkit.png"),
     item = true
   }
 end
@@ -33,7 +33,7 @@ function Gear.sprayBottle()
         dispatch(Aliens.actions.removeSpawner(spawner))
       end
     end,
-    sprite = Sprite.fromFile("assets/graphics/spray-bottle.png"),
+    sprite = ImageManager.load("SPRAY_BOTTLE", "assets/graphics/spray-bottle.png"),
     item = true
   }
 end
@@ -42,7 +42,7 @@ function Gear.keycard()
    return {
     key = "keycard",
     name = "Keycard",
-    sprite = Sprite.fromFile("assets/graphics/keycard.png"),
+    sprite = ImageManager.load("KEY_CARD", "assets/graphics/keycard.png"),
     item = true
   }
 end

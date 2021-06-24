@@ -149,13 +149,12 @@ function generator.fillWalls(width, height, levels)
 end
 
 function generator.calculateSprites(width, height, levels)
-  local sprite = require "game.rules.graphics.sprite"
   for pos in Position.box(Position(1, 1, 1), Position(width, height, levels)) do
     local neighbors = Selectors.getNeighbors(store.getState(), pos)
     local tile = neighbors.center
     if tile and tile.terrain then
       if tile.terrain.images then
-        local tileImage = sprite.fromImage(tables.pickRandom(tile.terrain.images))
+        local tileImage = tables.pickRandom(tile.terrain.images)
         tileImage.color = tile.terrain.color
         store.dispatch(Actions.setTileProperties(pos, { sprite = tileImage }))
       end
