@@ -36,7 +36,7 @@ describe("game.app", function()
 
     it("renders the create character screen", function()
       app.newGame()
-      assert.not_nil(moonpie.ui.current.findByID("create_character_screen"))
+      assert.not_nil(moonpie.ui.current.findByID("createCharacterScreen"))
     end)
   end)
 

@@ -4,45 +4,55 @@
 -- https://opensource.org/licenses/MIT
 
 describe("game.ui.create_character", function()
-  local create_character = require "game.ui.create_character"
-  local character = require "game.rules.character"
+  local CreateCharacter = require "game.ui.create_character"
   local testStates = require "test_helpers.test_states"
-  local player, store
 
   before_each(function()
-    store, player = testStates.basicGameState()
+    testStates.basicGameState()
   end)
 
-  it("has a button that continues to the game start screen", function()
+  it("starts on the basic information screen", function()
+    local c = moonpie.testRender(CreateCharacter())
+    local bi = c:findByID("basicInformation")
+    assert.is_falsy(bi:isHidden())
+  end)
+
+  it("can move from the basic information screen to the career terms screen", function()
+    local c = moonpie.testRender(CreateCharacter())
+    local cc = c:findByID("createCharacterScreen")
+    local bi = c:findByID("basicInformation")
+    assert.is_falsy(bi:isHidden())
+    cc:findByID("btnNext"):click()
+    assert.equals(2, cc.currentStep)
+    c = moonpie.testRender(cc)
+    assert.is_nil(c:findByID("basicInformation"))
+
+    local ct = c:findByID("careerTerms")
+    assert.is_falsy(ct:isHidden())
+  end)
+
+  it("can move from the career terms to equip screen", function()
+    local c = moonpie.testRender(CreateCharacter())
+    local cc = c:findByID("createCharacterScreen")
+    c:findByID("btnNext"):click()
+    c:findByID("btnNext"):click()
+    c = moonpie.testRender(cc)
+    local es = c:findByID("equipCharacter")
+    assert.is_falsy(es:isHidden())
+    assert.is_true(c:findByID("btnNext"):isHidden())
+    assert.is_falsy(c:findByID("btnDone"):isHidden())
+  end)
+
+  it("continues to the game start screen after done", function()
     local app = require "game.app"
     spy.on(app, "gameStart")
 
-    local c = moonpie.testRender(create_character())
-    c:findByID("button_done"):click()
+    local c = moonpie.testRender(CreateCharacter())
+    c:findByID("btnDone"):click()
     assert.spy(app.gameStart).was.called()
   end)
 
-  it("dispatch set character name action on done", function()
-    local c = moonpie.testRender(create_character())
-    local textbox = c:findByID("character_name")
-    textbox:setText("Foo")
-
-    c:findByID("button_done"):click()
-
-    assert.equals(1, #store.get_actions(character.actions.types.SET_NAME))
-    local action = store.get_actions(character.actions.types.SET_NAME)[1]
-    assert.equals(player, action.payload.character)
-    assert.equals("Foo", action.payload.name)
+  it("sets up the character state when done", function()
+    pending()
   end)
-
-  it("displays the character abilities section", function()
-    local c = moonpie.testRender(create_character())
-    assert.not_nil(c:findByID("characterAttributes"))
-  end)
-
-  it("displays the character skills section", function()
-    local c = moonpie.testRender(create_character())
-    assert.not_nil(c:findByID("characterSkills"))
-  end)
-
 end)

@@ -3,74 +3,61 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
-local components = require "moonpie.ui.components"
-local store = require "moonpie.redux.store"
+local Components = require "moonpie.ui.components"
 local connect = require "moonpie.redux.connect"
 local app = require "game.app"
-local character = require "game.rules.character"
 local player = require "game.rules.player"
-local Skills = require "game.rules.skills"
 local FullScreenPanel = require "game.ui.widgets.full_screen_panel"
-local CharacterAttributes = require "game.ui.widgets.character_attributes"
-local CharacterSkills = require "game.ui.widgets.character_skills"
-local LabelPair = require "game.ui.widgets.label_pair"
+local BasicInformation = require "game.ui.create_character.basic_information"
+local CareerTerms = require "game.ui.create_character.career_terms"
+local Equip = require "game.ui.create_character.equip"
 
-local create_character = components("create_character", function(props)
-  local editCharacter = props.character
-  local character_name = components.textbox {
-    id = "character_name",
-    click = function(self) self:setFocus() end,
-    width = "100%",
+local nextButton = function(props)
+  return Components.button {
+    id = "btnNext",
+    wizard = props.wizard,
+    caption = "Next",
+    click = function()
+      props.wizard:update { currentStep = props.wizard.currentStep + 1 }
+    end,
+    hidden = props.wizard.currentStep >= #props.wizard.steps
   }
-  character_name:setText(props.character.name)
+end
 
+local doneButton = function(props)
+  return Components.button {
+    id = "btnDone",
+    caption = "Done",
+    wizard = props.wizard,
+    click = function()
+      app.gameStart()
+    end,
+    hidden = props.wizard.currentStep < #props.wizard.steps
+  }
+end
+
+local create_character = Components("create_character", function(props)
   return {
-    id = "create_character_screen",
-    FullScreenPanel {
-      title = "Create Character",
-      actions = {
-        components.button {
-          id = "button_done",
-          caption = "Done",
-          style = "button-primary",
-          click = function()
-            store.dispatch(character.actions.setName(
-              editCharacter,
-              character_name:getText()
-            ))
-            app.gameStart()
-          end
+    id = "createCharacterScreen",
+    editCharacter = props.character,
+    steps = {
+      BasicInformation(),
+      CareerTerms(),
+      Equip()
+    },
+    currentStep = 1,
+    render = function(self)
+      return FullScreenPanel {
+        title = "Create Character",
+        actions = {
+          nextButton { wizard = self },
+          doneButton { wizard = self }
         },
-      },
-      contents = {
-        padding = 6,
-        {
-          components.h3 { text = "Name"},
-          character_name,
-        },
-        {
-          { components.h3 { text = "Attributes"} },
-          CharacterAttributes {
-            id = "characterAttributes", attributes = editCharacter.attributes,
-            editable = true, character = editCharacter
-          },
-          LabelPair {
-            margin = { left = 10 },
-            width = "15%",
-            label = "Health:",
-            value = editCharacter.health
-          }
-        },
-        {
-          { components.h3 { text = "Skills" } },
-          CharacterSkills { id = "characterSkills",
-            characterSkills = props.characterSkills
-          }
+        contents = {
+          padding = 6,
+          self.steps[self.currentStep]
         },
       }
-    },
-    mounted = function()
-      character_name:setFocus()
     end
   }
 end)
@@ -78,7 +65,6 @@ end)
 return connect(create_character, function(state)
   local p = player.selectors.getPlayer(state)
   return {
-    character = p,
-    characterSkills = Skills.selectors.getCharacterSkills(state, p)
+    character = p
   }
 end)
