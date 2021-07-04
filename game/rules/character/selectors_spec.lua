@@ -25,7 +25,6 @@ describe("game.rules.characters.selectors", function()
   end)
 
   describe("SELECTOR: getAttribute", function()
-
     it("returns the specific attribute", function()
       local c = { attributes = { STRENGTH = 32 } }
       assert.equals(32, Selectors.getAttribute({}, c, Attributes.strength))
@@ -84,6 +83,7 @@ describe("game.rules.characters.selectors", function()
         [Attributes.charisma] = 15,
       }
     }
+    local state = { characters = { c } }
 
     it("can return the modifiers for the character stats", function()
       assert.equals(-2, Selectors.getStrengthModifier({}, c))
@@ -93,5 +93,40 @@ describe("game.rules.characters.selectors", function()
       assert.equals(2, Selectors.getIntelligenceModifier({}, c))
       assert.equals(3, Selectors.getCharismaModifier({}, c))
     end)
+
+    it("returns nil for the modifier if no value is set", function()
+      assert.is_nil(Selectors.getStrengthModifier({}, {}))
+    end)
+
+    it("returns nil for an attribute if attributes do not exist", function()
+      assert.is_nil(Selectors.getAttribute({}, {}, Attributes.strength))
+    end)
+
+    it("can get all the attributes together", function()
+      local attr = Selectors.getAttributes(state, c)
+      assert.equals(2, attr[Attributes.strength].value)
+      assert.equals(-2, attr[Attributes.strength].modifier)
+      assert.equals(3, attr[Attributes.dexterity].value)
+      assert.equals(-1, attr[Attributes.dexterity].modifier)
+      assert.equals(6, attr[Attributes.endurance].value)
+      assert.equals(0, attr[Attributes.endurance].modifier)
+      assert.equals(9, attr[Attributes.knowledge].value)
+      assert.equals(1, attr[Attributes.knowledge].modifier)
+      assert.equals(12, attr[Attributes.intelligence].value)
+      assert.equals(2, attr[Attributes.intelligence].modifier)
+      assert.equals(15, attr[Attributes.charisma].value)
+      assert.equals(3, attr[Attributes.charisma].modifier)
+    end)
+  end)
+
+  describe("SELECTORS: getName", function()
+    local c = {
+      name = "Foo Bar"
+    }
+    local state = {
+      characters = { c }
+    }
+
+    assert.equals("Foo Bar", Selectors.getName(state, c))
   end)
 end)

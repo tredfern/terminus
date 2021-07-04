@@ -16,7 +16,7 @@ local attrLabelPair = Components("characterAttributeLabelPair", function(props)
       style = "align-right",
       id = props.attribute .. "Value",
       value = props.value,
-      eventUpdated = function(component)
+      onUpdate = function(component)
         store.dispatch(Character.actions.setAttribute(props.character, props.attribute, component.value))
       end,
     }

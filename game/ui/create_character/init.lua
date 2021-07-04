@@ -41,7 +41,7 @@ local create_character = Components("create_character", function(props)
     id = "createCharacterScreen",
     editCharacter = props.character,
     steps = {
-      BasicInformation(),
+      BasicInformation { character = props.character },
       CareerTerms(),
       Equip()
     },

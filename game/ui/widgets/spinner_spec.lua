@@ -27,7 +27,7 @@ describe("game.ui.widgets.spinner", function()
 
   it("lets a subscriber know about the new value", function()
     local cb = spy.new(function() end)
-    local s = Spinner { value = 10, eventUpdated = cb }
+    local s = Spinner { value = 10, onUpdate = cb }
     local rend = moonpie.testRender(s)
     rend:findByID("btnNext"):click()
     assert.spy(cb).was.called()
