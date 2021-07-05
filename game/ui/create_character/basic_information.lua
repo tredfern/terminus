@@ -6,8 +6,20 @@
 local Components = require "moonpie.ui.components"
 local Character = require "game.rules.character"
 local connect = require "moonpie.redux.connect"
-local Panel = require "game.ui.widgets.panel"
 local store = require "game.store"
+
+local function AttributeComp(attribute, icon, score, modifier)
+  return {
+    style = "attribute",
+    {
+      Components.icon { icon = icon, style = "icon-medium attribute-icon", padding = 4,
+        border = 1, borderColor = "light_accent", backgroundColor = "dark_accent" },
+      Components.text { text = attribute, style = "attribute-title align-middle" },
+      Components.text { text = "{{score}} ({{modifier}})",
+        score = score, modifier = modifier, style = "attribute-score align-middle" }
+    },
+  }
+end
 
 local BasicInformation = Components("createCharacterBasicInformation", function(props)
   local updateName = function(textBox)
@@ -17,25 +29,29 @@ local BasicInformation = Components("createCharacterBasicInformation", function(
   return {
     character = props.character,
     id = "basicInformation",
-    Panel {
-      title = "Name",
-      contents = {
-        Components.h3 { text = "Name" },
-        Components.textbox {
-          id = "characterName",
-          click = function(self) self:setFocus() end,
-          width = "80%",
-          onUpdate = updateName
+    {
+      Components.h3 { text = "Name" },
+      Components.textbox {
+        id = "characterName",
+        click = function(self) self:setFocus() end,
+        width = "80%",
+        onUpdate = updateName
+      },
+    }, {
+      Components.h3 { text = "Attributes" },
+      {
+        {
+          AttributeComp("Strength", "strong", 12, 2),
+          AttributeComp("Dexterity", "acrobatic", 12, 2),
+          AttributeComp("Endurance", "jumping-rope", 12, 2),
         },
-      }
-    },
-    Panel {
-      title = "Attributes",
-      contents = {
-        Components.h3 { text = "Attributes" },
+        {
+          AttributeComp("Knowledge", "diploma", 12, 2),
+          AttributeComp("Intelligence", "brain", 12, 2),
+          AttributeComp("Charisma", "star-struck", 12, 2),
+        }
       }
     }
-
   }
 end)
 

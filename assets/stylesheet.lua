@@ -9,6 +9,32 @@ local styles = moonpie.ui.styles
 local colors = require "moonpie.graphics.colors"
 local sounds = require "assets.sounds"
 
+styles["attribute"] = {
+  width = 230,
+  border = 1,
+  borderColor = "light_accent"
+}
+
+styles["attribute-title"] = {
+  fontSize = 20,
+  padding = 5,
+  color = "primary"
+}
+
+styles["attribute-icon"] = {
+  padding = 4,
+  border = 2,
+  color = "white",
+  borderColor = "light_accent",
+  backgroundColor = "dark_accent"
+}
+
+styles["attribute-score"] = {
+  fontSize = 26,
+  color = "light_shade",
+  padding = { left = 5 },
+}
+
 styles.body.fontSize = 18
 styles.button = moonpie.tables.merge({
     fontSize = 18,
