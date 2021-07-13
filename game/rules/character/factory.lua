@@ -8,25 +8,19 @@ local attributes = require "game.rules.character.attributes"
 local Position = require "game.rules.world.position"
 local tables = require "moonpie.tables"
 
+local START_BUY_POINTS = 6
+
 function characterFactory.createDefaultAttributes()
   local spread = attributes.pointBuyStart()
 
   return {
+    buyPoints = START_BUY_POINTS,
     [attributes.strength] = tables.popRandom(spread),
     [attributes.dexterity] = tables.popRandom(spread),
     [attributes.endurance] = tables.popRandom(spread),
     [attributes.intelligence] = tables.popRandom(spread),
     [attributes.knowledge] = tables.popRandom(spread),
     [attributes.charisma] = tables.popRandom(spread),
-  }
-end
-
-function characterFactory.createDefaultSkills()
-  return {
-    throwing = 0,
-    blade = 0,
-    unarmed = 0,
-    handgun = 0,
   }
 end
 
@@ -47,7 +41,7 @@ function characterFactory.newCharacter(props)
     isPlayerControlled = props.isPlayerControlled,
     isEnemy = props.isEnemy,
     attributes = characterFactory.createDefaultAttributes(),
-    skills = characterFactory.createDefaultSkills(),
+    skills = {},
     name = characterFactory.getName(),
     ai = props.ai
   }

@@ -22,6 +22,16 @@ function Actions.add(character)
   }
 end
 
+function Actions.buyAttributePoint(character, attribute)
+  return {
+    type = Actions.types.BUY_ATTRIBUTE_POINT,
+    payload = {
+      character = character,
+      attribute = attribute
+    }
+  }
+end
+
 function Actions.heal(character)
   return function(dispatch)
     dispatch(Actions.setHealth(character, character.health + 5))
@@ -50,6 +60,16 @@ function Actions.remove(character)
     type = Actions.types.REMOVE,
     payload = {
       character = character
+    }
+  }
+end
+
+function Actions.sellAttributePoint(character, attribute)
+  return {
+    type = Actions.types.SELL_ATTRIBUTE_POINT,
+    payload = {
+      character = character,
+      attribute = attribute
     }
   }
 end

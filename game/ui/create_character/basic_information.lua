@@ -6,17 +6,30 @@
 local Components = require "moonpie.ui.components"
 local Character = require "game.rules.character"
 local connect = require "moonpie.redux.connect"
+local Spinner = require "game.ui.widgets.spinner"
 local store = require "game.store"
+local Row = require "game.ui.widgets.row"
+local Attributes = Character.attributes
 
-local function AttributeComp(attribute, icon, score, modifier)
+local function getAttributeValues(attributes, attribute)
+  return attributes[attribute].value, attributes[attribute].modifier
+end
+
+local function AttributeComp(character, attributes, attribute)
+  local score = getAttributeValues(attributes, attribute)
   return {
     style = "attribute",
     {
-      Components.icon { icon = icon, style = "icon-medium attribute-icon", padding = 4,
-        border = 1, borderColor = "light_accent", backgroundColor = "dark_accent" },
-      Components.text { text = attribute, style = "attribute-title align-middle" },
-      Components.text { text = "{{score}} ({{modifier}})",
-        score = score, modifier = modifier, style = "attribute-score align-middle" }
+      Components.text { text = "{{attribute}}", style = "attribute-title align-middle", attribute = attribute },
+      Spinner {
+        id = attribute .. "Spinner", value = score, style = "align-right",
+        minimum = Attributes.pointBuyMinimum(), maximum = Attributes.pointBuyMaximum(),
+        onIncrease = function()
+          store.dispatch(Character.actions.buyAttributePoint(character, attribute))
+        end, onDecrease = function()
+          store.dispatch(Character.actions.sellAttributePoint(character, attribute))
+        end
+      },
     },
   }
 end
@@ -29,29 +42,59 @@ local BasicInformation = Components("createCharacterBasicInformation", function(
   return {
     character = props.character,
     id = "basicInformation",
-    {
-      Components.h3 { text = "Name" },
-      Components.textbox {
-        id = "characterName",
-        click = function(self) self:setFocus() end,
-        width = "80%",
-        onUpdate = updateName
-      },
-    }, {
-      Components.h3 { text = "Attributes" },
-      {
-        {
-          AttributeComp("Strength", "strong", 12, 2),
-          AttributeComp("Dexterity", "acrobatic", 12, 2),
-          AttributeComp("Endurance", "jumping-rope", 12, 2),
+    Row({
+      padding = { top = 3, bottom = 3 },
+      columns = 4, {
+        columnWidth = 1,
+        Components.h3 { text = "Name" },
+      }, {
+        columnWidth = 3,
+        Components.textbox {
+          id = "characterName",
+          text = props.characterName,
+          click = function(self) self:setFocus() end,
+          width = "100%",
+          onUpdate = updateName
         },
-        {
-          AttributeComp("Knowledge", "diploma", 12, 2),
-          AttributeComp("Intelligence", "brain", 12, 2),
-          AttributeComp("Charisma", "star-struck", 12, 2),
-        }
       }
-    }
+    }),
+    Row({
+      padding = { top = 3, bottom = 3 },
+      columns = 4,
+      {
+        columnWidth = 1,
+        { Components.h3 { text = "Attributes" } },
+        Components.text { id = "buyPoints", margin = { left = 15 }, text = "Points: {{points}}",
+        points = props.buyPoints }
+      }, {
+        columnWidth = 3,
+        Row({
+          columns = 3,
+          {
+            columnWidth = 1,
+            AttributeComp(props.character, props.attributes, Attributes.strength),
+          }, {
+            columnWidth = 1,
+            AttributeComp(props.character, props.attributes, Attributes.dexterity),
+          }, {
+            columnWidth = 1,
+            AttributeComp(props.character, props.attributes, Attributes.endurance),
+          }
+        }),
+        Row({
+          columns = 3, {
+            columnWidth = 1,
+            AttributeComp(props.character, props.attributes, Attributes.knowledge),
+          }, {
+            columnWidth = 1,
+            AttributeComp(props.character, props.attributes, Attributes.intelligence)
+          }, {
+            columnWidth = 1,
+            AttributeComp(props.character, props.attributes, Attributes.charisma)
+          }
+        })
+      }
+    })
   }
 end)
 

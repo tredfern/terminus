@@ -9,17 +9,7 @@ local mockStore = require "moonpie.test_helpers.mock_store"
 local testStates = {}
 
 function testStates.basicGameState()
-  local player = {
-    isPlayerControlled = true, position = Position(1, 1, 1),
-    attributes = {
-      [Attributes.strength] = 3,
-      [Attributes.dexterity] = 2,
-      [Attributes.endurance] = 4,
-      [Attributes.knowledge] = 2,
-      [Attributes.intelligence] = 3,
-      [Attributes.charisma] = 2
-    }
-  }
+  local player = testStates.basicPlayer()
   return mockStore {
     map = {
       width = 100, height = 100, levels = 10,
@@ -38,6 +28,20 @@ function testStates.basicGameState()
       counter = 12
     }
   }, player
+end
+
+function testStates.basicPlayer()
+  return {
+    isPlayerControlled = true, position = Position(1, 1, 1),
+    attributes = {
+      [Attributes.strength] = 3,
+      [Attributes.dexterity] = 2,
+      [Attributes.endurance] = 4,
+      [Attributes.knowledge] = 2,
+      [Attributes.intelligence] = 3,
+      [Attributes.charisma] = 2
+    }
+  }
 end
 
 

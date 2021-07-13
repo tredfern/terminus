@@ -10,14 +10,14 @@ local colors = require "moonpie.graphics.colors"
 local sounds = require "assets.sounds"
 
 styles["attribute"] = {
-  width = 230,
   border = 1,
-  borderColor = "light_accent"
+  borderColor = "light_accent",
+  padding = 5
 }
 
 styles["attribute-title"] = {
   fontSize = 20,
-  padding = 5,
+  padding = { left = 10 },
   color = "primary"
 }
 
@@ -32,7 +32,7 @@ styles["attribute-icon"] = {
 styles["attribute-score"] = {
   fontSize = 26,
   color = "light_shade",
-  padding = { left = 5 },
+  padding = { right = 5 },
 }
 
 styles.body.fontSize = 18
@@ -227,14 +227,15 @@ styles.spinner = {
 styles["spinner-button"] = {
   margin = { left = 4, right = 4 },
   padding = { left = 4, right = 4 },
-  fontSize = 18
+  fontSize = 18,
 }
 
 styles["spinner-text"] = {
   border = 1,
   borderColor = colors.light_accent,
   padding = { left = 4, right = 4 },
-  fontName = "monospace"
+  fontName = "monospace",
+  fontSize = 20
 }
 
 styles.splash = {

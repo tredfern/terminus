@@ -4,27 +4,49 @@
 -- https://opensource.org/licenses/MIT
 
 local Components = require "moonpie.ui.components"
+local safeCall = require "moonpie.utility.safe_call"
 
 local Spinner = Components("spinner", function(props)
   local id = props.id or ""
   local spin = {
-    value = props.value
+    value = props.value,
+    minimum = props.minimum,
+    maximum = props.maximum,
+    onIncrease = props.onIncrease,
+    onDecrease = props.onDecrease
   }
 
   spin.render = function(self)
     return {
       display = "inline",
       Components.button {
-        style = "button-small spinner-button align-middle", caption = "<", id = "btnPrev" .. id,
-        click = function() self:changeValue(-1) end },
-      Components.text { style = "spinner-text align-middle", text = self.value },
+        style = "spinner-button align-middle button-info", id = "btnPrev" .. id,
+        click = function() self:changeValue(-1) end,
+        caption = "<<"
+      },
+      Components.text { style = "spinner-text align-middle", text = string.format("%02d", self.value) },
       Components.button {
-        style = "button-small spinner-button align-middle", caption = ">", id = "btnNext" .. id,
-        click = function() self:changeValue(1) end }
+        style = "spinner-button align-middle button-info", id = "btnNext" .. id,
+        click = function() self:changeValue(1) end,
+        caption = ">>"
+      }
     }
   end
 
+  spin.increase = function(self)
+    self:changeValue(1)
+    safeCall(self.onIncrease, self)
+  end
+
+  spin.decrease = function(self)
+    self:changeValue(-1)
+    safeCall(self.onDecrease, self)
+  end
+
   spin.changeValue = function(self, inc)
+    if self.minimum and self.value + inc < self.minimum then return end
+    if self.maximum and self.value + inc > self.maximum then return end
+
     self:update { value = self.value + inc }
   end
 

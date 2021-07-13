@@ -59,4 +59,9 @@ describe("game.rules.character.character", function()
 
     assert.equals(aiRoutine, c.ai)
   end)
+
+  it("starts with some buy points for attributes", function()
+    local c= characterFactory.newCharacter()
+    assert.greater_than(0, c.attributes.buyPoints)
+  end)
 end)

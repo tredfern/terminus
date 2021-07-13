@@ -162,6 +162,24 @@ describe("game.rules.character.actions", function()
       }
       assert.is_false(sp:validate(state))
     end)
+  end)
 
+  describe("ACTIONS: buy/sell Attributes", function()
+    -- Used during the character creation process
+    it("can specify an attribute point to buy", function()
+      local c, attr = {}, "INTELLIGENCE"
+      local buy = Actions.buyAttributePoint(c, attr)
+      assert.equals("CHARACTER_BUY_ATTRIBUTE_POINT", buy.type)
+      assert.equals(c, buy.payload.character)
+      assert.equals(attr, buy.payload.attribute)
+    end)
+
+    it("can specify an attribute to sell a point in", function()
+      local c, attr = {}, "INTELLIGENCE"
+      local sell = Actions.sellAttributePoint(c, attr)
+      assert.equals("CHARACTER_SELL_ATTRIBUTE_POINT", sell.type)
+      assert.equals(c, sell.payload.character)
+      assert.equals(attr, sell.payload.attribute)
+    end)
   end)
 end)
