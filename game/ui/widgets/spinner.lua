@@ -21,33 +21,24 @@ local Spinner = Components("spinner", function(props)
       display = "inline",
       Components.button {
         style = "spinner-button align-middle button-info", id = "btnPrev" .. id,
-        click = function() self:changeValue(-1) end,
+        click = function() self:decrease() end,
         caption = "<<"
       },
       Components.text { style = "spinner-text align-middle", text = string.format("%02d", self.value) },
       Components.button {
         style = "spinner-button align-middle button-info", id = "btnNext" .. id,
-        click = function() self:changeValue(1) end,
+        click = function() self:increase() end,
         caption = ">>"
       }
     }
   end
 
   spin.increase = function(self)
-    self:changeValue(1)
     safeCall(self.onIncrease, self)
   end
 
   spin.decrease = function(self)
-    self:changeValue(-1)
     safeCall(self.onDecrease, self)
-  end
-
-  spin.changeValue = function(self, inc)
-    if self.minimum and self.value + inc < self.minimum then return end
-    if self.maximum and self.value + inc > self.maximum then return end
-
-    self:update { value = self.value + inc }
   end
 
   return spin

@@ -12,6 +12,18 @@ return createSlice {
     return tables.concatArray(state, { action.payload.character })
   end,
 
+  [types.BUY_ATTRIBUTE_POINT] = function(state, action)
+    local Attributes = require "game.rules.character.attributes"
+    local c, attr = action.payload.character, action.payload.attribute
+
+    if c.attributes.buyPoints > 0 and c.attributes[attr] < Attributes.pointBuyMaximum() then
+      c.attributes[attr] = c.attributes[attr] + 1
+      c.attributes.buyPoints = c.attributes.buyPoints - 1
+    end
+
+    return state
+  end,
+
   [types.REMOVE] = function(state, action)
     return tables.select(state,
     function(character)
@@ -19,6 +31,18 @@ return createSlice {
         return character
       end
     end)
+  end,
+
+  [types.SELL_ATTRIBUTE_POINT] = function(state, action)
+    local Attributes = require "game.rules.character.attributes"
+    local c, attr = action.payload.character, action.payload.attribute
+
+    if c.attributes[attr] > Attributes.pointBuyMinimum() then
+      c.attributes[attr] = c.attributes[attr] - 1
+      c.attributes.buyPoints = c.attributes.buyPoints + 1
+    end
+
+    return state
   end,
 
   [types.SET_ATTRIBUTE] = function(state, action)

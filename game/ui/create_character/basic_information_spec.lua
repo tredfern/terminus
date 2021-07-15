@@ -34,10 +34,6 @@ describe("game.ui.create_character.basic_information", function()
     )
   end)
 
-  it("tracks the available points", function()
-    assert.equals("Points: 15", biWidget:findByID("buyPoints").text)
-  end)
-
   it("sets the minimum and maximum for the attribute spinners", function()
     local intelligenceSpinner = biWidget:findByID("INTELLIGENCESpinner")
     assert.equals(3, intelligenceSpinner.minimum)

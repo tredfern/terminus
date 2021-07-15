@@ -7,6 +7,7 @@ describe("game.rules.character.reducer", function()
   local characters_reducer = require "game.rules.character.reducer"
   local types = require "game.rules.character.types"
   local Position = require "game.rules.world.position"
+  local Attributes = require "game.rules.character.attributes"
 
   it("returns the same state if the action is not handled", function()
     local state = {}
@@ -104,5 +105,84 @@ describe("game.rules.character.reducer", function()
     })
 
     assert.equals(15, newState.characters[1].attributes[attributes.strength])
+  end)
+
+  describe("Buy/Sell Attribute Points", function()
+    local character, state
+
+    before_each(function()
+      character = { attributes = {
+        buyPoints = 10,
+        ["STRENGTH"] = 5
+      } }
+      state = { characters = { character } }
+    end)
+
+    it("increments the attribute and subtracts a buypoint", function()
+      characters_reducer(state, {
+        type = types.BUY_ATTRIBUTE_POINT,
+        payload = {
+          character = character,
+          attribute = Attributes.strength
+        }
+      })
+
+      assert.equals(6, character.attributes[Attributes.strength])
+      assert.equals(9, character.attributes.buyPoints)
+    end)
+
+    it("does nothing if there are no buy points", function()
+      character.attributes.buyPoints = 0
+      characters_reducer(state, {
+        type = types.BUY_ATTRIBUTE_POINT,
+        payload = {
+          character = character,
+          attribute = Attributes.strength
+        }
+      })
+
+      assert.equals(5, character.attributes[Attributes.strength])
+      assert.equals(0, character.attributes.buyPoints)
+    end)
+
+    it("does not increase past the maximum", function()
+      character.attributes[Attributes.strength] = Attributes.pointBuyMaximum()
+      characters_reducer(state, {
+        type = types.BUY_ATTRIBUTE_POINT,
+        payload = {
+          character = character,
+          attribute = Attributes.strength
+        }
+      })
+
+      assert.equals(Attributes.pointBuyMaximum(), character.attributes[Attributes.strength])
+    end)
+
+    it("decreases the attribute and adds a buypoint to the pool", function()
+      characters_reducer(state, {
+        type = types.SELL_ATTRIBUTE_POINT,
+        payload = {
+          character = character,
+          attribute = Attributes.strength
+        }
+      })
+
+      assert.equals(4, character.attributes[Attributes.strength])
+      assert.equals(11, character.attributes.buyPoints)
+    end)
+
+    it("does nothing if decreasing below attribute minimum", function()
+      character.attributes[Attributes.strength] = Attributes.pointBuyMinimum()
+      characters_reducer(state, {
+        type = types.SELL_ATTRIBUTE_POINT,
+        payload = {
+          character = character,
+          attribute = Attributes.strength
+        }
+      })
+
+      assert.equals(Attributes.pointBuyMinimum(), character.attributes[Attributes.strength])
+      assert.equals(10, character.attributes.buyPoints)
+    end)
   end)
 end)

@@ -8,7 +8,6 @@ describe("game.app", function()
   local app = require "game.app"
   local testStates = require "test_helpers.test_states"
 
-
   it("loads the core data", function()
     local gameState = require "game.rules.game_state"
     spy.on(gameState.actions, "loadCoreData")
@@ -30,6 +29,10 @@ describe("game.app", function()
   end)
 
   describe("starting a new game", function()
+    before_each(function()
+      -- testStates.basicGameState()
+    end)
+
     it("can start a new game", function()
       assert.has_no_errors(function() app.newGame() end)
     end)

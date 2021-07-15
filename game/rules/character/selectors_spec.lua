@@ -81,6 +81,7 @@ describe("game.rules.characters.selectors", function()
         [Attributes.knowledge] = 9,
         [Attributes.intelligence] = 12,
         [Attributes.charisma] = 15,
+        buyPoints = 5
       }
     }
     local state = { characters = { c } }
@@ -116,6 +117,10 @@ describe("game.rules.characters.selectors", function()
       assert.equals(2, attr[Attributes.intelligence].modifier)
       assert.equals(15, attr[Attributes.charisma].value)
       assert.equals(3, attr[Attributes.charisma].modifier)
+    end)
+
+    it("can return the buy points available", function()
+      assert.equals(5, Selectors.getBuyPoints(state, c))
     end)
   end)
 

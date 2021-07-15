@@ -22,6 +22,12 @@ function Selectors.getAttribute(_, character, attribute)
   end
 end
 
+function Selectors.getBuyPoints(_, character)
+  if character.attributes then
+    return character.attributes.buyPoints
+  end
+end
+
 function Selectors.getByPosition(state, position)
   return tables.select(state.characters, function(c)
     return Position.equal(c.position, position)
