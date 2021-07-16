@@ -20,15 +20,15 @@ local Spinner = Components("spinner", function(props)
     return {
       display = "inline",
       Components.button {
-        style = "spinner-button align-middle button-info", id = "btnPrev" .. id,
+        style = "spinner-button", id = "btnPrev" .. id,
         click = function() self:decrease() end,
-        caption = "<<"
+        caption = "-"
       },
-      Components.text { style = "spinner-text align-middle", text = string.format("%02d", self.value) },
+      Components.text { style = "spinner-text", text = string.format("%02d", self.value) },
       Components.button {
-        style = "spinner-button align-middle button-info", id = "btnNext" .. id,
+        style = "spinner-button", id = "btnNext" .. id,
         click = function() self:increase() end,
-        caption = ">>"
+        caption = "+"
       }
     }
   end

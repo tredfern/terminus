@@ -17,16 +17,13 @@ styles["attribute"] = {
 
 styles["attribute-title"] = {
   fontSize = 20,
+  margin = { top = 3, bottom = 6 },
   padding = { left = 10 },
   color = "primary"
 }
 
-styles["attribute-icon"] = {
+styles["attribute-spinner"] = {
   padding = 4,
-  border = 2,
-  color = "white",
-  borderColor = "light_accent",
-  backgroundColor = "dark_accent"
 }
 
 styles["attribute-score"] = {
@@ -226,8 +223,9 @@ styles.spinner = {
 
 styles["spinner-button"] = {
   margin = { left = 4, right = 4 },
-  padding = { left = 4, right = 4 },
-  fontSize = 18,
+  padding = { left = 6, right = 6 },
+  fontSize = 20,
+  fontName = "default-bold"
 }
 
 styles["spinner-text"] = {

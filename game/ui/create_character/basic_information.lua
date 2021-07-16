@@ -21,9 +21,9 @@ local function AttributeComp(character, attributes, attribute)
   return {
     style = "attribute",
     {
-      Components.text { text = "{{attribute}}", style = "attribute-title align-middle", attribute = attribute },
+      { Components.text { text = "{{attribute}}", style = "attribute-title align-center", attribute = attribute } },
       bind(Spinner({
-        id = attribute .. "Spinner", value = score, style = "align-right",
+        id = attribute .. "Spinner", value = score, style = "attribute-spinner align-center",
         minimum = Attributes.pointBuyMinimum(), maximum = Attributes.pointBuyMaximum(),
         onIncrease = function()
           store.dispatch(Character.actions.buyAttributePoint(character, attribute))
