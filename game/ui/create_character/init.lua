@@ -42,7 +42,7 @@ local create_character = Components("create_character", function(props)
     editCharacter = props.character,
     steps = {
       BasicInformation { character = props.character },
-      CareerTerms(),
+      CareerTerms { character = props.character },
       Equip()
     },
     currentStep = 1,

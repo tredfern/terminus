@@ -8,7 +8,7 @@ local Components = require "moonpie.ui.components"
 local Equip = Components("createCharacterEquip", function()
   return {
     id = "equipCharacter",
-    Components.text { text = "Equip Character" }
+    Components.text { text = "Equip Character" },
   }
 end)
 
