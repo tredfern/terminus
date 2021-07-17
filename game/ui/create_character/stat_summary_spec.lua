@@ -12,9 +12,9 @@ describe("game.ui.create_character.stat_summary", function()
       skills = { }
     }
 
-    local s = StatSummary {
+    local s = moonpie.testRender(StatSummary {
       character = character
-    }
+    })
 
     assert.not_nil(s:findByID("character_attributes"))
     assert.not_nil(s:findByID("character_skills"))

@@ -24,7 +24,8 @@ styles["attribute-title"] = {
 
 styles["attribute-icon"] = {
   margin = { top = 10, left = 10 },
-  color = "light_shade"
+  color = "light_shade",
+  width = 48, height = 48
 }
 
 styles["attribute-spinner"] = {
