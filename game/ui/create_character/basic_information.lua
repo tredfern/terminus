@@ -20,7 +20,11 @@ local function AttributeComp(character, attributes, attribute)
   local score = getAttributeValues(attributes, attribute)
   return {
     style = "attribute",
+    Components.icon { display = "inline", icon = Attributes.getIcon(attribute),
+      style = "attribute-icon icon-medium align-middle" },
     {
+      display = "inline",
+      width = "75%",
       { Components.text { text = "{{attribute}}", style = "attribute-title align-center", attribute = attribute } },
       bind(Spinner({
         id = attribute .. "Spinner", value = score, style = "attribute-spinner align-center",

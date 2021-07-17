@@ -13,16 +13,24 @@ local Attributes = {
 }
 
 local metaData = {
-  [Attributes.strength] = { displayText = "Strength", abbr = "STR" },
-  [Attributes.dexterity] = { displayText = "Dexterity", abbr = "DEX" },
-  [Attributes.endurance] = { displayText = "Endurance", abbr = "END" },
-  [Attributes.intelligence] = { displayText = "Intelligence", abbr = "INT" },
-  [Attributes.knowledge] = { displayText = "Knowledge", abbr = "KNW" },
-  [Attributes.charisma] = { displayText = "Charisma", abbr = "CHA" },
+  [Attributes.strength] = { displayText = "Strength", abbr = "STR", icon = "strong" },
+  [Attributes.dexterity] = { displayText = "Dexterity", abbr = "DEX", icon = "acrobatic" },
+  [Attributes.endurance] = { displayText = "Endurance", abbr = "END", icon = "hiking" },
+  [Attributes.intelligence] = { displayText = "Intelligence", abbr = "INT", icon = "brain" },
+  [Attributes.knowledge] = { displayText = "Knowledge", abbr = "KNW", icon = "diploma"  },
+  [Attributes.charisma] = { displayText = "Charisma", abbr = "CHA", icon = "star-struck" },
 }
 
 function Attributes.getDisplayText(attr)
   return metaData[attr].displayText
+end
+
+function Attributes.getIcon(attr)
+  return metaData[attr].icon
+end
+
+function Attributes.getAbbreviation(attr)
+  return metaData[attr].abbr
 end
 
 function Attributes.roll()

@@ -22,6 +22,11 @@ styles["attribute-title"] = {
   color = "primary"
 }
 
+styles["attribute-icon"] = {
+  margin = { top = 10, left = 10 },
+  color = "light_shade"
+}
+
 styles["attribute-spinner"] = {
   padding = 4,
 }
