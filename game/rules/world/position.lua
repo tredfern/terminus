@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local maths = require "moonpie.math"
+local tables = require "moonpie.tables"
 local readOnly = require "moonpie.utility.read_only_table"
 local Position = {}
 local hashDB = {}
@@ -171,6 +172,21 @@ function Position.box(from, to)
 
     return out
   end
+end
+
+function Position.createUniqueList(from, to, count)
+  local allPoints = {}
+  for p in Position.box(from, to) do
+    table.insert(allPoints, p)
+  end
+
+  local outList = {}
+
+  for _ = 1, count do
+    table.insert(outList, tables.popRandom(allPoints))
+  end
+
+  return outList
 end
 
 return setmetatable(Position, {

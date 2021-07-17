@@ -4,7 +4,10 @@
 -- https://opensource.org/licenses/MIT
 
 local Thunk = require "moonpie.redux.thunk"
+local tables = require "moonpie.tables"
 local World = require "game.rules.world"
+local Position = require "game.rules.world.position"
+local Rooms = require "game.rules.map.rooms"
 local ladders = require "assets.maps.features.ladders"
 
 local Actions = {}
@@ -65,8 +68,38 @@ function Actions.create(width, height, generator)
       local levels = 10
       dispatch(Actions.setDimensions(width, height, levels))
 
-      local outline, tileMap = generator(width, height, levels)
-      dispatch(Actions.add(outline, tileMap))
+      generator(width, height, levels)
+
+      dispatch(Actions.populate())
+    end
+  )
+end
+
+function Actions.populate()
+  -- Add some prickly bushes to 10 rooms on the map
+  local Bestiary = require "game.rules.bestiary"
+  return Thunk(
+    Actions.types.POPULATE,
+    function(dispatch, getState)
+      local Selectors = require "game.rules.map.selectors"
+      local rooms = Selectors.getRooms(getState())
+
+      if rooms then
+        for _ = 1, 10 do
+          local room = tables.pickRandom(rooms)
+          -- Fill about 1/3 of the room
+          local count = Rooms.getArea(room) / 3
+          -- Create a unique list of positions in an area
+          local positionList = Position.createUniqueList(
+            Position(room.x, room.y, room.level),
+            Position(room.x + room.width, room.y + room.height, room.level),
+            count)
+
+          for _, pos in ipairs(positionList) do
+            dispatch(Bestiary.actions.add(Bestiary.plants.prickleBush(), pos))
+          end
+        end
+      end
     end
   )
 end

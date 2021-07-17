@@ -160,4 +160,17 @@ describe("game.rules.world.position", function()
       assert.is_nil(loop())
     end)
   end)
+
+  it("creates a unique list of positions in an area", function()
+    local tables = require "moonpie.tables"
+    local list = Position.createUniqueList(Position(1, 1, 1), Position(5, 5, 5), 20)
+
+    assert.equals(20, #list)
+    for _, v in ipairs(list) do
+      assert.in_range(1, 5, v.x)
+      assert.in_range(1, 5, v.y)
+      assert.in_range(1, 5, v.z)
+      assert.is_false(tables.any(list, function(p) return p ~= v and p.x == v.x and p.y == v.y and p.z == v.z end))
+    end
+  end)
 end)

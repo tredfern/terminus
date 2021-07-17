@@ -29,5 +29,9 @@ function Rooms.rectangular(x, y, width, height, level)
   }
 end
 
+function Rooms.getArea(room)
+  return room.width * room.height
+end
+
 
 return Rooms

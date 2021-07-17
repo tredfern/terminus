@@ -7,6 +7,7 @@ describe("game.rules.map.actions", function()
   local Actions = require "game.rules.map.actions"
   local Position = require "game.rules.world.position"
   local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
+  local mockStore = require "moonpie.test_helpers.mock_store"
 
   describe("ACTION: addLadderDown", function()
     it("creates an add-entity action with the ladder specs", function()
@@ -46,11 +47,6 @@ describe("game.rules.map.actions", function()
     before_each(function()
       mockDispatch:reset()
       mockDispatch.processComplex = true
-    end)
-
-    it("adds the map to the state", function()
-      mockDispatch(Actions.create(100, 100, generator))
-      assert.is_true(mockDispatch:received_action("MAP_ADD"))
     end)
 
     it("uses a generator to create the map", function()
@@ -104,6 +100,19 @@ describe("game.rules.map.actions", function()
       assert.equals(Position(2, 3, 2), action.payload.position)
       assert.equals("terrain", action.payload.properties.terrain)
       assert.equals("something", action.payload.properties.trigger)
+    end)
+  end)
+
+  describe("ACTION: populate", function()
+    it("populates the map depending on what should be living there", function()
+      mockStore({
+        map = {
+          rooms = {
+            { x = 5, y = 10, level = 5,  width = 10, height = 10 }
+          }
+        }
+      })
+      assert.thunk_dispatches_type("ENTITY_ADD", Actions.populate())
     end)
   end)
 end)
