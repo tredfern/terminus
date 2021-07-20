@@ -189,6 +189,43 @@ function Position.createUniqueList(from, to, count)
   return outList
 end
 
+function Position.line(from, to)
+  assert(from.z == to.z)
+  local z = from.z
+  local x0,y0 = from.x, from.y
+  local x1,y1 = to.x, to.y
+  local sx, sy, dx, dy
+  dx = math.abs(x1 - x0) -- Distance for X
+  sx = maths.sign(x1 - x0) -- Direction for X
+  dy = math.abs(y1 - y0) -- Distance for Y
+  sy = maths.sign(y1 - y0) -- Direction for Y
+
+  local err, e2 = dx-dy -- Tracking the offset/err we have incurred
+  local first = true
+
+  return function()
+    -- don't run the calculations the first step, just return the starting position
+    if first then
+      first = nil
+      return from
+    end
+
+    if x0 == x1 and y0 == y1 then return nil end
+
+    e2 = err + err
+    if e2 > -dy then
+      err = err - dy
+      x0  = x0 + sx
+    end
+    if e2 < dx then
+      err = err + dx
+      y0  = y0 + sy
+    end
+
+    return Position(x0, y0, z)
+  end
+end
+
 return setmetatable(Position, {
   __call = function(self, x, y, z)
     return self.new(x, y, z)

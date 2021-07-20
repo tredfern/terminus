@@ -173,4 +173,28 @@ describe("game.rules.world.position", function()
       assert.is_false(tables.any(list, function(p) return p ~= v and p.x == v.x and p.y == v.y and p.z == v.z end))
     end
   end)
+
+  describe("line iterator", function()
+    it("can create a line on the same level", function()
+      local iter = Position.line(Position(1, 1, 1), Position(10, 3, 1))
+
+      assert.equals(Position(1, 1, 1), iter())
+      assert.equals(Position(2, 1, 1), iter())
+      assert.equals(Position(3, 1, 1), iter())
+      assert.equals(Position(4, 2, 1), iter())
+      assert.equals(Position(5, 2, 1), iter())
+      assert.equals(Position(6, 2, 1), iter())
+      assert.equals(Position(7, 2, 1), iter())
+      assert.equals(Position(8, 3, 1), iter())
+      assert.equals(Position(9, 3, 1), iter())
+      assert.equals(Position(10, 3, 1), iter())
+      assert.is_nil(iter())
+    end)
+
+    it("cannot create a line between 3 dimensions", function()
+      -- not implement yet, will sometime
+      assert.has_errors(function() Position.line(Position(1, 1, 1), Position(1, 3, 4)) end)
+    end)
+  end)
+
 end)

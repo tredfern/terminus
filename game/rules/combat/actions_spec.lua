@@ -72,4 +72,20 @@ describe("game.rules.combat.actions", function()
       assert.thunk_dispatches_type("MESSAGE_LOG_ADD", action)
     end)
   end)
+
+  describe("ACTION: rangedAttack", function()
+    local attacker = {}
+    local defender = {}
+
+    it("checks whether the points have a clear path", function()
+      local action = Actions.rangedAttack(attacker, defender)
+      stub()
+      assert.not_thunk_dispatches_type("SKILLS_TASK_CHECK", action)
+    end)
+
+    it("performs a task check for the weapon", function()
+      local action = Actions.rangedAttack(attacker, defender)
+      assert.thunk_dispatches_type("SKILLS_TASK_CHECK", action)
+    end)
+  end)
 end)
