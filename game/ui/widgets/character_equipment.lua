@@ -16,6 +16,6 @@ return Components("character_equipment", function(props)
   props.equipped = props.equipped or {}
   return {
     width = "15%",
-    LabelPair { id = "meleeItem", label = "Melee", value = getItemName(props.equipped[equipSlots.MELEE]) }
+    LabelPair { id = "meleeItem", label = "Melee", value = getItemName(props.equipped[equipSlots.melee]) }
   }
 end)

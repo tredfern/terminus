@@ -8,7 +8,7 @@ local Selectors = {}
 
 function Selectors.getMeleeWeapon(state, character)
   local Inventory = require "game.rules.inventory"
-  local weapon = Inventory.selectors.getEquippedItem(state, character, Inventory.equipSlots.MELEE)
+  local weapon = Inventory.selectors.getEquippedItem(state, character, Inventory.equipSlots.melee)
 
   if weapon == nil then
     return SpecialAttacks.unarmed

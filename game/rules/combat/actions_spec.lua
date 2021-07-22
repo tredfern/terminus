@@ -8,6 +8,7 @@ describe("game.rules.combat.actions", function()
   local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local Character = require "game.rules.character"
   local Skills = require "game.rules.skills"
+  local Position = require "game.rules.world.position"
 
   describe("ACTION: dealDamage", function()
     it("adjusts the characters health by a random die roll of the damage", function()
@@ -74,18 +75,46 @@ describe("game.rules.combat.actions", function()
   end)
 
   describe("ACTION: rangedAttack", function()
-    local attacker = {}
-    local defender = {}
+    local attacker = { position = Position(1, 1, 1) }
+    local defender = { position = Position(1, 3, 1) }
+
+    before_each(function()
+      local Inventory = require "game.rules.inventory"
+      stub(Inventory.selectors, "getRangedWeapon", { name = "ranged weapon" })
+    end)
+
+    after_each(function()
+      local Inventory = require "game.rules.inventory"
+      Inventory.selectors.getRangedWeapon:revert()
+    end)
 
     it("checks whether the points have a clear path", function()
+      local fov = require "game.rules.field_of_view"
       local action = Actions.rangedAttack(attacker, defender)
-      stub()
+      stub(fov.selectors, "checkLineOfSight", false)
       assert.not_thunk_dispatches_type("SKILLS_TASK_CHECK", action)
+      fov.selectors.checkLineOfSight:revert()
     end)
 
     it("performs a task check for the weapon", function()
       local action = Actions.rangedAttack(attacker, defender)
       assert.thunk_dispatches_type("SKILLS_TASK_CHECK", action)
+    end)
+  end)
+
+  describe("ACTION: rangedAttackSuccess", function()
+    local attacker, defender, weapon = { name = "atkr" }, { name = "dfndr" }, { name = "wpn" }
+    it("sends a message about the success", function()
+      local action = Actions.rangedAttackFailure(attacker, defender, weapon)
+      assert.thunk_dispatches_type("MESSAGE_LOG_ADD", action)
+    end)
+  end)
+
+  describe("ACTION: rangedAttackFailure", function()
+    local attacker, defender, weapon = { name = "atkr" }, { name = "dfndr" }, { name = "wpn" }
+    it("sends a message about the failure", function()
+      local action = Actions.rangedAttackFailure(attacker, defender, weapon)
+      assert.thunk_dispatches_type("MESSAGE_LOG_ADD", action)
     end)
   end)
 end)

@@ -66,12 +66,12 @@ describe("game.rules.inventory.reducer", function()
   describe("ACTION: equipItem", function()
     it("sets the item into the slot specified by the item", function()
       local entity = {}
-      local item = { equipSlot = equipSlots.MELEE }
+      local item = { equipSlot = equipSlots.melee }
 
       local action = actions.equipItem(entity, item)
       local state = reducer({}, action)
 
-      assert.equals(item, state[entity].equipped[equipSlots.MELEE])
+      assert.equals(item, state[entity].equipped[equipSlots.melee])
     end)
   end)
 end)

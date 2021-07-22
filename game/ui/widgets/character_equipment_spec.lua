@@ -10,7 +10,7 @@ describe("game.ui.widgets.character_equipment", function()
   it("shows the items for a character that are equipped", function()
     local meleeItem = { name = "Baton" }
     local equipped = {
-      [equipSlots.MELEE] = meleeItem
+      [equipSlots.melee] = meleeItem
     }
 
     local widget = CharacterEquipment { equipped = equipped }

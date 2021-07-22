@@ -33,15 +33,15 @@ describe("game.rules.field_of_view.calculate", function()
 
   it("does not register visibility if something blocks sight", function()
     -- TODO: Not a fan of this method of mocking
-    local Helper = require "game.rules.field_of_view.helper"
-    local old = Helper.blocksSight
-    Helper.blocksSight = function(_, p) return p.x == 4 and p.y == 4 end
+    local Selectors = require "game.rules.field_of_view.selectors"
+    local old = Selectors.blocksSight
+    Selectors.blocksSight = function(_, p) return p.x == 4 and p.y == 4 end
 
     local state = { }
     local vm = Calculate(state, Position(5, 5, 1), 4)
     assert.is_true(vm:isVisible(Position(4, 4, 1)))
     assert.is_false(vm:isVisible(Position(3, 3, 1))) -- block the space behind
 
-    Helper.blocksSight = old
+    Selectors.blocksSight = old
   end)
 end)

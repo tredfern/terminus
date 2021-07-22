@@ -72,6 +72,7 @@ function Actions.setup()
       local y = playerStartRoom.y + math.floor(playerStartRoom.height / 2)
       dispatch(Player.actions.add(Position(x, y, playerStartRoom.level)))
       dispatch(Player.actions.equipItem(Items.Weapons.sword()))
+      dispatch(Player.actions.equipItem(Items.Weapons.laserRifle()))
 
       for _ = 1,20 do
         local r = tables.pickRandom(rooms)

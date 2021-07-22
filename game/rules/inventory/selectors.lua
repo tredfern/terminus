@@ -4,6 +4,7 @@
 -- https://opensource.org/licenses/MIT
 
 local tables = require "moonpie.tables"
+local EquipSlots = require "game.rules.inventory.equip_slots"
 
 local selectors = {}
 
@@ -17,6 +18,10 @@ end
 
 function selectors.getInventory(state, entity)
   return state.inventory[entity]
+end
+
+function selectors.getRangedWeapon(state, entity)
+  return selectors.getEquippedItem(state, entity, EquipSlots.ranged)
 end
 
 function selectors.isCarryingItem(state, entity, item)

@@ -4,5 +4,6 @@
 -- https://opensource.org/licenses/MIT
 
 return {
-  MELEE = "EQUIP_SLOT_MELEE"
+  melee = "EQUIP_SLOT_MELEE",
+  ranged = "EQUIP_SLOT_RANGED"
 }

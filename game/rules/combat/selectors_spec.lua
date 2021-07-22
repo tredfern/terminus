@@ -14,7 +14,7 @@ describe("game.rules.combat.selectors", function()
         inventory = {
           [entity] = {
             equipped = {
-              [equipSlots.MELEE] = weapon
+              [equipSlots.melee] = weapon
             }
           }
         }
@@ -38,5 +38,10 @@ describe("game.rules.combat.selectors", function()
       assert.equals("unarmed", unarmed.skill)
       assert.equals("1d3", unarmed.damage)
     end)
+  end)
+
+  describe("SELECTORS: getRangedWeapon", function()
+
+
   end)
 end)

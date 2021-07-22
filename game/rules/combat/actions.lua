@@ -63,9 +63,7 @@ function Actions.meleeAttack(attacker, defender)
     local weapon = Selectors.getMeleeWeapon(store.getState(), attacker)
 
     -- Figure out skill and perform check
-    local modifiers = {
-
-    }
+    local modifiers = { }
 
     -- Play the attack sound effect
     Sounds.attack:play()
@@ -74,6 +72,40 @@ function Actions.meleeAttack(attacker, defender)
         Actions.meleeAttackSuccess(attacker, defender, weapon),
         Actions.meleeAttackFailure(attacker, defender, weapon))
     )
+  end
+end
+
+function Actions.rangedAttackSuccess(attacker, defender, weapon)
+  local msgData = standardFormat(attacker, defender, weapon)
+  return Thunk(types.RANGE_ATTACK_SUCCESS, function(dispatch)
+    Sounds.hit:play()
+    dispatch(MessageLog.actions.add(MessageLog.messages.combat.attacks.ranged.hit[1], msgData))
+    dispatch(Actions.dealDamage(defender, weapon.damage))
+  end)
+end
+
+function Actions.rangedAttackFailure(attacker, defender, weapon)
+  local msgData = standardFormat(attacker, defender, weapon)
+  return Thunk(types.RANGE_ATTACK_FAILURE, function(dispatch)
+    dispatch(MessageLog.actions.add(MessageLog.messages.combat.attacks.ranged.miss[1], msgData))
+  end)
+end
+
+function Actions.rangedAttack(attacker, defender)
+  local FieldOfView = require "game.rules.field_of_view"
+  local Inventory = require "game.rules.inventory"
+  return function(dispatch, getState)
+    local weapon = Inventory.selectors.getRangedWeapon(store.getState(), attacker)
+    local modifiers = {}
+
+    if FieldOfView.selectors.checkLineOfSight(getState(), attacker.position, defender.position) then
+      dispatch(
+        Skills.actions.taskCheck(modifiers,
+          Actions.rangedAttackSuccess(attacker, defender, weapon),
+          Actions.rangedAttackFailure(attacker, defender, weapon)
+        )
+      )
+    end
   end
 end
 

@@ -12,7 +12,7 @@ describe("game.rules.inventory.selectors", function()
     local entity, item = {}, {}
     local entityInventory = {
       equipped = {
-        [equipSlots.MELEE] = item
+        [equipSlots.melee] = item
       }
     }
     local state = {
@@ -23,11 +23,11 @@ describe("game.rules.inventory.selectors", function()
 
 
     it("returns the equipped item", function()
-      assert.equals(item, selectors.getEquippedItem(state, entity, equipSlots.MELEE))
+      assert.equals(item, selectors.getEquippedItem(state, entity, equipSlots.melee))
     end)
 
     it("returns nil if no inventory for entity", function()
-      assert.is_nil(selectors.getEquippedItem(state, {}, equipSlots.MELEE))
+      assert.is_nil(selectors.getEquippedItem(state, {}, equipSlots.melee))
     end)
   end)
 
@@ -57,5 +57,22 @@ describe("game.rules.inventory.selectors", function()
 
     assert.is_true(selectors.isCarryingItem(state, entity, item))
     assert.is_false(selectors.isCarryingItem(state, entity, {}))
+  end)
+
+  describe("SELECTOR: getRangedWeapon", function()
+    local entity, item = {}, {}
+    local entityInventory = {
+      equipped = {
+        [equipSlots.ranged] = item
+      }
+    }
+
+    local state = {
+      inventory = {
+        [entity] = entityInventory
+      }
+    }
+
+    assert.equals(item, selectors.getRangedWeapon(state, entity))
   end)
 end)

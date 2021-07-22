@@ -24,6 +24,20 @@ return {
         )
       }
     },
+    ranged = {
+      hit = {
+        string.format("%s blasts %s with the %s.",
+          highlight("{{attacker}}"),
+          highlight("{{defender}}"),
+          alert("{{weapon}}"))
+      },
+      miss = {
+        string.format("%s shoots %s with the %s but MISSES!",
+          highlight("{{attacker}}"),
+          highlight("{{defender}}"),
+          alert("{{weapon}}"))
+      }
+    }
   },
   damage = {
     string.format("%s took %s of damage!",
