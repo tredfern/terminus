@@ -9,6 +9,7 @@ local player = require "game.rules.player"
 local turn = require "game.rules.turn"
 local Orientation = require "game.rules.world.orientation"
 local Position = require "game.rules.world.position"
+local Cursor = require "game.ui.cursor"
 
 local keySettings = {}
 local directionAction
@@ -18,7 +19,9 @@ local function process_turn(player_action)
 end
 
 local function handleDirection(orientation)
-  if directionAction then
+  if keySettings.inCursorMode() then
+    Cursor.setPosition(Position[orientation](Cursor.position))
+  elseif directionAction then
     process_turn(directionAction(orientation))
     directionAction = nil
   else
@@ -39,8 +42,24 @@ local function hotkeySlotHandler(slot)
   end
 end
 
+local function triggerCursorAction()
+  if keySettings.cursorAction then
+    keySettings.cursorAction()
+  end
+  keySettings.endCursorMode()
+end
+
+local function triggerRangedAttack()
+  store.dispatch(player.actions.rangedAttack(Cursor.position))
+end
+
 
 keySettings.combatMap = {
+  ["return"] = function()
+    if keySettings.inCursorMode() then
+      triggerCursorAction()
+    end
+  end,
   ["down"] = function()
     handleDirection(Orientation.south)
   end,
@@ -58,6 +77,9 @@ keySettings.combatMap = {
   end,
   [","] = function()
     process_turn(player.actions.ladderDown())
+  end,
+  ["f"] = function()
+    keySettings.startCursorMode(triggerRangedAttack)
   end,
   ["g"] = function()
     process_turn(player.actions.pickupItems())
@@ -115,6 +137,21 @@ end
 
 function keySettings.disableCombatMap()
   keySettings.removeMapping(keySettings.combatMap)
+end
+
+function keySettings.startCursorMode(action)
+  Cursor.setPosition(player.selectors.getPosition(store.getState()))
+  Cursor.show()
+  keySettings.cursorAction = action
+end
+
+function keySettings.endCursorMode()
+  Cursor.hide()
+  keySettings.cursorAction = nil
+end
+
+function keySettings.inCursorMode()
+  return Cursor.isVisible
 end
 
 return keySettings

@@ -63,7 +63,7 @@ function Actions.setup()
   return Thunk(
     Actions.types.SETUP,
     function(dispatch, getState)
-      dispatch(Map.actions.create(100, 100, Map.generators.dungeon))
+      dispatch(Map.actions.create(40, 40, Map.generators.dungeon))
       local rooms = Map.selectors.getRooms(getState())
 
       local playerStartRoom = tables.pickRandom(rooms)

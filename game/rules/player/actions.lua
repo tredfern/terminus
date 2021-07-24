@@ -145,6 +145,21 @@ function Actions.enteredRoom(room)
   )
 end
 
+function Actions.rangedAttack(position)
+  return Thunk(
+    Actions.types.RANGED_ATTACK,
+    function(dispatch, getState)
+      local Combat = require "game.rules.combat"
+
+      local pc = Selectors.getPlayer(getState())
+      local targets = Characters.selectors.getByPosition(getState(), position)
+      if #targets > 0 then
+        dispatch(Combat.actions.rangedAttack(pc, targets[1]))
+      end
+    end
+  )
+end
+
 function Actions.setHotKey(key, name, image, handler)
   return {
     type = Actions.types.SET_HOT_KEY,

@@ -14,6 +14,7 @@ local Graphics = require "game.rules.graphics"
 local Position = require "game.rules.world.position"
 local Player = require "game.rules.player"
 local FogOfWar = require "game.rules.fog_of_war"
+local Cursor = require "game.ui.cursor"
 
 local tile_width = 32
 local tile_height = 32
@@ -91,6 +92,12 @@ local combat_map = components("combat_map", function(props)
           local sx, sy = getScreenCoordinate(self.camera, v.position.x, v.position.y)
           v.sprite:draw(sx, sy)
         end
+      end
+
+      if Cursor.isVisible then
+        love.graphics.setColor(colors.cursor)
+        local sx, sy = getScreenCoordinate(self.camera, Cursor.position.x, Cursor.position.y)
+        love.graphics.rectangle("fill", sx, sy, tile_width, tile_height)
       end
 
       if self.showGrid then

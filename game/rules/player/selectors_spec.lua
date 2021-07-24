@@ -124,4 +124,18 @@ describe("game.rules.player.selectors", function()
       assert.equals("4", Selectors.getFreeHotKey(state))
     end)
   end)
+
+  describe("SELECTOR: getPosition", function()
+    it("returns the player position", function()
+      local pos = {}
+      local player = { isPlayerControlled = true, position = pos }
+      local state = {
+        characters = {
+          player
+        }
+      }
+
+      assert.equals(pos, Selectors.getPosition(state))
+    end)
+  end)
 end)

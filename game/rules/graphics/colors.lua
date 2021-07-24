@@ -17,5 +17,6 @@ colors.msgHighlight = colors.main
 
 colors.fow = colors(colors.black, 0.4)
 colors.playerBlip = colors(colors.aquamarine)
+colors.cursor = colors(colors.orange, 0.6)
 
 return colors

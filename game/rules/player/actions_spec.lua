@@ -255,4 +255,16 @@ describe("game.rules.player", function()
       assert.equals("PLAYER_CLEAR_HOT_KEY", action.type)
     end)
   end)
+
+  describe("ACTION: rangedAttack", function()
+    it("takes the position passed in and triggers an attack on the target", function()
+      mockStore {
+        characters = {
+          { isPlayerControlled = true, position = Position(1, 4, 3)},
+          { isEnemy = true, position = Position(2, 2, 2) }
+        }, world = {}
+      }
+      assert.thunk_dispatches_type("COMBAT_RANGED_ATTACK", Actions.rangedAttack(Position(2, 2, 2)))
+    end)
+  end)
 end)

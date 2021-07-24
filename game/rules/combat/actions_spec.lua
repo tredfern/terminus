@@ -88,6 +88,11 @@ describe("game.rules.combat.actions", function()
       Inventory.selectors.getRangedWeapon:revert()
     end)
 
+    it("is identified as the ranged attack action", function()
+      local action = Actions.rangedAttack(attacker, defender)
+      assert.equals("COMBAT_RANGED_ATTACK", action.type)
+    end)
+
     it("checks whether the points have a clear path", function()
       local fov = require "game.rules.field_of_view"
       local action = Actions.rangedAttack(attacker, defender)

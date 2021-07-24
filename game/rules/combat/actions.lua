@@ -94,19 +94,21 @@ end
 function Actions.rangedAttack(attacker, defender)
   local FieldOfView = require "game.rules.field_of_view"
   local Inventory = require "game.rules.inventory"
-  return function(dispatch, getState)
-    local weapon = Inventory.selectors.getRangedWeapon(store.getState(), attacker)
-    local modifiers = {}
+  return Thunk(
+    types.RANGED_ATTACK,
+    function(dispatch, getState)
+      local weapon = Inventory.selectors.getRangedWeapon(store.getState(), attacker)
+      local modifiers = {}
 
-    if FieldOfView.selectors.checkLineOfSight(getState(), attacker.position, defender.position) then
-      dispatch(
-        Skills.actions.taskCheck(modifiers,
-          Actions.rangedAttackSuccess(attacker, defender, weapon),
-          Actions.rangedAttackFailure(attacker, defender, weapon)
+      if FieldOfView.selectors.checkLineOfSight(getState(), attacker.position, defender.position) then
+        dispatch(
+          Skills.actions.taskCheck(modifiers,
+            Actions.rangedAttackSuccess(attacker, defender, weapon),
+            Actions.rangedAttackFailure(attacker, defender, weapon)
+          )
         )
-      )
-    end
-  end
+      end
+    end)
 end
 
 return Actions
