@@ -185,4 +185,19 @@ describe("game.rules.character.reducer", function()
       assert.equals(10, character.attributes.buyPoints)
     end)
   end)
+
+  describe("CHARACTER_NEW", function()
+    it("adds the character to the state array", function()
+      local character = {}
+      local action = {
+        type = types.NEW,
+        payload = {
+          character = character
+        }
+      }
+
+      local state = characters_reducer({}, action)
+      assert.array_includes(character, state)
+    end)
+  end)
 end)

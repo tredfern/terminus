@@ -6,6 +6,7 @@
 describe("game.rules.character.actions", function()
   local mockDispatch = require "moonpie.test_helpers.mock_dispatch"
   local Actions = require "game.rules.character.actions"
+  local Position = require "game.rules.world.position"
 
   describe("ACTIONS: add", function()
     it("specifies the new character to add to the store", function()
@@ -31,7 +32,6 @@ describe("game.rules.character.actions", function()
     local wrap_in_function = require "wrap_in_function"
     local Skills = require "game.rules.skills"
     local Attributes = require "game.rules.character.attributes"
-    local Position = require "game.rules.world.position"
 
     before_each(function()
       Skills.list.unarmed = { name = "Unarmed", key = "unarmed", attribute = Attributes.strength }
@@ -63,6 +63,66 @@ describe("game.rules.character.actions", function()
       action(mockDispatch, wrap_in_function(state))
 
       assert.spy(Combat.actions.meleeAttack).was.called_with(player, enemy)
+    end)
+  end)
+
+  describe("ACTION: new", function()
+    it("uses the attributes to create a new one", function()
+      local def = {
+        strength = 10, dexterity = 4, endurance = 3, intelligence = 5, knowledge = 8, charisma = 3,
+        health = 3
+      }
+
+      local action = Actions.new(def)
+      assert.equals(10, action.payload.character.strength)
+      assert.equals(4, action.payload.character.dexterity)
+      assert.equals(3, action.payload.character.endurance)
+      assert.equals(5, action.payload.character.intelligence)
+      assert.equals(8, action.payload.character.knowledge)
+      assert.equals(3, action.payload.character.charisma)
+    end)
+
+    it("can have dice rolls defined for attributes to randomize the character some", function()
+      local def = {
+        strength = "1d6+2", dexterity = "2d4+2", endurance = "3d4+3",
+        intelligence = "1d3+2", knowledge = "2d4+3", charisma = "2d2+2",
+        health = 3,
+      }
+
+      local action = Actions.new(def)
+      assert.in_range(3, 8, action.payload.character.strength)
+      assert.in_range(4, 10, action.payload.character.dexterity)
+      assert.in_range(6, 15, action.payload.character.endurance)
+      assert.in_range(3, 5, action.payload.character.intelligence)
+      assert.in_range(5, 11, action.payload.character.knowledge)
+      assert.in_range(4, 6, action.payload.character.charisma)
+    end)
+
+    it("can have a sprite defined for the character", function()
+      local def = {
+        strength = 10, dexterity = 4, endurance = 3, intelligence = 5, knowledge = 8, charisma = 3,
+        health = 3,
+        sprite = {}
+      }
+
+      local action = Actions.new(def)
+      assert.equals(def.sprite, action.payload.character.sprite)
+    end)
+
+    it("can be passed the starting position for the character", function()
+      local def = { strength = 10, dexterity = 4, endurance = 3, intelligence = 5, knowledge = 8, charisma = 3,
+        health = 3 }
+      local action = Actions.new(def, Position(3, 4, 2))
+      assert.equals(Position(3, 4, 2), action.payload.character.position)
+    end)
+
+    it("sets the health for the character", function()
+      local def = { strength = 10, dexterity = 4, endurance = 3, intelligence = 5, knowledge = 3, charisma = 2,
+        health = "2d6"
+      }
+
+      local action = Actions.new(def)
+      assert.in_range(2, 12, action.payload.character.health)
     end)
   end)
 
@@ -112,8 +172,6 @@ describe("game.rules.character.actions", function()
   end)
 
   describe("ACTION: setPosition", function()
-    local Position = require "game.rules.world.position"
-
     it("specifies the position to update the character to", function()
       local c = {}
       local sp = Actions.setPosition(c, Position(89, 38))

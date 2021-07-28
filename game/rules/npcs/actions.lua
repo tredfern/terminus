@@ -24,7 +24,9 @@ end
 
 function Actions.think(enemy)
   return Thunk(Actions.types.THINK, function(dispatch, getState)
-    enemy:ai(dispatch, getState)
+    if enemy.ai then
+      enemy:ai(dispatch, getState)
+    end
   end)
 end
 return Actions

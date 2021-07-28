@@ -3,6 +3,7 @@
 -- This software is released under the MIT License.
 -- https://opensource.org/licenses/MIT
 
+local Dice = require "moonpie.math.dice"
 local Attributes = {
   strength = "STRENGTH",
   dexterity = "DEXTERITY",
@@ -34,7 +35,6 @@ function Attributes.getAbbreviation(attr)
 end
 
 function Attributes.roll()
-  local Dice = require "moonpie.math.dice"
   return Dice.cup(Dice.d6, Dice.d6)()
 end
 
@@ -48,6 +48,15 @@ end
 
 function Attributes.pointBuyMaximum()
   return 12
+end
+
+function Attributes.generate(diceString)
+  if type(diceString) == "number" then
+    return diceString
+  end
+
+  local cup = Dice.parse(diceString)
+  return cup:roll()
 end
 
 return Attributes

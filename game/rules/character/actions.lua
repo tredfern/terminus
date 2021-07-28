@@ -9,6 +9,16 @@ local tables = require "moonpie.tables"
 local map = require "game.rules.map"
 local World = require "game.rules.world"
 local Selectors = require "game.rules.character.selectors"
+local Dice = require "moonpie.math.dice"
+
+local function calculateValue(diceString)
+  if type(diceString) == "number" then
+    return diceString
+  end
+
+  local cup = Dice.parse(diceString)
+  return cup:roll()
+end
 
 local Actions = {}
 Actions.types = require "game.rules.character.types"
@@ -53,6 +63,26 @@ function Actions.move(character, position)
       dispatch(Actions.setPosition(character, position))
     end
   end)
+end
+
+function Actions.new(prototype, position)
+  local Attributes = require "game.rules.character.attributes"
+  return {
+    type = Actions.types.NEW,
+    payload = {
+      character = {
+        strength = Attributes.generate(prototype.strength),
+        dexterity = Attributes.generate(prototype.dexterity),
+        endurance = Attributes.generate(prototype.endurance),
+        intelligence = Attributes.generate(prototype.intelligence),
+        knowledge = Attributes.generate(prototype.knowledge),
+        charisma = Attributes.generate(prototype.charisma),
+        sprite = prototype.sprite,
+        health = calculateValue(prototype.health),
+        position = position
+      }
+    }
+  }
 end
 
 function Actions.remove(character)

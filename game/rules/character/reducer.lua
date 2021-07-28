@@ -24,6 +24,10 @@ return createSlice {
     return state
   end,
 
+  [types.NEW] = function(state, action)
+    return tables.concatArray(state, { action.payload.character })
+  end,
+
   [types.REMOVE] = function(state, action)
     return tables.select(state,
     function(character)

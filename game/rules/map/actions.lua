@@ -9,6 +9,7 @@ local World = require "game.rules.world"
 local Position = require "game.rules.world.position"
 local Rooms = require "game.rules.map.rooms"
 local ladders = require "assets.maps.features.ladders"
+local maths = require "moonpie.math"
 
 local Actions = {}
 
@@ -78,6 +79,9 @@ end
 function Actions.populate()
   -- Add some prickly bushes to 10 rooms on the map
   local Bestiary = require "game.rules.bestiary"
+  local Characters = require "game.rules.character"
+  local Spiders = require "assets.bestiary.spiders"
+
   return Thunk(
     Actions.types.POPULATE,
     function(dispatch, getState)
@@ -85,6 +89,7 @@ function Actions.populate()
       local rooms = Selectors.getRooms(getState())
 
       if rooms then
+        -- PRICKLY BUSHES
         for _ = 1, 10 do
           local room = tables.pickRandom(rooms)
           -- Fill about 1/3 of the room
@@ -97,6 +102,18 @@ function Actions.populate()
 
           for _, pos in ipairs(positionList) do
             dispatch(Bestiary.actions.add(Bestiary.plants.prickleBush(), pos))
+          end
+        end
+
+
+        for _ = 1, #rooms / 2 do
+          local room = tables.pickRandom(rooms)
+
+          -- add a 2-5 spiders
+          local count = maths.prandom(2, 5)
+          for _ = 1, count do
+            local p = Position.randomInRoom(room)
+            dispatch(Characters.actions.new(Spiders.crawler, p))
           end
         end
       end
